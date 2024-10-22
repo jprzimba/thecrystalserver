@@ -1692,19 +1692,22 @@ void ProtocolGame::sendCreatePrivateChannel(uint16_t channelId, const std::strin
 	}
 }
 
-void ProtocolGame::sendChannelsDialog(const ChannelsList& channels)
+void ProtocolGame::sendChannelsDialog()
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
 		msg->put<char>(0xAB);
-
-		msg->put<char>(channels.size());
-		for(ChannelsList::const_iterator it = channels.begin(); it != channels.end(); ++it)
+		ChannelList list = g_chat.getChannelList(player);
+		msg->put<char>(list.size());
+		for(ChannelList::iterator it = list.begin(); it != list.end(); ++it)
 		{
-			msg->put<uint16_t>(it->first);
-			msg->putString(it->second);
+			if(ChatChannel* channel = (*it))
+			{
+				msg->put<uint16_t>(channel->getId());
+				msg->putString(channel->getName());
+			}
 		}
 	}
 }
@@ -1945,23 +1948,23 @@ void ProtocolGame::sendCreatureTurn(const Creature* creature, int16_t stackpos)
 	}
 }
 
-void ProtocolGame::sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos, uint32_t statementId)
+void ProtocolGame::sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos/* = NULL*/)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
-		AddCreatureSpeak(msg, creature, type, text, 0, pos, statementId);
+		AddCreatureSpeak(msg, creature, type, text, 0, 0, pos);
 	}
 }
 
-void ProtocolGame::sendCreatureChannelSay(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId)
+void ProtocolGame::sendToChannel(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time /*= 0*/)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
-		AddCreatureSpeak(msg, creature, type, text, channelId, NULL, statementId);
+		AddCreatureSpeak(msg, creature, type, text, channelId, time);
 	}
 }
 
@@ -2632,7 +2635,6 @@ void ProtocolGame::AddCreature(NetworkMessage_ptr msg, const Creature* creature,
 		msg->put<uint16_t>(0x61);
 		msg->put<uint32_t>(remove);
 		msg->put<uint32_t>(creature->getID());
-		msg->put<char>(creature->getType());
 		msg->putString(creature->getHideName() ? "" : creature->getName());
 	}
 	else
@@ -2698,18 +2700,37 @@ void ProtocolGame::AddPlayerSkills(NetworkMessage_ptr msg)
 }
 
 void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, SpeakClasses type,
-	std::string text, uint16_t channelId, Position* pos, uint32_t statementId)
+	std::string text, uint16_t channelId, uint32_t time/*= 0*/, Position* pos/* = NULL*/)
 {
 	msg->put<char>(0xAA);
 	if(creature)
 	{
-		msg->put<uint32_t>(statementId);
-		msg->putString(!creature->getHideName() ? creature->getName() : "");
+		const Player* speaker = creature->getPlayer();
+		if(speaker)
+		{
+			msg->put<uint32_t>(++g_chat.statement);
+			g_chat.statementMap[g_chat.statement] = text;
+		}
+		else
+			msg->put<uint32_t>(0x00);
+
 		if(creature->getSpeakType() != SPEAK_CLASS_NONE)
 			type = creature->getSpeakType();
 
-		const Player* speaker = creature->getPlayer();
-		if(speaker && !speaker->isAccountManager() && !speaker->hasCustomFlag(PlayerCustomFlag_HideLevel))
+		switch(type)
+		{
+			case SPEAK_CHANNEL_RA:
+				msg->putString("");
+				break;
+			case SPEAK_RVR_ANSWER:
+				msg->putString("Gamemaster");
+				break;
+			default:
+				msg->putString(!creature->getHideName() ? creature->getName() : "");
+				break;
+		}
+
+		if(speaker && type != SPEAK_RVR_ANSWER && !speaker->isAccountManager() && !speaker->hasCustomFlag(PlayerCustomFlag_HideLevel))
 			msg->put<uint16_t>(speaker->getPlayerInfo(PLAYERINFO_LEVEL));
 		else
 			msg->put<uint16_t>(0x00);
@@ -2748,6 +2769,12 @@ void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* crea
 		case SPEAK_CHANNEL_W:
 			msg->put<uint16_t>(channelId);
 			break;
+
+		case SPEAK_RVR_CHANNEL:
+		{
+			msg->put<uint32_t>(uint32_t(OTSYS_TIME() / 1000 & 0xFFFFFFFF) - time);
+			break;
+		}
 
 		default:
 			break;

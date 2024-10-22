@@ -447,13 +447,13 @@ class Game
 		  * \param pos Appear as sent from different position
 		  */
 		bool internalCreatureSay(Creature* creature, SpeakClasses type, const std::string& text,
-			bool ghostMode, SpectatorVec* spectators = NULL, Position* pos = NULL, uint32_t statementId = 0);
+			bool ghostMode, SpectatorVec* spectators = NULL, Position* pos = NULL);
 
 		bool internalStartTrade(Player* player, Player* partner, Item* tradeItem);
 		bool internalCloseTrade(Player* player);
 
 		//Implementation of player invoked events
-		bool playerBroadcastMessage(Player* player, SpeakClasses type, const std::string& text, uint32_t statementId);
+		bool playerBroadcastMessage(Player* player, SpeakClasses type, const std::string& text);
 		bool playerReportBug(uint32_t playerId, std::string comment);
 		bool playerReportViolation(uint32_t playerId, ReportType_t type, uint8_t reason, const std::string& name,
 			const std::string& comment, const std::string& translation, uint32_t statementId);
@@ -632,10 +632,10 @@ class Game
 #endif
 
 	protected:
-		bool playerWhisper(Player* player, const std::string& text, uint32_t statementId);
-		bool playerYell(Player* player, const std::string& text, uint32_t statementId);
-		bool playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver, const std::string& text, uint32_t statementId);
-		bool playerSpeakToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId);
+		bool playerWhisper(Player* player, const std::string& text);
+		bool playerYell(Player* player, const std::string& text);
+		bool playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver, const std::string& text);
+		bool playerTalkToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId);
 		bool playerSpeakToNpc(Player* player, const std::string& text);
 
 		struct GameEvent

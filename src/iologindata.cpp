@@ -1196,20 +1196,6 @@ bool IOLoginData::saveItems(const Player* player, const ItemBlockList& itemList,
 	return stmt.execute();
 }
 
-bool IOLoginData::playerStatement(Player* _player, uint16_t channelId, const std::string& text, uint32_t& statementId)
-{
-	Database* db = Database::getInstance();
-	DBQuery query;
-
-	query << "INSERT INTO `player_statements` (`player_id`, `channel_id`, `text`, `date`) VALUES (" << _player->getGUID()
-		<< ", " << channelId << ", " << db->escapeString(text) << ", " << time(NULL) << ")";
-	if(!db->query(query.str()))
-		return false;
-
-	statementId = db->getLastInsertId();
-	return true;
-}
-
 bool IOLoginData::playerDeath(Player* _player, const DeathList& dl)
 {
 	Database* db = Database::getInstance();

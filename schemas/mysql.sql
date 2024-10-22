@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS `house_lists`;
 DROP TABLE IF EXISTS `houses`;
 DROP TABLE IF EXISTS `player_items`;
 DROP TABLE IF EXISTS `player_namelocks`;
-DROP TABLE IF EXISTS `player_statements`;
 DROP TABLE IF EXISTS `player_skills`;
 DROP TABLE IF EXISTS `player_storage`;
 DROP TABLE IF EXISTS `player_viplist`;
@@ -165,17 +164,6 @@ CREATE TABLE `player_namelocks`
 	`new_name` VARCHAR(255) NOT NULL,
 	`date` BIGINT NOT NULL DEFAULT 0,
 	KEY (`player_id`),
-	FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE
-) ENGINE = InnoDB;
-
-CREATE TABLE `player_statements`
-(
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`player_id` INT NOT NULL,
-	`channel_id` INT NOT NULL DEFAULT 0,
-	`text` VARCHAR (255) NOT NULL,
-	`date` BIGINT NOT NULL DEFAULT 0,
-	PRIMARY KEY (`id`), KEY (`player_id`), KEY (`channel_id`),
 	FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 

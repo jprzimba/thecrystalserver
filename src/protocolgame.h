@@ -170,9 +170,10 @@ class ProtocolGame : public Protocol
 		void sendChannelEvent(uint16_t channelId, const std::string& playerName, ChannelEvent_t channelEvent);
 		void sendClosePrivate(uint16_t channelId);
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName);
-		void sendChannelsDialog(const ChannelsList& channels);
+		void sendChannelsDialog();
 		void sendChannel(uint16_t channelId, const std::string& channelName);
 		void sendOpenPrivateChannel(const std::string& receiver);
+		void sendToChannel(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0);
 		void sendIcons(int32_t icons);
 		void sendFYIBox(const std::string& message);
 
@@ -183,8 +184,7 @@ class ProtocolGame : public Protocol
 		void sendSkills();
 		void sendPing();
 		void sendCreatureTurn(const Creature* creature, int16_t stackpos);
-		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos, uint32_t statementId);
-		void sendCreatureChannelSay(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId);
+		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos = NULL);
 
 		void sendCancel(const std::string& message);
 		void sendCancelWalk();
@@ -271,7 +271,7 @@ class ProtocolGame : public Protocol
 		void AddCreature(NetworkMessage_ptr msg, const Creature* creature, bool known, uint32_t remove);
 		void AddPlayerStats(NetworkMessage_ptr msg);
 		void AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, SpeakClasses type,
-			std::string text, uint16_t channelId, Position* pos, uint32_t statementId);
+			std::string text, uint16_t channelId, uint32_t time = 0, Position* pos = NULL);
 		void AddCreatureHealth(NetworkMessage_ptr msg, const Creature* creature);
 		void AddCreatureOutfit(NetworkMessage_ptr msg, const Creature* creature, const Outfit_t& outfit, bool outfitWindow = false);
 		void AddPlayerSkills(NetworkMessage_ptr msg);

@@ -1214,20 +1214,6 @@ uint32_t DatabaseManager::updateDatabase()
 			std::clog << "Updating database to version 32..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
-				query << "CREATE TABLE IF NOT EXISTS `player_statements`\
-(\
-	`id` INT NOT NULL AUTO_INCREMENT,\
-	`player_id` INT NOT NULL,\
-	`channel_id` INT NOT NULL DEFAULT 0,\
-	`text` VARCHAR (255) NOT NULL,\
-	`date` BIGINT NOT NULL DEFAULT 0,\
-	PRIMARY KEY (`id`), KEY (`player_id`), KEY (`channel_id`),\
-	FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE\
-) ENGINE = InnoDB;";
-
-				db->query(query.str());
-				query.str("");
-
 				query << "CREATE TABLE IF NOT EXISTS `guild_wars`\
 (\
 	`id` INT NOT NULL AUTO_INCREMENT,\
@@ -1296,79 +1282,6 @@ uint32_t DatabaseManager::updateDatabase()
 
 			registerDatabaseConfig("db_version", 33);
 			return 33;
-		}
-
-		case 33:
-		{
-			std::clog << "Updating database to version 34..." << std::endl;
-			switch(db->getDatabaseEngine())
-			{
-				case DATABASE_ENGINE_MYSQL:
-				{
-					db->query("CREATE TABLE `market_offers` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `player_id` INT NOT NULL, `sale` TINYINT(1) NOT NULL DEFAULT 0, `itemtype` INT UNSIGNED NOT NULL, `amount` SMALLINT UNSIGNED NOT NULL, `created` BIGINT UNSIGNED NOT NULL, `anonymous` TINYINT(1) NOT NULL DEFAULT 0, `price` INT UNSIGNED NOT NULL DEFAULT 0, PRIMARY KEY (`id`), KEY(`sale`, `itemtype`), KEY(`created`), FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE) ENGINE = InnoDB;");
-					db->query("CREATE TABLE `market_history` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `player_id` INT NOT NULL, `sale` TINYINT(1) NOT NULL DEFAULT 0, `itemtype` INT UNSIGNED NOT NULL, `amount` SMALLINT UNSIGNED NOT NULL, `price` INT UNSIGNED NOT NULL DEFAULT 0, `expires_at` BIGINT UNSIGNED NOT NULL, `inserted` BIGINT UNSIGNED NOT NULL, `state` TINYINT(1) UNSIGNED NOT NULL, PRIMARY KEY(`id`), KEY(`player_id`, `sale`), FOREIGN KEY (`player_id`) REFERENCES `players`(`id`) ON DELETE CASCADE) ENGINE = InnoDB;");
-					break;
-				}
-
-				case DATABASE_ENGINE_SQLITE:
-				{
-					db->query("CREATE TABLE `market_offers` (`id` INTEGER PRIMARY KEY NOT NULL, `player_id` INTEGER NOT NULL, `sale` BOOLEAN NOT NULL DEFAULT 0, `itemtype` UNSIGNED INTEGER NOT NULL, `amount` UNSIGNED INTEGER NOT NULL, `created` UNSIGNED INTEGER NOT NULL, `anonymous` BOOLEAN NOT NULL DEFAULT 0, `price` UNSIGNED INTEGER NOT NULL DEFAULT 0, FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE);");
-					db->query("CREATE INDEX market_offers_idx ON market_offers(created);");
-					db->query("CREATE INDEX market_offers_idx2 ON market_offers(sale, itemtype);");
-					db->query("CREATE TABLE `market_history` (`id` INTEGER PRIMARY KEY NOT NULL, `player_id` INTEGER NOT NULL, `sale` BOOLEAN NOT NULL DEFAULT 0, `itemtype` UNSIGNED INTEGER NOT NULL, `amount` UNSIGNED INTEGER NOT NULL, `price` UNSIGNED INTEGER NOT NULL DEFAULT 0, `expires_at` UNSIGNED INTEGER NOT NULL, `inserted` UNSIGNED INTEGER NOT NULL, `state` UNSIGNED INTEGER NOT NULL, FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE);");
-					db->query("CREATE INDEX market_history_idx ON market_history(player_id, sale);");
-					break;
-				}
-
-				default: break;
-			}
-
-			registerDatabaseConfig("db_version", 34);
-			return 34;
-		}
-
-		case 34:
-		{
-			std::clog << "Updating database to version 35..." << std::endl;
-			switch(db->getDatabaseEngine())
-			{
-				case DATABASE_ENGINE_MYSQL:
-				{
-					db->query("DROP TABLE IF EXISTS `market_offers`;");
-					db->query("DROP TABLE IF EXISTS `market_history`;");
-					break;
-				}
-
-				case DATABASE_ENGINE_SQLITE:
-				{
-					db->query("DROP TABLE IF EXISTS `market_offers`;");
-					db->query("DROP TABLE IF EXISTS `market_history`;");
-					break;
-				}
-
-				default: break;
-			}
-
-			registerDatabaseConfig("db_version", 35);
-			return 35;
-		}
-
-		case 35:
-		{
-			std::clog << "Updating database to version 36..." << std::endl;
-			switch(db->getDatabaseEngine())
-			{
-				case DATABASE_ENGINE_MYSQL:
-				{
-					db->query("ALTER TABLE `players` DROP COLUMN `lookmount`;");
-					break;
-				}
-
-				default: break;
-			}
-
-			registerDatabaseConfig("db_version", 36);
-			return 36;
 		}
 
 		default:

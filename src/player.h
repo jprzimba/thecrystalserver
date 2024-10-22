@@ -553,10 +553,8 @@ class Player : public Creature, public Cylinder
 
 		void sendCreatureTurn(const Creature* creature)
 			{if(client) client->sendCreatureTurn(creature, creature->getTile()->getClientIndexOfThing(this, creature));}
-		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos = NULL, uint32_t statementId = 0)
-			{if(client) client->sendCreatureSay(creature, type, text, pos, statementId);}
-		void sendCreatureChannelSay(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId = 0) const
-			{if(client) client->sendCreatureChannelSay(creature, type, text, channelId, statementId);}
+		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos = NULL)
+			{if(client) client->sendCreatureSay(creature, type, text, pos);}
 		void sendCreatureSquare(const Creature* creature, uint8_t color)
 			{if(client) client->sendCreatureSquare(creature, color);}
 		void sendCreatureChangeOutfit(const Creature* creature, const Outfit_t& outfit)
@@ -666,6 +664,8 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendTextMessage(type, message);}
 		void sendReLoginWindow(uint8_t pvpPercent) const
 			{if(client) client->sendReLoginWindow(pvpPercent);}
+		void sendToChannel(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0) const
+			{if(client) client->sendToChannel(creature, type, text, channelId, time);}
 		void sendTextWindow(Item* item, uint16_t maxLen, bool canWrite) const
 			{if(client) client->sendTextWindow(windowTextId, item, maxLen, canWrite);}
 		void sendShop(Npc* npc) const
@@ -680,8 +680,8 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendCloseTrade();}
 		void sendWorldLight(LightInfo& lightInfo)
 			{if(client) client->sendWorldLight(lightInfo);}
-		void sendChannelsDialog(const ChannelsList& channels)
-			{if(client) client->sendChannelsDialog(channels);}
+		void sendChannelsDialog()
+			{if(client) client->sendChannelsDialog();}
 		void sendOpenPrivateChannel(const std::string& receiver)
 			{if(client) client->sendOpenPrivateChannel(receiver);}
 		void sendOutfitWindow()
