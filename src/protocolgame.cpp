@@ -39,7 +39,6 @@
 #include "actions.h"
 #include "creatureevent.h"
 #include "quests.h"
-#include "mounts.h"
 
 #include "chat.h"
 #include "configmanager.h"
@@ -767,11 +766,6 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 					parseSetOutfit(msg);
 				break;
 
-			case 0xD4: // set mount
-				if(g_config.getBool(ConfigManager::ALLOW_MOUNTS))
-					parseMountStatus(msg);
-
-				break;
 			case 0xDC:
 				parseAddVip(msg);
 				break;
@@ -1149,18 +1143,7 @@ void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
 	else
 		msg.skip(1);
 
-	if(g_config.getBool(ConfigManager::ALLOW_MOUNTS))
-		newOutfit.lookMount = msg.get<uint16_t>();
-	else
-		msg.skip(2);
-
 	addGameTask(&Game::playerChangeOutfit, player->getID(), newOutfit);
-}
-
-void ProtocolGame::parseMountStatus(NetworkMessage& msg)
-{
-	bool status = msg.get<char>() != (char)0;
-	addGameTask(&Game::playerChangeMountStatus, player->getID(), status);
 }
 
 void ProtocolGame::parseUseItem(NetworkMessage& msg)
@@ -2493,31 +2476,6 @@ void ProtocolGame::sendOutfitWindow()
 			msg->put<char>(player->getDefaultOutfit().lookAddons);
 		}
 
-		if(g_config.getBool(ConfigManager::ALLOW_MOUNTS))
-		{
-			std::list<Mount*> mountList;
-			for(MountList::const_iterator it = Mounts::getInstance()->getFirstMount();
-				it != Mounts::getInstance()->getLastMount(); ++it)
-			{
-				if((*it)->isTamed(player))
-					mountList.push_back((*it));
-			}
-
-			if(mountList.size())
-			{
-				msg->put<char>(mountList.size());
-				for(std::list<Mount*>::iterator it = mountList.begin(); it != mountList.end(); ++it)
-				{
-					msg->put<uint16_t>((*it)->getClientId());
-					msg->putString((*it)->getName());
-				}
-			}
-			else
-				msg->put<char>(0);
-		}
-		else
-			msg->put<char>(0);
-
 		player->hasRequestedOutfit(true);
 	}
 }
@@ -2850,12 +2808,6 @@ void ProtocolGame::AddCreatureOutfit(NetworkMessage_ptr msg, const Creature* cre
 			msg->putItemId(outfit.lookTypeEx);
 		else
 			msg->put<uint16_t>(outfit.lookTypeEx);
-
-		const Player* _player = creature->getPlayer();
-		if(!_player || _player->isMounted())
-			msg->put<uint16_t>(outfit.lookMount);
-		else
-			msg->put<uint16_t>(0x00);
 	}
 	else
 	{

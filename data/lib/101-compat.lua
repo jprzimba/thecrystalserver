@@ -254,5 +254,4 @@ PlayerCustomFlag_CanTurnhop = 21
 PlayerCustomFlag_IgnoreHouseRent = 22
 PlayerCustomFlag_CanWearAllAddons = 23
 PlayerCustomFlag_IsWalkable = 24
-PlayerCustomFlag_CanUseAllMounts = 25
-PlayerCustomFlag_HasFullLight = 26
+PlayerCustomFlag_HasFullLight = 25

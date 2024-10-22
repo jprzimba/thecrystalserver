@@ -325,8 +325,6 @@ bool ConfigManager::load()
 	m_confNumber[VIPLIST_DEFAULT_PREMIUM_LIMIT]	= getGlobalNumber("vipListDefaultPremiumLimit", 100);
 	m_confNumber[STAMINA_DESTROY_LOOT]		= getGlobalNumber("staminaLootLimit", 840);
 	m_confNumber[FIST_BASE_ATTACK]			= getGlobalNumber("fistBaseAttack", 7);
-	m_confBool[ALLOW_MOUNTS]			= getGlobalBool("useMounts", true);
-	m_confBool[UNMOUNT_PLAYER_IN_PZ]		= getGlobalBool("unmountPlayerInPz", true);
 	m_confBool[ENABLE_COOLDOWNS] 			= getGlobalBool("enableCooldowns", true);
 	m_confBool[MONSTER_SPAWN_WALKBACK] 		= getGlobalBool("monsterSpawnWalkback", true);
 	m_confNumber[PVP_BLESSING_THRESHOLD]		= getGlobalNumber("pvpBlessingThreshold", 40);

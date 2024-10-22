@@ -26,7 +26,6 @@
 #include "town.h"
 #include "house.h"
 #include "beds.h"
-#include "mounts.h"
 #include "quests.h"
 
 #include "combat.h"
@@ -57,7 +56,7 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	if(client)
 		p->setPlayer(this);
 
-	pvpBlessing = pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = mounted = outfitAttributes = sentChat = false;
+	pvpBlessing = pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = outfitAttributes = sentChat = false;
 	saving = true;
 
 	lastAttackBlockType = BLOCK_NONE;
@@ -809,7 +808,7 @@ void Player::dropLoot(Container* corpse)
 bool Player::setStorage(const std::string& key, const std::string& value)
 {
 	uint32_t numericKey = atol(key.c_str());
-	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE) || IS_IN_KEYRANGE(numericKey, MOUNTS_RANGE))
+	if(!IS_IN_KEYRANGE(numericKey, RESERVED_RANGE))
 	{
 		if(!Creature::setStorage(key, value))
 			return false;
@@ -1503,9 +1502,6 @@ void Player::onChangeZone(ZoneType_t zone)
 			setAttackedCreature(NULL);
 			onTargetDisappear(false);
 		}
-
-		if(g_config.getBool(ConfigManager::UNMOUNT_PLAYER_IN_PZ))
-			dismount(true);
 	}
 
 	g_game.updateCreatureWalkthrough(this);
@@ -2262,11 +2258,6 @@ BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_
 		}
 	}
 
-	if(mounted)
-	{
-		// TODO: mount attributes
-	}
-
 	if(vocation->getAbsorb(combatType))
 		blocked += (int32_t)std::ceil((double)(damage * vocation->getAbsorb(combatType)) / 100.);
 
@@ -2445,7 +2436,7 @@ bool Player::onDeath()
 				health = healthMax = 150;
 				loginPosition = masterPosition = rook->getPosition();
 				experience = magLevel = manaSpent = mana = manaMax = balance = marriage = 0;
-				promotionLevel = defaultOutfit.lookAddons = defaultOutfit.lookMount = 0;
+				promotionLevel = defaultOutfit.lookAddons = 0;
 
 				setTown(rook->getID());
 				setVocation(0);
@@ -3803,9 +3794,6 @@ void Player::onAddCondition(ConditionType_t type, bool hadCondition)
 	if(type == CONDITION_GAMEMASTER)
 		return;
 
-	if(type == CONDITION_INVISIBLE && !hadCondition && mounted)
-		dismount(false);
-
 	if(getLastPosition().x) // don't send if player have just logged in (its already done in protocolgame), or condition have no icons
 		sendIcons();
 }
@@ -4243,13 +4231,6 @@ bool Player::changeOutfit(Outfit_t outfit, bool checkList)
 	if(checkList && (!canWearOutfit(outfitId, outfit.lookAddons) || !requestedOutfit))
 		return false;
 
-	if(outfit.lookMount && outfit.lookMount != getDefaultOutfit().lookMount)
-	{
-		Mount* mount = Mounts::getInstance()->getMountByCid(outfit.lookMount);
-		if(!mount || !mount->isTamed(this))
-			return false;
-	}
-
 	requestedOutfit = false;
 	if(outfitAttributes)
 	{
@@ -4604,17 +4585,6 @@ uint64_t Player::getLostExperience() const
 uint32_t Player::getAttackSpeed() const
 {
 	int32_t modifiers = 0;
-	if(mounted)
-	{
-		if(Mount* tmp = Mounts::getInstance()->getMountByCid(defaultOutfit.lookMount))
-		{
-			if(tmp->getAttackSpeed() == -1)
-				return 0;
-
-			modifiers += tmp->getAttackSpeed();
-		}
-	}
-
 	if(outfitAttributes)
 	{
 		Outfit outfit;
@@ -5462,101 +5432,5 @@ bool Player::transferMoneyTo(const std::string& name, uint64_t amount)
 void Player::sendCritical() const
 {
 	if(g_config.getBool(ConfigManager::DISPLAY_CRITICAL_HIT))
-		sendTextMessage(MSG_STATUS_CONSOLE_RED, "You strike a critical hit!");
-}
-
-void Player::setMounted(bool mounting)
-{
-	if(!mounting)
-	{
-		dismount(true);
-		return;
-	}
-
-	if(_tile->hasFlag(TILESTATE_PROTECTIONZONE) && g_config.getBool(ConfigManager::UNMOUNT_PLAYER_IN_PZ) && !hasFlag(PlayerFlag_IgnoreProtectionZone))
-		sendCancelMessage(RET_ACTIONNOTPERMITTEDINPROTECTIONZONE);
-	else if(Mounts::getInstance()->isPremium() && !isPremium())
-		sendCancelMessage(RET_YOUNEEDPREMIUMACCOUNT);
-	else if(!defaultOutfit.lookMount)
-		sendOutfitWindow();
-	else if(!mounted)
-	{
-		if(Mount* mount = Mounts::getInstance()->getMountByCid(defaultOutfit.lookMount))
-		{
-			mounted = true;
-			if(mount->getSpeed())
-				g_game.changeSpeed(this, mount->getSpeed());
-
-			// TODO: mount attributes
-			g_game.internalCreatureChangeOutfit(this, defaultOutfit, true);
-		}
-	}
-}
-
-void Player::dismount(bool update)
-{
-	if(!mounted)
-		return;
-
-	mounted = false;
-	if(!defaultOutfit.lookMount)
-		return;
-
-	if(Mount* mount = Mounts::getInstance()->getMountByCid(defaultOutfit.lookMount))
-	{
-		if(mount->getSpeed() > 0)
-			g_game.changeSpeed(this, -(int32_t)mount->getSpeed());
-
-		// TODO: mount attributes
-	}
-
-	if(update)
-		g_game.internalCreatureChangeOutfit(this, defaultOutfit, true);
-}
-
-bool Player::tameMount(uint8_t mountId)
-{
-	if(!Mounts::getInstance()->getMountById(mountId))
-		return false;
-
-	--mountId;
-	int32_t key = PSTRG_MOUNTS_RANGE_START + (mountId / 31), value = 0;
-
-	std::string tmp;
-	if(getStorage(asString(key), tmp))
-	{
-		value = atoi(tmp.c_str());
-		value |= (int32_t)pow(2., mountId % 31);
-	}
-	else
-		value = (int32_t)pow(2., mountId % 31);
-
-	setStorage(asString(key), asString(value));
-	return true;
-}
-
-bool Player::untameMount(uint8_t mountId)
-{
-	if(!Mounts::getInstance()->getMountById(mountId))
-		return false;
-
-	--mountId;
-	int32_t key = PSTRG_MOUNTS_RANGE_START + (mountId / 31), value = 0;
-
-	std::string tmp;
-	if(!getStorage(asString(key), tmp))
-		return true;
-
-	value = atoi(tmp.c_str());
-	value ^= (int32_t)std::pow(2., mountId % 31);
-
-	Mount* mount = Mounts::getInstance()->getMountByCid(defaultOutfit.lookMount);
-	if(mount && mount->getId() == (mountId + 1))
-	{
-		dismount(true);
-		defaultOutfit.lookMount = 0;
-	}
-
-	setStorage(asString(key), asString(value));
-	return true;
+		g_game.addAnimatedText(getPosition(), COLOR_DARKRED, "CRITICAL!");
 }

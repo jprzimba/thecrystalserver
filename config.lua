@@ -246,10 +246,6 @@
 	defaultDepotSizePremium = 2000
 	defaultDepotSize = 1000
 
-	-- Mounts
-	useMounts = true
-	unmountPlayerInPz = true
-
 	-- VIP list
 	separateVipListPerCharacter = false
 	vipListDefaultLimit = 20

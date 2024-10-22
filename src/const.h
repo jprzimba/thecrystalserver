@@ -771,8 +771,7 @@ enum PlayerCustomFlags
 	PlayerCustomFlag_IgnoreHouseRent,			//2^22 = 4194304
 	PlayerCustomFlag_CanWearAllAddons,			//2^23 = 8388608
 	PlayerCustomFlag_IsWalkable,				//2^24 = 16777216
-	PlayerCustomFlag_CanUseAllMounts,			//2^25 = 33554432
-	PlayerCustomFlag_HasFullLight,				//2^26 = 67108864
+	PlayerCustomFlag_HasFullLight,				//2^25 = 33554432
 
 	PlayerCustomFlag_LastFlag
 };
@@ -789,11 +788,6 @@ enum PlayerCustomFlags
 //[1500 - 2000]
 #define PSTRG_OUTFITSID_RANGE_START	(PSTRG_RESERVED_RANGE_START + 1500)
 #define PSTRG_OUTFITSID_RANGE_SIZE	500
-
-//[2000 - 2010]
-#define PSTRG_MOUNTS_RANGE_START   (PSTRG_RESERVED_RANGE_START + 2000)
-#define PSTRG_MOUNTS_RANGE_SIZE    10
-#define PSTRG_MOUNTS_CURRENTMOUNT (PSTRG_MOUNTS_RANGE_START + PSTRG_MOUNTS_RANGE_SIZE)
 
 #define NETWORK_CRYPTOHEADER_SIZE 8
 #define NETWORK_RETRY_TIMEOUT 5000

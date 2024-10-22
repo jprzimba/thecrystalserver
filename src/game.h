@@ -92,19 +92,18 @@ enum ReloadInfo_t
 	//RELOAD_UNUSED = 9,
 	RELOAD_ITEMS = 10,
 	RELOAD_MONSTERS = 11,
-	RELOAD_MOUNTS = 12,
-	RELOAD_MOVEEVENTS = 13,
-	RELOAD_NPCS = 14,
-	RELOAD_OUTFITS = 15,
-	RELOAD_QUESTS = 16,
-	RELOAD_RAIDS = 17,
-	RELOAD_SPELLS = 18,
-	RELOAD_STAGES = 19,
-	RELOAD_TALKACTIONS = 20,
-	RELOAD_VOCATIONS = 21,
-	RELOAD_WEAPONS = 22,
-	RELOAD_MODS = 23,
-	RELOAD_ALL = 24,
+	RELOAD_MOVEEVENTS = 12,
+	RELOAD_NPCS = 13,
+	RELOAD_OUTFITS = 14,
+	RELOAD_QUESTS = 15,
+	RELOAD_RAIDS = 16,
+	RELOAD_SPELLS = 17,
+	RELOAD_STAGES = 18,
+	RELOAD_TALKACTIONS = 19,
+	RELOAD_VOCATIONS = 20,
+	RELOAD_WEAPONS = 21,
+	RELOAD_MODS = 22,
+	RELOAD_ALL = 23,
 	RELOAD_LAST = RELOAD_WEAPONS
 };
 
@@ -515,7 +514,6 @@ class Game
 		bool playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type,
 			const std::string& receiver, const std::string& text);
 		bool playerChangeOutfit(uint32_t playerId, Outfit_t outfit);
-		bool playerChangeMountStatus(uint32_t playerId, bool status);
 		bool playerInviteToParty(uint32_t playerId, uint32_t invitedId);
 		bool playerJoinParty(uint32_t playerId, uint32_t leaderId);
 		bool playerRevokePartyInvitation(uint32_t playerId, uint32_t invitedId);

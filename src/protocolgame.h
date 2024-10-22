@@ -104,7 +104,6 @@ class ProtocolGame : public Protocol
 
 		void parseRequestOutfit(NetworkMessage& msg);
 		void parseSetOutfit(NetworkMessage& msg);
-		void parseMountStatus(NetworkMessage& msg);
 		void parseSay(NetworkMessage& msg);
 		void parseLookAt(NetworkMessage& msg);
 		void parseFightModes(NetworkMessage& msg);

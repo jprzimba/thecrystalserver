@@ -148,9 +148,6 @@ bool Npcs::parseNpcNode(xmlNodePtr node, FileType_t path, bool reloading/* = fal
 
 				if(readXMLInteger(q, "addons", intValue))
 					nType->outfit.lookAddons = intValue;
-
-				if(readXMLInteger(q, "mount", intValue))
-					nType->outfit.lookMount = intValue;
 			}
 			else if(readXMLInteger(q, "typeex", intValue))
 				nType->outfit.lookTypeEx = intValue;
@@ -438,9 +435,6 @@ bool Npc::loadFromXml()
 
 				if(readXMLInteger(p, "addons", intValue))
 					nType->outfit.lookAddons = intValue;
-
-				if(readXMLInteger(p, "mount", intValue))
-					nType->outfit.lookMount = intValue;
 			}
 			else if(readXMLInteger(p, "typeex", intValue))
 				nType->outfit.lookTypeEx = intValue;

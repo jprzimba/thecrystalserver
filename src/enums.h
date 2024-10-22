@@ -306,22 +306,22 @@ struct Outfit_t
 {
 	Outfit_t()
 	{
-		lookType = lookTypeEx = lookMount = 0;
+		lookType = lookTypeEx = 0;
 		lookHead = lookBody = lookLegs = lookFeet = lookAddons = 0;
 	}
 	Outfit_t(uint16_t _lookType)
 	{
 		lookType = _lookType;
-		lookTypeEx = lookMount = 0;
+		lookTypeEx = 0;
 		lookHead = lookBody = lookLegs = lookFeet = lookAddons = 0;
 	}
 
-	uint16_t lookType, lookMount, lookTypeEx;
+	uint16_t lookType, lookTypeEx;
 	uint8_t lookHead, lookBody, lookLegs, lookFeet, lookAddons;
 
 	bool operator==(const Outfit_t& o) const
 	{
-		return (o.lookAddons == lookAddons && o.lookMount == lookMount
+		return (o.lookAddons == lookAddons
 			&& o.lookType == lookType && o.lookTypeEx == lookTypeEx
 			&& o.lookHead == lookHead && o.lookBody == lookBody
 			&& o.lookLegs == lookLegs && o.lookFeet == lookFeet);

@@ -50,7 +50,6 @@
 #include "spells.h"
 #include "talkaction.h"
 #include "weapons.h"
-#include "mounts.h"
 
 #include "textlogger.h"
 #include "vocation.h"
@@ -3840,23 +3839,6 @@ bool Game::playerChangeOutfit(uint32_t playerId, Outfit_t outfit)
 	return true;
 }
 
-bool Game::playerChangeMountStatus(uint32_t playerId, bool status)
-{
-	Player* player = getPlayerByID(playerId);
-	if(!player || player->isRemoved())
-		return false;
-
-	if(!player->canDoAction() || player->hasCondition(CONDITION_INVISIBLE))
-	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
-		return false;
-	}
-
-	player->setMounted(status);
-	player->setNextAction(OTSYS_TIME() + g_config.getNumber(ConfigManager::EX_ACTIONS_DELAY_INTERVAL) - 10);
-	return true;
-}
-
 bool Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, const std::string& receiver, const std::string& text)
 {
 	Player* player = getPlayerByID(playerId);
@@ -5812,17 +5794,6 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 				done = true;
 			else
 				std::clog << "[Error - Game::reloadInfo] Failed to reload monsters." << std::endl;
-
-			break;
-		}
-
-		case RELOAD_MOUNTS:
-		{
-			//TODO?
-			if(Mounts::getInstance()->reload())
-				done = true;
-			else
-				std::clog << "[Notice - Game::reloadInfo] Reload type does not work." << std::endl;
 
 			break;
 		}

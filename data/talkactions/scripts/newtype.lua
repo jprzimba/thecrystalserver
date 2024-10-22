@@ -47,13 +47,6 @@ function onSay(cid, words, param, channel)
 	local tmp = getCreatureOutfit(pid)
 	tmp.lookType = t[1]
 
-	if(t[3]) then
-		t[3] = tonumber(t[3])
-		if(checkType(t[3])) then
-			tmp.lookMount = t[3]
-		end
-	end
-
 	doCreatureChangeOutfit(pid, tmp)
 	return true
 end

@@ -1353,6 +1353,24 @@ uint32_t DatabaseManager::updateDatabase()
 			return 35;
 		}
 
+		case 35:
+		{
+			std::clog << "Updating database to version 36..." << std::endl;
+			switch(db->getDatabaseEngine())
+			{
+				case DATABASE_ENGINE_MYSQL:
+				{
+					db->query("ALTER TABLE `players` DROP COLUMN `lookmount`;");
+					break;
+				}
+
+				default: break;
+			}
+
+			registerDatabaseConfig("db_version", 36);
+			return 36;
+		}
+
 		default:
 			break;
 	}

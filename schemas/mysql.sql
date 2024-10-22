@@ -70,7 +70,6 @@ CREATE TABLE `players`
 	`looklegs` INT NOT NULL DEFAULT 0,
 	`looktype` INT NOT NULL DEFAULT 136,
 	`lookaddons` INT NOT NULL DEFAULT 0,
-	`lookmount` INT NOT NULL DEFAULT 0, 
 	`maglevel` INT NOT NULL DEFAULT 0,
 	`mana` INT NOT NULL DEFAULT 0,
 	`manamax` INT NOT NULL DEFAULT 0,
@@ -113,7 +112,7 @@ CREATE TABLE `players`
 	FOREIGN KEY (`account_id`) REFERENCES `accounts`(`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-INSERT INTO `players` VALUES (1, 'Account Manager', 0, 1, 1, 1, 0, 150,  150, 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 0, 0, 0, 0, 853, 921, 7, '', 400, 0,  0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 201660000, 0, 100, 100, 100, 100, 100, 0,  0, 0, 0, 0, '');
+INSERT INTO `players` VALUES (1, 'Account Manager', 0, 1, 1, 1, 0, 150,  150, 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 0, 0, 0, 853, 921, 7, '', 400, 0,  0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 201660000, 0, 100, 100, 100, 100, 100, 0,  0, 0, 0, 0, '');
 
 CREATE TABLE `account_viplist`
 (

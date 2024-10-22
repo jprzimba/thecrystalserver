@@ -761,20 +761,6 @@
 			How many items can a player without premium store in their depot?
 			Default: 1000
 
-	*MOUNTS
-		useMounts
-			New in 8.7 determined if mounts are enabled or not.
-			Default: true
-
-		mountCooldown
-			How long you have to wait until you can mount again.
-			(In milliseconds.)
-			Default: 2000
-
-		unmountPlayerInPz
-			When entering a protection zone, will the player get unmounted?
-			Default: true
-
 	*VIP LIST
 		separateVipListPerCharacter
 			If enabled, each character on your account has a separate vip list.

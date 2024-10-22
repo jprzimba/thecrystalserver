@@ -36,7 +36,6 @@
 #include "group.h"
 #include "vocation.h"
 #include "outfit.h"
-#include "mounts.h"
 #include "quests.h"
 #include "items.h"
 #include "chat.h"
@@ -276,8 +275,6 @@ bool ScriptManager::loadFromXml(const std::string& file, bool& enabled)
 		{
 			if(!xmlStrcmp(p->name, (const xmlChar*)"quest"))
 				Quests::getInstance()->parseQuestNode(p, modsLoaded);
-			else if(!xmlStrcmp(p->name, (const xmlChar*)"mount"))
-				Mounts::getInstance()->parseMountNode(p);
 			else if(!xmlStrcmp(p->name, (const xmlChar*)"outfit"))
 				Outfits::getInstance()->parseOutfitNode(p);
 			else if(!xmlStrcmp(p->name, (const xmlChar*)"vocation"))

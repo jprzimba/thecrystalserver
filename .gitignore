@@ -48,8 +48,6 @@ compile_commands.json
 # Ignore logs, databases, and temporary files
 *.log
 *.db
-*.sqlite
-*.s3db
 
 # Ignore backup and temporary files
 *~
@@ -71,4 +69,3 @@ compile_commands.json
 Makefile.win
 src/dev-cpp/obj/crystalserver_private.res
 /src/dev-cpp/obj
-*.s3db

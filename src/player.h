@@ -591,14 +591,6 @@ class Player : public Creature, public Cylinder
 		void sendRemoveInventoryItem(slots_t slot, const Item*)
 			{if(client) client->sendRemoveInventoryItem(slot);}
 
-		//mount
-		bool isMounted() const {return mounted;}
-		void setMounted(bool mounting);
-		void dismount(bool update);
-
-		bool tameMount(uint8_t mountId);
-		bool untameMount(uint8_t mountId);
-
 		//event methods
 		virtual void onUpdateTileItem(const Tile* tile, const Position& pos, const Item* oldItem,
 			const ItemType& oldType, const Item* newItem, const ItemType& newType);
@@ -842,7 +834,6 @@ class Player : public Creature, public Cylinder
 		bool requestedOutfit;
 		bool outfitAttributes;
 		bool addAttackSkillPoint;
-		bool mounted;
 		bool pvpBlessing;
 		bool sentChat;
 
