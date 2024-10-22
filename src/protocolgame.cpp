@@ -2557,30 +2557,6 @@ void ProtocolGame::sendVIP(uint32_t guid, const std::string& name, bool online)
 	}
 }
 
-void ProtocolGame::sendSpellCooldown(Spells_t icon, uint32_t cooldown)
-{
-	NetworkMessage_ptr msg = getOutputBuffer();
-	if(msg)
-	{
-		TRACK_MESSAGE(msg);
-		msg->put<char>(0xA4);
-		msg->put<char>(icon);
-		msg->put<uint32_t>(cooldown);
-	}
-}
-
-void ProtocolGame::sendSpellGroupCooldown(SpellGroup_t groupId, uint32_t cooldown)
-{
-	NetworkMessage_ptr msg = getOutputBuffer();
-	if(msg)
-	{
-		TRACK_MESSAGE(msg);
-		msg->put<char>(0xA5);
-		msg->put<char>(groupId);
-		msg->put<uint32_t>(cooldown);
-	}
-}
-
 void ProtocolGame::reloadCreature(const Creature* creature)
 {
 	if(!canSee(creature))

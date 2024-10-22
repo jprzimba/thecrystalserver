@@ -8,10 +8,5 @@ setConditionFormula(condition, -0.9, 0, -0.9, 0)
 setCombatCondition(combat, condition)
 
 function onCastSpell(cid, var)
-	if(not doCombat(cid, combat, var)) then
-		return false
-	end
-
-	doSendMagicEffect(getThingPosition(cid), CONST_ME_MAGIC_GREEN)
-	return true
+	return doCombat(cid, combat, var)
 end

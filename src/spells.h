@@ -68,7 +68,6 @@ class Spells : public BaseEvents
 		RunesMap runes;
 		InstantsMap instants;
 
-		uint32_t spellId;
 		friend class CombatSpell;
 };
 
@@ -120,7 +119,7 @@ class Spell : public BaseSpell
 		bool configureSpell(xmlNodePtr xmlspell);
 		const std::string& getName() const {return name;}
 
-		void postSpell(Player* player) const;
+		void postSpell(Player* player, bool isFinished = true, bool payCost = true) const;
 		void postSpell(Player* player, uint32_t manaCost, uint32_t soulCost) const;
 
 		int32_t getManaCost(const Player* player) const;
@@ -130,10 +129,6 @@ class Spell : public BaseSpell
 		int32_t getMana() const {return mana;}
 		int32_t getManaPercent() const {return manaPercent;}
 		uint32_t getExhaustion() const {return exhaustion;}
-		Spells_t getIcon() const {return icon;}
-		SpellGroup getGroupExhaustions() const {return groupExhaustions;}
-		uint16_t getId() const {return spellId;}
-		void setId(uint16_t id) {spellId = id;}
 
 		bool isEnabled() const {return enabled;}
 		bool isPremium() const {return premium;}
@@ -150,9 +145,6 @@ class Spell : public BaseSpell
 		bool checkInstantSpell(Player* player, Creature* creature);
 		bool checkInstantSpell(Player* player, const Position& toPos);
 		bool checkRuneSpell(Player* player, const Position& toPos);
-
-	private:
-		uint16_t spellId;
 
 	protected:
 		int32_t level;
@@ -176,8 +168,6 @@ class Spell : public BaseSpell
 		bool selfTarget;
 		bool isAggressive;
 
-		Spells_t icon;
-		SpellGroup groupExhaustions;
 		std::string name;
 
 		VocationMap vocSpellMap;
@@ -292,8 +282,7 @@ class RuneSpell : public Action, public Spell
 
 		static RuneSpellFunction Illusion;
 		static RuneSpellFunction Convince;
-		static RuneSpellFunction Soulfire;
-
+	
 		bool internalCastSpell(Creature* creature, const LuaVariant& var);
 
 		bool hasCharges;

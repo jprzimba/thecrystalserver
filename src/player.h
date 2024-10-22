@@ -483,7 +483,6 @@ class Player : public Creature, public Cylinder
 			return std::find(revengeList.begin(), revengeList.end(), playerGUID) != revengeList.end();
 		}
 
-		void addCooldown(uint32_t ticks, uint16_t spellId);
 		void addExhaust(uint32_t ticks, Exhaust_t exhaust);
 		void addInFightTicks(bool pzLock, int32_t ticks = 0);
 		void addDefaultRegeneration(uint32_t addTicks);
@@ -571,10 +570,6 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendCreatureEmblem(creature);}
 		void sendCreatureWalkthrough(const Creature* creature, bool walkthrough)
 			{if(client) client->sendCreatureWalkthrough(creature, walkthrough);}
-		void sendSpellCooldown(Spells_t icon, uint32_t cooldown)
-			{if(client) client->sendSpellCooldown(icon, cooldown);}
-		void sendSpellGroupCooldown(SpellGroup_t groupId, uint32_t cooldown)
-			{if(client) client->sendSpellGroupCooldown(groupId, cooldown);}
 
 		//container
 		void sendAddContainerItem(const Container* container, const Item* item);

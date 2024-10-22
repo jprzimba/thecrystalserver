@@ -39,7 +39,6 @@ Spells::Spells():
 m_interface("Spell Interface")
 {
 	m_interface.initState();
-	spellId = 0;
 }
 
 ReturnValue Spells::onPlayerSay(Player* player, const std::string& words)
@@ -119,7 +118,6 @@ void Spells::clear()
 		delete it->second;
 
 	instants.clear();
-	spellId = 0;
 	m_interface.reInitState();
 }
 
@@ -143,7 +141,6 @@ bool Spells::registerEvent(Event* event, xmlNodePtr, bool override)
 	if(InstantSpell* instant = dynamic_cast<InstantSpell*>(event))
 	{
 		InstantsMap::iterator it = instants.find(instant->getWords());
-		instant->setId(spellId++);
 		if(it == instants.end())
 		{
 			instants[instant->getWords()] = instant;
@@ -164,7 +161,6 @@ bool Spells::registerEvent(Event* event, xmlNodePtr, bool override)
 	if(RuneSpell* rune = dynamic_cast<RuneSpell*>(event))
 	{
 		RunesMap::iterator it = runes.find(rune->getRuneItemId());
-		rune->setId(spellId++);
 		if(it == runes.end())
 		{
 			runes[rune->getRuneItemId()] = rune;
@@ -466,7 +462,6 @@ bool CombatSpell::executeCastSpell(Creature* creature, const LuaVariant& var)
 
 Spell::Spell()
 {
-	spellId = 0;
 	level = 0;
 	magLevel = 0;
 	mana = 0;
@@ -483,7 +478,6 @@ Spell::Spell()
 	premium = false;
 	isAggressive = true;
 	learnable = false;
-	icon = SPELL_NONE;
 
 	for(int32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
 		skills[i] = 10;
@@ -593,45 +587,6 @@ bool Spell::configureSpell(xmlNodePtr p)
 	if(readXMLString(p, "aggressive", strValue))
 		isAggressive = booleanString(strValue);
 
-	if(readXMLInteger(p, "icon", intValue)) // TODO: needs a string values parser, like skulls etc.
-		icon = (Spells_t)intValue;
-
-	if(readXMLString(p, "groups", strValue))
-	{
-		std::vector<std::string> strVector = explodeString(strValue, ";"), tmpVector;
-		for(std::vector<std::string>::iterator it = strVector.begin(); it != strVector.end(); ++it)
-		{
-			tmpVector = explodeString((*it), ",");
-			uint32_t id = atoi(tmpVector[0].c_str()), exhaust = isAggressive ? 2000 : 1000;
-			if(tmpVector.size() > 1)
-				exhaust = atoi(tmpVector[1].c_str());
-
-			if(!id)
-			{
-				strValue = asLowerCaseString(tmpVector[0]);
-				if(strValue == "attack" || strValue == "attacking")
-					id = SPELLGROUP_ATTACK;
-				else if(strValue == "heal" || strValue == "healing")
-					id = SPELLGROUP_HEALING;
-				else if(strValue == "support" || strValue == "supporting")
-					id = SPELLGROUP_SUPPORT;
-				else if(strValue == "special" || strValue == "ultimate")
-					id = SPELLGROUP_SPECIAL;
-			}
-
-			if(id && exhaust)
-				groupExhaustions[(SpellGroup_t)id] = exhaust;
-		}
-	}
-
-	if(groupExhaustions.empty())
-	{
-		if(isAggressive)
-			groupExhaustions[SPELLGROUP_ATTACK] = 2000;
-		else
-			groupExhaustions[SPELLGROUP_HEALING] = 1000;
-	}
-
 	std::string error;
 	for(xmlNodePtr vocationNode = p->children; vocationNode; vocationNode = vocationNode->next)
 	{
@@ -653,6 +608,7 @@ bool Spell::checkSpell(Player* player) const
 	if(!isEnabled())
 		return false;
 
+	bool exhausted = false;
 	if(isAggressive)
 	{
 		if(!player->hasFlag(PlayerFlag_IgnoreProtectionZone) && player->getZone() == ZONE_PROTECTION)
@@ -660,38 +616,20 @@ bool Spell::checkSpell(Player* player) const
 			player->sendCancelMessage(RET_ACTIONNOTPERMITTEDINPROTECTIONZONE);
 			return false;
 		}
-	}
 
-	if(!player->hasFlag(PlayerFlag_HasNoExhaustion))
-	{
-		bool exhausted = false;
-		if(g_config.getBool(ConfigManager::ENABLE_COOLDOWNS))
-		{
-			if(!player->hasCondition(CONDITION_SPELLCOOLDOWN, spellId))
-			{
-				for(SpellGroup::const_iterator it = groupExhaustions.begin(); it != groupExhaustions.end(); ++it)
-				{
-					if(!player->hasCondition(CONDITION_EXHAUST, (Exhaust_t)((int32_t)it->first + 1)))
-						continue;
-
-					exhausted = true;
-					break;
-				}
-			}
-			else
-				exhausted = true;
-		}
-		else if(player->hasCondition(CONDITION_EXHAUST, (isAggressive ? EXHAUST_SPELLGROUP_ATTACK : EXHAUST_SPELLGROUP_HEALING)))
+		if(player->hasCondition(CONDITION_EXHAUST, EXHAUST_COMBAT))
 			exhausted = true;
+	}
+	else if(player->hasCondition(CONDITION_EXHAUST, EXHAUST_HEALING))
+		exhausted = true;
 
-		if(exhausted)
-		{
-			player->sendCancelMessage(RET_YOUAREEXHAUSTED);
-			if(isInstant())
-				g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+	if(exhausted && !player->hasFlag(PlayerFlag_HasNoExhaustion))
+	{
+		player->sendCancelMessage(RET_YOUAREEXHAUSTED);
+		if(isInstant())
+			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
 
-			return false;
-		}
+		return false;
 	}
 
 	if(isPremium() && !player->isPremium())
@@ -1027,36 +965,19 @@ bool Spell::checkRuneSpell(Player* player, const Position& toPos)
 	return false;
 }
 
-void Spell::postSpell(Player* player) const
+void Spell::postSpell(Player* player, bool finishedCast /*= true*/, bool payCost /*= true*/) const
 {
-	if(!player->hasFlag(PlayerFlag_HasNoExhaustion))
+	if(finishedCast)
 	{
-		if(g_config.getBool(ConfigManager::ENABLE_COOLDOWNS))
-		{
-			for(SpellGroup::const_iterator it = groupExhaustions.begin(); it != groupExhaustions.end(); ++it)
-			{
-				player->addExhaust(it->second, (Exhaust_t)(it->first + 1));
-				player->sendSpellGroupCooldown(it->first, it->second);
-			}
+		if(!player->hasFlag(PlayerFlag_HasNoExhaustion) && exhaustion > 0)
+			player->addExhaust(exhaustion, isAggressive ? EXHAUST_COMBAT : EXHAUST_HEALING);
 
-			if(exhaustion > 0)
-			{
-				player->addCooldown(exhaustion, spellId);
-				if(icon != SPELL_NONE)
-					player->sendSpellCooldown(icon, exhaustion);
-			}
-		}
-		else if(exhaustion > 0)
-		{
-			player->addExhaust(exhaustion, (isAggressive ? EXHAUST_SPELLGROUP_ATTACK : EXHAUST_SPELLGROUP_HEALING));
-			player->sendSpellGroupCooldown(isAggressive ? SPELLGROUP_ATTACK : SPELLGROUP_HEALING, exhaustion);
-		}
+		if(isAggressive && !player->hasFlag(PlayerFlag_NotGainInFight))
+			player->addInFightTicks(false);
 	}
 
-	if(isAggressive && !player->hasFlag(PlayerFlag_NotGainInFight))
-		player->addInFightTicks(false);
-
-	postSpell(player, (uint32_t)getManaCost(player), (uint32_t)getSoulCost());
+	if(payCost)
+		postSpell(player, (uint32_t)getManaCost(player), (uint32_t)getSoulCost());
 }
 
 void Spell::postSpell(Player* player, uint32_t manaCost, uint32_t soulCost) const
@@ -1792,8 +1713,6 @@ bool RuneSpell::loadFunction(const std::string& functionName)
 		function = Illusion;
 	else if(tmpFunctionName == "convince")
 		function = Convince;
-	else if(tmpFunctionName == "soulfire")
-		function = Soulfire;
 	else
 	{
 		std::clog << "[Warning - RuneSpell::loadFunction] Function \"" << functionName << "\" does not exist." << std::endl;
@@ -1904,45 +1823,6 @@ bool RuneSpell::Convince(const RuneSpell* spell, Creature* creature, Item*, cons
 
 	spell->postSpell(player, (uint32_t)manaCost, (uint32_t)spell->getSoulCost());
 	g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_WRAPS_RED);
-	return true;
-}
-
-bool RuneSpell::Soulfire(const RuneSpell* spell, Creature* creature, Item*, const Position&, const Position& posTo)
-{
-	Player* player = creature->getPlayer();
-	if(!player)
-		return false;
-
-	Thing* thing = g_game.internalGetThing(player, posTo, 0, 0, STACKPOS_LOOK);
-	if(!thing)
-	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
-	}
-
-	Creature* target = thing->getCreature();
-	if(!target)
-	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
-	}
-
-	ConditionDamage* soulfireCondition = new ConditionDamage(CONDITIONID_COMBAT, CONDITION_FIRE, false, 0);
-	soulfireCondition->setParam(CONDITIONPARAM_SUBID, 1);
-	soulfireCondition->setParam(CONDITIONPARAM_OWNER, player->getID());
-
-	soulfireCondition->addDamage(std::ceil((player->getLevel() + player->getMagicLevel()) / 3.), 9000, -10);
-	if(!target->addCondition(soulfireCondition))
-	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
-	}
-
-	g_game.addDistanceEffect(player->getPosition(), posTo, SHOOT_EFFECT_FIRE);
-	spell->postSpell(player, true, false);
 	return true;
 }
 

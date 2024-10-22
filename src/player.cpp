@@ -1658,8 +1658,7 @@ void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const
 		int32_t ticks = g_config.getNumber(ConfigManager::STAIRHOP_DELAY);
 		if(ticks > 0)
 		{
-			addExhaust(ticks, EXHAUST_SPELLGROUP_ATTACK);
-			addExhaust(ticks, EXHAUST_MELEE);
+			addExhaust(ticks, EXHAUST_COMBAT);
 			if(Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_PACIFIED, ticks))
 				addCondition(condition);
 		}
@@ -2557,13 +2556,6 @@ Item* Player::createCorpse(DeathList deathList)
 	ss << ".";
 	corpse->setSpecialDescription(ss.str().c_str());
 	return corpse;
-}
-
-void Player::addCooldown(uint32_t ticks, uint16_t spellId)
-{
-	if(Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT,
-		CONDITION_SPELLCOOLDOWN, ticks, 0, false, spellId))
-		addCondition(condition);
 }
 
 void Player::addExhaust(uint32_t ticks, Exhaust_t exhaust)
@@ -3670,7 +3662,7 @@ void Player::doAttacking(uint32_t)
 		}
 		else
 		{
-			if((!_weapon->hasExhaustion() || !hasCondition(CONDITION_EXHAUST)) && _weapon->useWeapon(this, weapon, attackedCreature))
+			if((!_weapon->hasExhaustion() || !hasCondition(CONDITION_EXHAUST, EXHAUST_COMBAT)) && _weapon->useWeapon(this, weapon, attackedCreature))
 				lastAttack = OTSYS_TIME();
 
 			updateWeapon();
