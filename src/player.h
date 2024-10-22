@@ -320,7 +320,7 @@ class Player : public Creature, public Cylinder
 		virtual int32_t getThrowRange() const {return 1;}
 		virtual double getGainedExperience(Creature* attacker) const;
 
-		bool isMuted(uint16_t channelId, MessageClasses type, int32_t& time);
+		bool isMuted(uint16_t channelId, SpeakClasses type, int32_t& time);
 		void addMessageBuffer();
 		void removeMessageBuffer();
 
@@ -541,7 +541,7 @@ class Player : public Creature, public Cylinder
 		void sendUpdateTile(const Tile* tile, const Position& pos)
 			{if(client) client->sendUpdateTile(tile, pos);}
 
-		void sendChannelMessage(std::string author, std::string text, MessageClasses type, uint16_t channel)
+		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel)
 			{if(client) client->sendChannelMessage(author, text, type, channel);}
 		void sendChannelEvent(uint16_t channelId, const std::string& playerName, ChannelEvent_t channelEvent)
 			{if(client) client->sendChannelEvent(channelId, playerName, channelEvent);}
@@ -555,9 +555,9 @@ class Player : public Creature, public Cylinder
 
 		void sendCreatureTurn(const Creature* creature)
 			{if(client) client->sendCreatureTurn(creature, creature->getTile()->getClientIndexOfThing(this, creature));}
-		void sendCreatureSay(const Creature* creature, MessageClasses type, const std::string& text, Position* pos = NULL, uint32_t statementId = 0)
+		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos = NULL, uint32_t statementId = 0)
 			{if(client) client->sendCreatureSay(creature, type, text, pos, statementId);}
-		void sendCreatureChannelSay(Creature* creature, MessageClasses type, const std::string& text, uint16_t channelId, uint32_t statementId = 0) const
+		void sendCreatureChannelSay(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId = 0) const
 			{if(client) client->sendCreatureChannelSay(creature, type, text, channelId, statementId);}
 		void sendCreatureSquare(const Creature* creature, uint8_t color)
 			{if(client) client->sendCreatureSquare(creature, color);}
@@ -642,6 +642,8 @@ class Player : public Creature, public Cylinder
 			Item* newItem, const ItemType& newType);
 		void onRemoveInventoryItem(slots_t slot, Item* item);
 
+		void sendAnimatedText(const Position& pos, uint8_t color, std::string text) const
+			{if(client) client->sendAnimatedText(pos,color,text);}
 		void sendCancel(const std::string& msg) const
 			{if(client) client->sendCancel(msg);}
 		void sendCancelMessage(ReturnValue message) const;
@@ -676,8 +678,6 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendSkills();}
 		void sendTextMessage(MessageClasses type, const std::string& message) const
 			{if(client) client->sendTextMessage(type, message);}
-		void sendStatsMessage(MessageClasses type, const std::string& message, Position pos, MessageDetails* details = NULL) const
-			{if(client) client->sendStatsMessage(type, message, pos, details);}
 		void sendReLoginWindow(uint8_t pvpPercent) const
 			{if(client) client->sendReLoginWindow(pvpPercent);}
 		void sendTextWindow(Item* item, uint16_t maxLen, bool canWrite) const

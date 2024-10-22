@@ -227,7 +227,7 @@ void ProtocolManager::parsePacket(NetworkMessage& msg)
 			break;
 
 		case MP_MSG_CHAT_TALK:
-			Dispatcher::getInstance().addTask(createTask(boost::bind(&ProtocolManager::chat, this, msg.getString(), msg.get<uint16_t>(), (MessageClasses)msg.get<char>(), msg.getString())));
+			Dispatcher::getInstance().addTask(createTask(boost::bind(&ProtocolManager::chat, this, msg.getString(), msg.get<uint16_t>(), (SpeakClasses)msg.get<char>(), msg.getString())));
 			break;
 
 		default:
@@ -345,7 +345,7 @@ void ProtocolManager::channels()
 	}
 }
 
-void ProtocolManager::chat(std::string name, uint16_t channelId, MessageClasses type, std::string message)
+void ProtocolManager::chat(std::string name, uint16_t channelId, SpeakClasses type, std::string message)
 {
 	if(m_state != LOGGED_IN)
 		return;
@@ -457,7 +457,7 @@ void ProtocolManager::removeUser(uint32_t playerId)
 	msg->put<uint32_t>(playerId);
 }
 
-void ProtocolManager::talk(uint32_t playerId, uint16_t channelId, MessageClasses type, const std::string& message)
+void ProtocolManager::talk(uint32_t playerId, uint16_t channelId, SpeakClasses type, const std::string& message)
 {
 	if(m_state != LOGGED_IN)
 		return;
@@ -596,7 +596,7 @@ void Manager::removeUser(uint32_t playerId)
 	}
 }
 
-void Manager::talk(uint32_t playerId, uint16_t channelId, MessageClasses type, const std::string& message)
+void Manager::talk(uint32_t playerId, uint16_t channelId, SpeakClasses type, const std::string& message)
 {
 	for(ClientMap::const_iterator it = m_clients.begin(); it != m_clients.end(); ++it)
 	{

@@ -194,6 +194,8 @@ class ConfigManager
 			ROOK_LEVELTO,
 			ROOK_TOLEVEL,
 			SERVICE_THREADS,
+			HEALTH_HEALING_COLOR,
+			MANA_HEALING_COLOR,
 			LAST_NUMBER_CONFIG /* this must be the last one */
 		};
 

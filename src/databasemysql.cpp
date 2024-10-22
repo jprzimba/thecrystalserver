@@ -49,7 +49,7 @@ DatabaseMySQL::DatabaseMySQL() :
 	DBResult* result = storeQuery("SHOW variables LIKE 'max_allowed_packet';");
 	assert(result);
 	if(result->getDataLong("Value") < 16776192)
-		std::clog << std::endl << ":: WARNING: max_allowed_packet might be set too low for binary map storage." << std::endl
+		std::clog << std::endl << "WARNING: max_allowed_packet might be set too low for binary map storage." << std::endl
 			<< "Use the following query to raise max_allow_packet: SET GLOBAL max_allowed_packet = 16776192;" << std::endl;
 
 	result->free();
@@ -72,7 +72,7 @@ bool DatabaseMySQL::connect(bool _reconnect)
 		if(attempts != 0 && m_attempts > attempts)
 			return false;
 
-		std::clog << ":: WARNING: MYSQL Lost connection, attempting to reconnect..." << std::endl;
+		std::clog << "WARNING: MYSQL Lost connection, attempting to reconnect..." << std::endl;
 		if(attempts != 0 && ++m_attempts > attempts)
 		{
 			std::clog << std::endl << "Failed connection to database - maximum reconnect attempts passed." << std::endl;

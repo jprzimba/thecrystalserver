@@ -49,7 +49,7 @@ Creature::Creature()
 	lootDrop = LOOT_DROP_FULL;
 	skillLoss = true;
 	hideName = hideHealth = cannotMove = false;
-	speakType = MSG_NONE;
+	speakType = SPEAK_CLASS_NONE;
 	skull = SKULL_NONE;
 	partyShield = SHIELD_NONE;
 	guildEmblem = EMBLEM_NONE;
@@ -317,7 +317,7 @@ void Creature::onWalk(Direction& dir)
 	else if(r <= (tmp * 4))
 		dir = EAST;
 
-	g_game.internalCreatureSay(this, MSG_SPEAK_MONSTER_SAY, "Hicks!", isGhost());
+	g_game.internalCreatureSay(this, SPEAK_MONSTER_SAY, "Hicks!", isGhost());
 }
 
 bool Creature::getNextStep(Direction& dir, uint32_t&)
@@ -1338,35 +1338,9 @@ void Creature::onGainExperience(double& gainExp, Creature* target, bool multipli
 	if(color < 0)
 		color = random_range(0, 255);
 
-	const Position& targetPos = getPosition();
-
-	SpectatorVec list;
-	g_game.getSpectators(list, targetPos, false, false, Map::maxViewportX, Map::maxViewportX,
-		Map::maxViewportY, Map::maxViewportY);
-
 	std::stringstream ss;
-	ss << ucfirst(getNameDescription()) << " gained " << (uint64_t)gainExp << " experience points.";
-
-	SpectatorVec textList;
-	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-	{
-		if(!(*it)->getPlayer())
-			continue;
-
-		if((*it) != this)
-			textList.push_back(*it);
-	}
-
-	MessageDetails* details = new MessageDetails((int32_t)gainExp, (Color_t)color);
-	g_game.addStatsMessage(textList, MSG_EXPERIENCE_OTHERS, ss.str(), targetPos, details);
-	if(Player* player = getPlayer())
-	{
-		ss.str("");
-		ss << "You gained " << (uint64_t)gainExp << " experience points.";
-		player->sendStatsMessage(MSG_EXPERIENCE, ss.str(), targetPos, details);
-	}
-
-	delete details;
+	ss << (uint64_t)gainExp;
+	g_game.addAnimatedText(getPosition(), (uint8_t)color, ss.str());
 }
 
 void Creature::onGainSharedExperience(double& gainExp, Creature* target, bool multiplied)
@@ -1386,35 +1360,9 @@ void Creature::onGainSharedExperience(double& gainExp, Creature* target, bool mu
 	if(color < 0)
 		color = random_range(0, 255);
 
-	const Position& targetPos = getPosition();
-
-	SpectatorVec list;
-	g_game.getSpectators(list, targetPos, false, false, Map::maxViewportX, Map::maxViewportX,
-		Map::maxViewportY, Map::maxViewportY);
-
 	std::stringstream ss;
-	ss << ucfirst(getNameDescription()) << " gained " << (uint64_t)gainExp << " experience points.";
-
-	SpectatorVec textList;
-	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-	{
-		if(!(*it)->getPlayer())
-			continue;
-
-		if((*it) != this)
-			textList.push_back(*it);
-	}
-
-	MessageDetails* details = new MessageDetails((int32_t)gainExp, (Color_t)color);
-	g_game.addStatsMessage(textList, MSG_EXPERIENCE_OTHERS, ss.str(), targetPos, details);
-	if(Player* player = getPlayer())
-	{
-		ss.str("");
-		ss << "You gained " << (uint64_t)gainExp << " experience points.";
-		player->sendStatsMessage(MSG_EXPERIENCE, ss.str(), targetPos, details);
-	}
-
-	delete details;
+	ss << (uint64_t)gainExp;
+	g_game.addAnimatedText(getPosition(), (uint8_t)color, ss.str());
 }
 
 void Creature::addSummon(Creature* creature)

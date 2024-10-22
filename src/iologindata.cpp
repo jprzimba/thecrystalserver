@@ -404,7 +404,7 @@ void IOLoginData::removePremium(Account& account)
 	}
 
 	if(save && !saveAccount(account))
-		std::clog << ":: ERROR: Failed to save account: " << account.name << "!" << std::endl;
+		std::clog << "ERROR: Failed to save account: " << account.name << "!" << std::endl;
 }
 
 const Group* IOLoginData::getPlayerGroupByAccount(uint32_t accountId)

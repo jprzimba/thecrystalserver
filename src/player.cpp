@@ -1877,7 +1877,7 @@ void Player::onThink(uint32_t interval)
 		mailAttempts = lastMail = 0;
 }
 
-bool Player::isMuted(uint16_t channelId, MessageClasses type, int32_t& time)
+bool Player::isMuted(uint16_t channelId, SpeakClasses type, int32_t& time)
 {
 	time = 0;
 	if(hasFlag(PlayerFlag_CannotBeMuted))
@@ -1902,7 +1902,7 @@ bool Player::isMuted(uint16_t channelId, MessageClasses type, int32_t& time)
 	if(muteTicks)
 		time = (uint32_t)muteTicks / 1000;
 
-	return type != MSG_NPC_TO && (type != MSG_CHANNEL || (channelId != CHANNEL_GUILD && !g_chat.isPrivateChannel(channelId)));
+	return type != SPEAK_PRIVATE_PN && (type != SPEAK_CHANNEL_Y || (channelId != CHANNEL_GUILD && !g_chat.isPrivateChannel(channelId)));
 }
 
 void Player::addMessageBuffer()
@@ -5192,9 +5192,9 @@ void Player::manageAccount(const std::string &text)
 			break;
 	}
 
-	sendCreatureSay(this, MSG_NPC_FROM, msg.str());
+	sendTextMessage(MSG_STATUS_CONSOLE_BLUE, msg.str().c_str());
 	if(!noSwap)
-		sendCreatureSay(this, MSG_NPC_FROM, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
+		sendTextMessage(MSG_STATUS_CONSOLE_ORANGE, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
 }
 
 bool Player::isGuildInvited(uint32_t guildId) const

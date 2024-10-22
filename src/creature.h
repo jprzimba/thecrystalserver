@@ -220,8 +220,8 @@ class Creature : public AutoId, virtual public Thing
 		bool getHideHealth() const {return hideHealth;}
 		void setHideHealth(bool v) {hideHealth = v;}
 
-		MessageClasses getSpeakType() const {return speakType;}
-		void setSpeakType(MessageClasses type) {speakType = type;}
+		SpeakClasses getSpeakType() const {return speakType;}
+		void setSpeakType(SpeakClasses type) {speakType = type;}
 
 		Position getMasterPosition() const {return masterPosition;}
 		void setMasterPosition(const Position& pos, uint32_t radius = 1) {masterPosition = pos; masterRadius = radius;}
@@ -413,7 +413,7 @@ class Creature : public AutoId, virtual public Thing
 		virtual void onFollowCreatureDisappear(bool) {}
 
 		virtual void onCreatureTurn(const Creature*) {}
-		virtual void onCreatureSay(const Creature*, MessageClasses, const std::string&,
+		virtual void onCreatureSay(const Creature*, SpeakClasses, const std::string&,
 			Position* = NULL) {}
 
 		virtual void onCreatureChangeOutfit(const Creature*, const Outfit_t&) {}
@@ -489,7 +489,7 @@ class Creature : public AutoId, virtual public Thing
 		int32_t mana, manaMax;
 
 		bool hideName, hideHealth, cannotMove;
-		MessageClasses speakType;
+		SpeakClasses speakType;
 
 		Outfit_t currentOutfit;
 		Outfit_t defaultOutfit;

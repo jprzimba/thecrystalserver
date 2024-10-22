@@ -3607,9 +3607,9 @@ int32_t LuaInterface::luaDoCreatureSay(lua_State* L)
 	if(params > 3)
 		ghost = popBoolean(L);
 
-	MessageClasses type = MSG_SPEAK_SAY;
+	SpeakClasses type = SPEAK_SAY;
 	if(params > 2)
-		type = (MessageClasses)popNumber(L);
+		type = (SpeakClasses)popNumber(L);
 
 	std::string text = popString(L);
 
@@ -3676,7 +3676,7 @@ int32_t LuaInterface::luaDoCreatureChannelSay(lua_State* L)
 		return 1;
 	}
 
-	player->sendCreatureChannelSay(creature, (MessageClasses)speakClass, text, channelId);
+	player->sendCreatureChannelSay(creature, (SpeakClasses)speakClass, text, channelId);
 	lua_pushboolean(L, true);
 	return 1;
 }
@@ -3782,13 +3782,12 @@ int32_t LuaInterface::luaGetCreatureSpeakType(lua_State* L)
 int32_t LuaInterface::luaDoCreatureSetSpeakType(lua_State* L)
 {
 	//doCreatureSetSpeakType(uid, type)
-	MessageClasses type = (MessageClasses)popNumber(L);
+	SpeakClasses type = (SpeakClasses)popNumber(L);
 
 	ScriptEnviroment* env = getEnv();
 	if(Creature* creature = env->getCreatureByUID(popNumber(L)))
 	{
-		if(!((type >= MSG_SPEAK_FIRST && type <= MSG_SPEAK_LAST) ||
-			(type >= MSG_SPEAK_MONSTER_FIRST && type <= MSG_SPEAK_MONSTER_LAST)))
+		if(type < SPEAK_CLASS_FIRST || type > SPEAK_CLASS_LAST)
 		{
 			errorEx("Invalid speak type");
 			lua_pushboolean(L, false);
@@ -4275,18 +4274,7 @@ int32_t LuaInterface::luaDoCleanTile(lua_State* L)
 
 int32_t LuaInterface::luaDoPlayerSendTextMessage(lua_State* L)
 {
-	//doPlayerSendTextMessage(cid, MessageClasses, message[, value[, color[, position]]])
-	int32_t args = lua_gettop(L), value = 0, color = COLOR_WHITE;
-	PositionEx position;
-	if(args > 5)
-		popPosition(L, position);
-
-	if(args > 4)
-		color = popNumber(L);
-
-	if(args > 3)
-		value = popNumber(L);
-
+	//doPlayerSendTextMessage(cid, MessageClasses, message)
 	std::string text = popString(L);
 	uint32_t messageClass = popNumber(L);
 
@@ -4299,18 +4287,7 @@ int32_t LuaInterface::luaDoPlayerSendTextMessage(lua_State* L)
 		return 1;
 	}
 
-	if(args > 3)
-	{
-		if(!position.x || !position.y)
-			position = player->getPosition();
-
-		MessageDetails* details = new MessageDetails(value, (Color_t)color);
-		player->sendStatsMessage((MessageClasses)messageClass, text, position, details);
-		delete details;
-	}
-	else
-		player->sendTextMessage((MessageClasses)messageClass, text);
-
+	player->sendTextMessage((MessageClasses)messageClass, text);
 	lua_pushboolean(L, true);
 	return 1;
 }
@@ -4331,7 +4308,7 @@ int32_t LuaInterface::luaDoPlayerSendChannelMessage(lua_State* L)
 		return 1;
 	}
 
-	player->sendChannelMessage(name, text, (MessageClasses)speakClass, channelId);
+	player->sendChannelMessage(name, text, (SpeakClasses)speakClass, channelId);
 	lua_pushboolean(L, true);
 	return 1;
 }

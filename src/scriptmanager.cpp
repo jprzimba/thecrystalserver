@@ -71,56 +71,56 @@ modsLoaded(false)
 
 bool ScriptManager::loadSystem()
 {
-	std::clog << ":: Loading weapons... ";
+	std::clog << "Loading weapons... ";
 	if(!g_weapons->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Preparing weapons... ";
+	std::clog << "done." << std::endl << "Preparing weapons... ";
 	if(!g_weapons->loadDefaults())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading spells... ";
+	std::clog << "done." << std::endl << "Loading spells... ";
 	if(!g_spells->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading actions... ";
+	std::clog << "done." << std::endl << "Loading actions... ";
 	if(!g_actions->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading talkactions... ";
+	std::clog << "done." << std::endl << "Loading talkactions... ";
 	if(!g_talkActions->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading movements... ";
+	std::clog << "done." << std::endl << "Loading movements... ";
 	if(!g_moveEvents->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading creaturescripts... ";
+	std::clog << "done." << std::endl << "Loading creaturescripts... ";
 	if(!g_creatureEvents->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
 		return false;
 	}
 
-	std::clog << "done." << std::endl << ":: Loading globalscripts... ";
+	std::clog << "done." << std::endl << "Loading globalscripts... ";
 	if(!g_globalEvents->loadFromXml())
 	{
 		std::clog << "failed!" << std::endl;
@@ -148,7 +148,7 @@ bool ScriptManager::loadMods()
 		if(boost::filesystem::is_directory(it->status()) && (s.size() > 4 ? s.substr(s.size() - 4) : "") != ".xml")
 			continue;
 
-		std::clog << ":: Loading " << s << "...";
+		std::clog << "Loading " << s << "...";
 		if(loadFromXml(s, enabled))
 		{
 			std::clog << " done";
@@ -167,7 +167,7 @@ bool ScriptManager::loadMods()
 		++i;
 	}
 
-	std::clog << ":: " << i << " mods were loaded";
+	std::clog << "" << i << " mods were loaded";
 	if(j)
 		std::clog << " (" << j << " disabled)";
 

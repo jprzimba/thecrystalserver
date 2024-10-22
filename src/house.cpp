@@ -800,7 +800,7 @@ bool Houses::loadFromXml(std::string filename)
 void Houses::check()
 {
 	uint64_t start = OTSYS_TIME();
-	std::clog << ":: Checking houses..." << std::endl;
+	std::clog << "Checking houses..." << std::endl;
 
 	time_t currentTime = time(NULL);
 	for(HouseMap::iterator it = houseMap.begin(); it != houseMap.end(); ++it)

@@ -784,12 +784,12 @@ bool TalkAction::guildJoin(Creature* creature, const std::string&, const std::st
 			if(player->isGuildInvited(guildId))
 			{
 				IOGuild::getInstance()->joinGuild(player, guildId);
-				player->sendTextMessage(MSG_EVENT_GUILD, "You have joined the guild.");
+				player->sendTextMessage(MSG_INFO_DESCR, "You have joined the guild.");
 
 				char buffer[80];
 				sprintf(buffer, "%s has joined the guild.", player->getName().c_str());
 				if(ChatChannel* guildChannel = g_chat.getChannel(player, 0x00))
-					guildChannel->talk("", MSG_CHANNEL_HIGHLIGHT, buffer);
+					guildChannel->talk("", SPEAK_CHANNEL_RA, buffer);
 			}
 			else
 				player->sendCancel("You are not invited to that guild.");
@@ -867,7 +867,7 @@ bool TalkAction::guildCreate(Creature* creature, const std::string&, const std::
 
 	std::stringstream stream;
 	stream << "You have formed guild \"" << param.c_str() << "\"!";
-	player->sendTextMessage(MSG_EVENT_GUILD, stream.str().c_str());
+	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
 	return true;
 }
 
@@ -987,7 +987,7 @@ bool TalkAction::thingProporties(Creature* creature, const std::string&, const s
 				g_game.updateCreatureEmblem(_creature);
 			}
 			else if(action == "speaktype")
-				_creature->setSpeakType((MessageClasses)atoi(parseParams(it, tokens.end()).c_str()));
+				_creature->setSpeakType((SpeakClasses)atoi(parseParams(it, tokens.end()).c_str()));
 			else if(Player* _player = _creature->getPlayer())
 			{
 				if(action == "fyi")

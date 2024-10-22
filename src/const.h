@@ -183,58 +183,47 @@ enum ShootEffect_t
 	SHOOT_EFFECT_UNKNOWN		= 0xFFFF
 };
 
+enum SpeakClasses
+{
+	SPEAK_CLASS_NONE	= 0x00,
+	SPEAK_CLASS_FIRST 	= 0x01,
+	SPEAK_SAY		= SPEAK_CLASS_FIRST,
+	SPEAK_WHISPER		= 0x02,
+	SPEAK_YELL		= 0x03,
+	SPEAK_PRIVATE_PN	= 0x04,
+	SPEAK_PRIVATE_NP	= 0x05,
+	SPEAK_PRIVATE		= 0x06,
+	SPEAK_CHANNEL_Y		= 0x07,
+	SPEAK_CHANNEL_W		= 0x08,
+	SPEAK_RVR_CHANNEL	= 0x09,
+	SPEAK_RVR_ANSWER	= 0x0A,
+	SPEAK_RVR_CONTINUE	= 0x0B,
+	SPEAK_BROADCAST		= 0x0C,
+	SPEAK_CHANNEL_RN	= 0x0D, //red - #c text
+	SPEAK_PRIVATE_RED	= 0x0E,	//@name@text
+	SPEAK_CHANNEL_O		= 0x0F,
+	//SPEAK_UNKNOWN_1		= 0x10,
+	SPEAK_CHANNEL_RA	= 0x11,	//red anonymous - #d text
+	//SPEAK_UNKNOWN_2		= 0x12,
+	SPEAK_MONSTER_SAY	= 0x13,
+	SPEAK_MONSTER_YELL	= 0x14,
+	SPEAK_CLASS_LAST 	= SPEAK_MONSTER_YELL
+};
+
 enum MessageClasses
 {
-	MSG_NONE					= 0x00,
-
-	MSG_SPEAK_SAY				= 0x01,
-	MSG_SPEAK_WHISPER			= 0x02,
-	MSG_SPEAK_YELL				= 0x03,
-	MSG_PRIVATE_FROM			= 0x04,
-	MSG_PRIVATE_TO				= 0x05,
-	MSG_CHANNEL_MANAGEMENT		= 0x06,
-	MSG_CHANNEL					= 0x07,
-	MSG_CHANNEL_HIGHLIGHT		= 0x08,
-	MSG_SPEAK_SPELL				= 0x09,
-	MSG_NPC_FROM				= 0x0A,
-	MSG_NPC_TO					= 0x0B,
-	MSG_GAMEMASTER_BROADCAST	= 0x0C,
-	MSG_GAMEMASTER_CHANNEL		= 0x0D,
-	MSG_GAMEMASTER_PRIVATE_FROM	= 0x0E,
-	MSG_GAMEMASTER_PRIVATE_TO	= 0x0F,
-	MSG_SPEAK_MONSTER_SAY		= 0x22,
-	MSG_SPEAK_MONSTER_YELL		= 0x23,
-
-	MSG_SPEAK_FIRST				= MSG_SPEAK_SAY,
-	MSG_SPEAK_LAST				= MSG_GAMEMASTER_PRIVATE_TO,
-	MSG_SPEAK_MONSTER_FIRST		= MSG_SPEAK_MONSTER_SAY,
-	MSG_SPEAK_MONSTER_LAST		= MSG_SPEAK_MONSTER_YELL,
-
-	MSG_STATUS_CONSOLE_BLUE		= 0x04, /*Teal message in local chat*/
-	MSG_STATUS_CONSOLE_RED		= 0x0C, /*Red message in console*/
-	MSG_STATUS_DEFAULT			= 0x10, /*White message at the bottom of the game window and in the console*/
-	MSG_STATUS_WARNING			= 0x11, /*Red message in game window and in the console*/
-	MSG_EVENT_ADVANCE			= 0x12, /*White message in game window and in the console*/
-	MSG_STATUS_SMALL			= 0x13, /*White message at the bottom of the game window"*/
-	MSG_INFO_DESCR				= 0x14, /*Green message in game window and in the console*/
-	MSG_DAMAGE_DEALT			= 0x15,
-	MSG_DAMAGE_RECEIVED			= 0x16,
-	MSG_HEALED					= 0x17,
-	MSG_EXPERIENCE				= 0x18,
-	MSG_DAMAGE_OTHERS			= 0x19,
-	MSG_HEALED_OTHERS			= 0x1A,
-	MSG_EXPERIENCE_OTHERS		= 0x1B,
-	MSG_EVENT_DEFAULT			= 0x1C, /*White message at the bottom of the game window and in the console*/
-	MSG_LOOT					= 0x1D, /*Green message in game window and in the console*/
-	MSG_TRADE_NPC				= 0x1E, /*Green message in game window and in the console*/
-	MSG_EVENT_GUILD				= 0x1F, /*Green message in game window and in the console*/
-	MSG_PARTY_MANAGEMENT		= 0x20, /*Green message in game window and in the console*/
-	MSG_PARTY					= 0x21, /*Green message in game window and in the console*/
-	MSG_EVENT_ORANGE			= 0x22, /*Orange message in local chat*/
-	MSG_STATUS_CONSOLE_ORANGE	= 0x23, /*Orange message in local chat*/
-	MSG_REPORT 					= 0x24, /*White message in game window and in the console*/
-	MSG_HOTKEY_USE				= 0x25, /*Green message in game window*/
-	MSG_TUTORIAL_HINT			= 0x26
+	MSG_CLASS_FIRST			= 0x12,
+	MSG_STATUS_CONSOLE_RED		= MSG_CLASS_FIRST, /*Red message in the console*/
+	MSG_EVENT_ORANGE		= 0x13, /*Orange message in the console*/
+	MSG_STATUS_CONSOLE_ORANGE	= 0x14, /*Orange message in the console*/
+	MSG_STATUS_WARNING		= 0x15, /*Red message in game window and in the console*/
+	MSG_EVENT_ADVANCE		= 0x16, /*White message in game window and in the console*/
+	MSG_EVENT_DEFAULT		= 0x17, /*White message at the bottom of the game window and in the console*/
+	MSG_STATUS_DEFAULT		= 0x18, /*White message at the bottom of the game window and in the console*/
+	MSG_INFO_DESCR			= 0x19, /*Green message in game window and in the console*/
+	MSG_STATUS_SMALL		= 0x1A, /*White message at the bottom of the game window"*/
+	MSG_STATUS_CONSOLE_BLUE		= 0x1B, /*Blue message in the console*/
+	MSG_CLASS_LAST			= MSG_STATUS_CONSOLE_BLUE
 };
 
 enum MapMarks_t
@@ -786,16 +775,6 @@ enum PlayerCustomFlags
 	PlayerCustomFlag_HasFullLight,				//2^26 = 67108864
 
 	PlayerCustomFlag_LastFlag
-};
-
-struct MessageDetails
-{
-	int32_t value;
-	Color_t color;
-	MessageDetails* sub;
-
-	MessageDetails(int32_t value = 0, Color_t color = COLOR_WHITE):
-		value(value), color(color), sub(NULL) {}
 };
 
 //Reserved player storage key ranges

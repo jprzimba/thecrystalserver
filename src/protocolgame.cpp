@@ -1245,17 +1245,18 @@ void ProtocolGame::parseSay(NetworkMessage& msg)
 	std::string receiver;
 	uint16_t channelId = 0;
 
-	MessageClasses type = (MessageClasses)msg.get<char>();
+	SpeakClasses type = (SpeakClasses)msg.get<char>();
 	switch(type)
 	{
-		case MSG_PRIVATE_TO:
-		case MSG_GAMEMASTER_PRIVATE_TO:
+		case SPEAK_PRIVATE:
+		case SPEAK_PRIVATE_RED:
+		case SPEAK_RVR_ANSWER:
 			receiver = msg.getString();
 			break;
 
-		case MSG_CHANNEL:
-		case MSG_CHANNEL_HIGHLIGHT:
-		case MSG_GAMEMASTER_CHANNEL:
+		case SPEAK_CHANNEL_Y:
+		case SPEAK_CHANNEL_RN:
+		case SPEAK_CHANNEL_RA:
 			channelId = msg.get<uint16_t>();
 			break;
 
@@ -1961,7 +1962,7 @@ void ProtocolGame::sendCreatureTurn(const Creature* creature, int16_t stackpos)
 	}
 }
 
-void ProtocolGame::sendCreatureSay(const Creature* creature, MessageClasses type, const std::string& text, Position* pos, uint32_t statementId)
+void ProtocolGame::sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos, uint32_t statementId)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
@@ -1971,24 +1972,13 @@ void ProtocolGame::sendCreatureSay(const Creature* creature, MessageClasses type
 	}
 }
 
-void ProtocolGame::sendCreatureChannelSay(const Creature* creature, MessageClasses type, const std::string& text, uint16_t channelId, uint32_t statementId)
+void ProtocolGame::sendCreatureChannelSay(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
 		AddCreatureSpeak(msg, creature, type, text, channelId, NULL, statementId);
-	}
-}
-
-void ProtocolGame::sendStatsMessage(MessageClasses type, const std::string& message,
-	Position pos, MessageDetails* details/* = NULL*/)
-{
-	NetworkMessage_ptr msg = getOutputBuffer();
-	if(msg)
-	{
-		TRACK_MESSAGE(msg);
-		AddTextMessage(msg, type, message, &pos, details);
 	}
 }
 
@@ -2082,6 +2072,19 @@ void ProtocolGame::sendMagicEffect(const Position& pos, uint8_t type)
 	{
 		TRACK_MESSAGE(msg);
 		AddMagicEffect(msg, pos, type);
+	}
+}
+
+void ProtocolGame::sendAnimatedText(const Position& pos, uint8_t color, std::string text)
+{
+	if(!canSee(pos))
+		return;
+
+	NetworkMessage_ptr msg = getOutputBuffer();
+	if(msg)
+	{
+		TRACK_MESSAGE(msg);
+		AddAnimatedText(msg, pos, color, text);
 	}
 }
 
@@ -2656,76 +2659,20 @@ void ProtocolGame::AddMapDescription(NetworkMessage_ptr msg, const Position& pos
 	GetMapDescription(pos.x - 8, pos.y - 6, pos.z, 18, 14, msg);
 }
 
-void ProtocolGame::AddTextMessage(NetworkMessage_ptr msg, MessageClasses mClass, const std::string& message,
-	Position* pos/* = NULL*/, MessageDetails* details/* = NULL*/)
+void ProtocolGame::AddTextMessage(NetworkMessage_ptr msg, MessageClasses mClass, const std::string& message)
 {
 	msg->put<char>(0xB4);
 	msg->put<char>(mClass);
-	switch(mClass)
-	{
-		case MSG_DAMAGE_DEALT:
-		case MSG_DAMAGE_RECEIVED:
-		case MSG_DAMAGE_OTHERS:
-		{
-			if(pos)
-				msg->putPosition(*pos);
-			else
-				msg->putPosition(player->getPosition());
-
-			if(!details)
-			{
-				msg->put<uint32_t>(0x00);
-				msg->put<char>(0x00);
-				msg->put<uint32_t>(0x00);
-				msg->put<char>(0x00);
-				break;
-			}
-
-			msg->put<uint32_t>(details->value);
-			msg->put<char>(details->color);
-			if(details->sub)
-			{
-				msg->put<uint32_t>(details->sub->value);
-				msg->put<char>(details->sub->color);
-			}
-			else
-			{
-				msg->put<uint32_t>(0x00);
-				msg->put<char>(0x00);
-			}
-
-			break;
-		}
-
-		case MSG_EXPERIENCE:
-		case MSG_EXPERIENCE_OTHERS:
-		case MSG_HEALED:
-		case MSG_HEALED_OTHERS:
-		{
-			if(pos)
-				msg->putPosition(*pos);
-			else
-				msg->putPosition(player->getPosition());
-
-			if(details)
-			{
-				msg->put<uint32_t>(details->value);
-				msg->put<char>(details->color);
-			}
-			else
-			{
-				msg->put<uint32_t>(0x00);
-				msg->put<char>(0x00);
-			}
-
-			break;
-		}
-
-		default:
-			break;
-	}
-
 	msg->putString(message);
+}
+
+void ProtocolGame::AddAnimatedText(NetworkMessage_ptr msg, const Position& pos,
+	uint8_t color, const std::string& text)
+{
+	msg->put<char>(0x84);
+	msg->putPosition(pos);
+	msg->put<char>(color);
+	msg->putString(text);
 }
 
 void ProtocolGame::AddMagicEffect(NetworkMessage_ptr msg, const Position& pos, uint8_t type)
@@ -2817,7 +2764,7 @@ void ProtocolGame::AddPlayerSkills(NetworkMessage_ptr msg)
 	}
 }
 
-void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, MessageClasses type,
+void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, SpeakClasses type,
 	std::string text, uint16_t channelId, Position* pos, uint32_t statementId)
 {
 	msg->put<char>(0xAA);
@@ -2825,7 +2772,7 @@ void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* crea
 	{
 		msg->put<uint32_t>(statementId);
 		msg->putString(!creature->getHideName() ? creature->getName() : "");
-		if(creature->getSpeakType() != MSG_NONE)
+		if(creature->getSpeakType() != SPEAK_CLASS_NONE)
 			type = creature->getSpeakType();
 
 		const Player* speaker = creature->getPlayer();
@@ -2844,13 +2791,12 @@ void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* crea
 	msg->put<char>(type);
 	switch(type)
 	{
-		case MSG_SPEAK_SAY:
-		case MSG_SPEAK_WHISPER:
-		case MSG_SPEAK_YELL:
-		case MSG_SPEAK_MONSTER_SAY:
-		case MSG_SPEAK_MONSTER_YELL:
-		case MSG_SPEAK_SPELL:
-		case MSG_NPC_FROM:
+		case SPEAK_SAY:
+		case SPEAK_WHISPER:
+		case SPEAK_YELL:
+		case SPEAK_MONSTER_SAY:
+		case SPEAK_MONSTER_YELL:
+		case SPEAK_PRIVATE_NP:
 		{
 			if(pos)
 				msg->putPosition(*pos);
@@ -2862,9 +2808,11 @@ void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* crea
 			break;
 		}
 
-		case MSG_CHANNEL:
-		case MSG_CHANNEL_HIGHLIGHT:
-		case MSG_GAMEMASTER_CHANNEL:
+		case SPEAK_CHANNEL_Y:
+		case SPEAK_CHANNEL_RN:
+		case SPEAK_CHANNEL_RA:
+		case SPEAK_CHANNEL_O:
+		case SPEAK_CHANNEL_W:
 			msg->put<uint16_t>(channelId);
 			break;
 
@@ -3114,7 +3062,7 @@ void ProtocolGame::RemoveContainerItem(NetworkMessage_ptr msg, uint8_t cid, uint
 	msg->put<char>(slot);
 }
 
-void ProtocolGame::sendChannelMessage(std::string author, std::string text, MessageClasses type, uint16_t channel)
+void ProtocolGame::sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel)
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)

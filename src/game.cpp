@@ -114,13 +114,13 @@ void Game::start(ServiceManager* servicer)
 
 	if(prepareHour < 0 || prepareHour > 24)
 	{
-		std::clog << ":: WARNING: No valid hour (" << prepareHour << ") for a global save, should be between 0-23. Global save disabled." << std::endl;
+		std::clog << "WARNING: No valid hour (" << prepareHour << ") for a global save, should be between 0-23. Global save disabled." << std::endl;
 		return;
 	}
 
 	if(prepareMinute < 0 || prepareMinute > 59)
 	{
-		std::clog << ":: WARNING: No valid minute (" << prepareMinute << ") for a global save, should be between 0-59. Global save disabled." << std::endl;
+		std::clog << "WARNING: No valid minute (" << prepareMinute << ") for a global save, should be between 0-59. Global save disabled." << std::endl;
 		return;
 	}
 
@@ -273,7 +273,7 @@ void Game::setGameState(GameState_t newState)
 
 void Game::saveGameState(uint8_t flags)
 {
-	std::clog << ":: Saving server..." << std::endl;
+	std::clog << "Saving server..." << std::endl;
 	uint64_t start = OTSYS_TIME();
 	if(gameState == GAMESTATE_NORMAL)
 		setGameState(GAMESTATE_MAINTAIN);
@@ -297,7 +297,7 @@ void Game::saveGameState(uint8_t flags)
 	if(gameState == GAMESTATE_MAINTAIN)
 		setGameState(GAMESTATE_NORMAL);
 
-	std::clog << ":: SAVE: Complete in " << (OTSYS_TIME() - start) / (1000.) << " seconds using "
+	std::clog << "SAVE: Complete in " << (OTSYS_TIME() - start) / (1000.) << " seconds using "
 		<< asLowerCaseString(g_config.getString(ConfigManager::HOUSE_STORAGE))
 		<< " house storage." << std::endl;
 }
@@ -456,7 +456,7 @@ void Game::cleanMapEx(uint32_t& count)
 	if(gameState == GAMESTATE_MAINTAIN)
 		setGameState(GAMESTATE_NORMAL);
 
-	std::clog << ":: CLEAN: Removed " << count << " item" << (count != 1 ? "s" : "")
+	std::clog << "CLEAN: Removed " << count << " item" << (count != 1 ? "s" : "")
 		<< " from " << tiles << " tile" << (tiles != 1 ? "s" : "");
 	if(marked >= 0)
 		std::clog << " (" << marked << " were marked)";
@@ -520,7 +520,7 @@ void Game::refreshMap(RefreshTiles::iterator* it/* = NULL*/, uint32_t limit/* = 
 					#else
 					if(internalRemoveItem(NULL, item) != RET_NOERROR)
 					{
-						std::clog << ":: WARNING: Could not refresh item: " << item->getID();
+						std::clog << "WARNING: Could not refresh item: " << item->getID();
 						std::clog << " at position: " << tile->getPosition() << std::endl;
 					}
 					#endif
@@ -542,7 +542,7 @@ void Game::refreshMap(RefreshTiles::iterator* it/* = NULL*/, uint32_t limit/* = 
 			}
 			else
 			{
-				std::clog << ":: WARNING: Could not refresh item: " << item->getID()
+				std::clog << "WARNING: Could not refresh item: " << item->getID()
 					<< " at position: " << tile->getPosition() << std::endl;
 				delete item;
 			}
@@ -2287,10 +2287,9 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 	return player->startAutoWalk(dirs);
 }
 
-bool Game::playerBroadcastMessage(Player* player, MessageClasses type, const std::string& text, uint32_t statementId)
+bool Game::playerBroadcastMessage(Player* player, SpeakClasses type, const std::string& text, uint32_t statementId)
 {
-	if(!player->hasFlag(PlayerFlag_CanBroadcast) || !((type >= MSG_SPEAK_FIRST && type <= MSG_SPEAK_LAST) ||
-			(type >= MSG_SPEAK_MONSTER_FIRST && type <= MSG_SPEAK_MONSTER_LAST)))
+	if(!player->hasFlag(PlayerFlag_CanBroadcast) || type < SPEAK_CLASS_FIRST || type > SPEAK_CLASS_LAST)
 		return false;
 
 	Logger::getInstance()->eFile("talkactions/" + player->getName() + ".log", "#b " + text, true);
@@ -2298,7 +2297,7 @@ bool Game::playerBroadcastMessage(Player* player, MessageClasses type, const std
 		it->second->sendCreatureSay(player, type, text, NULL, statementId);
 
 	//TODO: event handling - onCreatureSay (???)
-	std::clog << ":: " << player->getName() << " broadcasted: \"" << text << "\"." << std::endl;
+	std::clog << "" << player->getName() << " broadcasted: \"" << text << "\"." << std::endl;
 	return true;
 }
 
@@ -3858,7 +3857,7 @@ bool Game::playerChangeMountStatus(uint32_t playerId, bool status)
 	return true;
 }
 
-bool Game::playerSay(uint32_t playerId, uint16_t channelId, MessageClasses type, const std::string& receiver, const std::string& text)
+bool Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, const std::string& receiver, const std::string& text)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
@@ -3885,10 +3884,10 @@ bool Game::playerSay(uint32_t playerId, uint16_t channelId, MessageClasses type,
 		if(mute)
 			player->removeMessageBuffer();
 
-		return internalCreatureSay(player, MSG_SPEAK_SAY, text, false);
+		return internalCreatureSay(player, SPEAK_SAY, text, false);
 	}
 
-	if(g_talkActions->onPlayerSay(player, type == MSG_SPEAK_SAY ? (unsigned)CHANNEL_DEFAULT : channelId, text, false))
+	if(g_talkActions->onPlayerSay(player, type == SPEAK_SAY ? (unsigned)CHANNEL_DEFAULT : channelId, text, false))
 		return true;
 
 	ReturnValue ret = RET_NOERROR;
@@ -3910,27 +3909,31 @@ bool Game::playerSay(uint32_t playerId, uint16_t channelId, MessageClasses type,
 	IOLoginData::getInstance()->playerStatement(player, channelId, text, statementId);
 	switch(type)
 	{
-		case MSG_SPEAK_SAY:
-			return internalCreatureSay(player, MSG_SPEAK_SAY, text, false, NULL, NULL, statementId);
-		case MSG_SPEAK_WHISPER:
+		case SPEAK_SAY:
+			return internalCreatureSay(player, SPEAK_SAY, text, false, NULL, NULL, statementId);
+		case SPEAK_WHISPER:
 			return playerWhisper(player, text, statementId);
-		case MSG_SPEAK_YELL:
+		case SPEAK_YELL:
 			return playerYell(player, text, statementId);
-		case MSG_PRIVATE_TO:
-		case MSG_GAMEMASTER_PRIVATE_TO:
+		case SPEAK_PRIVATE:
+		case SPEAK_PRIVATE_RED:
+		case SPEAK_RVR_ANSWER:
 			return playerSpeakTo(player, type, receiver, text, statementId);
-		case MSG_CHANNEL:
-		case MSG_GAMEMASTER_CHANNEL:
+		case SPEAK_CHANNEL_O:
+		case SPEAK_CHANNEL_Y:
+		case SPEAK_CHANNEL_RN:
+		case SPEAK_CHANNEL_RA:
+		case SPEAK_CHANNEL_W:
 		{
 			if(playerSpeakToChannel(player, type, text, channelId, statementId))
 				return true;
 
-			return internalCreatureSay(player, MSG_SPEAK_SAY, text, false, NULL, NULL, statementId);
+			return internalCreatureSay(player, SPEAK_SAY, text, false, NULL, NULL, statementId);
 		}
-		case MSG_NPC_TO:
+		case SPEAK_PRIVATE_PN:
 			return playerSpeakToNpc(player, text);
-		case MSG_GAMEMASTER_BROADCAST:
-			return playerBroadcastMessage(player, MSG_GAMEMASTER_BROADCAST, text, statementId);
+		case SPEAK_BROADCAST:
+			return playerBroadcastMessage(player, SPEAK_BROADCAST, text, statementId);
 
 		default:
 			break;
@@ -3943,7 +3946,7 @@ bool Game::playerWhisper(Player* player, const std::string& text, uint32_t state
 {
 	SpectatorVec list;
 	getSpectators(list, player->getPosition(), false, false, 1, 1);
-	internalCreatureSay(player, MSG_SPEAK_WHISPER, text, false, &list, NULL, statementId);
+	internalCreatureSay(player, SPEAK_WHISPER, text, false, &list, NULL, statementId);
 	return true;
 }
 
@@ -3967,11 +3970,11 @@ bool Game::playerYell(Player* player, const std::string& text, uint32_t statemen
 			player->addCondition(condition);
 	}
 
-	internalCreatureSay(player, MSG_SPEAK_YELL, asUpperCaseString(text), false, NULL, NULL, statementId);
+	internalCreatureSay(player, SPEAK_YELL, asUpperCaseString(text), false, NULL, NULL, statementId);
 	return true;
 }
 
-bool Game::playerSpeakTo(Player* player, MessageClasses type, const std::string& receiver,
+bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver,
 	const std::string& text, uint32_t statementId)
 {
 	Player* toPlayer = getPlayerByName(receiver);
@@ -3995,10 +3998,8 @@ bool Game::playerSpeakTo(Player* player, MessageClasses type, const std::string&
 		return false;
 	}
 
-	if(type == MSG_GAMEMASTER_PRIVATE_TO && player->hasFlag(PlayerFlag_CanTalkRedPrivate))
-		type = MSG_GAMEMASTER_PRIVATE_FROM;
-	else
-		type = MSG_PRIVATE_FROM;
+	if(type == SPEAK_PRIVATE_RED && !player->hasFlag(PlayerFlag_CanTalkRedPrivate))
+		type = SPEAK_PRIVATE;
 
 	toPlayer->sendCreatureSay(player, type, text, NULL, statementId);
 	toPlayer->onCreatureSay(player, type, text);
@@ -4014,40 +4015,39 @@ bool Game::playerSpeakTo(Player* player, MessageClasses type, const std::string&
 	return true;
 }
 
-bool Game::playerSpeakToChannel(Player* player, MessageClasses type, const std::string& text, uint16_t channelId, uint32_t statementId)
+bool Game::playerSpeakToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t statementId)
 {
 	switch(type)
 	{
-		case MSG_CHANNEL:
+		case SPEAK_CHANNEL_Y:
 		{
-			if(channelId == CHANNEL_HELP)
-			{
-				if(player->hasFlag(PlayerFlag_TalkOrangeHelpChannel))
-					type = MSG_CHANNEL_HIGHLIGHT;
-
-				if(player->hasFlag(PlayerFlag_CanTalkRedChannel))
-					type = MSG_GAMEMASTER_CHANNEL;
-			}
-
+			if(channelId == CHANNEL_HELP && player->hasFlag(PlayerFlag_TalkOrangeHelpChannel))
+				type = SPEAK_CHANNEL_O;
+				
+			if(g_chat.getPrivateChannel(player) != NULL && channelId == g_chat.getPrivateChannel(player)->getId())
+				type = SPEAK_CHANNEL_O;
+				
 			break;
 		}
 
-		case MSG_GAMEMASTER_CHANNEL:
+		case SPEAK_CHANNEL_O:
 		{
-			if(player->hasFlag(PlayerFlag_CanTalkRedChannelAnonymous))
-			{
-				if(text.length() < 251)
-					return g_chat.talk(player, type, text, channelId, statementId, true);
-			}
-			else
-				type = MSG_CHANNEL;
+			if(channelId != CHANNEL_HELP || !player->hasFlag(PlayerFlag_TalkOrangeHelpChannel))
+				type = SPEAK_CHANNEL_Y;
+			break;
 		}
 
-
-		case MSG_GAMEMASTER_BROADCAST:
+		case SPEAK_CHANNEL_RN:
 		{
-			if(!player->hasFlag(PlayerFlag_CanBroadcast))
-				type = MSG_CHANNEL;
+			if(!player->hasFlag(PlayerFlag_CanTalkRedChannel))
+				type = SPEAK_CHANNEL_Y;
+			break;
+		}
+
+		case SPEAK_CHANNEL_RA:
+		{
+			if(!player->hasFlag(PlayerFlag_CanTalkRedChannelAnonymous))
+				type = SPEAK_CHANNEL_Y;
 			break;
 		}
 
@@ -4073,7 +4073,7 @@ bool Game::playerSpeakToNpc(Player* player, const std::string& text)
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((tmpNpc = (*it)->getNpc()))
-			(*it)->onCreatureSay(player, MSG_NPC_TO, text);
+			(*it)->onCreatureSay(player, SPEAK_PRIVATE_PN, text);
 	}
 	return true;
 }
@@ -4121,7 +4121,7 @@ bool Game::internalCreatureTurn(Creature* creature, Direction dir)
 	return true;
 }
 
-bool Game::internalCreatureSay(Creature* creature, MessageClasses type, const std::string& text,
+bool Game::internalCreatureSay(Creature* creature, SpeakClasses type, const std::string& text,
 	bool ghostMode, SpectatorVec* spectators/* = NULL*/, Position* pos/* = NULL*/, uint32_t statementId/* = 0*/)
 {
 	Player* player = creature->getPlayer();
@@ -4143,7 +4143,7 @@ bool Game::internalCreatureSay(Creature* creature, MessageClasses type, const st
 		// is used if available and if it can be used, else a local vector is
 		// used (hopefully the compiler will optimize away the construction of
 		// the temporary when it's not used).
-		if(type != MSG_SPEAK_YELL && type != MSG_SPEAK_MONSTER_YELL)
+		if(type != SPEAK_YELL && type != SPEAK_MONSTER_YELL)
 			getSpectators(list, destPos, false, false,
 				Map::maxClientViewportX, Map::maxClientViewportX,
 				Map::maxClientViewportY, Map::maxClientViewportY);
@@ -4499,70 +4499,17 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 
 		int32_t oldHealth = target->getHealth();
 		target->gainHealth(attacker, healthChange);
-		if(oldHealth != target->getHealth() && g_config.getBool(ConfigManager::SHOW_HEALTH_CHANGE) && !target->isGhost() &&
+		if(g_config.getBool(ConfigManager::SHOW_HEALTH_CHANGE) && !target->isGhost() &&
 			(g_config.getBool(ConfigManager::SHOW_HEALTH_CHANGE_MONSTER) || !target->getMonster()))
 		{
+			char buffer[20];
+			sprintf(buffer, "+%d", healthChange);
+
 			const SpectatorVec& list = getSpectators(targetPos);
 			if(params.combatType != COMBAT_HEALING)
 				addMagicEffect(list, targetPos, MAGIC_EFFECT_WRAPS_BLUE);
 
-			SpectatorVec textList;
-			for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-			{
-				if(!(*it)->getPlayer())
-					continue;
-
-				if((*it) != attacker && (*it) != target && (*it)->getPosition().z == target->getPosition().z)
-					textList.push_back(*it);
-			}
-
-			healthChange = (target->getHealth() - oldHealth);
-			std::string plural = (healthChange != 1 ? "s." : ".");
-
-			std::stringstream ss;
-			MessageDetails* details = new MessageDetails(healthChange, COLOR_MAYABLUE);
-			if(!textList.empty())
-			{
-				if(!attacker)
-					ss << ucfirst(target->getNameDescription()) << " is healed for " << healthChange << " hitpoint" << plural;
-				else if(attacker != target)
-					ss << ucfirst(attacker->getNameDescription()) << " heals " << target->getNameDescription() << " for " << healthChange << " hitpoint" << plural;
-				else
-				{
-					ss << ucfirst(attacker->getNameDescription()) << " heals ";
-					if(Player* attackerPlayer = attacker->getPlayer())
-						ss << (attackerPlayer->getSex(false) == PLAYERSEX_FEMALE ? "herself" : "himself") << " for " << healthChange << " hitpoint" << plural;
-					else
-						ss << "itself for " << healthChange << " hitpoint" << plural;
-				}
-
-				addStatsMessage(textList, MSG_HEALED_OTHERS, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			Player* player = NULL;
-			if(attacker && (player = attacker->getPlayer()))
-			{
-				if(attacker != target)
-					ss << "You healed " << target->getNameDescription() << " for " << healthChange << " hitpoint" << plural;
-				else
-					ss << "You healed yourself for " << healthChange << " hitpoint" << plural;
-
-				player->sendStatsMessage(MSG_HEALED, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			if((player = target->getPlayer()) && attacker != target)
-			{
-				if(attacker)
-					ss << ucfirst(attacker->getNameDescription()) << " heals you for " << healthChange << " hitpoint" << plural;
-				else
-					ss << "You are healed for " << healthChange << " hitpoint" << plural;
-
-				player->sendStatsMessage(MSG_HEALED, ss.str(), targetPos, details);
-			}
-
-			delete details;
+			addAnimatedText(list, targetPos, g_config.getNumber(ConfigManager::HEALTH_HEALING_COLOR), buffer);
 		}
 	}
 	else
@@ -4587,8 +4534,26 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 				damage = std::max((int32_t)0, damage + elementDamage - manaDamage);
 
 				elementDamage = 0; // TODO: I don't know how it works ;(
-				if(manaDamage && combatChangeMana(attacker, target, -manaDamage, params.combatType, true))
+				if(manaDamage > 0)
+				{
+					bool deny = false;
+					CreatureEventList statsChangeEvents = target->getCreatureEvents(CREATURE_EVENT_STATSCHANGE);
+					for(CreatureEventList::iterator it = statsChangeEvents.begin(); it != statsChangeEvents.end(); ++it)
+					{
+						if(!(*it)->executeStatsChange(target, attacker, STATSCHANGE_MANALOSS, params.combatType, manaDamage))
+							deny = true;
+					}
+
+					if(deny)
+						return false;
+
+                    combatChangeMana(attacker, target, -manaDamage, params.combatType, true);
+					char buffer[20];
+					sprintf(buffer, "%d", manaDamage);
+
 					addMagicEffect(list, targetPos, MAGIC_EFFECT_LOSE_ENERGY);
+					addAnimatedText(list, targetPos, COLOR_BLUE, buffer);
+                }
 			}
 
 			damage = std::min(target->getHealth(), damage);
@@ -4666,68 +4631,11 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 
 				if(textColor < COLOR_NONE && magicEffect < MAGIC_EFFECT_NONE)
 				{
+					char buffer[20];
+					sprintf(buffer, "%d", damage);
+
 					addMagicEffect(list, targetPos, magicEffect);
-					SpectatorVec textList;
-					for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-					{
-						if(!(*it)->getPlayer())
-							continue;
-
-						if((*it) != attacker && (*it) != target && (*it)->getPosition().z == target->getPosition().z)
-							textList.push_back(*it);
-					}
-
-					MessageDetails* details = new MessageDetails(damage, textColor);
-					if(elementDamage)
-					{
-						getCombatDetails(params.element.type, magicEffect, textColor);
-						details->sub = new MessageDetails(elementDamage, textColor);
-						addMagicEffect(list, targetPos, magicEffect);
-					}
-
-					std::stringstream ss;				
-					int32_t totalDamage = damage + elementDamage;
-
-					std::string plural = (totalDamage != 1 ? "s" : "");
-					if(!textList.empty())
-					{
-						if(!attacker)
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << ".";
-						else if(attacker != target)
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
-						else
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to a self attack.";
-
-						addStatsMessage(textList, MSG_DAMAGE_OTHERS, ss.str(), targetPos, details);
-						ss.str("");
-					}
-
-					Player* player = NULL;
-					if(attacker && (player = attacker->getPlayer()))
-					{
-						if(attacker != target)
-							ss << ucfirst(target->getNameDescription()) << " loses " << totalDamage << " hitpoint" << plural << " due to your attack.";
-						else
-							ss << "You lose " << totalDamage << " hitpoint" << plural << " due to your attack.";
-
-						player->sendStatsMessage(MSG_DAMAGE_DEALT, ss.str(), targetPos, details);
-						ss.str("");
-					}
-
-					if((player = target->getPlayer()) && attacker != target)
-					{
-						if(attacker)
-							ss << "You lose " << totalDamage << " hitpoint" << plural << " due to an attack by " << attacker->getNameDescription() << ".";
-						else
-							ss << "You lose " << totalDamage << " hitpoint" << plural << ".";
-
-						player->sendStatsMessage(MSG_DAMAGE_RECEIVED, ss.str(), targetPos, details);
-					}
-
-					if(details->sub)
-						delete details->sub;
-
-					delete details;
+					addAnimatedText(list, targetPos, textColor, buffer);
 				}
 			}
 		}
@@ -4757,56 +4665,11 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 		if(g_config.getBool(ConfigManager::SHOW_MANA_CHANGE) && !target->isGhost() &&
 			(g_config.getBool(ConfigManager::SHOW_MANA_CHANGE_MONSTER) || !target->getMonster()))
 		{
+			char buffer[20];
+			sprintf(buffer, "+%d", manaChange);
+
 			const SpectatorVec& list = getSpectators(targetPos);
-
-			SpectatorVec textList;
-			for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-			{
-				if(!(*it)->getPlayer())
-					continue;
-
-				if((*it) != attacker && (*it) != target && (*it)->getPosition().z == target->getPosition().z)
-					textList.push_back(*it);
-			}
-
-			std::stringstream ss;
-			MessageDetails* details = new MessageDetails(manaChange, COLOR_DARKPURPLE);
-			if(!textList.empty())
-			{
-				if(!attacker)
-					ss << ucfirst(target->getNameDescription()) << " is regenerated with " << manaChange << " mana.";
-				else if(attacker != target)
-					ss << ucfirst(attacker->getNameDescription()) << " regenerates " << target->getNameDescription() << " with " << manaChange << " mana.";
-				else
-					ss << ucfirst(attacker->getNameDescription()) << " regenerates himself with " << manaChange << " mana.";
-
-				addStatsMessage(textList, MSG_HEALED_OTHERS, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			Player* player = NULL;
-			if(attacker && (player = attacker->getPlayer()))
-			{
-				if(attacker != target)
-					ss << "You regenerate " << target->getNameDescription() << " with " << manaChange << " mana.";
-				else
-					ss << "You regenerate yourself with " << manaChange << " mana.";
-
-				player->sendStatsMessage(MSG_HEALED, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			if((player = target->getPlayer()) && attacker != target)
-			{
-				if(attacker)
-					ss << ucfirst(attacker->getNameDescription()) << " regenerates you with " << manaChange << " mana.";
-				else
-					ss << "You are regenerated with " << manaChange << " mana.";
-
-				player->sendStatsMessage(MSG_HEALED, ss.str(), targetPos, details);
-			}
-
-			delete details;
+			addAnimatedText(list, targetPos, g_config.getNumber(ConfigManager::MANA_HEALING_COLOR), buffer);
 		}
 	}
 	else if(!inherited && Combat::canDoCombat(attacker, target, true) != RET_NOERROR)
@@ -4817,6 +4680,7 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 	}
 	else
 	{
+		const SpectatorVec& list = getSpectators(targetPos);
 		int32_t manaLoss = std::min(target->getMana(), -manaChange);
 		if(manaLoss > 0)
 		{
@@ -4832,56 +4696,10 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 				return false;
 
 			target->drainMana(attacker, combatType, manaLoss);
-			const SpectatorVec& list = getSpectators(targetPos);
+			char buffer[20];
+			sprintf(buffer, "%d", manaLoss);
 
-			SpectatorVec textList;
-			for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-			{
-				if(!(*it)->getPlayer())
-					continue;
-
-				if((*it) != attacker && (*it) != target && (*it)->getPosition().z == target->getPosition().z)
-					textList.push_back(*it);
-			}
-
-			std::stringstream ss;
-			MessageDetails* details = new MessageDetails(manaLoss, COLOR_BLUE);
-			if(!textList.empty())
-			{
-				if(!attacker)
-					ss << ucfirst(target->getNameDescription()) << " loses " << manaLoss << " mana.";
-				else if(attacker != target)
-					ss << ucfirst(target->getNameDescription()) << " loses " << manaLoss << " mana due to an attack by " << attacker->getNameDescription();
-				else
-					ss << ucfirst(target->getNameDescription()) << " loses " << manaLoss << " mana due to a self attack.";
-
-				addStatsMessage(textList, MSG_DAMAGE_OTHERS, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			Player* player;
-			if(attacker && (player = attacker->getPlayer()))
-			{
-				if(attacker != target)
-					ss << ucfirst(target->getNameDescription()) << " loses " << manaLoss << " mana due to your attack.";
-				else
-					ss << "You lose " << manaLoss << " mana due to your attack.";
-
-				player->sendStatsMessage(MSG_DAMAGE_DEALT, ss.str(), targetPos, details);
-				ss.str("");
-			}
-
-			if((player = target->getPlayer()) && attacker != target)
-			{
-				if(attacker)
-					ss << "You lose " << manaLoss << " mana due to an attack by " << attacker->getNameDescription();
-				else
-					ss << "You lose " << manaLoss << " mana.";
-
-				player->sendStatsMessage(MSG_DAMAGE_RECEIVED, ss.str(), targetPos, details);
-			}
-
-			delete details;
+			addAnimatedText(list, targetPos, COLOR_BLUE, buffer);
 		}
 	}
 
@@ -4917,6 +4735,23 @@ void Game::addCreatureSquare(const SpectatorVec& list, const Creature* target, u
 	{
 		if((player = (*it)->getPlayer()))
 			player->sendCreatureSquare(target, squareColor);
+	}
+}
+
+void Game::addAnimatedText(const Position& pos, uint8_t textColor, const std::string& text)
+{
+	const SpectatorVec& list = getSpectators(pos);
+	addAnimatedText(list, pos, textColor, text);
+}
+
+void Game::addAnimatedText(const SpectatorVec& list, const Position& pos, uint8_t textColor,
+	const std::string& text)
+{
+	Player* player = NULL;
+	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
+	{
+		if((player = (*it)->getPlayer()))
+			player->sendAnimatedText(pos, textColor, text);
 	}
 }
 
@@ -4962,17 +4797,6 @@ void Game::addDistanceEffect(const SpectatorVec& list, const Position& fromPos,
 	}
 }
 
-void Game::addStatsMessage(const SpectatorVec& list, MessageClasses mClass, const std::string& message,
-	const Position& pos, MessageDetails* details/* = NULL*/)
-{
-	Player* player = NULL;
-	for(SpectatorVec::const_iterator it = list.begin(); it != list.end(); ++it)
-	{
-		if((player = (*it)->getPlayer()))
-			player->sendStatsMessage(mClass, message, pos, details);
-	}
-}
-
 void Game::startDecay(Item* item)
 {
 	if(!item || !item->canDecay() || item->getDecaying() == DECAYING_TRUE)
@@ -5000,7 +4824,7 @@ void Game::internalDecayItem(Item* item)
 	{
 		ReturnValue ret = internalRemoveItem(NULL, item);
 		if(ret != RET_NOERROR)
-			std::clog << ":: DEBUG: internalDecayItem failed, error code: " << (int32_t)ret << ", item id: " << item->getID() << std::endl;
+			std::clog << "DEBUG: internalDecayItem failed, error code: " << (int32_t)ret << ", item id: " << item->getID() << std::endl;
 	}
 }
 
@@ -5191,7 +5015,7 @@ bool Game::playerInviteToParty(uint32_t playerId, uint32_t invitedId)
 	{
 		char buffer[90];
 		sprintf(buffer, "%s is already in a party.", invitedPlayer->getName().c_str());
-		player->sendTextMessage(MSG_PARTY, buffer);
+		player->sendTextMessage(MSG_INFO_DESCR, buffer);
 		return false;
 	}
 
@@ -5215,7 +5039,7 @@ bool Game::playerJoinParty(uint32_t playerId, uint32_t leaderId)
 	if(!player->getParty())
 		return leader->getParty()->join(player);
 
-	player->sendTextMessage(MSG_PARTY, "You are already in a party.");
+	player->sendTextMessage(MSG_INFO_DESCR, "You are already in a party.");
 	return false;
 }
 
@@ -5322,7 +5146,7 @@ void Game::kickPlayer(uint32_t playerId, bool displayEffect)
 
 bool Game::broadcastMessage(const std::string& text, MessageClasses type)
 {
-	std::clog << ":: Broadcasted message: \"" << text << "\"." << std::endl;
+	std::clog << "Broadcasted message: \"" << text << "\"." << std::endl;
 	for(AutoList<Player>::iterator it = Player::autoList.begin(); it != Player::autoList.end(); ++it)
 		it->second->sendTextMessage(type, text);
 
@@ -5836,7 +5660,7 @@ void Game::loadMotd()
 	DBResult* result;
 	if(!(result = db->storeQuery(query.str())))
 	{
-		std::clog << ":: ERROR: Failed to load motd!" << std::endl;
+		std::clog << "ERROR: Failed to load motd!" << std::endl;
 		lastMotdId = random_range(5, 500);
 		return;
 	}
@@ -5868,7 +5692,7 @@ void Game::loadPlayersRecord()
 	DBResult* result;
 	if(!(result = db->storeQuery(query.str())))
 	{
-		std::clog << ":: ERROR: Failed to load players record!" << std::endl;
+		std::clog << "ERROR: Failed to load players record!" << std::endl;
 		return;
 	}
 
@@ -6266,5 +6090,5 @@ void Game::showHotkeyUseMessage(Player* player, Item* item)
 	else
 		stream << "Using one of " << count << " " << it.pluralName.c_str() << "...";
 
-	player->sendTextMessage(MSG_HOTKEY_USE, stream.str().c_str());
+	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
 }
