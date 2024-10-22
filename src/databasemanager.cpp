@@ -40,7 +40,7 @@ bool DatabaseManager::optimizeTables()
 			query.str("");
 			do
 			{
-				std::clog << "> Optimizing table: " << result->getDataString("TABLE_NAME") << "... ";
+				std::clog << ":: Optimizing table: " << result->getDataString("TABLE_NAME") << "... ";
 				query << "OPTIMIZE TABLE `" << result->getDataString("TABLE_NAME") << "`;";
 				if(db->query(query.str()))
 					std::clog << "[success]" << std::endl;
@@ -60,7 +60,7 @@ bool DatabaseManager::optimizeTables()
 			if(!db->query("VACUUM;"))
 				break;
 
-			std::clog << "> Optimized database." << std::endl;
+			std::clog << ":: Optimized database." << std::endl;
 			return true;
 		}
 
@@ -171,7 +171,7 @@ uint32_t DatabaseManager::updateDatabase()
 	uint32_t version = getDatabaseVersion();
 	if(version < 6)
 	{
-		std::clog << "> WARNING: Couldn't update database." << std::endl;
+		std::clog << ":: WARNING: Couldn't update database." << std::endl;
 		registerDatabaseConfig("db_version", 6);
 		return 6;
 	}
@@ -181,7 +181,7 @@ uint32_t DatabaseManager::updateDatabase()
 	{
 		case 0:
 		{
-			std::clog << "> Updating database to version: 1..." << std::endl;
+			std::clog << ":: Updating database to version: 1..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_SQLITE)
 				db->query("CREATE TABLE IF NOT EXISTS `server_config` (`config` VARCHAR(35) NOT NULL DEFAULT '', `value` INTEGER NOT NULL);");
 			else
@@ -283,7 +283,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 1:
 		{
-			std::clog << "> Updating database to version: 2..." << std::endl;
+			std::clog << ":: Updating database to version: 2..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_SQLITE)
 				db->query("ALTER TABLE `players` ADD `promotion` INTEGER NOT NULL DEFAULT 0;");
 			else
@@ -333,7 +333,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 2:
 		{
-			std::clog << "> Updating database to version: 3..." << std::endl;
+			std::clog << ":: Updating database to version: 3..." << std::endl;
 			db->query("UPDATE `players` SET `vocation` = `vocation` - 4 WHERE `vocation` >= 5 AND `vocation` <= 8;");
 
 			DBResult* result;
@@ -351,7 +351,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 3:
 		{
-			std::clog << "> Updating database to version: 4..." << std::endl;
+			std::clog << ":: Updating database to version: 4..." << std::endl;
 			db->query("ALTER TABLE `houses` ADD `name` VARCHAR(255) NOT NULL;");
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_SQLITE)
 			{
@@ -382,7 +382,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 4:
 		{
-			std::clog << "> Updating database to version: 5..." << std::endl;
+			std::clog << ":: Updating database to version: 5..." << std::endl;
 			db->query("ALTER TABLE `player_deaths` ADD `altkilled_by` VARCHAR(255) NOT NULL;");
 			registerDatabaseConfig("db_version", 5);
 			return 5;
@@ -390,7 +390,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 5:
 		{
-			std::clog << "> Updating database to version: 6..." << std::endl;
+			std::clog << ":: Updating database to version: 6..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -434,7 +434,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 6:
 		{
-			std::clog << "> Updating database to version: 7..." << std::endl;
+			std::clog << ":: Updating database to version: 7..." << std::endl;
 			if(g_config.getBool(ConfigManager::INGAME_GUILD_MANAGEMENT))
 			{
 				query << "SELECT `r`.`id`, `r`.`guild_id` FROM `guild_ranks` r LEFT JOIN `guilds` g ON `r`.`guild_id` = `g`.`id` WHERE `g`.`ownerid` = `g`.`id` AND `r`.`level` = 3;";
@@ -457,7 +457,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 7:
 		{
-			std::clog << "> Updating database version to: 8..." << std::endl;
+			std::clog << ":: Updating database version to: 8..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -510,7 +510,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 8:
 		{
-			std::clog << "> Updating database to version: 9..." << std::endl;
+			std::clog << ":: Updating database to version: 9..." << std::endl;
 			db->query("ALTER TABLE `bans` ADD `statement` VARCHAR(255) NOT NULL;");
 			registerDatabaseConfig("db_version", 9);
 			return 9;
@@ -518,14 +518,14 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 9:
 		{
-			std::clog << "> Updating database to version: 10..." << std::endl;
+			std::clog << ":: Updating database to version: 10..." << std::endl;
 			registerDatabaseConfig("db_version", 10);
 			return 10;
 		}
 
 		case 10:
 		{
-			std::clog << "> Updating database to version: 11..." << std::endl;
+			std::clog << ":: Updating database to version: 11..." << std::endl;
 			db->query("ALTER TABLE `players` ADD `description` VARCHAR(255) NOT NULL DEFAULT '';");
 			if(tableExists("map_storage"))
 			{
@@ -555,7 +555,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 11:
 		{
-			std::clog << "> Updating database to version: 12..." << std::endl;
+			std::clog << ":: Updating database to version: 12..." << std::endl;
 			db->query("UPDATE `players` SET `stamina` = 151200000 WHERE `stamina` > 151200000;");
 			db->query("UPDATE `players` SET `loss_experience` = `loss_experience` * 10, `loss_mana` = `loss_mana` * 10, `loss_skills` = `loss_skills` * 10, `loss_items` = `loss_items` * 10;");
 			switch(db->getDatabaseEngine())
@@ -590,7 +590,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 12:
 		{
-			std::clog << "> Updating database to version: 13..." << std::endl;
+			std::clog << ":: Updating database to version: 13..." << std::endl;
 			std::string queryList[] = {
 				"ALTER TABLE `accounts` DROP KEY `group_id`;",
 				"ALTER TABLE `players` DROP KEY `group_id`;",
@@ -605,7 +605,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 13:
 		{
-			std::clog << "> Updating database to version: 14..." << std::endl;
+			std::clog << ":: Updating database to version: 14..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -641,7 +641,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 14:
 		{
-			std::clog << "> Updating database to version: 15..." << std::endl;
+			std::clog << ":: Updating database to version: 15..." << std::endl;
 			db->query("DROP TABLE `player_deaths`;"); //no support for moving, sorry!
 			switch(db->getDatabaseEngine())
 			{
@@ -727,7 +727,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 15:
 		{
-			std::clog << "> Updating database to version: 16..." << std::endl;
+			std::clog << ":: Updating database to version: 16..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -764,7 +764,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 16:
 		{
-			std::clog << "> Updating database to version: 17..." << std::endl;
+			std::clog << ":: Updating database to version: 17..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -799,7 +799,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 17:
 		{
-			std::clog << "> Updating database to version: 18..." << std::endl;
+			std::clog << ":: Updating database to version: 18..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -850,7 +850,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 18:
 		{
-			std::clog << "> Updating database to version: 19..." << std::endl;
+			std::clog << ":: Updating database to version: 19..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -909,7 +909,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 19:
 		{
-			std::clog << "> Updating database to version: 20..." << std::endl;
+			std::clog << ":: Updating database to version: 20..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -949,7 +949,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 20:
 		{
-			std::clog << "> Updating database to version: 21..." << std::endl;
+			std::clog << ":: Updating database to version: 21..." << std::endl;
 			std::string queryList[] = {
 				"UPDATE `bans` SET `type` = 3 WHERE `type` = 5;",
 				"UPDATE `bans` SET `param` = 2 WHERE `type` = 2;",
@@ -964,7 +964,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 21:
 		{
-			std::clog << "> Updating database to version: 22..." << std::endl;
+			std::clog << ":: Updating database to version: 22..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -983,7 +983,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 22:
 		{
-			std::clog << "> Updating database to version 23..." << std::endl;
+			std::clog << ":: Updating database to version 23..." << std::endl;
 			if(g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
 			{
 				query << "SELECT `id`, `key` FROM `accounts` WHERE `key` ";
@@ -1020,7 +1020,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 23:
 		{
-			std::clog << "> Updating database to version 24..." << std::endl;
+			std::clog << ":: Updating database to version 24..." << std::endl;
 			query << "ALTER TABLE `guilds` ADD `checkdata` ";
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_SQLITE)
 				query << "INTEGER NOT NULL;";
@@ -1035,7 +1035,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 24:
 		{
-			std::clog << "> Updating database to version 25..." << std::endl;
+			std::clog << ":: Updating database to version 25..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1067,7 +1067,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 25:
 		{
-			std::clog << "> Updating database to version 26..." << std::endl;
+			std::clog << ":: Updating database to version 26..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1095,7 +1095,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 26:
 		{
-			std::clog << "> Updating database to version 27..." << std::endl;
+			std::clog << ":: Updating database to version 27..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "ALTER TABLE `player_storage` CHANGE `key` `key` VARCHAR(32) NOT NULL DEFAULT '0'";
@@ -1113,7 +1113,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 27:
 		{
-			std::clog << "> Updating database to version 28..." << std::endl;
+			std::clog << ":: Updating database to version 28..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "ALTER TABLE `players` ADD `currmount` INT NOT NULL DEFAULT 0 AFTER `lookaddons`;";
@@ -1127,7 +1127,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 28:
 		{
-			std::clog << "> Updating database to version 29..." << std::endl;
+			std::clog << ":: Updating database to version 29..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1155,7 +1155,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 29:
 		{
-			std::clog << "> Updating database to version 30..." << std::endl;
+			std::clog << ":: Updating database to version 30..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1183,7 +1183,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 30:
 		{
-			std::clog << "> Updating database to version 31..." << std::endl;
+			std::clog << ":: Updating database to version 31..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1211,7 +1211,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 31:
 		{
-			std::clog << "> Updating database to version 32..." << std::endl;
+			std::clog << ":: Updating database to version 32..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "CREATE TABLE IF NOT EXISTS `player_statements`\
@@ -1278,7 +1278,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 32:
 		{
-			std::clog << "> Updating database to version 33..." << std::endl;
+			std::clog << ":: Updating database to version 33..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "ALTER TABLE `bans` DROP `reason`;";
@@ -1300,7 +1300,7 @@ uint32_t DatabaseManager::updateDatabase()
 
 		case 33:
 		{
-			std::clog << "> Updating database to version 34..." << std::endl;
+			std::clog << ":: Updating database to version 34..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_MYSQL:
@@ -1325,6 +1325,32 @@ uint32_t DatabaseManager::updateDatabase()
 
 			registerDatabaseConfig("db_version", 34);
 			return 34;
+		}
+
+		case 34:
+		{
+			std::clog << ":: Updating database to version 35..." << std::endl;
+			switch(db->getDatabaseEngine())
+			{
+				case DATABASE_ENGINE_MYSQL:
+				{
+					db->query("DROP TABLE IF EXISTS `market_offers`;");
+					db->query("DROP TABLE IF EXISTS `market_history`;");
+					break;
+				}
+
+				case DATABASE_ENGINE_SQLITE:
+				{
+					db->query("DROP TABLE IF EXISTS `market_offers`;");
+					db->query("DROP TABLE IF EXISTS `market_history`;");
+					break;
+				}
+
+				default: break;
+			}
+
+			registerDatabaseConfig("db_version", 35);
+			return 35;
 		}
 
 		default:
@@ -1410,7 +1436,7 @@ void DatabaseManager::checkEncryption()
 				{
 					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
-						std::clog << "> WARNING: You cannot change the encryption to MD5, change it back in config.lua." << std::endl;
+						std::clog << ":: WARNING: You cannot change the encryption to MD5, change it back in config.lua." << std::endl;
 						return;
 					}
 
@@ -1434,7 +1460,7 @@ void DatabaseManager::checkEncryption()
 						db->query("UPDATE `accounts` SET `password` = MD5(`password`), `key` = MD5(`key`);");
 
 					registerDatabaseConfig("encryption", (int32_t)newValue);
-					std::clog << "> Encryption updated to MD5." << std::endl;
+					std::clog << ":: Encryption updated to MD5." << std::endl;
 					break;
 				}
 
@@ -1442,7 +1468,7 @@ void DatabaseManager::checkEncryption()
 				{
 					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
-						std::clog << "> WARNING: You cannot change the encryption to SHA1, change it back in config.lua." << std::endl;
+						std::clog << ":: WARNING: You cannot change the encryption to SHA1, change it back in config.lua." << std::endl;
 						return;
 					}
 
@@ -1466,7 +1492,7 @@ void DatabaseManager::checkEncryption()
 						db->query("UPDATE `accounts` SET `password` = SHA1(`password`), `key` = SHA1(`key`);");
 
 					registerDatabaseConfig("encryption", (int32_t)newValue);
-					std::clog << "> Encryption set to SHA1." << std::endl;
+					std::clog << ":: Encryption set to SHA1." << std::endl;
 					break;
 				}
 
@@ -1474,7 +1500,7 @@ void DatabaseManager::checkEncryption()
 				{
 					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
-						std::clog << "> WARNING: You cannot change the encryption to SHA256, change it back in config.lua." << std::endl;
+						std::clog << ":: WARNING: You cannot change the encryption to SHA256, change it back in config.lua." << std::endl;
 						return;
 					}
 
@@ -1494,7 +1520,7 @@ void DatabaseManager::checkEncryption()
 					}
 
 					registerDatabaseConfig("encryption", (int32_t)newValue);
-					std::clog << "> Encryption set to SHA256." << std::endl;
+					std::clog << ":: Encryption set to SHA256." << std::endl;
 					break;
 				}
 
@@ -1502,7 +1528,7 @@ void DatabaseManager::checkEncryption()
 				{
 					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
-						std::clog << "> WARNING: You cannot change the encryption to SHA512, change it back in config.lua." << std::endl;
+						std::clog << ":: WARNING: You cannot change the encryption to SHA512, change it back in config.lua." << std::endl;
 						return;
 					}
 
@@ -1522,13 +1548,13 @@ void DatabaseManager::checkEncryption()
 					}
 
 					registerDatabaseConfig("encryption", (int32_t)newValue);
-					std::clog << "> Encryption set to SHA512." << std::endl;
+					std::clog << ":: Encryption set to SHA512." << std::endl;
 					break;
 				}
 
 				default:
 				{
-					std::clog << "> WARNING: You cannot switch from hashed passwords to plain text, change back the passwordType in config.lua to the passwordType you were previously using." << std::endl;
+					std::clog << ":: WARNING: You cannot switch from hashed passwords to plain text, change back the passwordType in config.lua to the passwordType you were previously using." << std::endl;
 					break;
 				}
 			}
@@ -1614,7 +1640,7 @@ void DatabaseManager::checkTriggers()
 			{
 				if(!triggerExists(triggerName[i]))
 				{
-					std::clog << "> Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
+					std::clog << ":: Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
 					db->query(triggerStatement[i]);
 				}
 			}
@@ -1779,7 +1805,7 @@ END;",
 			{
 				if(!triggerExists(triggerName[i]))
 				{
-					std::clog << "> Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
+					std::clog << ":: Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
 					db->query(triggerStatement[i]);
 				}
 			}

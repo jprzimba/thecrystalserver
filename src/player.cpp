@@ -929,11 +929,8 @@ Depot* Player::getDepot(uint32_t depotId, bool autoCreateDepot)
 		{
 			if(Depot* depot = container->getDepot())
 			{
-				Item* item = Item::CreateItem(ITEM_MARKET);
+				Item* item = Item::CreateItem(ITEM_INBOX);
 				if(item)
-					container->__internalAddThing(item);
-
-				if((item = Item::CreateItem(ITEM_INBOX)))
 				{
 					container->__internalAddThing(item);
 					depot->setInbox(item->getContainer());
@@ -985,11 +982,8 @@ void Player::updateDepots()
 			ItemList::const_reverse_iterator rit = depot->getReversedItems();
 			depot->setLocker((*rit)->getContainer()); // Depot is ALWAYS! the last item in the locker
 
-			Item* item = Item::CreateItem(ITEM_MARKET);
+			Item* item = Item::CreateItem(ITEM_INBOX);
 			if(item)
-				depot->__internalAddThing(item);
-
-			if((item = Item::CreateItem(ITEM_INBOX)))
 			{
 				depot->__internalAddThing(item);
 				depot->setInbox(item->getContainer());
@@ -1003,7 +997,7 @@ void Player::updateDepots()
 			while(rit != depot->getReversedEnd())
 			{
 				item = *rit;
-				if(item->getID() != ITEM_INBOX && item->getID() != ITEM_MARKET && item->getID() != ITEM_DEPOT)
+				if(item->getID() != ITEM_INBOX && item->getID() != ITEM_DEPOT)
 				{
 					g_game.internalMoveItem(NULL, item->getParent(), depot->getInbox(),
 						INDEX_WHEREEVER, item, item->getItemCount(), NULL, FLAG_NOLIMIT);

@@ -4,11 +4,11 @@
 	-- NOTE: sqlFile is used only by sqlite database, and sqlKeepAlive by mysql database.
 	-- To disable sqlKeepAlive such as mysqlReadTimeout use 0 value.
 	-- encryptionType can be plain, md5, sha1, sha256, sha512.
-	sqlType = "sqlite"
+	sqlType = "mysql"
 	sqlHost = "localhost"
 	sqlPort = 3306
 	sqlUser = "root"
-	sqlPass = ""
+	sqlPass = "root"
 	sqlDatabase = "crystalserver"
 	sqlFile = "crystalserver.s3db"
 	sqlKeepAlive = 0
@@ -197,13 +197,6 @@
 	mailBlockPeriod = 60 * 60 * 1000
 	mailAttemptsFadeTime = 10 * 60 * 1000
 
-	-- Market
-	marketEnabled = true
-	marketOfferDuration = 30 * 24 * 60 * 60
-	premiumToCreateMarketOffer = true
-	checkExpiredMarketOffersEachMinutes = 60
-	maxMarketOffersAtATimePerPlayer = 100
-
 	-- Process
 	-- NOTE: daemonize works only on *nix, same as niceLevel, while
 	-- defaultPriority works only on Windows.
@@ -264,7 +257,7 @@
 
 	-- Saving-related
 	-- houseDataStorage usage may be found at README.
-	houseDataStorage = "binary"
+	houseDataStorage = "relational"
 	saveGlobalStorage = true
 	storePlayerDirection = false
 	savePlayerData = true

@@ -153,7 +153,7 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 	if(headerMinorItems > (uint32_t)Items::dwMinorVersion)
 		setLastErrorString("This map needs an updated items.otb.");
 
-	std::clog << "> Map size: " << rootHeader->width << "x" << rootHeader->height << "." << std::endl;
+	std::clog << ":: Map size: " << rootHeader->width << "x" << rootHeader->height << "." << std::endl;
 	map->mapWidth = rootHeader->width;
 	map->mapHeight = rootHeader->height;
 
@@ -219,9 +219,12 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 		}
 	}
 
-	std::clog << "> Map descriptions: " << std::endl;
+	std::clog << ":: Map descriptions: " << std::endl;
 	for(StringVec::iterator it = map->descriptions.begin(); it != map->descriptions.end(); ++it)
-		std::clog << "\"" << (*it) << "\"" << std::endl;
+	{
+		if (!(*it).empty())
+			std::clog << ":: " << (*it) << std::endl;
+	}
 
 #ifdef __GROUND_CACHE__
 	typedef std::map<uint16_t, std::pair<Item*, int32_t> > CacheMap;

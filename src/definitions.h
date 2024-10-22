@@ -28,12 +28,12 @@
 //#define CLIENT_VERSION_DATA
 
 #define SOFTWARE_NAME "Crystal Server"
-#define SOFTWARE_VERSION "2.0"
+#define SOFTWARE_VERSION "1.0"
 #define SOFTWARE_CODENAME "Infinity Crystal"
 #define SOFTWARE_DEVELOPERS "Tryller"
 #define SOFTWARE_PROTOCOL "8.60"
 
-#define VERSION_DATABASE 34
+#define VERSION_DATABASE 35
 
 #undef MULTI_SQL_DRIVERS
 #define SQL_DRIVERS __USE_SQLITE__+__USE_MYSQL__

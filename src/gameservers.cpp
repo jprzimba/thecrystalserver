@@ -128,7 +128,7 @@ bool GameServers::loadFromXml(bool result)
 
 	if(result)
 	{
-		std::clog << "> Servers loaded:" << std::endl;
+		std::clog << ":: Servers loaded:" << std::endl;
 		for(GameServersMap::iterator it = serverList.begin(); it != serverList.end(); ++it)
 		{
 			IntegerVec games = it->second->getPorts();

@@ -32,7 +32,7 @@ crystalserver_SOURCES = account.h actions.cpp actions.h $(MAYBE_OTADMIN) \
 	fileloader.h game.cpp game.h $(MAYBE_LOGIN) globalevent.cpp globalevent.h \
 	group.cpp group.h house.cpp house.h housetile.cpp housetile.h ioban.cpp \
 	ioban.h ioguild.cpp ioguild.h iologindata.cpp iologindata.h iomap.cpp \
-	iomap.h iomapserialize.cpp iomapserialize.h iomarket.cpp iomarket.h \
+	iomap.h iomapserialize.cpp iomapserialize.h \
 	item.cpp item.h itemattributes.cpp itemattributes.h items.cpp items.h \
 	luascript.cpp luascript.h mailbox.cpp mailbox.h manager.cpp manager.h \
 	map.cpp map.h monster.cpp monster.h monsters.cpp monsters.h mounts.cpp \
