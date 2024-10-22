@@ -1,0 +1,50 @@
+[ CHANGELOG
+	Project Name
+		Crystal Server
+
+	Version
+		1.0
+
+	Website
+		https://github.com/jprzimba/crystalserver
+
+	License
+		GNU GPLv3
+]
+
+[ File changes:
+	D = Deleted,
+	M = Modified,
+	A = Added.
+
+	[ 1.0
+		[ A...
+
+		]
+
+		[ M...
+
+		]
+
+		[ D...
+
+		]
+	]
+]
+
+[ Charges made
+	[ 1.0
+		[ DISTRO
+			Game protocol 8.60. (Tryller)
+			War system. (Elf, Tryller)
+			Auto stacking items. (Elf)
+		]
+
+		[ MAP
+			Map SadSoul. (SadTeam Mapper, Erimyth and Tryller)
+			POI Quest. (Erimyth and Tryller)
+			Demon OAK Quest. (Erimyth and Tryller)
+			Ferumbras tower with Ferumbras raid. (Tryller)
+		]
+	]
+]

@@ -1,0 +1,74 @@
+# Ignore object files, static and dynamic libs
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.dylib
+
+# Ignore executables
+*.exe
+*.out
+*.app
+*.rar
+
+# Ignore compiler-generated files
+*.gch
+*.pch
+
+# Ignore CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+build/
+compile_commands.json
+
+# Ignore Visual Studio files
+.vscode/
+.vs/
+*.vcxproj*
+*.sln
+*.filters
+
+# Ignore CLion project files
+.idea/
+
+# Ignore QtCreator project files
+*.pro.user
+*.qmake.stash
+*.qmake.cache
+
+# Ignore code coverage and profiling tools output
+*.gcda
+*.gcno
+*.gcov
+
+# Ignore logs, databases, and temporary files
+*.log
+*.db
+*.sqlite
+*.s3db
+
+# Ignore backup and temporary files
+*~
+*.swp
+*.tmp
+*.bak
+*.old
+*.orig
+*.layout
+
+# Ignore debugging symbols
+*.dSYM/
+*.pdb
+
+# Ignore binaries for macOS
+.DS_Store
+
+# Ignore Windows Makefile
+Makefile.win
+src/dev-cpp/obj/crystalserver_private.res
+/src/dev-cpp/obj
+*.s3db

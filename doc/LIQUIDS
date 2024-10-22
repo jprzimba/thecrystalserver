@@ -1,0 +1,40 @@
+[ LIQUIDS
+	Project Name
+		Crystal Server
+
+	Version
+		1.0
+
+	Website
+		https://github.com/jprzimba/crystalserver
+
+	License
+		GNU GPLv3
+]
+
+[ FLUIDTYPE		NAME	COLOR
+	2	blood			RED
+	10	lifefluid		RED
+	26	lava			RED
+
+	3	beer			BROWN
+	11	oil				BROWN
+	19	mud				BROWN
+	27	rum				BROWN
+	35	tea				BROWN
+
+	4	slime			GREEN
+	28	swamp			GREEN
+
+	5	lemonade		YELLOW
+	13	urine			YELLOW
+	21	fruit juice		YELLOW
+
+	6	milk			WHITE
+	14	coconut milk	WHITE
+
+	7	manafluid		PURPLE
+	15	wine			PURPLE
+
+	1	water			BLUE
+]

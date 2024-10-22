@@ -1,0 +1,23 @@
+[ GROUPS
+	Project Name
+		Crystal Server
+
+	Version
+		1.0
+
+	Website
+		https://github.com/jprzimba/crystalserver
+
+	License
+		GNU GPLv3
+]
+
+[ Flags
+	All player flags with a generator may be found at address:
+		http://hem.bredband.net/johannesrosen/playerflags.html
+]
+
+[ Custom Flags
+	All player custom flags with a generator may be found at address:
+		http://fightingelf.net/customflags/
+]

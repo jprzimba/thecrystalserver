@@ -1,0 +1,59 @@
+[ SIGNALS
+	Project Name
+		Crystal Server
+
+	Version
+		1.0
+
+	Website
+		https://github.com/jprzimba/crystalserver
+
+	License
+		GNU GPLv3
+]
+
+[ How to use SIGNALS
+	[ Note
+		Signals are designed for Linux, so if you are Windows user,
+		you may skip reading it, as you won't have use of them.
+	]
+
+	Signals are nothing else than signals sent to a software when using
+	'kill' command. To use signals, you have to type:
+
+	kill -SIGNAL processId
+
+		or
+
+	killall -SIGNAL processName
+
+	[ Example
+		killall -HUP crystalserver; will save the server.
+	]
+]
+
+[ Available signal actions
+	HUP
+		* Saves server
+
+	TRAP
+		* Cleans map
+
+	CHLD
+		* Refreshes map
+
+	USR1
+		* Closes server
+
+	USR2
+		* Open the server
+
+	CONT
+		* Reloads everything
+
+	QUIT
+		* Saves server and shut it down
+
+	TERM
+		* Shuts down the server
+]
