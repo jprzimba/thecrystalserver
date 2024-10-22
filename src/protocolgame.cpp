@@ -2736,21 +2736,20 @@ void ProtocolGame::AddPlayerStats(NetworkMessage_ptr msg)
 	msg->put<uint16_t>(player->getHealth());
 	msg->put<uint16_t>(player->getPlayerInfo(PLAYERINFO_MAXHEALTH));
 	msg->put<uint32_t>(uint32_t(player->getFreeCapacity() * 100));
-	msg->put<uint32_t>(uint32_t(player->getCapacity() * 100));
-	msg->put<uint64_t>(player->getExperience());
+	uint64_t experience = player->getExperience();
+	if(experience > 0x7FFFFFFF) // client debugs after 2,147,483,647 exp
+		msg->put<uint32_t>(0x7FFFFFFF);
+	else
+		msg->put<uint32_t>(experience);
+
 	msg->put<uint16_t>(player->getPlayerInfo(PLAYERINFO_LEVEL));
 	msg->put<char>(player->getPlayerInfo(PLAYERINFO_LEVELPERCENT));
 	msg->put<uint16_t>(player->getPlayerInfo(PLAYERINFO_MANA));
 	msg->put<uint16_t>(player->getPlayerInfo(PLAYERINFO_MAXMANA));
-	msg->put<char>(player->getMagicLevel());
-	msg->put<char>(player->getBaseMagicLevel());
+	msg->put<char>(player->getPlayerInfo(PLAYERINFO_MAGICLEVEL));
 	msg->put<char>(player->getPlayerInfo(PLAYERINFO_MAGICLEVELPERCENT));
 	msg->put<char>(player->getPlayerInfo(PLAYERINFO_SOUL));
 	msg->put<uint16_t>(player->getStaminaMinutes());
-	msg->put<uint16_t>(player->getSpeed());
-
-	Condition* condition = player->getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT);
-	msg->put<uint16_t>(condition ? condition->getTicks() / 1000 : 0x00);
 }
 
 void ProtocolGame::AddPlayerSkills(NetworkMessage_ptr msg)

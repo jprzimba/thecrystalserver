@@ -22,11 +22,11 @@ function onLogin(cid)
 
 		doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, str)
 	elseif(accountManager == MANAGER_NAMELOCK) then
-		addEvent(valid(doCreatureSay), 500, cid, "Hello, it appears that your character has been locked for name violating rules, what new name would you like to have?", TALKTYPE_PRIVATE_NP, true, cid)
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Hello, it appears that your character has been locked for name violating rules, what new name would you like to have?")
 	elseif(accountManager == MANAGER_ACCOUNT) then
-		addEvent(valid(doCreatureSay), 500, cid, "Hello, type {account} to manage your account. If you would like to start over, type {cancel} anywhere.", TALKTYPE_PRIVATE_NP, true, cid)
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Hello, type {account} to manage your account. If you would like to start over, type {cancel} anywhere.")
 	else
-		addEvent(valid(doCreatureSay), 500, cid, "Hello, type {account} to create an account or {recover} to recover an account.", TALKTYPE_PRIVATE_NP, true, cid)
+		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_ORANGE, "Hello, type {account} to create an account or {recover} to recover an account.")
 	end
 
 	if(not isPlayerGhost(cid)) then

@@ -276,7 +276,6 @@ class Player : public Creature, public Cylinder
 		uint32_t getLevel() const {return level;}
 		uint64_t getExperience() const {return experience;}
 		uint32_t getMagicLevel() const {return getPlayerInfo(PLAYERINFO_MAGICLEVEL);}
-		uint32_t getBaseMagicLevel() const {return magLevel;}
 		uint64_t getSpentMana() const {return manaSpent;}
 
 		bool isPremium() const;

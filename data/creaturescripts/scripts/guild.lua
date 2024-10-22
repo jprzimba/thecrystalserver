@@ -4,7 +4,7 @@ function onChannelJoin(cid, channelId, users)
 	end
  
  	for _, pid in users do
-		doPlayerSendChannelMessage(pid, "", "Player " .. getCreatureName(cid) .. " has entered the channel.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+		doPlayerSendChannelMessage(pid, "", "Player " .. getCreatureName(cid) .. " has entered the channel.", TALKTYPE_CHANNEL_W, CHANNEL_GUILD)
 	end
 
 	local guildId = getPlayerGuildId(cid)
@@ -24,7 +24,7 @@ function onChannelLeave(cid, channelId, users)
 	end
 
 	for _, pid in users do
-		doPlayerSendChannelMessage(pid, "", "Player " .. getCreatureName(cid) .. " has left the channel.", TALKTYPE_CHANNEL_HIGHLIGHT, CHANNEL_GUILD)
+		doPlayerSendChannelMessage(pid, "", "Player " .. getCreatureName(cid) .. " has left the channel.", TALKTYPE_CHANNEL_W, CHANNEL_GUILD)
 	end
 
 	return true
