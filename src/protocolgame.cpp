@@ -1717,11 +1717,10 @@ void ProtocolGame::sendShop(Npc* npc, const ShopInfoList& shop)
 	{
 		TRACK_MESSAGE(msg);
 		msg->put<char>(0x7A);
-		msg->putString(npc->getName());
-		msg->put<uint16_t>(std::min(shop.size(), (size_t)65535));
+		msg->put<char>(std::min(shop.size(), (size_t)255));
 
 		ShopInfoList::const_iterator it = shop.begin();
-		for(uint16_t i = 0; it != shop.end() && i < 65535; ++it, ++i)
+		for(uint32_t i = 0; it != shop.end() && i < 255; ++it, ++i)
 			AddShopItem(msg, (*it));
 	}
 }
@@ -2989,7 +2988,7 @@ void ProtocolGame::AddShopItem(NetworkMessage_ptr msg, const ShopInfo& item)
 	else if(it.stackable || it.charges)
 		msg->put<char>(item.subType);
 	else
-		msg->put<char>(0x00);
+		msg->put<char>(0x01);
 
 	msg->putString(item.itemName);
 	msg->put<uint32_t>(uint32_t(it.weight * 100));
