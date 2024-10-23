@@ -224,8 +224,6 @@ class Player : public Creature, public Cylinder
 
 		void addBlessing(int16_t blessing) {blessings += blessing;}
 		bool hasBlessing(int16_t blessing) const {return ((blessings & ((int16_t)1 << blessing)) != 0);}
-		void setPVPBlessing(bool value) {pvpBlessing = value;}
-		bool hasPVPBlessing() const {return pvpBlessing;}
 		uint16_t getBlessings() const;
 
 		OperatingSystem_t getOperatingSystem() const {return operatingSystem;}
@@ -353,7 +351,6 @@ class Player : public Creature, public Cylinder
 
 		Depot* getDepot(uint32_t depotId, bool autoCreateDepot);
 		bool addDepot(Depot* depot, uint32_t depotId);
-		void updateDepots();
 		void useDepot(uint32_t depotId, bool value);
 
 		virtual bool canSee(const Position& pos) const;
@@ -362,9 +359,6 @@ class Player : public Creature, public Cylinder
 		void setWalkthrough(const Creature* creature, bool walkthrough);
 
 		virtual bool canSeeInvisibility() const {return hasFlag(PlayerFlag_CanSenseInvisibility);}
-
-		bool hasSentChat() const {return sentChat;}
-		void setSentChat(bool sending) {sentChat = sending;}
 
 		virtual RaceType_t getRace() const {return RACE_BLOOD;}
 
@@ -541,8 +535,6 @@ class Player : public Creature, public Cylinder
 
 		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel)
 			{if(client) client->sendChannelMessage(author, text, type, channel);}
-		void sendChannelEvent(uint16_t channelId, const std::string& playerName, ChannelEvent_t channelEvent)
-			{if(client) client->sendChannelEvent(channelId, playerName, channelEvent);}
 		void sendCreatureAppear(const Creature* creature)
 			{if(client) client->sendAddCreature(creature, creature->getPosition(), creature->getTile()->getClientIndexOfThing(this, creature));}
 		void sendCreatureDisappear(const Creature* creature, uint32_t stackpos)
@@ -829,8 +821,6 @@ class Player : public Creature, public Cylinder
 		bool requestedOutfit;
 		bool outfitAttributes;
 		bool addAttackSkillPoint;
-		bool pvpBlessing;
-		bool sentChat;
 
 		OperatingSystem_t operatingSystem;
 		AccountManager_t accountManager;

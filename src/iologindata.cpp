@@ -427,7 +427,7 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 	Database* db = Database::getInstance();
 	DBQuery query;
 	query << "SELECT `id`, `account_id`, `group_id`, `world_id`, `sex`, `vocation`, `experience`, `level`, "
-	<< "`maglevel`, `health`, `healthmax`, `blessings`, `pvp_blessing`, `mana`, `manamax`, `manaspent`, `soul`, "
+	<< "`maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, "
 	<< "`lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, "
 	<< "`posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skull`, `skulltime`, `guildnick`, "
 	<< "`rank_id`, `town_id`, `balance`, `stamina`, `direction`, `loss_experience`, `loss_mana`, `loss_skills`, "
@@ -496,7 +496,6 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 		|| !g_config.getBool(ConfigManager::BLESSING_ONLY_PREMIUM)))
 	{
 		player->blessings = result->getDataInt("blessings");
-		player->setPVPBlessing(result->getDataInt("pvp_blessing") != 0);
 	}
 
 	uint64_t conditionsSize = 0;
@@ -751,7 +750,6 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 			}
 		}
 
-		player->updateDepots();
 		itemMap.clear();
 		result->free();
 	}
@@ -955,7 +953,6 @@ bool IOLoginData::savePlayer(Player* player, bool preSave/* = true*/, bool shall
 		|| !g_config.getBool(ConfigManager::BLESSING_ONLY_PREMIUM)))
 	{
 		query << "`blessings` = " << player->blessings << ", ";
-		query << "`pvp_blessing` = " << (player->hasPVPBlessing() ? "1" : "0") << ", ";
 	}
 
 	query << "`marriage` = " << player->marriage << ", ";

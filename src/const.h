@@ -26,21 +26,6 @@ enum OperatingSystem_t
 	CLIENTOS_FLASH		= 0x03
 };
 
-enum ChannelEvent_t
-{
-	CHANNELEVENT_JOIN = 0,
-	CHANNELEVENT_LEAVE = 1,
-	CHANNELEVENT_INVITE = 2,
-	CHANNELEVENT_EXCLUDE = 3
-};
-
-enum ReportType_t
-{
-	REPORT_NAME = 0x00,
-	REPORT_STATEMENT = 0x01,
-	REPORT_BOT = 0x02
-};
-
 enum MagicEffect_t
 {
 	MAGIC_EFFECT_DRAW_BLOOD			= 0x00,
@@ -360,24 +345,22 @@ enum Color_t
 
 enum Icons_t
 {
-	ICON_NONE		= 0,
-	ICON_POISON		= 1 << 0,
-	ICON_BURN		= 1 << 1,
-	ICON_ENERGY		= 1 << 2,
-	ICON_DRUNK		= 1 << 3,
-	ICON_MANASHIELD	= 1 << 4,
-	ICON_PARALYZE	= 1 << 5,
-	ICON_HASTE		= 1 << 6,
-	ICON_SWORDS		= 1 << 7,
-	ICON_DROWNING	= 1 << 8,
-	ICON_FREEZING	= 1 << 9,
-	ICON_DAZZLED	= 1 << 10,
-	ICON_CURSED		= 1 << 11,
-	ICON_BUFF		= 1 << 12,
-	ICON_PZBLOCK	= 1 << 13,
-	ICON_PZ			= 1 << 14,
-	ICON_BLEED		= 1 << 15,
-	ICON_HUNGRY		= 1 << 16
+	ICON_NONE = 0,
+	ICON_POISON = 1 << 0,
+	ICON_BURN = 1 << 1,
+	ICON_ENERGY = 1 << 2,
+	ICON_DRUNK = 1 << 3,
+	ICON_MANASHIELD = 1 << 4,
+	ICON_PARALYZE = 1 << 5,
+	ICON_HASTE = 1 << 6,
+	ICON_SWORDS = 1 << 7,
+	ICON_DROWNING = 1 << 8,
+	ICON_FREEZING = 1 << 9,
+	ICON_DAZZLED = 1 << 10,
+	ICON_CURSED = 1 << 11,
+	ICON_BUFF = 1 << 12,
+	ICON_PZ = 1 << 13,
+	ICON_PROTECTIONZONE = 1 << 14
 };
 
 enum skills_t
@@ -447,8 +430,7 @@ enum Skulls_t
 	SKULL_WHITE,
 	SKULL_RED,
 	SKULL_BLACK,
-	SKULL_ORANGE,
-	SKULL_LAST = SKULL_ORANGE
+	SKULL_LAST = SKULL_BLACK
 };
 
 enum PartyShields_t
@@ -503,7 +485,6 @@ enum item_t
 
 	ITEM_DEPOT				= 2594,
 	ITEM_LOCKER				= 2589,
-	ITEM_INBOX				= 14404,
 
 	ITEM_MALE_CORPSE		= 3058,
 	ITEM_FEMALE_CORPSE		= 3065,

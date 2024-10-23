@@ -2357,7 +2357,6 @@ bool Game::playerRequestChannels(uint32_t playerId)
 		return false;
 
 	player->sendChannelsDialog();
-	player->setSentChat(true);
 	return true;
 }
 
@@ -2365,18 +2364,6 @@ bool Game::playerOpenChannel(uint32_t playerId, uint16_t channelId)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
-		return false;
-
-	bool deny = false;
-	CreatureEventList openEvents = player->getCreatureEvents(CREATURE_EVENT_CHANNEL_REQUEST);
-	for(CreatureEventList::iterator it = openEvents.begin(); it != openEvents.end(); ++it)
-	{
-		if(!(*it)->executeChannelRequest(player, asString(channelId), false, !player->hasSentChat()) && !deny)
-			deny = true;
-	}
-
-	player->setSentChat(false);
-	if(deny)
 		return false;
 
 	ChatChannel* channel = g_chat.addUserToChannel(player, channelId);
@@ -2406,18 +2393,6 @@ bool Game::playerOpenPrivateChannel(uint32_t playerId, std::string& receiver)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
-		return false;
-
-	bool deny = false;
-	CreatureEventList openEvents = player->getCreatureEvents(CREATURE_EVENT_CHANNEL_REQUEST);
-	for(CreatureEventList::iterator it = openEvents.begin(); it != openEvents.end(); ++it)
-	{
-		if(!(*it)->executeChannelRequest(player, receiver, true, !player->hasSentChat()) && !deny)
-			deny = true;
-	}
-
-	player->setSentChat(false);
-	if(deny)
 		return false;
 
 	if(IOLoginData::getInstance()->playerExists(receiver))
@@ -5098,33 +5073,6 @@ bool Game::playerReportBug(uint32_t playerId, std::string comment)
 	CreatureEventList reportBugEvents = player->getCreatureEvents(CREATURE_EVENT_REPORTBUG);
 	for(CreatureEventList::iterator it = reportBugEvents.begin(); it != reportBugEvents.end(); ++it)
 		(*it)->executeReportBug(player, comment);
-
-	return true;
-}
-
-bool Game::playerReportViolation(uint32_t playerId, ReportType_t type, uint8_t reason, const std::string& name,
-	const std::string& comment, const std::string& translation, uint32_t statementId)
-{
-	Player* player = getPlayerByID(playerId);
-	if(!player || player->isRemoved())
-		return false;
-
-	CreatureEventList reportViolationEvents = player->getCreatureEvents(CREATURE_EVENT_REPORTVIOLATION);
-	for(CreatureEventList::iterator it = reportViolationEvents.begin(); it != reportViolationEvents.end(); ++it)
-		(*it)->executeReportViolation(player, type, reason, name, comment, translation, statementId);
-
-	return true;
-}
-
-bool Game::playerThankYou(uint32_t playerId, uint32_t statementId)
-{
-	Player* player = getPlayerByID(playerId);
-	if(!player || player->isRemoved())
-		return false;
-
-	CreatureEventList thankYouEvents = player->getCreatureEvents(CREATURE_EVENT_THANKYOU);
-	for(CreatureEventList::iterator it = thankYouEvents.begin(); it != thankYouEvents.end(); ++it)
-		(*it)->executeThankYou(player, statementId);
 
 	return true;
 }

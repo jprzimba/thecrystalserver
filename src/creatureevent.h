@@ -31,7 +31,6 @@ enum CreatureEventType_t
 	CREATURE_EVENT_SPAWN_GLOBAL,
 	CREATURE_EVENT_CHANNEL_JOIN,
 	CREATURE_EVENT_CHANNEL_LEAVE,
-	CREATURE_EVENT_CHANNEL_REQUEST,
 	CREATURE_EVENT_ADVANCE,
 	CREATURE_EVENT_LOOK,
 	CREATURE_EVENT_DIRECTION,
@@ -43,8 +42,6 @@ enum CreatureEventType_t
 	CREATURE_EVENT_TEXTEDIT,
 	CREATURE_EVENT_HOUSEEDIT,
 	CREATURE_EVENT_REPORTBUG,
-	CREATURE_EVENT_REPORTVIOLATION,
-	CREATURE_EVENT_THANKYOU,
 	CREATURE_EVENT_THINK,
 	CREATURE_EVENT_STATSCHANGE,
 	CREATURE_EVENT_COMBAT_AREA,
@@ -125,7 +122,6 @@ class CreatureEvent : public Event
 		uint32_t executeLogout(Player* player, bool forceLogout);
 		uint32_t executeSpawn(Monster* monster);
 		uint32_t executeChannel(Player* player, uint16_t channelId, UsersMap usersMap);
-		uint32_t executeChannelRequest(Player* player, const std::string& channel, bool isPrivate, bool custom);
 		uint32_t executeAdvance(Player* player, skills_t skill, uint32_t oldLevel, uint32_t newLevel);
 		uint32_t executeLook(Player* player, Thing* thing, const Position& position, int16_t stackpos, int32_t lookDistance);
 		uint32_t executeMail(Player* player, Player* target, Item* item, bool openBox);
@@ -134,9 +130,6 @@ class CreatureEvent : public Event
 		uint32_t executeTextEdit(Player* player, Item* item, const std::string& newText);
 		uint32_t executeHouseEdit(Player* player, uint32_t houseId, uint32_t listId, const std::string& text);
 		uint32_t executeReportBug(Player* player, const std::string& comment);
-		uint32_t executeReportViolation(Player* player, ReportType_t type, uint8_t reason, const std::string& name,
-			const std::string& comment, const std::string& translation, uint32_t statementId);
-		uint32_t executeThankYou(Player* player, uint32_t statementId);
 		uint32_t executeThink(Creature* creature, uint32_t interval);
 		uint32_t executeDirection(Creature* creature, Direction old, Direction current);
 		uint32_t executeOutfit(Creature* creature, const Outfit_t& old, const Outfit_t& current);

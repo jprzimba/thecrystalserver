@@ -56,7 +56,7 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	if(client)
 		p->setPlayer(this);
 
-	pvpBlessing = pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = outfitAttributes = sentChat = false;
+	pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = outfitAttributes = false;
 	saving = true;
 
 	lastAttackBlockType = BLOCK_NONE;
@@ -527,13 +527,14 @@ void Player::sendIcons() const
 	}
 
 	if(getZone() == ZONE_PROTECTION)
-		icons |= ICON_PZ;
+	{
+		icons |= ICON_PROTECTIONZONE;
+		if(hasBitSet(ICON_SWORDS, icons))
+			icons &= ~ICON_SWORDS;
+	}
 
 	if(pzLocked)
-		icons |= ICON_PZBLOCK;
-
-	if(!getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT))
-		icons |= ICON_HUNGRY;
+		icons |= ICON_PZ;
 
 	client->sendIcons(icons);
 }
@@ -928,20 +929,8 @@ Depot* Player::getDepot(uint32_t depotId, bool autoCreateDepot)
 		{
 			if(Depot* depot = container->getDepot())
 			{
-				Item* item = Item::CreateItem(ITEM_INBOX);
-				if(item)
-				{
-					container->__internalAddThing(item);
-					depot->setInbox(item->getContainer());
-				}
-
-				if((item = Item::CreateItem(ITEM_DEPOT)))
-				{
-					container->__internalAddThing(item);
-					depot->setLocker(item->getContainer());
-				}
-
-				internalAddDepot(depot, depotId);
+				container->__internalAddThing(Item::CreateItem(ITEM_DEPOT));
+				addDepot(depot, depotId);
 				return depot;
 			}
 		}
@@ -968,51 +957,6 @@ void Player::internalAddDepot(Depot* depot, uint32_t depotId)
 	depots[depotId] = std::make_pair(depot, false);
 	depot->setDepotId(depotId);
 	depot->setMaxDepotLimit((group != NULL ? group->getDepotLimit(isPremium()) : 1000));
-}
-
-void Player::updateDepots()
-{
-	Depot* depot = NULL;
-	for(DepotMap::iterator it = depots.begin(); it != depots.end(); ++it)
-	{
-		depot = it->second.first;
-		if(depot->__getItemTypeCount(ITEM_INBOX) == 0) // This happens only during upgrade of depots...
-		{
-			ItemList::const_reverse_iterator rit = depot->getReversedItems();
-			depot->setLocker((*rit)->getContainer()); // Depot is ALWAYS! the last item in the locker
-
-			Item* item = Item::CreateItem(ITEM_INBOX);
-			if(item)
-			{
-				depot->__internalAddThing(item);
-				depot->setInbox(item->getContainer());
-			}
-
-			// we need to place the depot to be first
-			depot->__removeThing(depot->getLocker()->getItem(), 1);
-			depot->__addThing(NULL, depot->getLocker()->getItem());
-
-			rit = depot->getReversedItems();
-			while(rit != depot->getReversedEnd())
-			{
-				item = *rit;
-				if(item->getID() != ITEM_INBOX && item->getID() != ITEM_DEPOT)
-				{
-					g_game.internalMoveItem(NULL, item->getParent(), depot->getInbox(),
-						INDEX_WHEREEVER, item, item->getItemCount(), NULL, FLAG_NOLIMIT);
-					rit = depot->getReversedItems();
-				}
-				else
-					++rit;
-			}
-		}
-		else
-		{
-			ItemList::const_iterator rit = depot->getItems();
-			depot->setLocker((*rit)->getContainer());
-			depot->setInbox((*(++rit))->getContainer());
-		}
-	}
 }
 
 void Player::useDepot(uint32_t depotId, bool value)
@@ -4328,21 +4272,15 @@ Skulls_t Player::getSkull() const
 
 Skulls_t Player::getSkullType(const Creature* creature) const
 {
-	const Player* player = creature->getPlayer();
-	if(player && player->getSkull() == SKULL_NONE)
+	if(const Player* player = creature->getPlayer())
 	{
 		if(g_game.getWorldType() != WORLDTYPE_OPEN)
 			return SKULL_NONE;
 
-		if(canRevenge(player->getGUID()))
-			return SKULL_ORANGE;
-
-		if((skull != SKULL_NONE || player->canRevenge(guid)) &&
-			player->hasAttacked(this) && !player->isEnemy(this, false))
+		if((skull != SKULL_NONE && player->getSkull() < SKULL_RED) && player->hasAttacked(this) && !player->isEnemy(this, false))
 			return SKULL_YELLOW;
 
-		if((isPartner(player) || isAlly(player)) &&
-			g_game.getWorldType() != WORLDTYPE_OPTIONAL)
+		if(player->getSkull() == SKULL_NONE && (isPartner(player) || isAlly(player)) && g_game.getWorldType() != WORLDTYPE_OPTIONAL)
 			return SKULL_GREEN;
 	}
 

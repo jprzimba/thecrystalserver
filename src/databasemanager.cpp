@@ -1114,13 +1114,6 @@ uint32_t DatabaseManager::updateDatabase()
 		case 27:
 		{
 			std::clog << "Updating database to version 28..." << std::endl;
-			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
-			{
-				query << "ALTER TABLE `players` ADD `currmount` INT NOT NULL DEFAULT 0 AFTER `lookaddons`;";
-				db->query(query.str());
-				query.str("");
-			}
-
 			registerDatabaseConfig("db_version", 28);
 			return 28;
 		}
@@ -1128,27 +1121,6 @@ uint32_t DatabaseManager::updateDatabase()
 		case 28:
 		{
 			std::clog << "Updating database to version 29..." << std::endl;
-			switch(db->getDatabaseEngine())
-			{
-				case DATABASE_ENGINE_SQLITE:
-				{
-					query << "ALTER TABLE `players` ADD `lookmount` INT NOT NULL DEFAULT 0;";
-					break;
-				}
-
-				case DATABASE_ENGINE_MYSQL:
-				{
-					query << "ALTER TABLE `players` CHANGE `currmount` `lookmount` INT NOT NULL DEFAULT 0";
-					break;
-				}
-
-				default:
-					break;
-			}
-
-			db->query(query.str());
-			query.str("");
-
 			registerDatabaseConfig("db_version", 29);
 			return 29;
 		}
@@ -1184,27 +1156,6 @@ uint32_t DatabaseManager::updateDatabase()
 		case 30:
 		{
 			std::clog << "Updating database to version 31..." << std::endl;
-			switch(db->getDatabaseEngine())
-			{
-				case DATABASE_ENGINE_SQLITE:
-				{
-					query << "ALTER TABLE `players` ADD `pvp_blessing` BOOLEAN NOT NULL DEFAULT FALSE;";
-					break;
-				}
-
-				case DATABASE_ENGINE_MYSQL:
-				{
-					query << "ALTER TABLE `players` ADD `pvp_blessing` TINYINT(1) NOT NULL DEFAULT 0 AFTER `blessings`;";
-					break;
-				}
-
-				default:
-					break;
-			}
-
-			db->query(query.str());
-			query.str("");
-
 			registerDatabaseConfig("db_version", 31);
 			return 31;
 		}

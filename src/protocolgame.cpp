@@ -356,7 +356,6 @@ bool ProtocolGame::connect(uint32_t playerId, OperatingSystem_t operatingSystem,
 	player->lastIP = player->getIP();
 	player->lastLoad = OTSYS_TIME();
 
-	g_chat.reOpenChannels(player);
 	m_acceptPackets = true;
 	return true;
 }
@@ -778,10 +777,6 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 				parseBugReport(msg);
 				break;
 
-			case 0xE7:
-				parseThankYou(msg);
-				break;
-
 			case 0xE8:
 				parseDebugAssert(msg);
 				break;
@@ -792,10 +787,6 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 
 			case 0xF1:
 				parseQuestInfo(msg);
-				break;
-
-			case 0xF2:
-				parseViolationReport(msg);
 				break;
 
 			default:
@@ -1416,12 +1407,6 @@ void ProtocolGame::parseBugReport(NetworkMessage& msg)
 	addGameTask(&Game::playerReportBug, player->getID(), comment);
 }
 
-void ProtocolGame::parseThankYou(NetworkMessage& msg)
-{
-	uint32_t statementId = msg.get<uint32_t>();
-	addGameTask(&Game::playerThankYou, player->getID(), statementId);
-}
-
 void ProtocolGame::parseInviteToParty(NetworkMessage& msg)
 {
 	uint32_t targetId = msg.get<uint32_t>();
@@ -1468,22 +1453,6 @@ void ProtocolGame::parseQuestInfo(NetworkMessage& msg)
 	addGameTask(&Game::playerQuestInfo, player->getID(), questId);
 }
 
-void ProtocolGame::parseViolationReport(NetworkMessage& msg)
-{
-	ReportType_t type = (ReportType_t)msg.get<char>();
-	uint8_t reason = msg.get<char>();
-
-	std::string name = msg.getString(), comment = msg.getString(), translation = "";
-	if(type != REPORT_BOT)
-		translation = msg.getString();
-
-	uint32_t statementId = 0;
-	if(type == REPORT_STATEMENT)
-		statementId = msg.get<uint32_t>();
-
-	addGameTask(&Game::playerReportViolation, player->getID(), type, reason, name, comment, translation, statementId);
-}
-
 //********************** Send methods *******************************//
 void ProtocolGame::sendOpenPrivateChannel(const std::string& receiver)
 {
@@ -1493,19 +1462,6 @@ void ProtocolGame::sendOpenPrivateChannel(const std::string& receiver)
 		TRACK_MESSAGE(msg);
 		msg->put<char>(0xAD);
 		msg->putString(receiver);
-	}
-}
-
-void ProtocolGame::sendChannelEvent(uint16_t channelId, const std::string& playerName, ChannelEvent_t channelEvent)
-{
-	NetworkMessage_ptr msg = getOutputBuffer();
-	if(msg)
-	{
-		TRACK_MESSAGE(msg);
-		msg->put<char>(0xF3);
-		msg->put<uint16_t>(channelId);
-		msg->putString(playerName);
-		msg->put<char>(channelEvent);
 	}
 }
 

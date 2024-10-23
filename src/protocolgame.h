@@ -111,7 +111,6 @@ class ProtocolGame : public Protocol
 		void parseFollow(NetworkMessage& msg);
 
 		void parseBugReport(NetworkMessage& msg);
-		void parseThankYou(NetworkMessage& msg);
 		void parseDebugAssert(NetworkMessage& msg);
 
 		void parseThrow(NetworkMessage& msg);
@@ -162,12 +161,8 @@ class ProtocolGame : public Protocol
 		void parseCloseChannel(NetworkMessage& msg);
 		void parseCloseNpc(NetworkMessage& msg);
 
-		//rule violation
-		void parseViolationReport(NetworkMessage& msg);
-
 		//Send functions
 		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel);
-		void sendChannelEvent(uint16_t channelId, const std::string& playerName, ChannelEvent_t channelEvent);
 		void sendClosePrivate(uint16_t channelId);
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName);
 		void sendChannelsDialog();

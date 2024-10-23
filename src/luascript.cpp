@@ -2238,12 +2238,6 @@ void LuaInterface::registerFunctions()
 	//doPlayerAddBlessing(cid, blessing)
 	lua_register(m_luaState, "doPlayerAddBlessing", LuaInterface::luaDoPlayerAddBlessing);
 
-	//getPlayerPVPBlessing(cid)
-	lua_register(m_luaState, "getPlayerPVPBlessing", LuaInterface::luaGetPlayerPVPBlessing);
-
-	//doPlayerSetPVPBlessing(cid[, value])
-	lua_register(m_luaState, "doPlayerSetPVPBlessing", LuaInterface::luaDoPlayerSetPVPBlessing);
-
 	//getPlayerStamina(cid)
 	lua_register(m_luaState, "getPlayerStamina", LuaInterface::luaGetPlayerStamina);
 
@@ -8976,43 +8970,6 @@ int32_t LuaInterface::luaDoPlayerAddBlessing(lua_State* L)
 		}
 		else
 			lua_pushboolean(L, false);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaGetPlayerPVPBlessing(lua_State* L)
-{
-	//getPlayerPVPBlessing(cid)
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-		lua_pushboolean(L, player->hasPVPBlessing());
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerSetPVPBlessing(lua_State* L)
-{
-	//doPlayerSetPVPBlessing(cid[, value])
-	bool value = true;
-	if(lua_gettop(L) > 1)
-		value = popBoolean(L);
-
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		player->setPVPBlessing(value);
-		lua_pushboolean(L, true);
 	}
 	else
 	{

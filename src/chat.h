@@ -128,7 +128,6 @@ class Chat
 		bool deleteChannel(Player* player, uint16_t channelId);
 
 		ChatChannel* addUserToChannel(Player* player, uint16_t channelId);
-		void reOpenChannels(Player* player);
 		bool removeUserFromChannel(Player* player, uint16_t channelId);
 		void removeUserFromChannels(Player* player);
 
