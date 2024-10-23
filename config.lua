@@ -284,17 +284,11 @@
 	-- Blessings
 	-- NOTE: blessingReduction* regards items/containers loss.
 	-- eachBlessReduction is how much each bless reduces the experience/magic/skills loss.
-	-- pvpBlessingThreshold is damage percent received from PvP that is required to
-	-- enable pvpBlessing.
-	-- fairFightTimeRange is last X seconds from which damage to player counts.
-	-- Applies to pvp blessing.
 	blessings = true
 	blessingOnlyPremium = true
 	blessingReductionBase = 30
 	blessingReductionDecrement = 5
 	eachBlessReduction = 8
-	pvpBlessingThreshold = 40
-	fairFightTimeRange = 60
 
 	-- Rates
 	-- NOTE: experienceStages configuration is located in data/XML/stages.xml.

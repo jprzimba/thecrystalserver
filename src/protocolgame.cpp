@@ -1631,14 +1631,13 @@ void ProtocolGame::sendAddMarker(const Position& pos, MapMarks_t markType, const
 	}
 }
 
-void ProtocolGame::sendReLoginWindow(uint8_t pvpPercent)
+void ProtocolGame::sendReLoginWindow()
 {
 	NetworkMessage_ptr msg = getOutputBuffer();
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
 		msg->put<char>(0x28);
-		msg->put<char>(pvpPercent);
 	}
 }
 
@@ -1685,10 +1684,6 @@ void ProtocolGame::sendCreatePrivateChannel(uint16_t channelId, const std::strin
 		msg->put<char>(0xB2);
 		msg->put<uint16_t>(channelId);
 		msg->putString(channelName);
-
-		msg->put<uint16_t>(0x01);
-		msg->putString(player->getName());
-		msg->put<uint16_t>(0x00);
 	}
 }
 
@@ -1749,7 +1744,7 @@ void ProtocolGame::sendContainer(uint32_t cid, const Container* container, bool 
 		msg->put<char>(container->capacity());
 
 		msg->put<char>(hasParent ? 0x01 : 0x00);
-		msg->put<char>(std::min(container->size(), 255U));
+		msg->put<char>(std::min(container->size(), (uint32_t)255));
 
 		ItemList::const_iterator cit = container->getItems();
 		for(uint32_t i = 0; cit != container->getEnd() && i < 255; ++cit, ++i)
@@ -2548,7 +2543,7 @@ void ProtocolGame::sendVIP(uint32_t guid, const std::string& name, bool online)
 	}
 }
 
-void ProtocolGame::reloadCreature(const Creature* creature)
+void ProtocolGame::sendCreatureEmblem(const Creature* creature)
 {
 	if(!canSee(creature))
 		return;
@@ -2562,8 +2557,8 @@ void ProtocolGame::reloadCreature(const Creature* creature)
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
-		if(std::find(knownCreatureList.begin(), knownCreatureList.end(),
-			creature->getID()) != knownCreatureList.end())
+		std::list<uint32_t>::iterator it = std::find(knownCreatureList.begin(), knownCreatureList.end(), creature->getID());
+		if(it != knownCreatureList.end())
 		{
 			RemoveTileItem(msg, creature->getPosition(), stackpos);
 			msg->put<char>(0x6A);

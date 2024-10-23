@@ -662,8 +662,8 @@ class Player : public Creature, public Cylinder
 			{if(client) client->sendSkills();}
 		void sendTextMessage(MessageClasses type, const std::string& message) const
 			{if(client) client->sendTextMessage(type, message);}
-		void sendReLoginWindow(uint8_t pvpPercent) const
-			{if(client) client->sendReLoginWindow(pvpPercent);}
+		void sendReLoginWindow() const
+			{if(client) client->sendReLoginWindow();}
 		void sendToChannel(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0) const
 			{if(client) client->sendToChannel(creature, type, text, channelId, time);}
 		void sendTextWindow(Item* item, uint16_t maxLen, bool canWrite) const

@@ -193,14 +193,14 @@ class ProtocolGame : public Protocol
 		void sendCreatureOutfit(const Creature* creature, const Outfit_t& outfit);
 		void sendStats();
 		void sendTextMessage(MessageClasses mclass, const std::string& message);
-		void sendReLoginWindow(uint8_t pvpPercent);
+		void sendReLoginWindow();
 
 		void sendTutorial(uint8_t tutorialId);
 		void sendAddMarker(const Position& pos, MapMarks_t markType, const std::string& desc);
 
 		void sendCreatureSkull(const Creature* creature);
 		void sendCreatureShield(const Creature* creature);
-		void sendCreatureEmblem(const Creature* creature) {reloadCreature(creature);}
+		void sendCreatureEmblem(const Creature* creature);
 		void sendCreatureWalkthrough(const Creature* creature, bool walkthrough);
 
 		void sendShop(Npc* npc, const ShopInfoList& shop);

@@ -326,8 +326,6 @@ bool ConfigManager::load()
 	m_confNumber[STAMINA_DESTROY_LOOT]		= getGlobalNumber("staminaLootLimit", 840);
 	m_confNumber[FIST_BASE_ATTACK]			= getGlobalNumber("fistBaseAttack", 7);
 	m_confBool[MONSTER_SPAWN_WALKBACK] 		= getGlobalBool("monsterSpawnWalkback", true);
-	m_confNumber[PVP_BLESSING_THRESHOLD]		= getGlobalNumber("pvpBlessingThreshold", 40);
-	m_confNumber[FAIRFIGHT_TIMERANGE]		= getGlobalNumber("fairFightTimeRange", 60);
 	m_confNumber[DEFAULT_DEPOT_SIZE_PREMIUM]	= getGlobalNumber("defaultDepotSizePremium", 2000);
 	m_confNumber[DEFAULT_DEPOT_SIZE]		= getGlobalNumber("defaultDepotSize", 2000);
 	m_confBool[USE_CAPACITY]			= getGlobalBool("useCapacity", true);

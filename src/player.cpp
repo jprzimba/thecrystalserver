@@ -2330,51 +2330,29 @@ bool Player::onDeath()
 		return false;
 	}
 
-	uint32_t totalDamage = 0, pvpDamage = 0, opponents = 0;
-	for(CountMap::iterator it = damageMap.begin(); it != damageMap.end(); ++it)
-	{
-		if(((OTSYS_TIME() - it->second.ticks) / 1000) > g_config.getNumber(
-			ConfigManager::FAIRFIGHT_TIMERANGE))
-			continue;
-
-		totalDamage += it->second.total;
-		if(Creature* creature = g_game.getCreatureByID(it->first))
-		{
-			Player* player = creature->getPlayer();
-			if(!player)
-				player = creature->getPlayerMaster();
-
-			if(!player)
-				continue;
-
-			opponents += player->getLevel();
-			pvpDamage += it->second.total;
-		}
-	}
-
-	bool usePVPBlessing = false;
 	if(preventLoss)
 	{
 		setLossSkill(false);
-		g_game.transformItem(preventLoss, preventLoss->getID(), std::max(0, (int32_t)preventLoss->getCharges() - 1));
+		if(preventLoss->getCharges() > 1) //weird, but transform failed to remove for some hosters
+			g_game.transformItem(preventLoss, preventLoss->getID(), std::max(0, ((int32_t)preventLoss->getCharges() - 1)));
+		else
+			g_game.internalRemoveItem(NULL, preventDrop);
 	}
-	else if(pvpBlessing && (int32_t)std::floor((100. * pvpDamage) / std::max(
-		1U, totalDamage)) >= g_config.getNumber(ConfigManager::PVP_BLESSING_THRESHOLD))
-		usePVPBlessing = true;
 
-	if(preventDrop && preventDrop != preventLoss && !usePVPBlessing)
-		g_game.transformItem(preventDrop, preventDrop->getID(), std::max(0, (int32_t)preventDrop->getCharges() - 1));
+	if(preventDrop && preventDrop != preventLoss)
+	{
+		if(preventDrop->getCharges() > 1) //weird, but transform failed to remove for some hosters
+			g_game.transformItem(preventDrop, preventDrop->getID(), std::max(0, ((int32_t)preventDrop->getCharges() - 1)));
+		else
+			g_game.internalRemoveItem(NULL, preventDrop);
+	}
 
 	removeConditions(CONDITIONEND_DEATH);
 	if(skillLoss)
 	{
-		double reduction = 1.;
-		if(g_config.getBool(ConfigManager::FAIRFIGHT_REDUCTION) && opponents > level)
-			reduction -= (double)level / opponents;
-
-		uint64_t lossExperience = (uint64_t)std::floor(reduction * getLostExperience()), currExperience = experience;
+		uint64_t lossExperience = getLostExperience();
 		removeExperience(lossExperience, false);
-		double percent = 1. - ((double)(currExperience - lossExperience) / std::max((uint64_t)1, currExperience));
+		double percent = 1. - ((double)(experience - lossExperience) / experience);
 
 		// magic level loss
 		uint64_t sumMana = 0, lostMana = 0;
@@ -2417,11 +2395,7 @@ bool Player::onDeath()
 			skills[i][SKILL_TRIES] -= lostSkillTries;
 		}
 
-		if(usePVPBlessing)
-			pvpBlessing = false;
-		else
-			blessings = 0;
-
+		blessings = 0;
 		loginPosition = masterPosition;
 		if(vocationId > 0 && g_config.getBool(ConfigManager::ROOK_SYSTEM) &&
 			level <= (uint32_t)g_config.getNumber(ConfigManager::ROOK_LEVELTO))
@@ -2464,7 +2438,7 @@ bool Player::onDeath()
 
 		g_creatureEvents->playerLogout(this, true);
 		g_game.removeCreature(this, false);
-		sendReLoginWindow((uint8_t)std::floor((1. - reduction) * 100.));
+		sendReLoginWindow();
 	}
 	else
 	{
@@ -2475,7 +2449,7 @@ bool Player::onDeath()
 			g_creatureEvents->playerLogout(this, true);
 
 			g_game.removeCreature(this, false);
-			sendReLoginWindow(0);
+			sendReLoginWindow();
 		}
 	}
 
