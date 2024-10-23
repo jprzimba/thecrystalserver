@@ -25,9 +25,6 @@
 	<wand id="8910" level="42" mana="13" min="55" max="75" type="death" event="function" value="default"> <!-- Underworld Rod -->
 		<vocation id="2"/>
 	</wand>
-    <wand id="13872" level="40" mana="13" min="55" max="75" type="ice" event="function" value="default"> <!-- Shimmer Rod -->
-        <vocation id="2"/>
-    </wand>
 
 	<!-- Wands -->
 	<wand id="2190" level="7" mana="2" min="8" max="18" type="energy" event="function" value="default"> <!-- Wand of Vortex -->
@@ -54,9 +51,6 @@
 	<wand id="8922" level="42" mana="13" min="55" max="75" type="death" event="function" value="default"> <!-- Wand of Voodoo -->
 		<vocation id="1"/>
 	</wand>
-    <wand id="13880" level="40" mana="13" min="55" max="75" type="energy" event="function" value="default"> <!-- Shimmer Wand -->
-		<vocation id="1"/>
-    </wand>
 
 	<!-- Swords -->
 		<!-- Broadsword -->
@@ -326,14 +320,6 @@
 	<melee id="8926" level="120" unproperly="1" event="function" value="default"/>
 		<!-- Solar Axe -->
 	<melee id="8925" level="130" unproperly="1" event="function" value="default"/>
-		<!-- Deepling Axe -->
-	<melee id="15404" level="80" unproperly="1" event="function" value="default"/>
-		<!-- Warrior's Axe -->
-	<melee id="15451" level="40" unproperly="1" event="function" value="default"/>
-		<!-- Guardian Axe -->
-	<melee id="15454" level="50" unproperly="1" event="function" value="default"/>
-		<!-- Hive Scythe -->
-	<melee id="15492" level="70" unproperly="1" event="function" value="default"/>
 		<!-- Fire -->
 	<melee id="7749" level="20" event="function" value="default"/>
 	<melee id="7750" level="25" unproperly="1" event="function" value="default"/>
@@ -475,12 +461,6 @@
 		<vocation id="8" showInDescription="0"/>
 	</melee>
 	<melee id="8927" level="120" unproperly="1" event="function" value="default"/>
-		<!-- Deepling Staff -->
-	<melee id="15400" level="38" unproperly="1" event="function" value="default"/>
-		<!-- Ornate Mace -->
-	<melee id="15414" level="90" unproperly="1" event="function" value="default"/>
-		<!-- Deepling Squelcher -->
-	<melee id="15647" level="48" unproperly="1" event="function" value="default"/>
 		<!-- Fire -->
 	<melee id="7754" level="20" unproperly="1" event="function" value="default"/>
 	<melee id="7755" level="35" unproperly="1" event="function" value="default"/>
@@ -514,11 +494,6 @@
 	<melee id="7881" level="60" unproperly="1" event="function" value="default"/>
 	<melee id="7882" level="35" unproperly="1" event="function" value="default"/>
 	<melee id="7883" level="50" unproperly="1" event="function" value="default">
-		<vocation id="4"/>
-		<vocation id="8" showInDescription="0"/>
-	</melee>
-		<!-- Drachaku -->
-	<melee id="11308" level="55" unproperly="1" event="function" value="default"> 
 		<vocation id="4"/>
 		<vocation id="8" showInDescription="0"/>
 	</melee>
@@ -582,21 +557,6 @@
 		<vocation id="3"/>
 		<vocation id="7" showInDescription="0"/>
 	</distance>
-		<!-- Shimmer Bow -->
-    <distance id="13873" level="40" unproperly="1" event="function" value="default">
-		<vocation id="3"/>
-		<vocation id="7" showInDescription="0"/>
-    </distance>
-		<!-- Hive Bow -->
-    <distance id="15643" level="85" unproperly="1" event="function" value="default">
-		<vocation id="3"/>
-		<vocation id="7" showInDescription="0"/>
-    </distance>
-		<!-- Ornate Crossbow -->
-    <distance id="15644" level="50" unproperly="1" event="function" value="default">
-		<vocation id="3"/>
-		<vocation id="7" showInDescription="0"/>
-    </distance>
 
  	<!-- Ammunition -->
 	<distance id="2545" event="script" value="poison_arrow.lua"/> <!-- Poison Arrow -->
@@ -615,6 +575,4 @@
 	<distance id="7363" level="30" event="function" value="default"/> <!-- Piercing Bolt -->
 	<distance id="2547" level="55" event="function" value="default"/> <!-- Power Bolt -->
 	<distance id="6529" level="70" event="function" value="default"/> <!-- Infernal Bolt -->
-	<distance id="15648" level="30" event="function" value="default"/> <!-- Tarsal Arrow -->
-	<distance id="15649" level="40" event="function" value="default"/> <!-- Vortex Bolt -->
 </weapons>
