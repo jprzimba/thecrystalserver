@@ -89,11 +89,6 @@
 	<action itemid="8847" event="script" value="foods/food.lua"/>
 	<action itemid="8868" event="script" value="foods/food.lua"/>
 	<action itemid="9005" event="script" value="foods/food.lua"/>
-	<action itemid="10454" event="script" value="foods/food.lua"/>
-	<action itemid="11246" event="script" value="foods/food.lua"/>
-	<action itemid="11429" event="script" value="foods/food.lua"/>
-	<action fromid="12415" toid="12418" event="script" value="foods/food.lua"/>
-	<action fromid="12637" toid="12639" event="script" value="foods/food.lua"/>
 
 	<!-- Special Food -->
 	<action itemid="9992" event="script" value="foods/rotworm_stew.lua"/>
@@ -106,10 +101,6 @@
 	<action itemid="9999" event="script" value="foods/blessed_steak.lua"/>
 	<action itemid="10000" event="script" value="foods/carrot_cake.lua"/>
 	<action itemid="10001" event="script" value="foods/northern_fishburger.lua"/>
-	<action itemid="12540" event="script" value="foods/coconut_shrimp_bake.lua"/>
-	<action itemid="12542" event="script" value="foods/pot_of_blackjack.lua"/>
-	<action itemid="12543" event="script" value="foods/demonic_candy_ball.lua"/>
-	<action itemid="12544" event="script" value="foods/sweet_mangonaise_elixir.lua"/>
 
 	<!-- Spellbooks -->
 	<action itemid="2175" event="script" value="other/spellbook.lua"/>
@@ -151,7 +142,6 @@
 	<action itemid="8580" event="script" value="other/teleport.lua"/>
 	<action itemid="8599" event="script" value="other/teleport.lua"/>
 	<action itemid="10035" event="script" value="other/teleport.lua"/>
-	<action itemid="13010" event="script" value="other/teleport.lua"/>
 
 	<!-- Bread Creating -->
 	<action itemid="2692" event="script" value="other/createbread.lua"/>
@@ -159,9 +149,35 @@
 
 	<!-- Doors -->
 		<!-- Doors -->
-	<action itemid="1209-1214;1219-1262;1539-1542;3535-3552;4913-4918;5082-5085;5098-5145;5278-5295;5515-5518;5732-5737;5745-5749;6192-6209;6249-6266;6795-6802;6891-6908;7033-7050;7054-7057;8541-8558;9165-9184;9267-9284;10268-10285;10468-10486;10775-10777;10780-10786;10789-10792;12092-12105;12188-12190;12193-12199;12202-12205;12692;12695;12701;12703;13020-13023;13236-13237" event="script" value="other/doors.lua"/>
-		<!-- Keys -->
-	<action itemid="2086-2092;10032;10091" event="script" value="other/keys.lua"/>
+	<action fromid="1209" toid="1214" event="script" value="other/doors.lua"/>
+	<action fromid="1219" toid="1262" event="script" value="other/doors.lua"/>
+	<action fromid="1539" toid="1542" event="script" value="other/doors.lua"/>
+	<action fromid="2086" toid="2092" event="script" value="other/doors.lua"/>
+	<action fromid="3535" toid="3552" event="script" value="other/doors.lua"/>
+	<action fromid="4913" toid="4918" event="script" value="other/doors.lua"/>
+	<action fromid="5082" toid="5085" event="script" value="other/doors.lua"/>
+	<action fromid="5098" toid="5145" event="script" value="other/doors.lua"/>
+	<action fromid="5278" toid="5295" event="script" value="other/doors.lua"/>
+	<action fromid="5515" toid="5518" event="script" value="other/doors.lua"/>
+	<action fromid="5732" toid="5737" event="script" value="other/doors.lua"/>
+	<action fromid="5745" toid="5749" event="script" value="other/doors.lua"/>
+	<action fromid="6192" toid="6209" event="script" value="other/doors.lua"/>
+	<action fromid="6249" toid="6266" event="script" value="other/doors.lua"/>
+	<action fromid="6795" toid="6802" event="script" value="other/doors.lua"/>
+	<action fromid="6891" toid="6908" event="script" value="other/doors.lua"/>
+	<action fromid="7033" toid="7050" event="script" value="other/doors.lua"/>
+	<action fromid="7054" toid="7057" event="script" value="other/doors.lua"/>
+	<action fromid="8541" toid="8558" event="script" value="other/doors.lua"/>
+	<action fromid="9165" toid="9184" event="script" value="other/doors.lua"/>
+	<action fromid="9267" toid="9284" event="script" value="other/doors.lua"/>
+	<action itemid="10032" event="script" value="other/doors.lua"/>
+	<action itemid="10091" event="script" value="other/doors.lua"/>
+	<action fromid="10268" toid="10285" event="script" value="other/doors.lua"/>
+	<action fromid="10468" toid="10486" event="script" value="other/doors.lua"/>
+	<action fromid="10774" toid="10776" event="script" value="other/doors.lua"/>
+	<action fromid="10779" toid="10785" event="script" value="other/doors.lua"/>
+	<action fromid="10788" toid="10791" event="script" value="other/doors.lua"/>
+
 		<!-- Windows -->
 	<action itemid="5303-5305;6436-6473;6788-6791;7025-7032;10264-10267;10488-10491" event="script" value="other/windows.lua"/>
 
@@ -196,5 +212,5 @@
 	<action itemid="8110" event="script" value="other/present.lua"/>
 	<action itemid="7735" event="script" value="other/spellwand.lua"/>
 	<action itemid="7537;7585" event="script" value="other/spideregg.lua" />
-	<action itemid="6561;12424" event="script" value="other/blessings.lua"/>
+	<action itemid="6561" event="script" value="other/blessings.lua"/>
 </actions>
