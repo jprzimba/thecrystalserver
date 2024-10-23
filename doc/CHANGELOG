@@ -19,15 +19,15 @@
 
 	[ 1.0
 		[ A...
-
+			Initial release has no charges.
 		]
 
 		[ M...
-
+			Initial release has no charges.
 		]
 
 		[ D...
-
+			Initial release has no charges.
 		]
 	]
 ]
@@ -35,9 +35,23 @@
 [ Charges made
 	[ 1.0
 		[ DISTRO
+			Based on TFS 0.3.7 (0.4), downgraded to protocol 8.60. (Tryller)
 			Game protocol 8.60. (Tryller)
+			Support items 8.60. (OpenTibia, Tryller)
 			War system. (Elf, Tryller)
+			Skull system. (OpenTibia, Elf, Tryller)
 			Auto stacking items. (Elf)
+			MD5, SHA1 and RSA implementations improved using OpenSSL (Dalkon)
+			LuaJIT support, up to 130 times faster Lua scripts (Talaturen, Elf)
+			A lot of Lua stack errors fixed (Elf, Talaturen)
+			Lua function doRelocate is now approximately 100 times faster (Elf)
+			Improved autobuild scripts for Linux (Elf, Fallen)
+			A lot of miscellaneous cleanups, fixes and optimizations (Dalkon, Elf, slawkens, Talaturen)
+			Separate map actions into a specific folder. (Tryller)
+			8.6 Monsters. (Talaturen, Elf)
+			8.6 Spells. (Talaturen, Elf)
+			NPC A.I. (Elf)
+			Ground cache needs to be compiled with the __GROUND_CACHE__  flag. (Elf)
 		]
 
 		[ MAP
