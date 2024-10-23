@@ -21,11 +21,11 @@
 	accountManager = true
 	namelockManager = true
 	newPlayerChooseVoc = true
-	newPlayerSpawnPosX = 857
-	newPlayerSpawnPosY = 964
-	newPlayerSpawnPosZ = 7
+	newPlayerSpawnPosX = 438
+	newPlayerSpawnPosY = 504
+	newPlayerSpawnPosZ = 8
 	newPlayerTownId = 1
-	newPlayerLevel = 1
+	newPlayerLevel = 8
 	newPlayerMagicLevel = 0
 	generateAccountNumber = false
 	generateAccountSalt = false
@@ -185,8 +185,8 @@
 
 	-- Map
 	-- NOTE: storeTrash costs more memory, but will perform alot faster cleaning.
-	mapName = "tfs.otbm"
-	mapAuthor = "Siramix"
+	mapName = "world.otbm"
+	mapAuthor = "SadSoul Team"
 	randomizeTiles = true
 	storeTrash = true
 	cleanProtectedZones = true
