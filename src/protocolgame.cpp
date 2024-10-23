@@ -2633,12 +2633,20 @@ void ProtocolGame::AddPlayerStats(NetworkMessage_ptr msg)
 void ProtocolGame::AddPlayerSkills(NetworkMessage_ptr msg)
 {
 	msg->put<char>(0xA1);
-	for(uint8_t i = 0; i <= SKILL_LAST; ++i)
-	{
-		msg->put<char>(player->getSkill((skills_t)i, SKILL_LEVEL));
-		msg->put<char>(player->getBaseSkill((skills_t)i));
-		msg->put<char>(player->getSkill((skills_t)i, SKILL_PERCENT));
-	}
+	msg->put<char>(player->getSkill(SKILL_FIST, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_FIST, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_CLUB, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_CLUB, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_SWORD, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_SWORD, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_AXE, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_AXE, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_DIST, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_DIST, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_SHIELD, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_SHIELD, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_FISH, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_FISH, SKILL_PERCENT));
 }
 
 void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, SpeakClasses type,
@@ -2672,7 +2680,8 @@ void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* crea
 				break;
 		}
 
-		if(speaker && type != SPEAK_RVR_ANSWER && !speaker->isAccountManager() && !speaker->hasCustomFlag(PlayerCustomFlag_HideLevel))
+		if(speaker && type != SPEAK_RVR_ANSWER && !speaker->isAccountManager()
+			&& !speaker->hasCustomFlag(PlayerCustomFlag_HideLevel))
 			msg->put<uint16_t>(speaker->getPlayerInfo(PLAYERINFO_LEVEL));
 		else
 			msg->put<uint16_t>(0x00);
@@ -2730,7 +2739,7 @@ void ProtocolGame::AddCreatureHealth(NetworkMessage_ptr msg,const Creature* crea
 	msg->put<char>(0x8C);
 	msg->put<uint32_t>(creature->getID());
 	if(!creature->getHideHealth())
-		msg->put<char>(std::ceil(creature->getHealth() * 100. / std::max(creature->getMaxHealth(), (int32_t)1)));
+		msg->put<char>((int32_t)std::ceil(((float)creature->getHealth()) * 100 / std::max(creature->getMaxHealth(), (int32_t)1)));
 	else
 		msg->put<char>(0x00);
 }
@@ -2755,10 +2764,7 @@ void ProtocolGame::AddCreatureOutfit(NetworkMessage_ptr msg, const Creature* cre
 			msg->put<uint16_t>(outfit.lookTypeEx);
 	}
 	else
-	{
 		msg->put<uint32_t>(0x00);
-		msg->put<uint16_t>(0x00);
-	}
 }
 
 void ProtocolGame::AddWorldLight(NetworkMessage_ptr msg, const LightInfo& lightInfo)

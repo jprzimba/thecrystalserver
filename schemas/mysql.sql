@@ -13,6 +13,8 @@ DROP TABLE IF EXISTS `house_lists`;
 DROP TABLE IF EXISTS `houses`;
 DROP TABLE IF EXISTS `player_items`;
 DROP TABLE IF EXISTS `player_namelocks`;
+DROP TABLE IF EXISTS `guild_wars`;
+DROP TABLE IF EXISTS `guild_kills`;
 DROP TABLE IF EXISTS `player_skills`;
 DROP TABLE IF EXISTS `player_storage`;
 DROP TABLE IF EXISTS `player_viplist`;
@@ -408,7 +410,7 @@ CREATE TABLE `server_config`
 	UNIQUE (`config`)
 ) ENGINE = InnoDB;
 
-INSERT INTO `server_config` VALUES ('db_version', 31);
+INSERT INTO `server_config` VALUES ('db_version', 25);
 
 CREATE TABLE `server_motd`
 (

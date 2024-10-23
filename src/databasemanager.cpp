@@ -1114,20 +1114,6 @@ uint32_t DatabaseManager::updateDatabase()
 		case 27:
 		{
 			std::clog << "Updating database to version 28..." << std::endl;
-			registerDatabaseConfig("db_version", 28);
-			return 28;
-		}
-
-		case 28:
-		{
-			std::clog << "Updating database to version 29..." << std::endl;
-			registerDatabaseConfig("db_version", 29);
-			return 29;
-		}
-
-		case 29:
-		{
-			std::clog << "Updating database to version 30..." << std::endl;
 			switch(db->getDatabaseEngine())
 			{
 				case DATABASE_ENGINE_SQLITE:
@@ -1149,20 +1135,13 @@ uint32_t DatabaseManager::updateDatabase()
 			db->query(query.str());
 			query.str("");
 
-			registerDatabaseConfig("db_version", 30);
-			return 30;
+			registerDatabaseConfig("db_version", 28);
+			return 28;
 		}
 
-		case 30:
+		case 28:
 		{
-			std::clog << "Updating database to version 31..." << std::endl;
-			registerDatabaseConfig("db_version", 31);
-			return 31;
-		}
-
-		case 31:
-		{
-			std::clog << "Updating database to version 32..." << std::endl;
+			std::clog << "Updating database to version 29..." << std::endl;
 			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "CREATE TABLE IF NOT EXISTS `guild_wars`\
@@ -1209,30 +1188,51 @@ uint32_t DatabaseManager::updateDatabase()
 				query.str("");
 			}
 
-			registerDatabaseConfig("db_version", 32);
-			return 32;
+			registerDatabaseConfig("db_version", 29);
+			return 29;
 		}
 
-		case 32:
+		case 29:
 		{
-			std::clog << "Updating database to version 33..." << std::endl;
-			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
+			std::clog << "Updating database to version 30..." << std::endl;
+			switch(db->getDatabaseEngine())
 			{
-				query << "ALTER TABLE `bans` DROP `reason`;";
-				db->query(query.str());
-				query.str("");
+				case DATABASE_ENGINE_SQLITE:
+				{
+					db->query("CREATE TABLE IF NOT EXISTS `guild_wars` (\
+						`id` INTEGER NOT NULL,\
+						`guild_id` INT NOT NULL,\
+						`enemy_id` INT NOT NULL,\
+						`begin` BIGINT NOT NULL DEFAULT '0',\
+						`end` BIGINT NOT NULL DEFAULT '0',\
+						`frags` INT NOT NULL DEFAULT '0',\
+						`payment` BIGINT NOT NULL DEFAULT '0',\
+						`guild_kills` INT NOT NULL DEFAULT '0',\
+						`enemy_kills` INT NOT NULL DEFAULT '0',\
+						`status` TINYINT(1) NOT NULL DEFAULT '0',\
+						PRIMARY KEY (`id`),\
+						FOREIGN KEY (`guild_id`) REFERENCES `guilds`(`id`),\
+						FOREIGN KEY (`enemy_id`) REFERENCES `guilds`(`id`)\
+						);");
 
-				query << "ALTER TABLE `bans` DROP `action`;";
-				db->query(query.str());
-				query.str("");
+					db->query("CREATE TABLE IF NOT EXISTS `guild_kills` (\
+						`id` INT NOT NULL PRIMARY KEY,\
+						`guild_id` INT NOT NULL,\
+						`war_id` INT NOT NULL,\
+						`death_id` INT NOT NULL\
+					);");
 
-				query << "ALTER TABLE `bans` DROP `statement`;";
-				db->query(query.str());
-				query.str("");
+					db->query("ALTER TABLE `guilds` ADD `balance` BIGINT NOT NULL DEFAULT '0';");
+					db->query("ALTER TABLE `killers` ADD `war` BIGINT NOT NULL DEFAULT 0;");
+					break;
+				}
+
+				default:
+					break;
 			}
 
-			registerDatabaseConfig("db_version", 33);
-			return 33;
+			registerDatabaseConfig("db_version", 30);
+			return 30;
 		}
 
 		default:
