@@ -5058,9 +5058,9 @@ void Player::manageAccount(const std::string &text)
 			break;
 	}
 
-	sendTextMessage(MSG_STATUS_CONSOLE_BLUE, msg.str().c_str());
+	sendCreatureSay(this, SPEAK_PRIVATE_NP, msg.str());
 	if(!noSwap)
-		sendTextMessage(MSG_STATUS_CONSOLE_ORANGE, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
+		sendCreatureSay(this, SPEAK_PRIVATE_NP, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
 }
 
 bool Player::isGuildInvited(uint32_t guildId) const

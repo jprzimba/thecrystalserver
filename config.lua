@@ -20,7 +20,7 @@
 	-- Account manager
 	accountManager = true
 	namelockManager = true
-	newPlayerChooseVoc = false
+	newPlayerChooseVoc = true
 	newPlayerSpawnPosX = 857
 	newPlayerSpawnPosY = 964
 	newPlayerSpawnPosZ = 7
