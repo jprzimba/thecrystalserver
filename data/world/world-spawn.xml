@@ -69,9 +69,6 @@
 		<monster name="Elf" x="2" y="0" z="5" spawntime="60" />
 		<monster name="Elf" x="0" y="1" z="5" spawntime="60" />
 	</spawn>
-	<spawn centerx="269" centery="322" centerz="5" radius="5">
-		<npc name="Nimral" x="-1" y="0" z="5" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="388" centery="326" centerz="5" radius="5">
 		<monster name="Elf Scout" x="-2" y="-1" z="5" spawntime="60" />
 		<monster name="Elf Scout" x="1" y="-1" z="5" spawntime="60" />
@@ -110,9 +107,6 @@
 	<spawn centerx="779" centery="424" centerz="5" radius="5">
 		<monster name="spider" x="0" y="-1" z="5" spawntime="60" />
 	</spawn>
-	<spawn centerx="432" centery="426" centerz="5" radius="5">
-		<npc name="Nimral" x="-1" y="0" z="5" spawntime="60" direction="2" />
-	</spawn>
 	<spawn centerx="794" centery="427" centerz="5" radius="5">
 		<monster name="spider" x="1" y="-2" z="5" spawntime="60" />
 	</spawn>
@@ -121,9 +115,6 @@
 	</spawn>
 	<spawn centerx="787" centery="431" centerz="5" radius="5">
 		<monster name="spider" x="0" y="0" z="5" spawntime="60" />
-	</spawn>
-	<spawn centerx="523" centery="438" centerz="5" radius="5">
-		<npc name="Nimral" x="0" y="1" z="5" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="761" centery="439" centerz="5" radius="5">
 		<monster name="Poison spider" x="-1" y="0" z="5" spawntime="60" />
@@ -155,12 +146,6 @@
 	<spawn centerx="624" centery="478" centerz="5" radius="5">
 		<monster name="Lizard Templar" x="1" y="-3" z="5" spawntime="40" />
 		<monster name="Lizard Templar" x="-2" y="3" z="5" spawntime="40" />
-	</spawn>
-	<spawn centerx="459" centery="481" centerz="5" radius="5">
-		<npc name="Nimral" x="0" y="-2" z="5" spawntime="60" direction="2" />
-	</spawn>
-	<spawn centerx="402" centery="487" centerz="5" radius="5">
-		<npc name="Nimral" x="-2" y="0" z="5" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="652" centery="547" centerz="5" radius="12">
 		<monster name="Behemoth" x="0" y="-6" z="5" spawntime="60" />
@@ -306,6 +291,9 @@
 	<spawn centerx="218" centery="305" centerz="6" radius="5">
 		<monster name="Frost Troll" x="-1" y="-1" z="6" spawntime="160" />
 	</spawn>
+	<spawn centerx="268" centery="316" centerz="6" radius="1">
+		<npc name="Nimral" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="377" centery="317" centerz="6" radius="5">
 		<monster name="Elf" x="0" y="-1" z="6" spawntime="60" />
 		<monster name="Elf" x="0" y="0" z="6" spawntime="60" />
@@ -423,6 +411,9 @@
 		<monster name="Lizard Snakecharmer" x="1" y="0" z="6" spawntime="60" />
 		<monster name="Lizard Snakecharmer" x="-3" y="2" z="6" spawntime="60" />
 	</spawn>
+	<spawn centerx="433" centery="420" centerz="6" radius="1">
+		<npc name="Nimral" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="551" centery="423" centerz="6" radius="5">
 		<monster name="Lizard Templar" x="-3" y="0" z="6" spawntime="60" />
 		<monster name="Lizard Templar" x="3" y="0" z="6" spawntime="60" />
@@ -474,6 +465,9 @@
 		<monster name="spider" x="0" y="-1" z="6" spawntime="60" />
 		<monster name="spider" x="-1" y="1" z="6" spawntime="60" />
 	</spawn>
+	<spawn centerx="517" centery="440" centerz="6" radius="1">
+		<npc name="Nimral" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="597" centery="445" centerz="6" radius="5">
 		<monster name="Hydra" x="2" y="-3" z="6" spawntime="40" />
 		<monster name="Hydra" x="1" y="4" z="6" spawntime="40" />
@@ -509,8 +503,14 @@
 		<monster name="Lizard Templar" x="3" y="-4" z="6" spawntime="40" />
 		<monster name="Lizard Templar" x="-2" y="4" z="6" spawntime="40" />
 	</spawn>
+	<spawn centerx="453" centery="479" centerz="6" radius="1">
+		<npc name="Nimral" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="604" centery="480" centerz="6" radius="5">
 		<monster name="Lizard Sentinel" x="-1" y="0" z="6" spawntime="40" />
+	</spawn>
+	<spawn centerx="402" centery="481" centerz="6" radius="1">
+		<npc name="Nimral" x="0" y="0" z="6" spawntime="60" />
 	</spawn>
 	<spawn centerx="614" centery="486" centerz="6" radius="5">
 		<monster name="Lizard Sentinel" x="0" y="-1" z="6" spawntime="40" />
