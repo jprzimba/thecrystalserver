@@ -1587,7 +1587,7 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 		else if(tmpStrValue == "suppressphysical")
 		{
 			if(readXMLInteger(itemAttributesNode, "value", intValue) && intValue != 0)
-				it.getAbilities()->conditionSuppressions |= CONDITION_BLEEDING;
+				it.getAbilities()->conditionSuppressions |= CONDITION_PHYSICAL;
 		}
 		else if(tmpStrValue == "suppresshaste")
 		{
@@ -1704,9 +1704,9 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 					conditionDamage = new ConditionDamage(CONDITIONID_COMBAT, CONDITION_DROWN, false, 0);
 					combatType = COMBAT_DROWNDAMAGE;
 				}
-				else if(tmpStrValue == "physical" || tmpStrValue == "bleed")
+				else if(tmpStrValue == "physical")
 				{
-					conditionDamage = new ConditionDamage(CONDITIONID_COMBAT, CONDITION_BLEEDING, false, 0);
+					conditionDamage = new ConditionDamage(CONDITIONID_COMBAT, CONDITION_PHYSICAL, false, 0);
 					combatType = COMBAT_PHYSICALDAMAGE;
 				}
 				else

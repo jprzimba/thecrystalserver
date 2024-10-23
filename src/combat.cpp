@@ -178,7 +178,7 @@ CombatType_t Combat::ConditionToDamageType(ConditionType_t type)
 		case CONDITION_DROWN:
 			return COMBAT_DROWNDAMAGE;
 
-		case CONDITION_BLEEDING:
+		case CONDITION_PHYSICAL:
 			return COMBAT_PHYSICALDAMAGE;
 
 		default:
@@ -211,7 +211,7 @@ ConditionType_t Combat::DamageToConditionType(CombatType_t type)
 			return CONDITION_CURSED;
 
 		case COMBAT_PHYSICALDAMAGE:
-			return CONDITION_BLEEDING;
+			return CONDITION_PHYSICAL;
 
 		default:
 			break;

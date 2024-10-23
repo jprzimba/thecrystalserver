@@ -471,12 +471,6 @@ class Player : public Creature, public Cylinder
 		virtual float getAttackFactor() const;
 		virtual float getDefenseFactor() const;
 
-		void addRevenge(uint32_t playerGUID) {revengeList.push_back(playerGUID);}
-		bool canRevenge(uint32_t playerGUID) const
-		{
-			return std::find(revengeList.begin(), revengeList.end(), playerGUID) != revengeList.end();
-		}
-
 		void addExhaust(uint32_t ticks, Exhaust_t exhaust);
 		void addInFightTicks(bool pzLock, int32_t ticks = 0);
 		void addDefaultRegeneration(uint32_t addTicks);
@@ -918,7 +912,6 @@ class Player : public Creature, public Cylinder
 		Item* weapon;
 
 		std::vector<uint32_t> forceWalkthrough;
-		std::vector<uint32_t> revengeList;
 
 		typedef std::set<uint32_t> AttackedSet;
 		AttackedSet attackedSet;

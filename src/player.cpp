@@ -3741,9 +3741,6 @@ void Player::onAddCombatCondition(ConditionType_t type, bool)
 		case CONDITION_PARALYZE:
 			tmp = "paralyzed";
 			break;
-		case CONDITION_BLEEDING:
-			tmp = "bleeding";
-			break;
 		default:
 			break;
 	}
@@ -3835,11 +3832,10 @@ void Player::onTarget(Creature* target)
 		sendIcons();
 	}
 
-	if(getZone() != target->getZone() || skull != SKULL_NONE || targetPlayer->isEnemy(this, true)
-		|| canRevenge(targetPlayer->getGUID()) || g_game.getWorldType() != WORLDTYPE_OPEN)
+	if(getZone() != target->getZone() || skull != SKULL_NONE || targetPlayer->isEnemy(this, true))
 		return;
 
-	if(target->getSkull() != SKULL_NONE || (targetPlayer->canRevenge(guid) && targetPlayer->hasAttacked(this)))
+	if(targetPlayer->getSkull() != SKULL_NONE)
 		targetPlayer->sendCreatureSkull(this);
 	else if(!hasCustomFlag(PlayerCustomFlag_NotGainSkull))
 	{
@@ -4005,13 +4001,9 @@ bool Player::onKilledCreature(Creature* target, DeathEntry& entry)
 	if(!entry.isJustify() || !hasCondition(CONDITION_INFIGHT))
 		return true;
 
-	std::vector<uint32_t>::iterator it = std::find(revengeList.begin(), revengeList.end(), targetPlayer->getGUID());
-	if(!targetPlayer->hasAttacked(this) && target->getSkull() == SKULL_NONE && it == revengeList.end()
-		&& targetPlayer != this && (addUnjustifiedKill(targetPlayer, !enemy.war) || entry.isLast()))
+	if(!targetPlayer->hasAttacked(this) && target->getSkull() == SKULL_NONE && targetPlayer != this
+		&& (addUnjustifiedKill(targetPlayer, !enemy.war) || entry.isLast()))
 		entry.setUnjustified();
-
-	if(it != revengeList.end())
-		revengeList.erase(it);
 
 	addInFightTicks(true, g_config.getNumber(ConfigManager::WHITE_SKULL_TIME));
 	return true;
