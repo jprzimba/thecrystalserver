@@ -213,4 +213,130 @@
 	<action itemid="7735" event="script" value="other/spellwand.lua"/>
 	<action itemid="7537;7585" event="script" value="other/spideregg.lua" />
 	<action itemid="6561" event="script" value="other/blessings.lua"/>
+
+	<!-- Map -->
+	<!-- Other Scripts -->
+	<action uniqueid="14030" event="script" value="map/hydras_camp.lua"/>
+	<action actionid="2017" event="script" value="map/training/room.lua"/>
+	<action actionid="2018" event="script" value="map/training/room.lua"/>
+	<action actionid="2019" event="script" value="map/training/room.lua"/>
+	<action actionid="2020" event="script" value="map/training/room.lua"/>
+
+	<!-- Ferumbras Tower -->
+	<action uniqueid="12151" event="script" value="map/ferumbras_tower/ferumbras_wall.lua"/>
+	<action uniqueid="12152" event="script" value="map/ferumbras_tower/ferumbras_wall2.lua"/>
+	<action uniqueid="12153" event="script" value="map/ferumbras_tower/ferumbras_wall3.lua"/>
+	<action uniqueid="5169" event="script" value="map/ferumbras_tower/ferumbras_stair.lua"/>
+
+	<!-- Behemoth Quest -->
+	<action uniqueid="5010" event="script" value="map/quests/behemoth_quest.lua"/>
+	<action uniqueid="5011" event="script" value="map/quests/behemoth_quest.lua"/>
+	<action uniqueid="5012" event="script" value="map/quests/behemoth_quest.lua"/>
+	<action uniqueid="5013" event="script" value="map/quests/behemoth_quest.lua"/>
+
+	<!-- Annhilator Quest -->
+	<action uniqueid="9000" event="script" value="map/quests/annhilator/chest.lua"/>
+	<action uniqueid="9001" event="script" value="map/quests/annhilator/chest.lua"/>
+	<action uniqueid="9002" event="script" value="map/quests/annhilator/chest.lua"/>
+	<action uniqueid="9003" event="script" value="map/quests/annhilator/chest.lua"/>
+	<action uniqueid="7000" event="script" value="map/quests/annhilator/switch.lua"/>
+
+	<!-- Demon Helmet Quest -->
+	<action uniqueid="5049" event="script" value="map/quests/dh/chest.lua"/>
+	<action uniqueid="5050" event="script" value="map/quests/dh/chest.lua"/>
+	<action uniqueid="5051" event="script" value="map/quests/dh/chest.lua"/>
+	<action uniqueid="3002" event="script" value="map/quests/dh/switch.lua"/>
+
+	<!-- Karmia City Quests -->
+	<action uniqueid="5014" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5019" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5021" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5022" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5023" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5025" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5026" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5029" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5030" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5031" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5067" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5068" event="script" value="map/quests/cities/karmia.lua"/>
+	<action uniqueid="5069" event="script" value="map/quests/cities/karmia.lua"/>
+
+	<!-- Desert City Quests -->
+	<action uniqueid="5032" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5033" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5034" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5035" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5036" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5037" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5038" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5039" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5040" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5041" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5042" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5043" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5044" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5073" event="script" value="map/quests/cities/desert.lua"/>
+	<action uniqueid="5074" event="script" value="map/quests/cities/desert.lua"/>
+
+	<!-- Inferno City Quests -->
+	<action uniqueid="5015" event="script" value="map/quests/cities/inferno.lua"/>
+	<action uniqueid="5016" event="script" value="map/quests/cities/inferno.lua"/>
+	<action uniqueid="5017" event="script" value="map/quests/cities/inferno.lua"/>
+	<action uniqueid="5018" event="script" value="map/quests/cities/inferno.lua"/>
+
+	<!-- Premium City Quests -->
+	<action uniqueid="5045" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5046" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5047" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5048" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5058" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5059" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5060" event="script" value="map/quests/cities/premium_island.lua"/>
+	<action uniqueid="5088" event="script" value="map/quests/cities/premium_island.lua"/>
+
+	<!-- Rookgaard Quests -->
+	<action uniqueid="2398" event="script" value="map/quests/cities/rookgaard.lua"/>
+	<action uniqueid="2458" event="script" value="map/quests/cities/rookgaard.lua"/>
+	<action uniqueid="2464" event="script" value="map/quests/cities/rookgaard.lua"/>
+
+	<!-- Tiquanda Quests -->
+	<action uniqueid="5052" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5053" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5054" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5055" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5056" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5057" event="script" value="map/quests/cities/tiquanda.lua"/>
+	<action uniqueid="5066" event="script" value="map/quests/cities/tiquanda.lua"/>
+
+	<!-- Venore Quests -->
+	<action uniqueid="5076" event="script" value="map/quests/cities/venore.lua"/>
+	<action uniqueid="5077" event="script" value="map/quests/cities/venore.lua"/>
+	<action uniqueid="5063" event="script" value="map/quests/cities/venore.lua"/>
+	<action uniqueid="5064" event="script" value="map/quests/cities/venore.lua"/>
+	<action uniqueid="5065" event="script" value="map/quests/cities/venore.lua"/>
+	<action uniqueid="5080" event="script" value="map/quests/cities/venore.lua"/>
+
+	<!-- Folda Quests -->
+	<action uniqueid="5081" event="script" value="map/quests/cities/folda.lua"/>
+	<action uniqueid="5082" event="script" value="map/quests/cities/folda.lua"/>
+	<action uniqueid="5083" event="script" value="map/quests/cities/folda.lua"/>
+
+	<!-- Liberty bay Quests -->
+	<action uniqueid="5084" event="script" value="map/quests/cities/liberty_bay.lua"/>
+	<action uniqueid="5086" event="script" value="map/quests/cities/liberty_bay.lua"/>
+	<action uniqueid="5087" event="script" value="map/quests/cities/liberty_bay.lua"/>
+
+	<!-- Demon Oak -->
+	<action itemid="8293" event="script" value="map/quests/demon_oak/quest.lua"/>
+	<action fromuid="6000" touid ="6003" event="script" value="map/quests/demon_oak/chest.lua"/>
+
+	<!-- Pits of Inferno -->
+	<action uniqueid="6500" event="script" value="map/quests/poi/first_switch.lua"/>
+	<action uniqueid="6501" event="script" value="map/quests/poi/second_switch.lua"/>
+	<action uniqueid="6502" event="script" value="map/quests/poi/third_switch.lua"/>
+	<action uniqueid="6503" event="script" value="map/quests/poi/fourth_switch.lua"/>
+	<action uniqueid="6504" event="script" value="map/quests/poi/fifth_switch.lua"/>
+	<action uniqueid="6505" event="script" value="map/quests/poi/six_switch.lua"/>
+	<action fromuid="6506" touid ="6512" event="script" value="map/quests/poi/chests.lua"/>
 </actions>
