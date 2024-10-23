@@ -802,7 +802,9 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 
 void ProtocolGame::GetTileDescription(const Tile* tile, NetworkMessage_ptr msg)
 {
-	msg->put<uint16_t>(0x00); // enviromental effects, flash only
+	if(!tile)
+		return;
+
 	int32_t count = 0;
 	if(tile->ground)
 	{
@@ -921,11 +923,11 @@ void ProtocolGame::checkCreatureAsKnown(uint32_t id, bool& known, uint32_t& remo
 	// ... but not in future
 	knownCreatureList.push_back(id);
 	// too many known creatures?
-	if(knownCreatureList.size() > 1300)
+	if(knownCreatureList.size() > 250)
 	{
 		// lets try to remove one from the end of the list
 		Creature* c = NULL;
-		for(int16_t n = 0; n < 1300; ++n)
+		for(int16_t n = 0; n < 250; ++n)
 		{
 			removedKnown = knownCreatureList.front();
 			if(!(c = g_game.getCreatureByID(removedKnown)) || !canSee(c))
