@@ -1719,37 +1719,8 @@ void ProtocolGame::sendChannel(uint16_t channelId, const std::string& channelNam
 	{
 		TRACK_MESSAGE(msg);
 		msg->put<char>(0xAC);
-
 		msg->put<uint16_t>(channelId);
 		msg->putString(channelName);
-		if(channelId == CHANNEL_PARTY || channelId == CHANNEL_GUILD || channelId == CHANNEL_PRIVATE)
-		{
-			if(ChatChannel* channel = g_chat.getChannelById(channelId))
-			{
-				const UsersMap& users = channel->getUsers();
-				msg->put<uint16_t>(users.size());
-				for(UsersMap::const_iterator itt = users.begin(); itt != users.end(); ++itt)
-					msg->putString(itt->second->getName());
-
-				if(PrivateChatChannel* privateChannel = dynamic_cast<PrivateChatChannel*>(channel))
-				{
-					const InviteList& invitedUsers = privateChannel->getInvitedUsers();
-					msg->put<uint16_t>(invitedUsers.size());
-					for(InviteList::const_iterator it = invitedUsers.begin(); it != invitedUsers.end(); ++it)
-					{
-						if(Player* _player = g_game.getPlayerByID(*it))
-							msg->putString(_player->getName());
-					}
-				}
-				else
-					msg->put<uint16_t>(0x00);
-
-				return;
-			}
-		}
-
-		msg->put<uint16_t>(0x00);
-		msg->put<uint16_t>(0x00);
 	}
 }
 
@@ -2190,6 +2161,23 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 	msg->put<uint16_t>(0x32);
 
 	msg->put<char>(player->hasFlag(PlayerFlag_CanReportBugs));
+	if(Group* group = player->getGroup())
+	{
+		int32_t reasons = group->getViolationReasons();
+		if(reasons > 1)
+		{
+			msg->put<char>(0x0B);
+			for(int32_t i = 0; i < 20; ++i)
+			{
+				if(i < 4)
+					msg->put<char>(group->getNameViolationFlags());
+				else if(i < reasons)
+					msg->put<char>(group->getStatementViolationFlags());
+				else
+					msg->put<char>(0x00);
+			}
+		}
+	}
 
 	AddMapDescription(msg, pos);
 	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
