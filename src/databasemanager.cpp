@@ -1235,6 +1235,36 @@ uint32_t DatabaseManager::updateDatabase()
 			return 30;
 		}
 
+		case 30:
+		{
+			std::clog << "Updating database to version 31..." << std::endl;
+			switch(db->getDatabaseEngine())
+			{
+				case DATABASE_ENGINE_MYSQL:
+				{
+					db->query("ALTER TABLE `bans` \
+						ADD `reason` INT UNSIGNED NOT NULL DEFAULT 0, \
+						ADD `action` INT UNSIGNED NOT NULL DEFAULT 0, \
+						ADD `statement` VARCHAR(255) NOT NULL DEFAULT '';");
+					break;
+				}
+        
+				case DATABASE_ENGINE_SQLITE:
+				{
+					db->query("ALTER TABLE `bans` ADD `reason` INTEGER NOT NULL DEFAULT 0;");
+					db->query("ALTER TABLE `bans` ADD `action` INTEGER NOT NULL DEFAULT 0;");
+					db->query("ALTER TABLE `bans` ADD `statement` VARCHAR(255) NOT NULL DEFAULT '';");
+					break;
+				}
+        
+				default:
+					break;
+			}
+
+			registerDatabaseConfig("db_version", 31);
+			return 31;
+		}
+
 		default:
 			break;
 	}

@@ -533,6 +533,10 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 				parseUpdateTile(msg);
 				break;
 
+			case 0xE7:
+				parseViolationWindow(msg);
+				break;
+
 			case 0xE8:
 				parseDebugAssert(msg);
 				break;
@@ -1493,6 +1497,18 @@ void ProtocolGame::sendCreatureLight(const Creature* creature)
 		TRACK_MESSAGE(msg);
 		AddCreatureLight(msg, creature);
 	}
+}
+
+void ProtocolGame::parseViolationWindow(NetworkMessage& msg)
+{
+	std::string target = msg.getString();
+	uint8_t reason = msg.get<char>();
+	ViolationAction_t action = (ViolationAction_t)msg.get<char>();
+	std::string comment = msg.getString();
+	std::string statement = msg.getString();
+	uint32_t statementId = (uint32_t)msg.get<uint16_t>();
+	bool ipBanishment = msg.get<char>();
+	addGameTask(&Game::playerViolationWindow, player->getID(), target, reason, action, comment, statement, statementId, ipBanishment);
 }
 
 void ProtocolGame::sendWorldLight(const LightInfo& lightInfo)

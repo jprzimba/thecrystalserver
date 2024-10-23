@@ -294,6 +294,9 @@ class ProtocolGame : public Protocol
 		void UpdateInventoryItem(NetworkMessage_ptr msg, slots_t slot, const Item* item);
 		void RemoveInventoryItem(NetworkMessage_ptr msg, slots_t slot);
 
+		//rule violation window
+		void parseViolationWindow(NetworkMessage& msg);
+
 		//shop
 		void AddShopItem(NetworkMessage_ptr msg, const ShopInfo& item);
 

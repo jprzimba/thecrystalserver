@@ -74,6 +74,9 @@
 	finalBanLength = 30 * 24 * 60 * 60
 	ipBanLength = 1 * 24 * 60 * 60
 	allowedMaxSizePackets = 20
+	broadcastBanishments = true
+	maxViolationCommentSize = 200
+	violationNameReportActionType = 2
 
 	-- Battle
 	-- NOTE: showHealth/ManaChangeForMonsters inherites from showHealth/ManaChange.

@@ -390,6 +390,9 @@ CREATE TABLE `bans`
 	`added` INT UNSIGNED NOT NULL,
 	`admin_id` INT UNSIGNED NOT NULL DEFAULT 0,
 	`comment` TEXT NOT NULL,
+	`reason` INT UNSIGNED NOT NULL DEFAULT 0,
+	`action` INT UNSIGNED NOT NULL DEFAULT 0,
+	`statement` VARCHAR(255) NOT NULL DEFAULT '',
 	PRIMARY KEY (`id`),
 	KEY `type` (`type`, `value`),
 	KEY `active` (`active`)

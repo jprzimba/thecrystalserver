@@ -10482,16 +10482,22 @@ int32_t LuaInterface::luaIsAccountBanished(lua_State* L)
 
 int32_t LuaInterface::luaDoAddIpBanishment(lua_State* L)
 {
-	//doAddIpBanishment(ip[, mask[, length[, comment[, admin]]]]])
-	uint32_t admin = 0, mask = 0xFFFFFFFF, params = lua_gettop(L);
+	//doAddIpBanishment(ip[, mask[, length[, reason[, comment[, admin[, statement]]]]]])
+	uint32_t admin = 0, reason = 21, mask = 0xFFFFFFFF, params = lua_gettop(L);
 	int64_t length = time(NULL) + g_config.getNumber(ConfigManager::IPBAN_LENGTH);
-	std::string comment;
+	std::string statement, comment;
 
-	if(params > 4)
+	if(params > 6)
+		statement = popString(L);
+
+	if(params > 5)
 		admin = popNumber(L);
 
-	if(params > 3)
+	if(params > 4)
 		comment = popString(L);
+
+	if(params > 3)
+		reason = popNumber(L);
 
 	if(params > 2)
 		length = popNumber(L);
@@ -10499,23 +10505,34 @@ int32_t LuaInterface::luaDoAddIpBanishment(lua_State* L)
 	if(params > 1)
 		mask = popNumber(L);
 
-	lua_pushboolean(L, IOBan::getInstance()->addIpBanishment((uint32_t)popNumber(L), length, comment, admin, mask));
+	lua_pushboolean(L, IOBan::getInstance()->addIpBanishment((uint32_t)popNumber(L),
+		length, reason, comment, admin, mask, statement));
 	return 1;
 }
 
 int32_t LuaInterface::luaDoAddPlayerBanishment(lua_State* L)
 {
-	//doAddPlayerBanishment(name/guid[, type[, length[, comment[, admin]]]]]])
-	uint32_t admin = 0, params = lua_gettop(L);
+	//doAddPlayerBanishment(name/guid[, type[, length[, reason[, action[, comment[, admin[, statement]]]]]]])
+	uint32_t admin = 0, reason = 21, params = lua_gettop(L);
 	int64_t length = -1;
-	std::string comment;
+	std::string statement, comment;
 
+	ViolationAction_t action = ACTION_NAMELOCK;
 	PlayerBan_t type = PLAYERBAN_LOCK;
-	if(params > 4)
+	if(params > 7)
+		statement = popString(L);
+
+	if(params > 6)
 		admin = popNumber(L);
 
-	if(params > 3)
+	if(params > 5)
 		comment = popString(L);
+
+	if(params > 4)
+		action = (ViolationAction_t)popNumber(L);
+
+	if(params > 3)
+		reason = popNumber(L);
 
 	if(params > 2)
 		length = popNumber(L);
@@ -10524,25 +10541,38 @@ int32_t LuaInterface::luaDoAddPlayerBanishment(lua_State* L)
 		type = (PlayerBan_t)popNumber(L);
 
 	if(lua_isnumber(L, -1))
-		lua_pushboolean(L, IOBan::getInstance()->addPlayerBanishment((uint32_t)popNumber(L), length, comment, admin, type));
+		lua_pushboolean(L, IOBan::getInstance()->addPlayerBanishment((uint32_t)popNumber(L),
+			length, reason, action, comment, admin, type, statement));
 	else
-		lua_pushboolean(L, IOBan::getInstance()->addPlayerBanishment(popString(L), length, comment, admin, type));
+		lua_pushboolean(L, IOBan::getInstance()->addPlayerBanishment(popString(L),
+			length, reason, action, comment, admin, type, statement));
 
 	return 1;
 }
 
 int32_t LuaInterface::luaDoAddAccountBanishment(lua_State* L)
 {
-	//doAddAccountBanishment(accountId[, playerId[, length[, comment[, admin]]]]]])
-	uint32_t admin = 0, playerId = 0, params = lua_gettop(L);
+	//doAddAccountBanishment(accountId[, playerId[, length[, reason[, action[, comment[, admin[, statement]]]]]]])
+	uint32_t admin = 0, reason = 21, playerId = 0, params = lua_gettop(L);
 	int64_t length = time(NULL) + g_config.getNumber(ConfigManager::BAN_LENGTH);
-	std::string comment;
+	std::string statement, comment;
 
-	if(params > 4)
+	ViolationAction_t action = ACTION_BANISHMENT;
+	if(params > 7)
+		statement = popString(L);
+
+	if(params > 6)
 		admin = popNumber(L);
 
-	if(params > 3)
+	if(params > 5)
 		comment = popString(L);
+
+	if(params > 4)
+		action = (ViolationAction_t)popNumber(L);
+
+	if(params > 3)
+
+		reason = popNumber(L);
 
 	if(params > 2)
 		length = popNumber(L);
@@ -10550,7 +10580,8 @@ int32_t LuaInterface::luaDoAddAccountBanishment(lua_State* L)
 	if(params > 1)
 		playerId = popNumber(L);
 
-	lua_pushboolean(L, IOBan::getInstance()->addAccountBanishment((uint32_t)popNumber(L), length, comment, admin, playerId));
+	lua_pushboolean(L, IOBan::getInstance()->addAccountBanishment((uint32_t)popNumber(L),
+		length, reason, action, comment, admin, playerId, statement));
 	return 1;
 }
 
@@ -10572,20 +10603,27 @@ int32_t LuaInterface::luaDoAddAccountWarnings(lua_State* L)
 
 int32_t LuaInterface::luaDoAddNotation(lua_State* L)
 {
-	//doAddNotation(accountId[, playerId[, comment[, admin]]]]])
-	uint32_t admin = 0, playerId = 0, params = lua_gettop(L);
-	std::string comment;
+	//doAddNotation(accountId[, playerId[, reason[, comment[, admin[, statement]]]]]])
+	uint32_t admin = 0, reason = 21, playerId = 0, params = lua_gettop(L);
+	std::string statement, comment;
 
-	if(params > 3)
+	if(params > 5)
+		statement = popString(L);
+
+	if(params > 4)
 		admin = popNumber(L);
 
-	if(params > 2)
+	if(params > 3)
 		comment = popString(L);
+
+	if(params > 2)
+		reason = popNumber(L);
 
 	if(params > 1)
 		playerId = popNumber(L);
 
-	lua_pushboolean(L, IOBan::getInstance()->addNotation((uint32_t)popNumber(L), comment, admin, playerId));
+	lua_pushboolean(L, IOBan::getInstance()->addNotation((uint32_t)popNumber(L),
+		reason, comment, admin, playerId, statement));
 	return 1;
 }
 

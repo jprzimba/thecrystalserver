@@ -168,5 +168,9 @@ std::string getSkillName(uint16_t skillId, bool suffix = true);
 std::string getWeaponName(WeaponType_t weaponType);
 
 bool fileExists(const char* filename);
+
+std::string getReason(int32_t reasonId);
+std::string getAction(ViolationAction_t actionId, bool ipBanishment);
+
 std::string getFilePath(FileType_t type, std::string name = "");
 #endif

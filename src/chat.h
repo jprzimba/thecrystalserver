@@ -117,7 +117,7 @@ typedef std::map<uint32_t, std::string> StatementMap;
 class Chat
 {
 	public:
-		Chat(): dummyPrivate(NULL), partyName("Party") {}
+		Chat(): statement(0), dummyPrivate(NULL), partyName("Party") {}
 		virtual ~Chat();
 
 		bool reload();
