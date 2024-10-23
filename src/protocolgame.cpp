@@ -2139,10 +2139,11 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 	AddPlayerStats(msg);
 	AddPlayerSkills(msg);
 
+	//gameworld light-settings
 	LightInfo lightInfo;
 	g_game.getWorldLightInfo(lightInfo);
-
 	AddWorldLight(msg, lightInfo);
+	//player light level
 	AddCreatureLight(msg, creature);
 
 	player->sendIcons();
@@ -2399,8 +2400,9 @@ void ProtocolGame::sendOutfitWindow()
 
  		if(outfitList.size())
 		{
-			msg->put<char>(outfitList.size());
-			for(std::list<Outfit>::iterator it = outfitList.begin(); it != outfitList.end(); ++it)
+			msg->put<char>((size_t)std::min((size_t)OUTFITS_MAX_NUMBER, outfitList.size()));
+			std::list<Outfit>::iterator it = outfitList.begin();
+			for(int32_t i = 0; it != outfitList.end() && i < OUTFITS_MAX_NUMBER; ++it, ++i)
 			{
 				msg->put<uint16_t>(it->lookType);
 				msg->putString(it->name);
@@ -2585,7 +2587,7 @@ void ProtocolGame::AddCreature(NetworkMessage_ptr msg, const Creature* creature,
 	}
 
 	if(!creature->getHideHealth())
-		msg->put<char>(std::ceil(creature->getHealth() * 100. / std::max(creature->getMaxHealth(), 1)));
+		msg->put<char>((int32_t)std::ceil(((float)creature->getHealth()) * 100 / std::max(creature->getMaxHealth(), (int32_t)1)));
 	else
 		msg->put<char>(0x00);
 
@@ -2594,8 +2596,7 @@ void ProtocolGame::AddCreature(NetworkMessage_ptr msg, const Creature* creature,
 
 	LightInfo lightInfo;
 	creature->getCreatureLight(lightInfo);
-
-	msg->put<char>(lightInfo.level);
+	msg->put<char>(player->hasCustomFlag(PlayerCustomFlag_HasFullLight) ? 0xFF : lightInfo.level);
 	msg->put<char>(lightInfo.color);
 
 	msg->put<uint16_t>(creature->getStepSpeed());

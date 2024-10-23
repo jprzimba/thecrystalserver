@@ -23,6 +23,8 @@
 #include "const.h"
 #include "tools.h"
 
+#define OUTFITS_MAX_NUMBER 25
+
 enum AddonRequirement_t
 {
 	REQUIREMENT_NONE = 0,
