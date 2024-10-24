@@ -822,9 +822,9 @@ bool Houses::payRent(Player* player, House* house, uint32_t bid, time_t _time/* 
 
 	bool paid = false;
 	uint32_t amount = house->getRent() + bid;
-	if(g_config.getBool(ConfigManager::BANK_SYSTEM) && player->balance >= amount)
+	if(g_config.getBool(ConfigManager::BANK_SYSTEM) && player->getBankBalance() >= amount)
 	{
-		player->balance -= amount;
+		player->setBankBalance(player->getBankBalance() - amount);
 		paid = true;
 	}
 	else if(Depot* depot = player->getDepot(town->getID(), true))

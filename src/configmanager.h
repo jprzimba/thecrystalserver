@@ -319,6 +319,7 @@ class ConfigManager
 			FAIRFIGHT_REDUCTION,
 			BROADCAST_BANISHMENTS,
 			SURPRISE_BAGS,
+			ENABLE_AUTO_BANK,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

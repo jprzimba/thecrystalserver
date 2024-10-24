@@ -163,6 +163,14 @@ uint16_t Monsters::getLootRandom()
 
 void MonsterType::dropLoot(Container* corpse)
 {
+	uint32_t ownerId = corpse->getCorpseOwner();
+	if(!ownerId)
+		return;
+
+	Player* owner = g_game.getPlayerByGuid(ownerId);
+	if(!owner)
+		return;
+
 	ItemList items;
 	for(LootItems::const_iterator it = lootItems.begin(); it != lootItems.end() && !corpse->full(); ++it)
 	{
@@ -181,7 +189,34 @@ void MonsterType::dropLoot(Container* corpse)
 					delete container;
 			}
 			else
+			{
+				if(g_config.getBool(ConfigManager::BANK_SYSTEM) && g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
+				{
+					if(tmpItem->getID() == ITEM_GOLD_COIN || tmpItem->getID() == ITEM_PLATINUM_COIN || tmpItem->getID() == ITEM_CRYSTAL_COIN)
+					{
+						uint64_t money = 0;
+						if(tmpItem->getID() == ITEM_PLATINUM_COIN)
+							money = tmpItem->getItemCount() * 100;
+						else if (tmpItem->getID() == ITEM_CRYSTAL_COIN)
+							money = tmpItem->getItemCount() * 10000;
+						else
+							money = tmpItem->getItemCount();
+
+						if(owner)
+							owner->setBankBalance(owner->getBankBalance() + money);
+
+			   			Cylinder* parent = tmpItem->getParent();
+						if(parent)
+							parent->__removeThing(tmpItem, tmpItem->getItemCount());
+						else
+							continue;
+
+						continue;
+					}
+				}
+
 				corpse->__internalAddThing(tmpItem);
+			}
 		}
 
 		if(g_config.getBool(ConfigManager::SURPRISE_BAGS))
@@ -239,13 +274,6 @@ void MonsterType::dropLoot(Container* corpse)
 	}
 
 	corpse->__startDecaying();
-	uint32_t ownerId = corpse->getCorpseOwner();
-	if(!ownerId)
-		return;
-
-	Player* owner = g_game.getPlayerByGuid(ownerId);
-	if(!owner)
-		return;
 
 	LootMessage_t message = lootMessage;
 	if(message == LOOTMSG_IGNORE)

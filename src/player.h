@@ -304,6 +304,9 @@ class Player : public Creature, public Cylinder
 		void useStamina(int64_t value) {stamina = std::min((int64_t)STAMINA_MAX, (int64_t)std::max((int64_t)0, ((int64_t)stamina + value)));}
 		uint64_t getSpentStamina() {return (uint64_t)STAMINA_MAX - stamina;}
 
+		uint64_t getBankBalance() const {return balance;}
+		void setBankBalance(uint64_t newBalance) {balance = newBalance;}
+
 		int64_t getLastLoad() const {return lastLoad;}
 		time_t getLastLogin() const {return lastLogin;}
 		time_t getLastLogout() const {return lastLogout;}

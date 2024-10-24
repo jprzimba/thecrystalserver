@@ -9167,7 +9167,7 @@ int32_t LuaInterface::luaDoPlayerSetBalance(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
 	{
-		player->balance = balance;
+		player->setBankBalance(balance);
 		lua_pushboolean(L, true);
 	}
 	else

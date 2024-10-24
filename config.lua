@@ -238,12 +238,15 @@
 	-- called "exception tracer" (__EXCEPTION_TRACER__ flag).
 	dataDirectory = "data/"
 	logsDirectory = "data/logs/"
-	bankSystem = true
 	promptExceptionTracerErrorBox = true
 	maximumDoorLevel = 500
 	maxMessageBuffer = 4
 	tradeLimit = 100
 	useCapacity = true
+
+	-- Bank system
+	bankSystem = true
+	enableAutoBank = false
 
 	-- Depot
 	defaultDepotSizePremium = 2000
