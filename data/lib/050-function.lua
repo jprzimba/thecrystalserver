@@ -414,11 +414,3 @@ function valid(f)
 		end
 	end
 end
-
-function getTotalGold(cid)
-    if not isPlayer(cid) then
-        return 0
-    end
-
-    return getPlayerMoney(cid) + getPlayerBalance(cid)
-end

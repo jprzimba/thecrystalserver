@@ -5330,3 +5330,26 @@ void Player::sendCritical() const
 	if(g_config.getBool(ConfigManager::DISPLAY_CRITICAL_HIT))
 		g_game.addAnimatedText(getPosition(), COLOR_DARKRED, "CRITICAL!");
 }
+
+void Player::handleAutoBankGold(Item* item)
+{
+	if(!g_config.getBool(ConfigManager::BANK_SYSTEM) || !g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
+		return;
+
+	if(item->getID() != ITEM_GOLD_COIN && item->getID() != ITEM_PLATINUM_COIN && item->getID() != ITEM_CRYSTAL_COIN)
+		return;
+
+	uint64_t money = 0;
+	if(item->getID() == ITEM_PLATINUM_COIN)
+		money = item->getItemCount() * 100;
+	else if(item->getID() == ITEM_CRYSTAL_COIN)
+		money = item->getItemCount() * 10000;
+	else
+		money = item->getItemCount();
+
+	setBankBalance(getBankBalance() + money);
+
+	Cylinder* parent = item->getParent();
+	if(parent)
+		parent->__removeThing(item, item->getItemCount());
+}

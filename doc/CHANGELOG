@@ -53,8 +53,11 @@
 			NPC A.I. (Elf)
 			Ground cache needs to be compiled with the __GROUND_CACHE__  flag. (Elf)
 			Surprise bag system is configurable in config.lua with settings in data/items/bags.xml. (Tryller)
-			Auto bank system: the gold goes to the player's bank balance. (Tryller)
-			New Lua function: getTotalGold(cid). (Tryller)
+			Auto bank system: the gold is added to the player's bank balance and removed from the inventory/bank balance when buying an item. (Tryller)
+			getPlayerMoney(cid) retrieves all gold from the player, including inventory and bank. (Tryller)
+			doPlayerAddMoney(cid, money) Add gold to bank balance if bankSystem and enableAutoBank are enabled in config.lua (Tryller)
+			doPlayerRemoveMoney(cid, money) tries to remove gold from the player; if unsuccessful, it attempts to remove it from the bank if bankSystem and enableAutoBank are enabled in config.lua. (Tryller)
+			ShopWindow shows the player's total gold, including from inventory and bank. (Tryller)
 		]
 
 		[ MAP

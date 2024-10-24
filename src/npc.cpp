@@ -1657,7 +1657,7 @@ void Npc::executeResponse(Player* player, NpcState* npcState, const NpcResponse*
 						if(iit.hasSubType())
 							subType = npcState->subType;
 
-						if(g_game.getMoney(player) >= moneyCount)
+						if(g_game.getMoney(player) + player->getBankBalance() >= moneyCount)
 						{
 							int32_t amount = npcState->amount;
 							if(iit.stackable)

@@ -306,6 +306,7 @@ class Player : public Creature, public Cylinder
 
 		uint64_t getBankBalance() const {return balance;}
 		void setBankBalance(uint64_t newBalance) {balance = newBalance;}
+		void handleAutoBankGold(Item* item);
 
 		int64_t getLastLoad() const {return lastLoad;}
 		time_t getLastLogin() const {return lastLogin;}
@@ -727,6 +728,8 @@ class Player : public Creature, public Cylinder
 		uint32_t marriage;
 		uint64_t balance;
 		double rates[SKILL__LAST + 1];
+		
+		void updateInventoryGoods(uint32_t itemId);
 
 	protected:
 		void checkTradeState(const Item* item);
@@ -736,7 +739,6 @@ class Player : public Creature, public Cylinder
 		bool rateExperience(double& gainExp, Creature* target);
 
 		void updateInventoryWeight();
-		void updateInventoryGoods(uint32_t itemId);
 		void updateItemsLight(bool internal = false);
 		void updateWeapon();
 		void updateBaseSpeed()

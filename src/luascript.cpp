@@ -2711,7 +2711,8 @@ int32_t LuaInterface::internalGetPlayerInfo(lua_State* L, PlayerInfo_t info)
 			value = player->getVocationId();
 			break;
 		case PlayerInfoMoney:
-			value = g_game.getMoney(player);
+			uint64_t totalMoney =  g_game.getMoney(player) + player->getBankBalance();
+			value = totalMoney;
 			break;
 		case PlayerInfoFreeCap:
 			value = (int64_t)player->getFreeCapacity();
@@ -5213,7 +5214,11 @@ int32_t LuaInterface::luaDoPlayerAddMoney(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
 	{
-		g_game.addMoney(player, money);
+		if(g_config.getBool(ConfigManager::BANK_SYSTEM) && g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
+			player->setBankBalance(player->getBankBalance() + money);
+		else
+			g_game.addMoney(player, money);
+
 		lua_pushboolean(L, true);
 	}
 	else
@@ -5227,12 +5232,38 @@ int32_t LuaInterface::luaDoPlayerAddMoney(lua_State* L)
 
 int32_t LuaInterface::luaDoPlayerRemoveMoney(lua_State* L)
 {
-	//doPlayerRemoveMoney(cid,money)
-	uint64_t money = popNumber(L);
+	//doPlayerRemoveMoney(cid, money)
+	uint64_t moneyToRemove = popNumber(L);
 
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
-		lua_pushboolean(L, g_game.removeMoney(player, money));
+	{
+		uint64_t playerInventoryMoney = g_game.getMoney(player);
+		if (playerInventoryMoney >= moneyToRemove)
+		{
+			g_game.removeMoney(player, moneyToRemove);
+			lua_pushboolean(L, true);
+		}
+		else
+		{
+			g_game.removeMoney(player, playerInventoryMoney);
+			uint64_t remainingMoney = moneyToRemove - playerInventoryMoney;
+
+			if(g_config.getBool(ConfigManager::BANK_SYSTEM) && g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
+			{
+				uint64_t bankBalance = player->getBankBalance();
+				if(bankBalance >= remainingMoney)
+				{
+					player->setBankBalance(bankBalance - remainingMoney);
+					lua_pushboolean(L, true);
+				}
+				else
+					lua_pushboolean(L, false);
+			}
+			else
+				lua_pushboolean(L, false);
+		}
+	}
 	else
 	{
 		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
