@@ -1732,6 +1732,9 @@ void LuaInterface::registerFunctions()
 	//doSendDistanceShoot(fromPos, toPos, type[, player])
 	lua_register(m_luaState, "doSendDistanceShoot", LuaInterface::luaDoSendDistanceShoot);
 
+	//doSendAnimatedText(pos, text, color[, player])
+	lua_register(m_luaState, "doSendAnimatedText", LuaInterface::luaDoSendAnimatedText);
+
 	//doPlayerAddSkillTry(cid, skillid, n[, useMultiplier = true])
 	lua_register(m_luaState, "doPlayerAddSkillTry", LuaInterface::luaDoPlayerAddSkillTry);
 
@@ -3674,6 +3677,34 @@ int32_t LuaInterface::luaDoSendDistanceShoot(lua_State* L)
 		g_game.addDistanceEffect(list, fromPos, toPos, type);
 	else
 		g_game.addDistanceEffect(fromPos, toPos, type);
+
+	lua_pushboolean(L, true);
+	return 1;
+}
+
+int32_t LuaInterface::luaDoSendAnimatedText(lua_State* L)
+{
+	//doSendAnimatedText(pos, text, color[, player])
+	ScriptEnviroment* env = getEnv();
+	SpectatorVec list;
+	if(lua_gettop(L) > 3)
+	{
+		if(Creature* creature = env->getCreatureByUID(popNumber(L)))
+			list.push_back(creature);
+	}
+
+	uint8_t color = popNumber(L);
+	std::string text = popString(L);
+
+	PositionEx pos;
+	popPosition(L, pos);
+	if(pos.x == 0xFFFF)
+		pos = env->getRealPos();
+
+	if(!list.empty())
+		g_game.addAnimatedText(list, pos, color, text);
+	else
+		g_game.addAnimatedText(pos, color, text);
 
 	lua_pushboolean(L, true);
 	return 1;

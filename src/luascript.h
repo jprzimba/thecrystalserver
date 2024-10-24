@@ -348,6 +348,7 @@ class LuaInterface
 		static int32_t luaDoSendCreatureSquare(lua_State* L);
 		static int32_t luaDoSendMagicEffect(lua_State* L);
 		static int32_t luaDoSendDistanceShoot(lua_State* L);
+		static int32_t luaDoSendAnimatedText(lua_State* L);
 		static int32_t luaDoShowTextWindow(lua_State* L);
 		static int32_t luaDoShowTextDialog(lua_State* L);
 		static int32_t luaDoDecayItem(lua_State* L);

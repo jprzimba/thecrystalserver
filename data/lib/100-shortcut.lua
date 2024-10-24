@@ -1,8 +1,3 @@
-function doSendAnimatedText(...)
-	print("doSendAnimatedText is now a deprecated function.")
-	return true
-end
-
 function doPlayerSendToChannel(cid, target, type, text, channel, time)
 	return doCreatureChannelSay(cid, target, text, type, channel)
 end
