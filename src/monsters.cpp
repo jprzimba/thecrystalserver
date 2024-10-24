@@ -183,6 +183,59 @@ void MonsterType::dropLoot(Container* corpse)
 			else
 				corpse->__internalAddThing(tmpItem);
 		}
+
+		if(g_config.getBool(ConfigManager::SURPRISE_BAGS))
+		{
+			const std::vector<const Items::BagItemInfo*> allBagItems = Item::items.getAllBagItems();
+			std::vector<const Items::BagItemInfo*> validBagItems;
+			for(std::vector<const Items::BagItemInfo*>::const_iterator it = allBagItems.begin(); it != allBagItems.end(); ++it)
+			{
+				const Items::BagItemInfo* bagItem = *it;
+				if(bagItem->chance > 0)
+					validBagItems.push_back(bagItem);
+			}
+        
+			if(!validBagItems.empty())
+			{
+				for(std::vector<const Items::BagItemInfo*>::const_iterator it = validBagItems.begin(); it != validBagItems.end(); ++it)
+				{
+					const Items::BagItemInfo* bagItem = *it;
+					uint64_t minChance = bagItem->minRange;
+					uint64_t maxChance = bagItem->maxRange;
+        
+					if(random_range(minChance, maxChance) <= bagItem->chance)
+					{
+						uint16_t chosenBagId = bagItem->id;
+						uint32_t minAmount = bagItem->minAmount;
+						uint32_t maxAmount = bagItem->maxAmount;
+						uint16_t dropAmount = static_cast<uint16_t>(random_range(minAmount, maxAmount, DISTRO_UNIFORM));
+        
+						if(chosenBagId != 0)
+						{
+							Item* newItem = NULL;
+							if(dropAmount > 1)
+							{
+								newItem = Item::CreateItem(chosenBagId, dropAmount);
+								if(newItem)
+								{
+									if(g_game.internalAddItem(NULL, corpse, newItem) != RET_NOERROR)
+										corpse->__internalAddThing(newItem);
+								}
+							}
+							else
+							{
+								newItem = Item::CreateItem(chosenBagId, 1);
+								if(newItem)
+								{
+									if(g_game.internalAddItem(NULL, corpse, newItem) != RET_NOERROR)
+										corpse->__internalAddThing(newItem);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	corpse->__startDecaying();

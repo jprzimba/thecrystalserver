@@ -528,6 +528,56 @@ bool Items::loadFromXml()
 	}
 
 	xmlFreeDoc(doc);
+	if(!(doc = xmlParseFile(getFilePath(FILE_TYPE_OTHER, "items/bags.xml").c_str())))
+	{
+		std::clog << "[Warning - Items::loadBags] Cannot load bags file."
+			<< std::endl << getLastXMLError() << std::endl;
+		return false;
+	}
+
+	root = xmlDocGetRootElement(doc);
+	if(xmlStrcmp(root->name,(const xmlChar*)"bags"))
+	{
+		xmlFreeDoc(doc);
+		std::clog << "[Warning - Items::loadBags] Malformed bags file." << std::endl;
+		return false;
+	}
+
+	for(xmlNodePtr node = root->children; node; node = node->next)
+	{
+		if(xmlStrcmp(node->name, (const xmlChar*)"bag"))
+			continue;
+
+		uint16_t itemId = 0;
+		std::string itemName;
+		uint32_t chance = 0, minAmount = 1, maxAmount = 1;
+		uint64_t minRange = 0, maxRange = 0;
+
+		if(readXMLString(node, "name", strValue))
+			itemName = strValue;
+
+		if(readXMLInteger(node, "itemid", intValue))
+			itemId = intValue;
+
+		if(readXMLInteger(node, "chance", intValue))
+			chance = intValue;
+
+		if(readXMLInteger(node, "minAmount", intValue))
+			minAmount = intValue;
+
+		if(readXMLInteger(node, "maxAmount", intValue))
+			maxAmount = intValue;
+
+		if(readXMLInteger(node, "minRange", intValue))
+			minRange = intValue;
+
+		if(readXMLInteger(node, "maxRange", intValue))
+			maxRange = intValue;
+
+		setItemBag(itemId, itemName, chance, minAmount, maxAmount, minRange, maxRange);
+	}
+
+	xmlFreeDoc(doc);
 	return true;
 }
 

@@ -349,6 +349,7 @@ bool ConfigManager::load()
 	m_confNumber[MANA_HEALING_COLOR] = getGlobalNumber("manaHealingColor", COLOR_DARKPURPLE);
 	m_confNumber[NAME_REPORT_TYPE] = getGlobalNumber("violationNameReportActionType", 2);
 	m_confBool[BROADCAST_BANISHMENTS] = getGlobalBool("broadcastBanishments", true);
+	m_confBool[SURPRISE_BAGS] = getGlobalBool("dropSurpriseBagsFromMonsters", false);
 
 	m_loaded = true;
 	return true;

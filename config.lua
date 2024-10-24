@@ -265,7 +265,11 @@
 	-- monsterLootMessage 0 to disable, 1 - only party, 2 - only player, 3 - party or player (like Tibia's)
 	checkCorpseOwner = true
 	monsterLootMessage = 3
-	monsterLootMessageType = 29
+	monsterLootMessageType = 25
+
+	-- Surprise Bags
+	-- NOTE: Set dropSurpriseBagsFromMonsters to false to disable surprise bag drops from monsters..
+	dropSurpriseBagsFromMonsters = false
 
 	-- Ghost mode
 	ghostModeInvisibleEffect = false

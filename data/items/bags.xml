@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bags>
+    <!-- If chance and maxRange have the same value, the item will always drop. -->
+    <bag name="Red Surprise Bag"  itemid="6571" chance="100" maxRange="1000"/>
+    <bag name="Blue Surprise Bag" itemid="6570" chance="100" maxRange="10000"/>
+</bags>

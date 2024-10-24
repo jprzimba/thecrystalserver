@@ -318,6 +318,7 @@ class ConfigManager
 			ROOK_SYSTEM,
 			FAIRFIGHT_REDUCTION,
 			BROADCAST_BANISHMENTS,
+			SURPRISE_BAGS,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

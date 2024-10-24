@@ -256,6 +256,18 @@ typedef std::map<int32_t, int32_t> IntegerMap;
 class Items
 {
 	public:
+		struct BagItemInfo
+		{
+			std::string name;
+			uint16_t id;
+			uint32_t chance;
+			uint32_t minAmount;
+			uint32_t maxAmount;
+			uint64_t minRange;
+			uint64_t maxRange;
+		};
+
+
 		Items(): m_randomizationChance(ITEMS_RANDOMIZATION), items(ITEMS_SIZE) {}
 		virtual ~Items() {clear();}
 
@@ -283,6 +295,28 @@ class Items
 		static uint32_t dwMajorVersion;
 		static uint32_t dwMinorVersion;
 		static uint32_t dwBuildNumber;
+		
+		std::vector<const BagItemInfo*> getAllBagItems() const
+		{
+			std::vector<const BagItemInfo*> allBagItems;
+			for(std::map<int32_t, BagItemInfo>::const_iterator it = bagItems.begin(); it != bagItems.end(); ++it)
+				allBagItems.push_back(&(it->second));
+
+			return allBagItems;
+		}
+        
+		void setItemBag(uint16_t itemId, const std::string &itemName, uint32_t chance, uint32_t minAmount, uint32_t maxAmount, uint64_t minRange, uint64_t maxRange)
+		{
+			BagItemInfo itemInfo;
+			itemInfo.name = itemName;
+			itemInfo.id = itemId;
+			itemInfo.chance = chance;
+			itemInfo.minAmount = minAmount;
+			itemInfo.maxAmount = maxAmount;
+			itemInfo.minRange = minRange;
+			itemInfo.maxRange = maxRange;
+			bagItems[itemId] = itemInfo;
+		}
 
 	private:
 		uint8_t m_randomizationChance;
@@ -292,6 +326,7 @@ class Items
 
 		Array<ItemType*> items;
 		RandomizationMap randomizationMap;
+		std::map<int32_t, BagItemInfo> bagItems;
 
 		IntegerMap moneyMap;
 		IntegerMap reverseItemMap;
