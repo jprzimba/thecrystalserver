@@ -28,7 +28,6 @@
 	newPlayerLevel = 8
 	newPlayerMagicLevel = 0
 	generateAccountNumber = false
-	generateAccountSalt = false
 
 	-- Rook system
 	useRookSystem = false

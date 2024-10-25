@@ -63,10 +63,6 @@
 			Ignored if account manager is disabled.
 			Default: false
 
-		generateAccountSalt
-			Ignored if account manager is disabled.
-			Default: false
-
 	*UNJUSTIFIED KILLS
 		useFragHandler
 			If not active, unjustified kills are not recorded.

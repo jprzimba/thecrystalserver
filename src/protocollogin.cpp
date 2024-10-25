@@ -156,7 +156,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	}
 
 	Account account;
-	if(!IOLoginData::getInstance()->loadAccount(account, name) || !encryptTest(account.salt + password, account.password))
+	if(!IOLoginData::getInstance()->loadAccount(account, name) || !encryptTest(password, account.password))
 	{
 		ConnectionManager::getInstance()->addAttempt(clientIp, protocolId, false);
 		disconnectClient(0x0A, "Invalid account name or password.");

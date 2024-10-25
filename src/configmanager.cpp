@@ -185,7 +185,6 @@ bool ConfigManager::load()
 	m_confNumber[PROTECTION_LEVEL] = getGlobalNumber("protectionLevel", 1);
 	m_confNumber[STATUSQUERY_TIMEOUT] = getGlobalNumber("statusTimeout", 300000);
 	m_confBool[GENERATE_ACCOUNT_NUMBER] = getGlobalBool("generateAccountNumber", false);
-	m_confBool[GENERATE_ACCOUNT_SALT] = getGlobalBool("generateAccountSalt", false);
 	m_confBool[INGAME_GUILD_MANAGEMENT] = getGlobalBool("ingameGuildManagement", true);
 	m_confNumber[LEVEL_TO_FORM_GUILD] = getGlobalNumber("levelToFormGuild", 8);
 	m_confNumber[MIN_GUILDNAME] = getGlobalNumber("guildNameMinLength", 4);
