@@ -4,69 +4,7 @@
 		We really appreciate if someone could help us
 		with getting real monster attributes, loot etc
 
-		[ MISSING MONSTERS (not all listed there)
-			Bio-Elemental Bosses
-				Diseased Bill
-				Diseased Dan
-				Diseased Fred
-				Slime Puddle
-
-			Canine Bosses
-				The Big Bad One
-
-			Crustaceans
-				Blood Crab (Underwater)
-
-			Dwarves
-				Dwarf Henchman
-				Dwarf Miner
-				Dwarf Dispenser
-
-			Frogs
-				Deathspawn
-
-			Giant Bosses
-				Freegoiz
-				Stonecracker
-				The Old Whopper
-
-			Ghosts
-				Dryad
-				Ghostly Apparition
-				Tormented Ghost
-
-			Quara Bosses
-				Inky
-				Sharptooth
-				Splasher
-
-			Rifts
-				Rift Phantom
-				Rift Lord
-
-			Traps
-				Deathspawn
-				Hell Hole
-				Kitty
-				Magic Pillar
-				Mechanical Fighter
-				Pillar
-
-			Undead Humanoids
-				Undead Jester
-				Spectral Scum
-
-			Rhinoceros 
-				Stampor
-
-			Misc
-				Cake Golem
-
-			Rat
-				Ghost Rat
-		]
-
-		You can send your work here: http://otland.net/project.php?projectid=2
+		You can send your work here: https://github.com/jprzimba/thecrystalserver/pulls
 	-->
 	<!-- Amazons -->
 	<monster name="Amazon" file="Amazons/amazon.xml"/>
@@ -89,7 +27,6 @@
 	<monster name="Spider" file="Arachnids/spider.xml"/>
 	<monster name="Tarantula" file="Arachnids/tarantula.xml"/>
 	<monster name="Wailing Widow" file="Arachnids/wailing widow.xml"/>
-	<monster name="Sandstone Scorpion" file="Arachnids/sandstone scorpion.xml"/>
 
 	<!-- Arena -->
 		<!-- Greenhorn -->
@@ -138,7 +75,6 @@
 	<monster name="Bear" file="Bears/bear.xml"/>
 	<monster name="Panda" file="Bears/panda.xml"/>
 	<monster name="Polar Bear" file="Bears/polar bear.xml"/>
-	<monster name="Undead Cavebear" file="Bears/undead cavebear.xml"/>
 
 	<!-- Bonelords -->
 	<monster name="Bonelord" file="Bonelords/bonelord.xml"/>
@@ -157,7 +93,6 @@
 	<monster name="Slime Summon" file="Bio-Elementals/slime summon.xml"/>
 	<monster name="Son of Verminor" file="Bio-Elementals/son of verminor.xml"/>
 	<monster name="Spit Nettle" file="Bio-Elementals/spit nettle.xml"/>
-	<monster name="Slug" file="Bio-Elementals/slug.xml"/>
 
 	<!-- Birds -->
 	<monster name="Chicken" file="Birds/chicken.xml"/>
@@ -259,7 +194,6 @@
 	<monster name="Winter wolf" file="Canines/winter wolf.xml"/>
 	<monster name="Wolf" file="Canines/wolf.xml"/>
 	<monster name="Gnarlhound" file="Canines/gnarlhound.xml"/>
-	<monster name="Crystal Wolf" file="Canines/crystal wolf.xml"/>
 
 	<!-- Chakoyas -->
 	<monster name="Chakoya Toolshaper" file="Chakoyas/chakoya toolshaper.xml"/>
@@ -269,7 +203,6 @@
 	<!-- Crustaceans -->
 	<monster name="Blood Crab" file="Crustaceans/blood crab.xml"/>
 	<monster name="Crab" file="Crustaceans/crab.xml"/>
-	<monster name="Crustacea Gigantica" file="Crustaceans/crustacea gigantica.xml"/>
 
 	<!-- Cryo-Elementals -->
 	<monster name="Ice Golem" file="Cryo-Elementals/ice golem.xml"/>
@@ -313,7 +246,6 @@
 	<monster name="Undead Dragon" file="Dragons/undead dragon.xml"/>
 	<monster name="Wyrm" file="Dragons/wyrm.xml"/>
 	<monster name="Ghastly Dragon" file="Dragons/ghastly dragon.xml"/>
-	<monster name="Draptor" file="Dragons/draptor.xml"/>
 
 	<!-- Dwarves -->
 	<monster name="Dwarf Geomancer" file="Dwarves/dwarf geomancer.xml"/>
@@ -346,7 +278,6 @@
 	<monster name="Cat" file="Felines/cat.xml"/>
 	<monster name="Lion" file="Felines/lion.xml"/>
 	<monster name="Tiger" file="Felines/tiger.xml"/>
-	<monster name="Midnight Panther" file="Felines/midnight panther.xml"/>
 
 	<!-- Frogs -->
 	<monster name="Azure Frog" file="Frogs/azure frog.xml"/>
@@ -394,7 +325,6 @@
 
 	<!-- Grunts -->
 	<monster name="Pig" file="Grunts/pig.xml"/>
-	<monster name="Boar" file="Grunts/boar.xml"/>
 
 	<!-- Hydro-Elementals -->
 	<monster name="Ice Overlord" file="Hydro-Elementals/ice overlord.xml"/>
@@ -420,7 +350,6 @@
 	<monster name="Sandcrawler" file="Insects/sandcrawler.xml"/>
 	<monster name="Terramite" file="Insects/terramite.xml"/>
 	<monster name="Brimstone Bug" file="Insects/brimstone bug.xml"/>
-	<monster name="Insectoid Scout" file="Insects/insectoid scout.xml"/>
 
 	<!-- Lizards -->
 	<monster name="Lizard Sentinel" file="Lizards/lizard sentinel.xml"/>
@@ -458,11 +387,6 @@
 	<monster name="Skunk" file="Misc/skunk.xml"/>
 	<monster name="Squirrel" file="Misc/squirrel.xml"/>
 	<monster name="Yalahari" file="Misc/yalahari.xml"/>
-	<monster name="White Deer" file="Misc/white deer.xml"/>
-	<monster name="Dromedary" file="Misc/dromedary.xml"/>
-	<monster name="Brown Horse" file="Misc/horse(brown).xml"/>
-	<monster name="Grey Horse" file="Misc/horse(grey).xml"/>
-	<monster name="Fire Horse" file="Misc/horse(fire).xml"/>
 
 	<!-- Monks -->
 	<monster name="Dark Monk" file="Monks/dark monk.xml"/>
@@ -505,7 +429,6 @@
 	<monster name="Smuggler" file="Outlaws/smuggler.xml"/>
 	<monster name="Stalker" file="Outlaws/stalker.xml"/>
 	<monster name="Wild Warrior" file="Outlaws/wild warrior.xml"/>
-	<monster name="Feverish Citizen" file="Outlaws/feverish citizen.xml"/>
 
 	<!-- Pharaohs -->
 	<monster name="Ashmunrah" file="Pharaohs/ashmunrah.xml"/>
@@ -565,7 +488,6 @@
 	<monster name="Serpent Spawn" file="Serpents/serpent spawn.xml"/>
 	<monster name="Snake" file="Serpents/snake.xml"/>
 	<monster name="Young Sea Serpent" file="Serpents/young sea serpent.xml"/>
-	<monster name="Deepling Scout" file="Serpents/deepling scout.xml"/>
 
 	<!-- Sheeps -->
 	<monster name="Black Sheep" file="Sheeps/black sheep.xml"/>
@@ -594,7 +516,6 @@
 	<monster name="Mad Scientist" file="Sorcerers/mad scientist.xml"/>
 	<monster name="Warlock" file="Sorcerers/warlock.xml"/>
 	<monster name="Witch" file="Sorcerers/witch.xml"/>
-	<monster name="Mad Mage" file="Sorcerers/mad mage.xml"/>
 
 	<!-- Tortoises -->
 	<monster name="Thornback Tortoise" file="Tortoises/thornback tortoise.xml"/>
@@ -630,7 +551,6 @@
 	<monster name="Souleater" file="Undead Humanoids/souleater.xml"/>
 	<monster name="Undead Prospector" file="Undead Humanoids/undead prospector.xml"/>
 	<monster name="Undead Mine Worker" file="Undead Humanoids/undead mine worker.xml"/>
-	<monster name="Tomb Servant" file="Undead Humanoids/tomb servant.xml"/>
 
 	<!-- Isle of Evil -->
 	<monster name="Berserker Chicken" file="Isle of Evil/berserker chicken.xml"/>
