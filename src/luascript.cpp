@@ -5246,18 +5246,17 @@ int32_t LuaInterface::luaDoPlayerRemoveMoney(lua_State* L)
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
 	{
 		uint64_t playerInventoryMoney = g_game.getMoney(player);
-		if (playerInventoryMoney >= moneyToRemove)
+		if(g_config.getBool(ConfigManager::BANK_SYSTEM))
 		{
-			g_game.removeMoney(player, moneyToRemove);
-			lua_pushboolean(L, true);
-		}
-		else
-		{
-			g_game.removeMoney(player, playerInventoryMoney);
-			uint64_t remainingMoney = moneyToRemove - playerInventoryMoney;
-
-			if(g_config.getBool(ConfigManager::BANK_SYSTEM) && g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
+			if(playerInventoryMoney >= moneyToRemove)
 			{
+				g_game.removeMoney(player, moneyToRemove);
+				lua_pushboolean(L, true);
+			}
+			else
+			{
+				g_game.removeMoney(player, playerInventoryMoney);
+				uint64_t remainingMoney = moneyToRemove - playerInventoryMoney;
 				uint64_t bankBalance = player->getBankBalance();
 				if(bankBalance >= remainingMoney)
 				{
@@ -5265,7 +5264,15 @@ int32_t LuaInterface::luaDoPlayerRemoveMoney(lua_State* L)
 					lua_pushboolean(L, true);
 				}
 				else
-					lua_pushboolean(L, false);
+					lua_pushboolean(L, false);  // Não há dinheiro suficiente no banco
+			}
+		}
+		else
+		{
+			if(playerInventoryMoney >= moneyToRemove)
+			{
+				g_game.removeMoney(player, moneyToRemove);
+				lua_pushboolean(L, true);
 			}
 			else
 				lua_pushboolean(L, false);

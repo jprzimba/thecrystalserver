@@ -494,11 +494,46 @@ bool TalkAction::houseBuy(Creature* creature, const std::string&, const std::str
 		return false;
 	}
 
-	if((uint32_t)g_game.getMoney(player) < house->getPrice() || !g_game.removeMoney(player, house->getPrice()))
+	int32_t housePrice = house->getPrice();
+	int32_t playerMoney = g_game.getMoney(player);
+	int32_t playerBankBalance = player->getBankBalance();
+	uint32_t totalMoney = playerMoney + playerBankBalance;
+
+	uint32_t moneyTakenFromInventory = 0;
+	uint32_t moneyTakenFromBank = 0;
+	
+	if(g_config.getBool(ConfigManager::BANK_SYSTEM))
 	{
-		player->sendCancel("You do not have enough money.");
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
+		if(totalMoney < housePrice)
+		{
+			player->sendCancel("You do not have enough money to buy this house.");
+			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+			return false;
+		}
+
+		if(playerMoney >= housePrice)
+		{
+			g_game.removeMoney(player, housePrice);
+			moneyTakenFromInventory = playerMoney;
+			moneyTakenFromInventory = housePrice;
+		}
+		else
+		{
+			g_game.removeMoney(player, playerMoney);
+			moneyTakenFromInventory = playerMoney;
+			uint32_t remainingAmount = housePrice - playerMoney;
+			player->setBankBalance(playerBankBalance - remainingAmount);
+			moneyTakenFromBank = remainingAmount;
+		}
+	}
+	else
+	{
+		if((uint32_t)playerMoney < house->getPrice() || !g_game.removeMoney(player, house->getPrice()))
+		{
+			player->sendCancel("You do not have enough money.");
+			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+			return false;
+		}
 	}
 
 	house->setOwnerEx(player->getGUID(), true);
@@ -533,7 +568,31 @@ bool TalkAction::houseBuy(Creature* creature, const std::string&, const std::str
 	else
 		ret += "house";
 
-	ret += ", remember to leave money at ";
+	if(g_config.getBool(ConfigManager::BANK_SYSTEM))
+	{
+		std::stringstream ssInventory, ssBank;
+		if(moneyTakenFromInventory > 0)
+		{
+			ssInventory << moneyTakenFromInventory;
+			ret += ". You paid " + ssInventory.str() + " gold from your inventory";
+		}
+	  
+		if(moneyTakenFromBank > 0)
+		{
+			ssBank << moneyTakenFromBank;
+			if(moneyTakenFromInventory > 0)
+				ret += " and ";
+			else
+				ret += ". You paid ";
+	
+			ret += ssBank.str() + " gold from your bank balance";
+		}
+		ret += ".";
+		ret += " Remember to leave money at ";
+	}
+	else
+		ret += ", remember to leave money at ";
+
 	if(house->isGuild())
 		ret += "guild owner ";
 
