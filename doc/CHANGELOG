@@ -6,7 +6,7 @@
 		1.0
 
 	Website
-		https://github.com/jprzimba/crystalserver
+		https://github.com/jprzimba/thecrystalserver
 
 	License
 		GNU GPLv3
@@ -63,6 +63,7 @@
 			If enableAutoBank is active in config.lua, the server will add money to the player's bank balance instead of their inventory via NPC system. (Tryller)
 			Removed the account 'salt' from the accounts table in the database. (Tryller)
 			Initial database version set to 1. (Tryller)
+			Spawn monsters like in Tibia RL. (tetra20)
 		]
 
 		[ MAP

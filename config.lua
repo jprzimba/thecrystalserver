@@ -246,7 +246,7 @@
 	-- Bank system
 	-- NOTE: If enableAutoBank is true, the server will try to remove/add gold to/from the player's bank balance
 	bankSystem = true
-	enableAutoBank = true
+	enableAutoBank = false
 
 	-- Depot
 	defaultDepotSizePremium = 2000

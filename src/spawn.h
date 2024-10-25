@@ -95,7 +95,7 @@ class Spawn
 		int32_t radius, despawnRange, despawnRadius;
 
 		void checkSpawn();
-		bool spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup = false);
+		bool spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, int16_t delay, bool startup = false);
 
 		bool findPlayer(const Position& pos);
 

@@ -6,7 +6,7 @@
 		1.0
 
 	Website
-		https://github.com/jprzimba/crystalserver
+		https://github.com/jprzimba/thecrystalserver
 
 	License
 		GNU GPLv3
@@ -105,7 +105,7 @@
 
 			Download sources
 				Launch a terminal, and paste in this command:
-					git clone https://github.com/jprzimba/crystalserver
+					git clone https://github.com/jprzimba/thecrystalserver
 
 			Compiling
 				Launch a terminal, and type this:

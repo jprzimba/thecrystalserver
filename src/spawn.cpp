@@ -276,7 +276,7 @@ bool Spawn::findPlayer(const Position& pos)
 	return false;
 }
 
-bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup /*= false*/)
+bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, int16_t delay, bool startup /*= false*/)
 {
 	Monster* monster = Monster::createMonster(mType);
 	if(!monster)
@@ -291,10 +291,20 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 			return false;
 		}
 	}
-	else if(!g_game.placeCreature(monster, pos, false, true))
+	else if(delay == 0)
 	{
-		delete monster;
-		return false;
+		if (!g_game.placeCreature(monster, pos, false, true))
+		{
+			delete monster;
+			return false;
+		}
+	}
+	else
+	{
+		g_game.addMagicEffect(pos, MAGIC_EFFECT_TELEPORT);
+		Scheduler::getInstance().addEvent(createSchedulerTask(1400,
+			boost::bind(&Spawn::spawnMonster, this, spawnId, mType, pos, dir, delay - 1400, false)));
+		return true;
 	}
 
 	monster->setSpawn(this);
@@ -313,7 +323,7 @@ void Spawn::startup()
 	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it)
 	{
 		sb = it->second;
-		spawnMonster(it->first, sb.mType, sb.pos, sb.direction, true);
+		spawnMonster(it->first, sb.mType, sb.pos, sb.direction, false);
 	}
 }
 
@@ -355,7 +365,7 @@ void Spawn::checkSpawn()
 			continue;
 		}
 
-		spawnMonster(it->first, sb.mType, sb.pos, sb.direction);
+		spawnMonster(it->first, sb.mType, sb.pos, sb.direction, 4200);
 		uint32_t minSpawnCount = g_config.getNumber(ConfigManager::RATE_SPAWN_MIN),
 			maxSpawnCount = g_config.getNumber(ConfigManager::RATE_SPAWN_MAX);
 		if(++spawnCount >= (uint32_t)random_range(minSpawnCount, maxSpawnCount))
