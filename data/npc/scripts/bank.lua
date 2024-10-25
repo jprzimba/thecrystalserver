@@ -95,7 +95,7 @@ function creatureSayCallback(cid, type, msg)
 	elseif talkState[talkUser] == 7 then
 		if msgcontains(msg, 'yes') then
 			if getPlayerBalance(cid) >= n then
-				if doPlayerTransferMoneyTo(cid, p, n) == TRUE then
+				if doPlayerTransferMoneyTo(cid, p, n) then
 					selfSay('You have transferred '..n..' gold to '..p..' and your account balance is '..getPlayerBalance(cid)..' golds.', cid)
 					talkState[talkUser] = 0
 				else

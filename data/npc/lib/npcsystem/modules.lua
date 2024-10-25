@@ -1302,7 +1302,11 @@ if(Modules == nil) then
 			local msg = self.npcHandler:getMessage(MESSAGE_SOLD)
 			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, self.npcHandler:parseMessage(msg, parseInfo))
 
-			doPlayerAddMoney(cid, amount * shopItem.sell)
+			if (getConfigValue("enableAutoBank")) then
+				doPlayerSetBalance(cid, amount * shopItem.sell)
+			else
+				doPlayerAddMoney(cid, amount * shopItem.sell)
+			end
 			if(NPCHANDLER_CONVBEHAVIOR ~= CONVERSATION_DEFAULT) then
 				self.npcHandler.talkStart[cid] = os.time()
 			else
