@@ -55,9 +55,9 @@
 			Surprise bag system is configurable in config.lua with settings in data/items/bags.xml. (Tryller)
 			Auto bank system: the gold is added to the player's bank balance and removed from the inventory/bank balance when buying an item. (Tryller)
 			getPlayerMoney(cid) retrieves all gold from the player, including inventory and bank. (Tryller)
-			doPlayerAddMoney(cid, money) Add gold to bank balance if bankSystem and enableAutoBank are enabled in config.lua (Tryller)
 			doPlayerRemoveMoney(cid, money) tries to remove gold from the player; if unsuccessful, it attempts to remove it from the bank if bankSystem and enableAutoBank are enabled in config.lua. (Tryller)
 			ShopWindow shows the player's total gold, including from inventory and bank. (Tryller)
+			New lua function: getPlayerTotalMoney(). (Tryller)
 		]
 
 		[ MAP

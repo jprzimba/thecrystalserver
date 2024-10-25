@@ -50,7 +50,7 @@ function onSay(cid, words, param, channel)
 			return true
 		end
 
-		if(getPlayerMoney(cid) < money) then
+		if(getPlayerTotalMoney(cid) < money) then
 			doPlayerSendChannelMessage(cid, '', 'You don\'t have enough money.', TALKTYPE_CHANNEL_W, CHANNEL_GUILD)
 			return true
 		end

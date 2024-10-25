@@ -667,6 +667,7 @@
 	getPlayerPremiumDays(cid)
 	getPlayerBalance(cid)
 	getPlayerMoney(cid)
+	getPlayerTotalMoney(cid)
 	getPlayerSkullTicks(cid, type)
 	getPlayerModes(cid)
 	getPlayerRates(cid)

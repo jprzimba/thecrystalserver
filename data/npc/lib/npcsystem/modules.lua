@@ -1,5 +1,6 @@
 -- Advanced NPC System (Created by Jiddo),
 -- Modified by TheForgottenServer Team.
+-- Modified by Tryller
 
 if(Modules == nil) then
 	-- Constants used to separate buying from selling.
@@ -738,7 +739,7 @@ if(Modules == nil) then
 									found = false
 								end
 							elseif(k == 20000) then
-								if(getPlayerMoney(cid) < tmp) then
+								if(getPlayerTotalMoney(cid) < tmp) then
 									found = false
 								end
 							elseif(getPlayerItemCount(cid, k, v[2]) < tmp) then
@@ -1222,7 +1223,7 @@ if(Modules == nil) then
 			[TAG_TOTALCOST] = totalCost,
 			[TAG_ITEMNAME] = shopItem.name
 		}
-		if(getPlayerMoney(cid) < totalCost) then
+		if(getPlayerTotalMoney(cid) < totalCost) then
 			local msg = self.npcHandler:getMessage(MESSAGE_NEEDMONEY)
 			doPlayerSendCancel(cid, self.npcHandler:parseMessage(msg, parseInfo))
 			return false

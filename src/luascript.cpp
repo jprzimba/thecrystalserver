@@ -1540,6 +1540,9 @@ void LuaInterface::registerFunctions()
 	//getPlayerMoney(cid)
 	lua_register(m_luaState, "getPlayerMoney", LuaInterface::luaGetPlayerMoney);
 
+	//getPlayerTotalMoney(cid)
+	lua_register(m_luaState, "getPlayerTotalMoney", LuaInterface::luaGetPlayerTotalMoney);
+
 	//getPlayerSoul(cid[, ignoreModifiers = false])
 	lua_register(m_luaState, "getPlayerSoul", LuaInterface::luaGetPlayerSoul);
 
@@ -2711,6 +2714,9 @@ int32_t LuaInterface::internalGetPlayerInfo(lua_State* L, PlayerInfo_t info)
 			value = player->getVocationId();
 			break;
 		case PlayerInfoMoney:
+			value = g_game.getMoney(player);
+			break;
+		case PlayerInfoTotalMoney:
 			uint64_t totalMoney =  g_game.getMoney(player) + player->getBankBalance();
 			value = totalMoney;
 			break;
@@ -2850,6 +2856,11 @@ int32_t LuaInterface::luaGetPlayerVocation(lua_State* L)
 int32_t LuaInterface::luaGetPlayerMoney(lua_State* L)
 {
 	return internalGetPlayerInfo(L, PlayerInfoMoney);
+}
+
+int32_t LuaInterface::luaGetPlayerTotalMoney(lua_State* L)
+{
+	return internalGetPlayerInfo(L, PlayerInfoTotalMoney);
 }
 
 int32_t LuaInterface::luaGetPlayerFreeCap(lua_State* L)
@@ -5214,11 +5225,7 @@ int32_t LuaInterface::luaDoPlayerAddMoney(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
 	{
-		if(g_config.getBool(ConfigManager::BANK_SYSTEM) && g_config.getBool(ConfigManager::ENABLE_AUTO_BANK))
-			player->setBankBalance(player->getBankBalance() + money);
-		else
-			g_game.addMoney(player, money);
-
+		g_game.addMoney(player, money);
 		lua_pushboolean(L, true);
 	}
 	else

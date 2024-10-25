@@ -49,7 +49,7 @@ local onBuy = function(cid, item, subType, amount, ignoreCap, inBackpacks)
 		return
 	end
 
-	if(getPlayerMoney(cid) >= amount * items[item].buyPrice) then
+	if(getPlayerTotalMoney(cid) >= amount * items[item].buyPrice) then
 		local itemz, i = doNpcSellItem(cid, item, amount, subType, ignoreCap, inBackpacks)
 		if(i < amount) then
 			if(i == 0) then
