@@ -18,32 +18,32 @@ function creatureSayCallback(cid, type, msg)
 	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 
 	if(msgcontains(msg, 'soft') or msgcontains(msg, 'boots')) then
-		selfSay('Do you want to repair your worn soft boots for 10000 gold coins?', cid)
+		npcHandler:say('Do you want to repair your worn soft boots for 10000 gold coins?', cid)
 		talkState[talkUser] = 1
 	elseif(msgcontains(msg, 'yes') and talkState[talkUser] == 1) then
 		if(getPlayerItemCount(cid, 6530) >= 1) then
 			if(doPlayerRemoveMoney(cid, 10000)) then
 				local item = getPlayerItemById(cid, true, 6530)
 				doTransformItem(item.uid, 6132)
-				selfSay('Here you are.', cid)
+				npcHandler:say('Here you are.', cid)
 			else
-				selfSay('Sorry, you don\'t have enough gold.', cid)
+				npcHandler:say('Sorry, you don\'t have enough gold.', cid)
 			end
 		elseif(getPlayerItemCount(cid, 10021) >= 1) then
 			if(doPlayerRemoveMoney(cid, 10000)) then
 				local item = getPlayerItemById(cid, true, 10021)
 				doTransformItem(item.uid, 6132)
-				selfSay('Here you are.', cid)
+				npcHandler:say('Here you are.', cid)
 			else
-				selfSay('Sorry, you don\'t have enough gold.', cid)
+				npcHandler:say('Sorry, you don\'t have enough gold.', cid)
 			end
 		else
-			selfSay('Sorry, you don\'t have the item.', cid)
+			npcHandler:say('Sorry, you don\'t have the item.', cid)
 		end
 		talkState[talkUser] = 0
 	elseif(msgcontains(msg, 'no') and isInArray({1}, talkState[talkUser])) then
 		talkState[talkUser] = 0
-		selfSay('Ok then.', cid)
+		npcHandler:say('Ok then.', cid)
 	end
 
 	return true

@@ -25,19 +25,19 @@ function creatureSayCallback(cid, type, msg)
         if isPremium(cid) then
          
                 if getPlayerItemCount(cid,2160) >= 1 then
-                    selfSay('Did you buy first addons for 10k?', cid)
+                    npcHandler:say('Did you buy first addons for 10k?', cid)
 		talkState[talkUser] = 1
                 else
-                    selfSay('Come back when you have 10k.', cid)
+                    npcHandler:say('Come back when you have 10k.', cid)
                 end
 
         else
-            selfSay(addonPremium, cid)
+            npcHandler:say(addonPremium, cid)
         end
 	elseif(msgcontains(msg, 'yes') and talkState[talkUser] == 1) then
         if getPlayerItemCount(cid,2160) >= 1 or getPlayerItemCount(cid,2152) >= 100 or getPlayerItemCount(cid,2148) >= 10000 then
             if doPlayerTakeItem(cid,2160,1) or doPlayerTakeItem(cid,2152,100) or doPlayerTakeItem(cid,2148,10000) == 0 then
-                selfSay(addonGive, cid)
+                npcHandler:say(addonGive, cid)
 				doPlayerAddOutfit(cid, 136, 1)
 				doPlayerAddOutfit(cid, 128, 1)
 				doPlayerAddOutfit(cid, 137, 1)
@@ -85,25 +85,25 @@ function creatureSayCallback(cid, type, msg)
 
             end
         else
-            selfSay(addonItem, cid)
+            npcHandler:say(addonItem, cid)
         end
         talkState[talkUser] = 0
     elseif (msgcontains(msg, 'second') or msgcontains(msg, 'second addon')) then
         if isPremium(cid) then
                 if getPlayerItemCount(cid,2160) >= 2 or getPlayerItemCount(cid,2152) >= 200 or getPlayerItemCount(cid,2148) >= 20000 then
-                    selfSay('Did you bring me the 20k?', cid)
+                    npcHandler:say('Did you bring me the 20k?', cid)
                     talkState[talkUser] = 4
                 else
-                    selfSay('Come back when you have the 20k.', cid)
+                    npcHandler:say('Come back when you have the 20k.', cid)
                 end
 
         else
-            selfSay(addonPremium, cid)
+            npcHandler:say(addonPremium, cid)
         end
 	elseif(msgcontains(msg, 'yes') and talkState[talkUser] == 4) then
 	if getPlayerItemCount(cid,2160) >= 2 or getPlayerItemCount(cid,2152) >= 200 or getPlayerItemCount(cid,2148) >= 20000 then
             if doPlayerTakeItem(cid,2160,1) or doPlayerTakeItem(cid,2152,100) or doPlayerTakeItem(cid,2148,10000) == 0 then
-                selfSay(addonGive, cid)
+                npcHandler:say(addonGive, cid)
 				doPlayerAddOutfit(cid, 136, 2)
 				doPlayerAddOutfit(cid, 128, 2)
 				doPlayerAddOutfit(cid, 137, 2)
@@ -150,13 +150,13 @@ function creatureSayCallback(cid, type, msg)
 				doPlayerAddOutfit(cid, 335, 2)
             end
         else
-            selfSay(addonItem, cid)
+            npcHandler:say(addonItem, cid)
         end
 
 		talkState[talkUser] = 0
 	elseif(msgcontains(msg, 'no') and isInArray({1}, talkState[talkUser])) then
 		talkState[talkUser] = 0
-		selfSay('Ok then.', cid)
+		npcHandler:say('Ok then.', cid)
 	end
 
 	return true
