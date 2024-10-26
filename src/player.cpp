@@ -5353,3 +5353,18 @@ void Player::handleAutoBankGold(Item* item)
 	if(parent)
 		parent->__removeThing(item, item->getItemCount());
 }
+
+void Player::setDesiredLootItems(const std::vector<uint32_t>& desiredItems)
+{
+    desiredLootItems = desiredItems;
+}
+
+bool Player::isDesiredLootItem(uint32_t itemId)
+{
+    return std::find(desiredLootItems.begin(), desiredLootItems.end(), itemId) != desiredLootItems.end();
+}
+
+const std::vector<uint32_t>& Player::getDesiredLootItems() const
+{
+    return desiredLootItems;
+}

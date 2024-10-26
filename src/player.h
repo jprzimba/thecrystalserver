@@ -731,6 +731,10 @@ class Player : public Creature, public Cylinder
 		
 		void updateInventoryGoods(uint32_t itemId);
 
+		void setDesiredLootItems(const std::vector<uint32_t>& desiredItems);
+		bool isDesiredLootItem(uint32_t itemId);
+		const std::vector<uint32_t>& getDesiredLootItems() const;
+
 	protected:
 		void checkTradeState(const Item* item);
 		void internalAddDepot(Depot* depot, uint32_t depotId);
@@ -917,6 +921,7 @@ class Player : public Creature, public Cylinder
 		Item* weapon;
 
 		std::vector<uint32_t> forceWalkthrough;
+		std::vector<uint32_t> desiredLootItems;
 
 		typedef std::set<uint32_t> AttackedSet;
 		AttackedSet attackedSet;

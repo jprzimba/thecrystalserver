@@ -753,6 +753,22 @@ bool IOLoginData::loadPlayer(Player* player, const std::string& name, bool preLo
 		result->free();
 	}
 
+	// Load desired loot items
+	query.str("");
+	query << "SELECT `itemid` FROM `player_autoloot` WHERE `player_id` = " << player->getGUID();
+	if((result = db->storeQuery(query.str())))
+	{
+		std::vector<uint32_t> lootItems;
+		do
+		{
+			uint32_t itemId = result->getDataInt("itemid");
+			lootItems.push_back(itemId);
+		} while (result->next());
+		result->free();
+        
+		player->setDesiredLootItems(lootItems);
+	}
+
 	//load vip
 	query.str("");
 	if(!g_config.getBool(ConfigManager::VIPLIST_PER_PLAYER))
@@ -953,6 +969,25 @@ bool IOLoginData::savePlayer(Player* player, bool preSave/* = true*/, bool shall
 			return false;
 	}
 
+	// Save player loot items
+	char buffer[280];
+	std::vector<uint32_t> desiredItems = player->getDesiredLootItems();
+	query.str("");
+	query << "DELETE FROM `player_autoloot` WHERE `player_id` = " << player->getGUID();
+	if(!db->query(query.str()))
+		return false;
+
+	stmt.setQuery("INSERT INTO `player_autoloot` (`player_id`, `itemid`) VALUES ");
+	for(size_t i = 0; i < desiredItems.size(); ++i)
+	{
+		sprintf(buffer, "%u, %u", player->getGUID(), desiredItems[i]);
+		if(!stmt.addRow(buffer))
+			return false;
+	}
+	
+	if(!stmt.execute())
+		return false;
+ 
 	//item saving
 	query.str("");
 	query << "DELETE FROM `player_items` WHERE `player_id` = " << player->getGUID();

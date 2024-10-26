@@ -350,6 +350,7 @@ bool ConfigManager::load()
 	m_confBool[BROADCAST_BANISHMENTS] = getGlobalBool("broadcastBanishments", true);
 	m_confBool[SURPRISE_BAGS] = getGlobalBool("dropSurpriseBagsFromMonsters", false);
 	m_confBool[ENABLE_AUTO_BANK] = getGlobalBool("enableAutoBank", false);
+	m_confBool[ENABLE_AUTO_LOOT] = getGlobalBool("enableAutoLoot", false);
 
 	m_loaded = true;
 	return true;

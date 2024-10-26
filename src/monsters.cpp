@@ -172,17 +172,39 @@ void MonsterType::dropLoot(Container* corpse)
 
 		for(ItemList::iterator iit = items.begin(); iit != items.end(); ++iit)
 		{
+			uint32_t ownerId = corpse->getCorpseOwner();
+			if(!ownerId)
+				return;
+			
+			Player* owner = g_game.getPlayerByGuid(ownerId);
+			if(!owner)
+				return;
+	  
 			Item* tmpItem = *iit;
-			if(Container* container = tmpItem->getContainer())
-			{
-				if(createChildLoot(container, *it))
-					corpse->__internalAddThing(tmpItem);
+		 	if(g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
+		 	{
+				if(tmpItem && owner->isDesiredLootItem(tmpItem->getID()))
+				{
+					std::ostringstream msg;
+					msg << "You looted " << tmpItem->getArticle() << " " << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";
+					owner->sendTextMessage(MSG_STATUS_SMALL, msg.str());
+					ReturnValue ret = g_game.internalPlayerAddItem(owner, owner, tmpItem);
+					if(ret != RET_NOERROR)
+						delete tmpItem;
+				}
 				else
-					delete container;
+				{
+					if(owner)
+					{
+						owner->handleAutoBankGold(tmpItem);
+						owner->updateInventoryGoods(tmpItem->getID());
+					}
+		
+					corpse->__internalAddThing(tmpItem);
+				}
 			}
 			else
 			{
-			 	Player* owner = g_game.getPlayerByGuid(corpse->getCorpseOwner());
 				if(owner)
 				{
 					owner->handleAutoBankGold(tmpItem);

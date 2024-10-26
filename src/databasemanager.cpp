@@ -186,6 +186,33 @@ uint32_t DatabaseManager::updateDatabase()
 			return 1;
 		}
 
+		case 1:
+		{
+			std::clog << "Updating database to version: 2 (Auto Loot)." << std::endl;
+			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
+			{
+				query << "CREATE TABLE IF NOT EXISTS `player_autoloot` ("
+				"`id` INT NOT NULL AUTO_INCREMENT, "
+				"`player_id` INT NOT NULL, "
+				"`itemid` INT NOT NULL, "
+				"PRIMARY KEY (`id`), "
+				"KEY `player_id` (`player_id`), "
+				"KEY `itemid` (`itemid`) "
+				") ENGINE=InnoDB;";
+			}
+			else
+			{
+				query << "CREATE TABLE IF NOT EXISTS `player_autoloot` ("
+				"`id` INTEGER PRIMARY KEY AUTOINCREMENT, "
+				"`player_id` INTEGER NOT NULL, "
+				"`itemid` INTEGER NOT NULL"");";
+			}
+
+			db->query(query.str());
+			registerDatabaseConfig("db_version", 2);
+			return 2;
+		}
+
 		default:
 			break;
 	}

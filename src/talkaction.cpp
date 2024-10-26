@@ -325,6 +325,12 @@ bool TalkAction::loadFunction(const std::string& functionName)
 		m_function = ghost;
 	else if(m_functionName == "software")
 		m_function = software;
+	else if(m_functionName == "adddesireditem")
+		m_function = addDesiredItem;
+	else if(m_functionName == "removedesireditem")
+		m_function = removeDesiredItem;
+	else if(m_functionName == "showdesireditems")
+		m_function = showDesiredItems;
 	else
 	{
 		std::clog << "[Warning - TalkAction::loadFunction] Function \"" << m_functionName << "\" does not exist." << std::endl;
@@ -1371,5 +1377,119 @@ bool TalkAction::software(Creature* creature, const std::string&, const std::str
 		<< "Lua: " << LUA_VERSION << std::endl;
 
 	player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, s.str());
+	return true;
+}
+
+bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const std::string& param)
+{
+	Player* player = creature->getPlayer();
+	if(!player)
+		return false;
+
+	if(!g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
+	{
+		std::string message = "Auto loot is currently disabled.";
+		player->sendTextMessage(MSG_EVENT_ADVANCE, message.c_str());
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return false;
+	}
+	
+	std::vector<uint32_t> desiredItems = player->getDesiredLootItems();
+	StringVec params = explodeString(param, ",");
+	for(size_t i = 0; i < params.size(); ++i)
+	{
+		uint32_t itemId = Item::items.getItemIdByName(params[i]);
+		if(itemId == -1)
+		{
+			player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item not found: " + params[i]);
+			return true;
+		}
+
+		if(std::find(desiredItems.begin(), desiredItems.end(), itemId) == desiredItems.end())
+		{
+			desiredItems.push_back(itemId);
+			player->setDesiredLootItems(desiredItems);
+			player->sendTextMessage(MSG_INFO_DESCR, "Added item to desired loot list: " + params[i]);
+			IOLoginData::getInstance()->savePlayer(player);
+		}
+		else
+			player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item is already in the desired loot list: " + params[i]);
+    }
+
+    return true;
+}
+
+bool TalkAction::removeDesiredItem(Creature* creature, const std::string&, const std::string& param)
+{
+	Player* player = creature->getPlayer();
+	if(!player)
+		return false;
+
+	if(!g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
+	{
+		std::string message = "Auto loot is currently disabled.";
+		player->sendTextMessage(MSG_EVENT_ADVANCE, message.c_str());
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
+	}
+
+	std::vector<uint32_t> desiredItems = player->getDesiredLootItems();
+	StringVec params = explodeString(param, ",");
+	for(size_t i = 0; i < params.size(); ++i)
+	{
+		uint32_t itemId = Item::items.getItemIdByName(params[i]);
+		std::string itemName = trimString(params[i]);
+
+
+		for(size_t j = 0; j < desiredItems.size(); ++j)
+		{
+		 	if(desiredItems[j] == itemId)
+			{
+				desiredItems.erase(desiredItems.begin() + j);
+				player->setDesiredLootItems(desiredItems);
+				player->sendTextMessage(MSG_INFO_DESCR, "Deleted item from desired loot list: " + itemName);
+				IOLoginData::getInstance()->savePlayer(player);
+				return true;
+			}
+		}
+	}
+
+	player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item not found in the desired loot list.");
+	return true;
+}
+
+bool TalkAction::showDesiredItems(Creature* creature, const std::string&, const std::string&)
+{
+	Player* player = creature->getPlayer();
+	if(!player)
+		return false;
+
+	if(!g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
+	{
+		std::string message = "Auto loot is currently disabled.";
+		player->sendTextMessage(MSG_EVENT_ADVANCE, message.c_str());
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
+	}
+
+	std::vector<uint32_t> desiredItems = player->getDesiredLootItems();
+	if(desiredItems.empty())
+	{
+		player->sendFYIBox("Your desired loot list is empty.");
+		return true;
+	}
+
+	std::stringstream ss;
+	ss << "Your desired loot list:\n";
+	for(size_t i = 0; i < desiredItems.size(); ++i)
+	{
+		const ItemType& it = Item::items[desiredItems[i]];
+		ss << it.name;
+
+		if(i < desiredItems.size() - 1)
+			ss << ", ";
+	}
+
+	player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, ss.str());
 	return true;
 }

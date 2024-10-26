@@ -319,6 +319,7 @@ class ConfigManager
 			BROADCAST_BANISHMENTS,
 			SURPRISE_BAGS,
 			ENABLE_AUTO_BANK,
+			ENABLE_AUTO_LOOT,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

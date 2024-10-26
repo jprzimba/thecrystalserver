@@ -72,6 +72,9 @@
 	<talkaction words="!commands;/commands" event="script" value="commands.lua"/>
 	<talkaction words="!software;/software" event="function" value="software"/>
 	<talkaction words="!bank;/bank" event="script" value="bank.lua"/>
+	<talkaction words="!addloot;/addloot" event="function" value="adddesireditem"/>
+	<talkaction words="!removeloot;/removeloot;!deleteloot;/deleteloot" event="function" value="removedesireditem"/>
+	<talkaction words="!showloot;/showloot" event="function" value="showdesireditems"/>
 
 	<!-- Houses -->
 	<talkaction words="alevo grav" filter="word-spaced" event="function" value="houseBuy"/>
