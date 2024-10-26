@@ -183,7 +183,7 @@ void MonsterType::dropLoot(Container* corpse)
 			Item* tmpItem = *iit;
 		 	if(g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
 		 	{
-				if(tmpItem && owner->isDesiredLootItem(tmpItem->getID()))
+				if(tmpItem && owner && owner->isDesiredLootItem(tmpItem->getID()))
 				{
 					std::ostringstream msg;
 					msg << "You looted " << tmpItem->getArticle() << " " << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";

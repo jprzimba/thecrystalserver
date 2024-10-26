@@ -3,7 +3,7 @@ local PRESENT_RED = {2152, 2152, 2152, 2153, 5944, 2112, 6568, 6566, 2492, 2520,
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 	local count = 1
-	if(item.itemid == 6570) then
+	if(item.itemid == ITEM_BLUE_SURPRISE_BAG) then
 		local randomChance = math.random(1, #PRESENT_BLUE)
 		if(randomChance == 1) then
 			count = 10
@@ -11,7 +11,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 			count = 3
 		end
 		doPlayerAddItem(cid, PRESENT_BLUE[randomChance], count)
-	elseif(item.itemid == 6571) then
+	elseif(item.itemid == ITEM_RED_SURPRISE_BAG) then
 		local randomChance = math.random(1, #PRESENT_RED)
 		if randomChance > 0 and randomChance < 4 then
 			count = 10
