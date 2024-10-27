@@ -4,9 +4,11 @@ Crystal Server is a server application written in C++ for the MMORPG Tibia. It i
 
 ### TUTORIALS
 
-===============
-
 - [Wiki](https://github.com/jprzimba/thecrystalserver/wiki).
+
+
+### TODO
+- Added pugixml support for improved XML performance.
 
 ### Donate
 
