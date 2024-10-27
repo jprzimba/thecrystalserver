@@ -78,12 +78,12 @@
 		#8
 			Last step, you can now launch your server ;).
 			If you're new to Linux you just have to type:
-				./TheForgottenServer
+				./crystalserver
 
 	Windows
 		Introduction
 			In this guide you will learn how to setup a MySQL server
-			and TheForgottenServer database on it, you will also get
+			and crystalserver database on it, you will also get
 			some other things with this, such as Apache2 and PHP5
 			because we're going to use XAMPP to make this an easy
 			task, Apache2 and PHP5 are quite useful anyway if you
@@ -109,7 +109,7 @@
 			Use the 'File to import' part, select mysql.sql and press on 'Go'.
 
 		#7
-			Now you should have a MySQL server with TheForgottenServer
+			Now you should have a MySQL server with crystalserver
 			database imported, it is time to open config.lua with your
 			favourite text editor and go to the '-- MySQL' part. Edit
 			the settings there for the server to be able to create a
