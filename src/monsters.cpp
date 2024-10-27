@@ -188,7 +188,7 @@ void MonsterType::dropLoot(Container* corpse)
 					std::ostringstream msg;
 					msg << "You looted " << tmpItem->getArticle() << " " << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";
 					owner->sendTextMessage(MSG_STATUS_SMALL, msg.str());
-					ReturnValue ret = g_game.internalPlayerAddItem(owner, owner, tmpItem);
+					ReturnValue ret = g_game.internalPlayerAddItem(NULL, owner, tmpItem, false);
 					if(ret != RET_NOERROR)
 						delete tmpItem;
 				}
