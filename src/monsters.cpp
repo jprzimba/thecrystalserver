@@ -186,8 +186,13 @@ void MonsterType::dropLoot(Container* corpse)
 				if(tmpItem && owner && owner->isDesiredLootItem(tmpItem->getID()))
 				{
 					std::ostringstream msg;
-					msg << "You looted " << tmpItem->getArticle() << " " << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";
-					owner->sendTextMessage(MSG_STATUS_SMALL, msg.str());
+					msg << "You looted ";
+					if (!tmpItem->getArticle().empty())
+						msg << tmpItem->getArticle() << " ";
+
+					msg << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";
+					owner->sendTextMessage(MSG_EVENT_ADVANCE, msg.str());
+
 					ReturnValue ret = g_game.internalPlayerAddItem(NULL, owner, tmpItem, false);
 					if(ret != RET_NOERROR)
 						delete tmpItem;
@@ -199,7 +204,7 @@ void MonsterType::dropLoot(Container* corpse)
 						owner->handleAutoBankGold(tmpItem);
 						owner->updateInventoryGoods(tmpItem->getID());
 					}
-		
+
 					corpse->__internalAddThing(tmpItem);
 				}
 			}
