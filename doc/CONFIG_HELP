@@ -635,10 +635,10 @@
 			Default: 5
 
 		coresUsed
-			Specifies a cores of CPU that are used to run TFS
+			Specifies a cores of CPU that are used to run TCS
 			Put a cores' numbers, counting from 0 and separate them with comma
 			(fe. coresUsed = "0, 1, 2, 3" means you have a quad core
-				and want TFS to use all of its cores)
+				and want TCS to use all of its cores)
 			Default: -1
 
 	*STARTUP

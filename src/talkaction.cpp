@@ -1440,7 +1440,6 @@ bool TalkAction::removeDesiredItem(Creature* creature, const std::string&, const
 		uint32_t itemId = Item::items.getItemIdByName(params[i]);
 		std::string itemName = trimString(params[i]);
 
-
 		for(size_t j = 0; j < desiredItems.size(); ++j)
 		{
 		 	if(desiredItems[j] == itemId)

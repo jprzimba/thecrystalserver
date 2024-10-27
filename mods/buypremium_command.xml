@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mod name="Buy premium command" version="1.0" author="The Crystal Server" contact="otland.net" enabled="yes">
+<mod name="Buy premium command" version="1.0" author="The Crystal Server" contact="github.com/jprzimba/thecrystalserver" enabled="yes">
 	<config name="buypremium_config"><![CDATA[
 		config = {
 			days = 90,

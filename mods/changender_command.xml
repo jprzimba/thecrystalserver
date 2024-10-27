@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mod name="Change gender command" version="1.0" author="The Crystal Server" contact="otland.net" enabled="yes">
+<mod name="Change gender command" version="1.0" author="The Crystal Server" contact="github.com/jprzimba/thecrystalserver" enabled="yes">
 	<description>
 		This mod will add new command for players - !changender.
 		Players will be able to change gender, cost can be configured.

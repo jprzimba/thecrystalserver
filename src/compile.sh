@@ -25,7 +25,7 @@ else
 	if [ $ans1 = "Fedora" ] || [ $ans1 = "CentOS" ]; then
 
 ##########################
-#TFS Dependencies & Tools#
+#TCS Dependencies & Tools#
 ##################################################
 #This is all the dependencies needed to compile. #
 ##################################################
@@ -109,9 +109,9 @@ else
 		echo 'Continuing...'
 
 ###############
-#Compiling TFS#
+#Compiling TCS#
 #################################################
-#This will compile TFS, it has default settings.#
+#This will compile TCS, it has default settings.#
 #If you wish to specify more options, go follow ################
 # the compiling instructions in DOC/README.     # -D__LUAJIT-_ #
 ################################################################

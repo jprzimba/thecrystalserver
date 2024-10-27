@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mod name="Highscore book" version="1.0" author="The Crystal Server" contact="otland.net" enabled="yes">
+<mod name="Highscore book" version="1.0" author="The Crystal Server" contact="github.com/jprzimba/thecrystalserver" enabled="yes">
 	<action itemid="1981" event="buffer"><![CDATA[
 		if(item.actionid >= 150 and item.actionid <= 158) then
 			doShowTextDialog(cid, item.itemid, getHighscoreString((item.actionid - 150)))

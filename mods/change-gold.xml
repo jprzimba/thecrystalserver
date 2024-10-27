@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mod name="change-gold" version="1.0" author="The Crystal Server" contact="otland.net" enabled="yes">
+<mod name="change-gold" version="1.0" author="The Crystal Server" contact="github.com/jprzimba/thecrystalserver" enabled="yes">
 	<action itemid="2148;2152;2160" event="script" override="yes"><![CDATA[
 		local coins = {
 			[ITEM_GOLD_COIN] = {

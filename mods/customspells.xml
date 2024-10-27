@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mod name="Custom Spells" version="1.0" author="The Crystal Server" contact="otland.net" enabled="yes">
+<mod name="Custom Spells" version="1.0" author="The Crystal Server" contact="github.com/jprzimba/thecrystalserver" enabled="yes">
 	<!-- Custom Runes -->
 	<rune name="Polymorph" id="2270" charges="1" maglv="20" exhaustion="2000" blocktype="solid" allowfaruse="1" event="script" value="customspells/polymorph.lua"/>
 	<rune name="Combustion" id="2276" charges="1" maglv="20" exhaustion="2000" blocktype="solid" allowfaruse="1" event="script" value="customspells/combustion.lua"/>

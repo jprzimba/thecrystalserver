@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\account.h" />
+    <ClInclude Include="..\actions.h" />
+    <ClInclude Include="..\admin.h" />
+    <ClInclude Include="..\allocator.h" />
+    <ClInclude Include="..\baseevents.h" />
+    <ClInclude Include="..\beds.h" />
+    <ClInclude Include="..\chat.h" />
+    <ClInclude Include="..\combat.h" />
+    <ClInclude Include="..\condition.h" />
+    <ClInclude Include="..\configmanager.h" />
+    <ClInclude Include="..\connection.h" />
+    <ClInclude Include="..\const.h" />
+    <ClInclude Include="..\container.h" />
+    <ClInclude Include="..\creature.h" />
+    <ClInclude Include="..\creatureevent.h" />
+    <ClInclude Include="..\cylinder.h" />
+    <ClInclude Include="..\database.h" />
+    <ClInclude Include="..\databasemanager.h" />
+    <ClInclude Include="..\databasemysql.h" />
+    <ClInclude Include="..\databasepgsql.h" />
+    <ClInclude Include="..\databasesqlite.h" />
+    <ClInclude Include="..\definitions.h" />
+    <ClInclude Include="..\depot.h" />
+    <ClInclude Include="..\dispatcher.h" />
+    <ClInclude Include="..\enums.h" />
+    <ClInclude Include="..\exception.h" />
+    <ClInclude Include="..\fileloader.h" />
+    <ClInclude Include="..\game.h" />
+    <ClInclude Include="..\gameservers.h" />
+    <ClInclude Include="..\globalevent.h" />
+    <ClInclude Include="..\group.h" />
+    <ClInclude Include="..\house.h" />
+    <ClInclude Include="..\housetile.h" />
+    <ClInclude Include="..\ioban.h" />
+    <ClInclude Include="..\ioguild.h" />
+    <ClInclude Include="..\iologindata.h" />
+    <ClInclude Include="..\iomap.h" />
+    <ClInclude Include="..\iomapserialize.h" />
+    <ClInclude Include="..\item.h" />
+    <ClInclude Include="..\itemattributes.h" />
+    <ClInclude Include="..\itemloader.h" />
+    <ClInclude Include="..\items.h" />
+    <ClInclude Include="..\luascript.h" />
+    <ClInclude Include="..\mailbox.h" />
+    <ClInclude Include="..\manager.h" />
+    <ClInclude Include="..\map.h" />
+    <ClInclude Include="..\monster.h" />
+    <ClInclude Include="..\monsters.h" />
+    <ClInclude Include="..\movement.h" />
+    <ClInclude Include="..\networkmessage.h" />
+    <ClInclude Include="..\npc.h" />
+    <ClInclude Include="..\otpch.h" />
+    <ClInclude Include="..\otsystem.h" />
+    <ClInclude Include="..\outfit.h" />
+    <ClInclude Include="..\outputmessage.h" />
+    <ClInclude Include="..\party.h" />
+    <ClInclude Include="..\player.h" />
+    <ClInclude Include="..\position.h" />
+    <ClInclude Include="..\protocol.h" />
+    <ClInclude Include="..\protocolgame.h" />
+    <ClInclude Include="..\protocolhttp.h" />
+    <ClInclude Include="..\protocollogin.h" />
+    <ClInclude Include="..\protocolold.h" />
+    <ClInclude Include="..\quests.h" />
+    <ClInclude Include="..\raids.h" />
+    <ClInclude Include="..\rsa.h" />
+    <ClInclude Include="..\scheduler.h" />
+    <ClInclude Include="..\scriptmanager.h" />
+    <ClInclude Include="..\server.h" />
+    <ClInclude Include="..\spawn.h" />
+    <ClInclude Include="..\spells.h" />
+    <ClInclude Include="..\status.h" />
+    <ClInclude Include="..\talkaction.h" />
+    <ClInclude Include="..\teleport.h" />
+    <ClInclude Include="..\templates.h" />
+    <ClInclude Include="..\textlogger.h" />
+    <ClInclude Include="..\thing.h" />
+    <ClInclude Include="..\tile.h" />
+    <ClInclude Include="..\tools.h" />
+    <ClInclude Include="..\town.h" />
+    <ClInclude Include="..\trashholder.h" />
+    <ClInclude Include="..\vocation.h" />
+    <ClInclude Include="..\waitlist.h" />
+    <ClInclude Include="..\waypoints.h" />
+    <ClInclude Include="..\weapons.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\actions.cpp" />
+    <ClCompile Include="..\admin.cpp" />
+    <ClCompile Include="..\allocator.cpp" />
+    <ClCompile Include="..\baseevents.cpp" />
+    <ClCompile Include="..\beds.cpp" />
+    <ClCompile Include="..\chat.cpp" />
+    <ClCompile Include="..\combat.cpp" />
+    <ClCompile Include="..\condition.cpp" />
+    <ClCompile Include="..\configmanager.cpp" />
+    <ClCompile Include="..\connection.cpp" />
+    <ClCompile Include="..\container.cpp" />
+    <ClCompile Include="..\creature.cpp" />
+    <ClCompile Include="..\creatureevent.cpp" />
+    <ClCompile Include="..\cylinder.cpp" />
+    <ClCompile Include="..\database.cpp" />
+    <ClCompile Include="..\databasemanager.cpp" />
+    <ClCompile Include="..\databasemysql.cpp" />
+    <ClCompile Include="..\databasepgsql.cpp" />
+    <ClCompile Include="..\databasesqlite.cpp" />
+    <ClCompile Include="..\depot.cpp" />
+    <ClCompile Include="..\dispatcher.cpp" />
+    <ClCompile Include="..\exception.cpp" />
+    <ClCompile Include="..\fileloader.cpp" />
+    <ClCompile Include="..\game.cpp" />
+    <ClCompile Include="..\gameservers.cpp" />
+    <ClCompile Include="..\globalevent.cpp" />
+    <ClCompile Include="..\group.cpp" />
+    <ClCompile Include="..\house.cpp" />
+    <ClCompile Include="..\housetile.cpp" />
+    <ClCompile Include="..\ioban.cpp" />
+    <ClCompile Include="..\ioguild.cpp" />
+    <ClCompile Include="..\iologindata.cpp" />
+    <ClCompile Include="..\iomap.cpp" />
+    <ClCompile Include="..\iomapserialize.cpp" />
+    <ClCompile Include="..\itemattributes.cpp" />
+    <ClCompile Include="..\items.cpp" />
+    <ClCompile Include="..\luascript.cpp" />
+    <ClCompile Include="..\mailbox.cpp" />
+    <ClCompile Include="..\manager.cpp" />
+    <ClCompile Include="..\map.cpp" />
+    <ClCompile Include="..\monster.cpp" />
+    <ClCompile Include="..\monsters.cpp" />
+    <ClCompile Include="..\movement.cpp" />
+    <ClCompile Include="..\networkmessage.cpp" />
+    <ClCompile Include="..\npc.cpp" />
+    <ClCompile Include="..\otpch.cpp" />
+    <ClCompile Include="..\otserv.cpp" />
+    <ClCompile Include="..\outfit.cpp" />
+    <ClCompile Include="..\outputmessage.cpp" />
+    <ClCompile Include="..\party.cpp" />
+    <ClCompile Include="..\player.cpp" />
+    <ClCompile Include="..\position.cpp" />
+    <ClCompile Include="..\protocol.cpp" />
+    <ClCompile Include="..\protocolgame.cpp" />
+    <ClCompile Include="..\protocolhttp.cpp" />
+    <ClCompile Include="..\protocollogin.cpp" />
+    <ClCompile Include="..\protocolold.cpp" />
+    <ClCompile Include="..\quests.cpp" />
+    <ClCompile Include="..\raids.cpp" />
+    <ClCompile Include="..\rsa.cpp" />
+    <ClCompile Include="..\scheduler.cpp" />
+    <ClCompile Include="..\scriptmanager.cpp" />
+    <ClCompile Include="..\server.cpp" />
+    <ClCompile Include="..\spawn.cpp" />
+    <ClCompile Include="..\spells.cpp" />
+    <ClCompile Include="..\status.cpp" />
+    <ClCompile Include="..\talkaction.cpp" />
+    <ClCompile Include="..\teleport.cpp" />
+    <ClCompile Include="..\textlogger.cpp" />
+    <ClCompile Include="..\thing.cpp" />
+    <ClCompile Include="..\tile.cpp" />
+    <ClCompile Include="..\tools.cpp" />
+    <ClCompile Include="..\trashholder.cpp" />
+    <ClCompile Include="..\vocation.cpp" />
+    <ClCompile Include="..\waitlist.cpp" />
+    <ClCompile Include="..\weapons.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\pch.hpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7AA6C5AC-C8C4-40EF-A0B3-3569B9819163}</ProjectGuid>
+    <RootNamespace>CrystalServer</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <OutDir>$(ProjectDir)../</OutDir>
+    <SourcePath>$(OutDirFullPath)src</SourcePath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v143</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <EnableUnitySupport>true</EnableUnitySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <EnableUnitySupport>true</EnableUnitySupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <Import Project="settings.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.21006.1</_ProjectFileVersion>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\src;$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)-sln-dbg</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\src;$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(ProjectName)-sln</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+    <VcpkgAutoLink>true</VcpkgAutoLink>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgInstalledDir>vcpkg_installed</VcpkgInstalledDir>
+    <VcpkgTriplet>x64-windows</VcpkgTriplet>
+    <VcpkgConfiguration>Release</VcpkgConfiguration>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Vcpkg">
+    <VcpkgInstalledDir>vcpkg_installed</VcpkgInstalledDir>
+    <VcpkgTriplet>x64-windows</VcpkgTriplet>
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+    <VcpkgUseMD>false</VcpkgUseMD>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>
+      $(GITHUB_WORKSPACE)\vcpkg\installed\$(VcpkgTriplet)\include\;
+      vcpkg_installed\$(VcpkgTriplet)\include\;
+      generated
+      </AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeaderFile />
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <IncludeInUnityFile>true</IncludeInUnityFile>
+      <OpenMPSupport>true</OpenMPSupport>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <AdditionalOptions>/Zc:__cplusplus /fsanitize=address %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_DISABLE_VECTOR_ANNOTATION;_DISABLE_STRING_ANNOTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>
+      $(GITHUB_WORKSPACE)\vcpkg\installed\$(VcpkgTriplet)\lib\;
+      vcpkg_installed\$(VcpkgTriplet)\lib\
+      </AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateMapFile>false</GenerateMapFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>$(CRYSTALSERVER_LIBDEPS)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>
+      $(GITHUB_WORKSPACE)\vcpkg\installed\$(VcpkgTriplet)\include\;
+      vcpkg_installed\$(VcpkgTriplet)\include\;
+      generated
+      </AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeaderFile />
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <IncludeInUnityFile>true</IncludeInUnityFile>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_DISABLE_VECTOR_ANNOTATION;_DISABLE_STRING_ANNOTATION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>
+      $(GITHUB_WORKSPACE)\vcpkg\installed\$(VcpkgTriplet)\lib\;
+      vcpkg_installed\$(VcpkgTriplet)\lib\
+      </AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateMapFile>false</GenerateMapFile>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="EnsureGeneratedDirectoryExists" BeforeTargets="ProtoCompile">
+    <MakeDir Directories="generated" />
+  </Target>
+  <PropertyGroup>
+    <RunProtoCompile>true</RunProtoCompile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_WORKSPACE)' != ''">
+    <RunProtoCompile>false</RunProtoCompile>
+  </PropertyGroup>
+  <Target Name="DisplayRunProtoCompileValue" BeforeTargets="ProtoCompile">
+    <Message Text="RunProtoCompile value: $(RunProtoCompile)" Importance="high" />
+  </Target>
+  <PropertyGroup Condition="'$(RunProtoCompile)'=='true'">
+    <ProtocPath>$(ProjectDir)vcpkg_installed\$(VcpkgTriplet)\tools\protobuf\protoc</ProtocPath>
+    <ProtoPath>..\$(SourcePath)\protobuf</ProtoPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RunProtoCompile)'=='false'">
+    <ProtocPath>$(ProjectDir)vcpkg_installed\$(VcpkgTriplet)\tools\protobuf\protoc</ProtocPath>
+    <ProtoPath>$(GITHUB_WORKSPACE)\src\protobuf</ProtoPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProtoFiles Include="$(ProtoPath)\*.proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\autogen.sh" />
+    <None Include="..\run.sh" />
+  </ItemGroup>
+  <Target Name="ProtoCompile" BeforeTargets="PrepareForBuild" DependsOnTargets="VcpkgInstallManifestDependencies">
+    <Exec Command="$(ProtocPath) --proto_path=$(ProtoPath) --cpp_out=generated %(ProtoFiles.Identity)" />
+    <ItemGroup>
+      <ClCompile Include="generated\%(ProtoFiles.Filename).pb.cc">
+        <IncludeInUnityFile>false</IncludeInUnityFile>
+      </ClCompile>
+      <ClInclude Include="generated\%(ProtoFiles.Filename).pb.h">
+        <IncludeInUnityFile>false</IncludeInUnityFile>
+      </ClInclude>
+    </ItemGroup>
+  </Target>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

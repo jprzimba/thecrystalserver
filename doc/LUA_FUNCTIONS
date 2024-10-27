@@ -469,7 +469,7 @@
 
 				Returns
 					Player group id.
-					For example (using standard TFS groups):
+					For example (using standard TCS groups):
 						1 - when checked player is player
 						2 - when checked player is gamemaster
 						3 - when checked player is god

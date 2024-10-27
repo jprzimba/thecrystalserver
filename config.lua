@@ -381,9 +381,9 @@
 	-- Status
 	statusPort = 7171
 	ownerName = ""
-	ownerEmail = "@otland.net"
-	url = "http://otland.net/"
-	location = "Europe"
+	ownerEmail = ""
+	url = "https://github.com/jprzimba/thecrystalserver"
+	location = "Brazil"
 	displayGamemastersWithOnlineCommand = false
 
 	-- Logs
