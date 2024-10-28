@@ -23,6 +23,11 @@
 #include <boost/utility.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
+#ifndef __USE_DEVCPP__
+static constexpr int32_t CONNECTION_WRITE_TIMEOUT = 30;
+static constexpr int32_t CONNECTION_READ_TIMEOUT = 30;
+#endif
+
 class OutputMessage;
 typedef boost::shared_ptr<OutputMessage> OutputMessage_ptr;
 
@@ -90,8 +95,10 @@ class ConnectionManager
 class Connection : public boost::enable_shared_from_this<Connection>, boost::noncopyable
 {
 	public:
+#ifdef __USE_DEVCPP__
 		enum {writeTimeout = 30};
 		enum {readTimeout = 30};
+#endif
 
 		enum ConnectionState_t
 		{

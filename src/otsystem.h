@@ -19,6 +19,10 @@
 #define __OTSYSTEM__
 #include "definitions.h"
 
+#ifndef __USE_DEVCPP__
+#include <chrono>
+#endif
+
 #include <string>
 #include <algorithm>
 #include <bitset>
@@ -56,12 +60,16 @@
 #include <cassert>
 #ifdef WINDOWS
 	#include <windows.h>
+#ifdef __USE_DEVCPP__
 	#include <sys/timeb.h>
+#endif
+
 
 	#ifndef access
 	#define access _access
 	#endif
 
+#ifdef __USE_DEVCPP__
 	#ifndef timeb
 	#define timeb _timeb
 	#endif
@@ -69,6 +77,7 @@
 	#ifndef ftime
 	#define ftime _ftime
 	#endif
+#endif
 
 	#ifndef EWOULDBLOCK
 	#define EWOULDBLOCK WSAEWOULDBLOCK
@@ -120,9 +129,13 @@
 
 inline int64_t OTSYS_TIME()
 {
-	timeb t;
+#ifdef __USE_DEVCPP__
+	_timeb t;
 	ftime(&t);
 	return ((int64_t)t.millitm) + ((int64_t)t.time) * 1000;
+#else
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+#endif
 }
 
 inline uint32_t swap_uint32(uint32_t val)
@@ -130,6 +143,12 @@ inline uint32_t swap_uint32(uint32_t val)
     val = ((val << 8) & 0xFF00FF00) | ((val >> 8) & 0xFF00FF);
     return (val << 16) | (val >> 16);
 }
+
+#if BOOST_VERSION < 104400
+	#define BOOST_DIR_ITER_FILENAME(iterator) (iterator)->path().filename()
+#else
+	#define BOOST_DIR_ITER_FILENAME(iterator) (iterator)->path().filename().string()
+#endif
 
 #define foreach BOOST_FOREACH
 #define reverse_foreach BOOST_REVERSE_FOREACH

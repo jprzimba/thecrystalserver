@@ -125,7 +125,6 @@ uint32_t rand24b();
 float box_muller(float m, float s);
 int32_t random_range(int32_t lowestNumber, int32_t highestNumber, DistributionType_t type = DISTRO_UNIFORM);
 
-int32_t round(float v);
 bool hasBitSet(uint32_t flag, uint32_t flags);
 uint32_t adlerChecksum(uint8_t* data, size_t length);
 

@@ -91,6 +91,10 @@ inline void boost::throw_exception(std::exception const & e)
 }
 #endif
 
+#ifdef __USE_DEVCPP__
+#include <signal.h>
+#endif
+
 RSA* g_RSA;
 ConfigManager g_config;
 Game g_game;

@@ -764,7 +764,7 @@ bool LuaInterface::loadDirectory(std::string dir, bool recursively, bool loadSys
 	StringVec files;
 	for (boost::filesystem::directory_iterator it(dir), end; it != end; ++it)
 	{
-		std::string s = it->leaf();
+		std::string s = BOOST_DIR_ITER_FILENAME(it);
 		if (!loadSystems && s[0] == '_')
 			continue;
 
@@ -2717,7 +2717,8 @@ int32_t LuaInterface::internalGetPlayerInfo(lua_State* L, PlayerInfo_t info)
 			value = g_game.getMoney(player);
 			break;
 		case PlayerInfoTotalMoney:
-			uint64_t totalMoney =  g_game.getMoney(player) + player->getBankBalance();
+			uint64_t totalMoney;
+			totalMoney = g_game.getMoney(player) + player->getBankBalance();
 			value = totalMoney;
 			break;
 		case PlayerInfoFreeCap:
