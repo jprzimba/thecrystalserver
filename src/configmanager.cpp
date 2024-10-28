@@ -38,51 +38,51 @@ ConfigManager::ConfigManager()
 
 bool ConfigManager::load()
 {
-	if(L)
+	if (L)
 		lua_close(L);
 
 	L = luaL_newstate();
-	if(!L)
+	if (!L)
 		return false;
 
 	luaL_openlibs(L);
-	if(luaL_dofile(L, m_confString[CONFIG_FILE].c_str()))
+	if (luaL_dofile(L, m_confString[CONFIG_FILE].c_str()))
 	{
 		lua_close(L);
 		L = NULL;
 		return false;
 	}
 
-	if(!m_loaded) //info that must be loaded one time- unless we reset the modules involved
+	if (!m_loaded) //info that must be loaded one time- unless we reset the modules involved
 	{
-		if(m_confString[DATA_DIRECTORY] == "")
+		if (m_confString[DATA_DIRECTORY] == "")
 			m_confString[DATA_DIRECTORY] = getGlobalString("dataDirectory", "data/");
 
-		if(m_confString[LOGS_DIRECTORY] == "")
+		if (m_confString[LOGS_DIRECTORY] == "")
 			m_confString[LOGS_DIRECTORY] = getGlobalString("logsDirectory", "logs/");
 
-		if(m_confString[IP] == "")
+		if (m_confString[IP] == "")
 			m_confString[IP] = getGlobalString("ip", "127.0.0.1");
 
-		if(m_confNumber[LOGIN_PORT] == 0)
+		if (m_confNumber[LOGIN_PORT] == 0)
 			m_confNumber[LOGIN_PORT] = getGlobalNumber("loginPort", 7171);
 
-		if(m_confString[GAME_PORT] == "")
+		if (m_confString[GAME_PORT] == "")
 			m_confString[GAME_PORT] = getGlobalString("gamePort", "7172");
 
-		if(m_confNumber[ADMIN_PORT] == 0)
+		if (m_confNumber[ADMIN_PORT] == 0)
 			m_confNumber[ADMIN_PORT] = getGlobalNumber("adminPort", 7171);
 
-		if(m_confNumber[MANAGER_PORT] == 0)
+		if (m_confNumber[MANAGER_PORT] == 0)
 			m_confNumber[MANAGER_PORT] = getGlobalNumber("managerPort", 7171);
 
-		if(m_confNumber[STATUS_PORT] == 0)
+		if (m_confNumber[STATUS_PORT] == 0)
 			m_confNumber[STATUS_PORT] = getGlobalNumber("statusPort", 7171);
 
-		if(m_confString[RUNFILE] == "")
+		if (m_confString[RUNFILE] == "")
 			m_confString[RUNFILE] = getGlobalString("runFile", "");
 
-		if(m_confString[OUTPUT_LOG] == "")
+		if (m_confString[OUTPUT_LOG] == "")
 			m_confString[OUTPUT_LOG] = getGlobalString("outputLog", "");
 
 		m_confBool[TRUNCATE_LOG] = getGlobalBool("truncateLogOnStartup", true);
@@ -358,32 +358,32 @@ bool ConfigManager::load()
 
 bool ConfigManager::reload()
 {
-	if(!m_loaded)
+	if (!m_loaded)
 		return false;
 
 	uint32_t tmp = m_confNumber[HOUSE_PRICE];
-	if(!load())
+	if (!load())
 		return false;
 
-	if((uint32_t)m_confNumber[HOUSE_PRICE] == tmp)
+	if ((uint32_t)m_confNumber[HOUSE_PRICE] == tmp)
 		return true;
 
-	for(HouseMap::iterator it = Houses::getInstance()->getHouseBegin();
+	for (HouseMap::iterator it = Houses::getInstance()->getHouseBegin();
 		it != Houses::getInstance()->getHouseEnd(); ++it)
 	{
 		uint32_t price = it->second->getTilesCount() * m_confNumber[HOUSE_PRICE];
-		if(m_confBool[HOUSE_RENTASPRICE])
+		if (m_confBool[HOUSE_RENTASPRICE])
 		{
 			uint32_t rent = it->second->getRent();
-			if(!m_confBool[HOUSE_PRICEASRENT] && it->second->getPrice() != rent)
+			if (!m_confBool[HOUSE_PRICEASRENT] && it->second->getPrice() != rent)
 				price = rent;
 		}
 
 		it->second->setPrice(price);
-		if(m_confBool[HOUSE_PRICEASRENT])
+		if (m_confBool[HOUSE_PRICEASRENT])
 			it->second->setRent(price);
 
-		if(!it->second->getOwner())
+		if (!it->second->getOwner())
 			it->second->updateDoorDescription();
 	}
 
@@ -392,10 +392,10 @@ bool ConfigManager::reload()
 
 const std::string& ConfigManager::getString(uint32_t _what) const
 {
-	if((m_loaded && _what < LAST_STRING_CONFIG) || _what <= CONFIG_FILE)
+	if ((m_loaded && _what < LAST_STRING_CONFIG) || _what <= CONFIG_FILE)
 		return m_confString[_what];
 
-	if(!m_startup)
+	if (!m_startup)
 		std::clog << "[Warning - ConfigManager::getString] " << _what << std::endl;
 
 	return m_confString[DUMMY_STR];
@@ -403,10 +403,10 @@ const std::string& ConfigManager::getString(uint32_t _what) const
 
 bool ConfigManager::getBool(uint32_t _what) const
 {
-	if(m_loaded && _what < LAST_BOOL_CONFIG)
+	if (m_loaded && _what < LAST_BOOL_CONFIG)
 		return m_confBool[_what];
 
-	if(!m_startup)
+	if (!m_startup)
 		std::clog << "[Warning - ConfigManager::getBool] " << _what << std::endl;
 
 	return false;
@@ -414,10 +414,10 @@ bool ConfigManager::getBool(uint32_t _what) const
 
 int64_t ConfigManager::getNumber(uint32_t _what) const
 {
-	if(m_loaded && _what < LAST_NUMBER_CONFIG)
+	if (m_loaded && _what < LAST_NUMBER_CONFIG)
 		return m_confNumber[_what];
 
-	if(!m_startup)
+	if (!m_startup)
 		std::clog << "[Warning - ConfigManager::getNumber] " << _what << std::endl;
 
 	return 0;
@@ -425,10 +425,10 @@ int64_t ConfigManager::getNumber(uint32_t _what) const
 
 double ConfigManager::getDouble(uint32_t _what) const
 {
-	if(m_loaded && _what < LAST_DOUBLE_CONFIG)
+	if (m_loaded && _what < LAST_DOUBLE_CONFIG)
 		return m_confDouble[_what];
 
-	if(!m_startup)
+	if (!m_startup)
 		std::clog << "[Warning - ConfigManager::getDouble] " << _what << std::endl;
 
 	return 0;
@@ -436,7 +436,7 @@ double ConfigManager::getDouble(uint32_t _what) const
 
 bool ConfigManager::setString(uint32_t _what, const std::string& _value)
 {
-	if(_what < LAST_STRING_CONFIG)
+	if (_what < LAST_STRING_CONFIG)
 	{
 		m_confString[_what] = _value;
 		return true;
@@ -448,7 +448,7 @@ bool ConfigManager::setString(uint32_t _what, const std::string& _value)
 
 bool ConfigManager::setNumber(uint32_t _what, int64_t _value)
 {
-	if(_what < LAST_NUMBER_CONFIG)
+	if (_what < LAST_NUMBER_CONFIG)
 	{
 		m_confNumber[_what] = _value;
 		return true;
@@ -460,7 +460,7 @@ bool ConfigManager::setNumber(uint32_t _what, int64_t _value)
 
 bool ConfigManager::setBool(uint32_t _what, bool _value)
 {
-	if(_what < LAST_BOOL_CONFIG)
+	if (_what < LAST_BOOL_CONFIG)
 	{
 		m_confBool[_what] = _value;
 		return true;

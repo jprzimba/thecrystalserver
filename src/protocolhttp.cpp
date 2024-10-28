@@ -34,7 +34,7 @@ void ProtocolHTTP::deleteProtocolTask()
 #endif
 void ProtocolHTTP::onRecvFirstMessage(NetworkMessage&)
 {
-	if(OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
+	if (OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
 	{
 		TRACK_MESSAGE(output);
 

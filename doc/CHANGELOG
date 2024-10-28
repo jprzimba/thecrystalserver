@@ -65,8 +65,8 @@
 			Initial database version set to 1. (Tryller)
 			Spawn monsters like in Tibia RL. (tetra20)
 			Updated houseBuy talkaction to work with the bank system if bankSystem is enabled in config.lua. (Tryller)
-			Auto loot with desired loot items is configurable in talkactions, and auto loot can be enabled in config.lua: (Tryller)
-				!addloot golden armor
+			Auto loot with desired loot items is configurable in talkactions, including which container the loot goes to, and auto loot can be enabled in config.lua. (Tryller)
+				!addloot golden armor, 1
 				!removeloot golden armor
 				!showloot; show your desired loot list.
 		]

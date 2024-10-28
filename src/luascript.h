@@ -244,7 +244,7 @@ class LuaInterface
 
 		static bool reserveEnv()
 		{
-			if(++m_scriptEnvIndex > 20)
+			if (++m_scriptEnvIndex > 20)
 			{
 				--m_scriptEnvIndex;
 				return false;
@@ -254,7 +254,7 @@ class LuaInterface
 		}
 		static void releaseEnv()
 		{
-			if(m_scriptEnvIndex >= 0)
+			if (m_scriptEnvIndex >= 0)
 			{
 				m_scriptEnv[m_scriptEnvIndex].reset();
 				--m_scriptEnvIndex;

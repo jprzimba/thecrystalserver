@@ -23,11 +23,11 @@ extern Game g_game;
 
 Attr_ReadValue Teleport::readAttr(AttrTypes_t attr, PropStream& propStream)
 {
-	if(attr != ATTR_TELE_DEST)
+	if (attr != ATTR_TELE_DEST)
 		return Item::readAttr(attr, propStream);
 
 	TeleportDest* dest;
-	if(!propStream.getStruct(dest))
+	if (!propStream.getStruct(dest))
 		return ATTR_READ_ERROR;
 
 	setDestination(Position(dest->_x, dest->_y, dest->_z));
@@ -50,20 +50,20 @@ bool Teleport::serializeAttr(PropWriteStream& propWriteStream) const
 
 void Teleport::__addThing(Creature* actor, int32_t, Thing* thing)
 {
-	if(!thing || thing->isRemoved())
+	if (!thing || thing->isRemoved())
 		return;
 
 	Tile* destTile = g_game.getTile(destination);
-	if(!destTile)
+	if (!destTile)
 		return;
 
-	if(Creature* creature = thing->getCreature())
+	if (Creature* creature = thing->getCreature())
 	{
 		g_game.addMagicEffect(creature->getPosition(), MAGIC_EFFECT_TELEPORT, creature->isGhost());
 		creature->getTile()->moveCreature(actor, creature, destTile);
 		g_game.addMagicEffect(destTile->getPosition(), MAGIC_EFFECT_TELEPORT, creature->isGhost());
 	}
-	else if(Item* item = thing->getItem())
+	else if (Item* item = thing->getItem())
 	{
 		g_game.addMagicEffect(item->getPosition(), MAGIC_EFFECT_TELEPORT);
 		g_game.internalMoveItem(actor, item->getTile(), destTile, INDEX_WHEREEVER, item, item->getItemCount(), NULL);
