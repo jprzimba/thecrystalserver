@@ -173,4 +173,5 @@ std::string getReason(int32_t reasonId);
 std::string getAction(ViolationAction_t actionId, bool ipBanishment);
 
 std::string getFilePath(FileType_t type, std::string name = "");
+std::string convertString(int number);
 #endif

@@ -69,6 +69,7 @@
 				!addloot golden armor, 1
 				!removeloot golden armor
 				!showloot; show your desired loot list.
+			Auto loot shows the container ID instead of the backpack name if enableAutoLoot is active in config.lua. (Tryller)
 		]
 
 		[ MAP

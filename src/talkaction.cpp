@@ -1391,14 +1391,15 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 		std::string message = "Auto loot is currently disabled.";
 		player->sendTextMessage(MSG_EVENT_ADVANCE, message.c_str());
 		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
+		return true;
 	}
 
 	StringVec params = explodeString(param, ",");
 	if (params.size() < 2)
 	{
 		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Usage: /addloot item_name, container_id");
-		return false;
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
 	}
 
 	std::string itemName = params[0];
@@ -1416,7 +1417,7 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 
 	for (size_t i = 0; i < desiredItems.size(); ++i)
 	{
-		if (desiredItems[i].first == itemId && desiredItems[i].second == containerID)
+		if (desiredItems[i].first == itemId)
 		{
 			itemExists = true;
 			break;
@@ -1431,7 +1432,11 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 		IOLoginData::getInstance()->savePlayer(player);
 	}
 	else
+	{
 		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item is already in the desired loot list: " + itemName);
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
+	}
 
 	return true;
 }
@@ -1477,7 +1482,11 @@ bool TalkAction::removeDesiredItem(Creature* creature, const std::string&, const
 	}
 
 	if (!itemRemoved)
+	{
 		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item not found in the desired loot list.");
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
+	}
 
 	IOLoginData::getInstance()->savePlayer(player);
 	return true;
