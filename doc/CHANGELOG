@@ -56,7 +56,7 @@
 			getPlayerMoney(cid) retrieves all gold from the player, including inventory and bank. (Tryller)
 			doPlayerRemoveMoney(cid, money) tries to remove gold from the player; if unsuccessful, it attempts to remove it from the bank if bankSystem and enableAutoBank are enabled in config.lua. (Tryller)
 			ShopWindow shows the player's total gold, including from inventory and bank. (Tryller)
-			New lua function: getPlayerTotalMoney(cid). (Tryller)
+			New lua functions: getPlayerTotalMoney(cid), getPlayerInventoryItemId(cid, slot). (Tryller)
 			Modified NPC system modules to work with the bank system and the getPlayerTotalMoney(cid) function. (Tryller)
 			Added the !bank command by luanluciano93 for the bank system, modified to work with the server. (Tryller)
 			If enableAutoBank is active in config.lua, the server will add money to the player's bank balance instead of their inventory via NPC system. (Tryller)
@@ -78,6 +78,7 @@
 			Demon OAK Quest. (Erimyth and Tryller)
 			Ferumbras tower with Ferumbras raid. (Tryller)
 			Trainer room allows only one player per room. (Tryller)
+			Underwater hunts require wearing the Helmet of the Deep. (Tryller)
 		]
 	]
 ]

@@ -1020,9 +1020,12 @@
 	</movevent>
 	<movevent type="DeEquip" itemid="12644" slot="shield" event="function" value="onDeEquipItem"/>
 
-
 	<!-- Other -->
 		<!-- Magical Torch -->
 	<movevent type="Equip" itemid="9956" slot="pickupable" event="function" value="onEquipItem"/>
 	<movevent type="DeEquip" itemid="9956" slot="pickupable" event="function" value="onDeEquipItem"/>
+
+	<!-- Map -->
+	<!-- Under Water -->
+	<movevent event="StepIn" itemid="4820" actionid="4550" script="map/under_water/enter.lua"/>
 </movements>
