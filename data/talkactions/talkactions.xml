@@ -75,6 +75,7 @@
 	<talkaction words="!addloot;/addloot" event="function" value="adddesireditem"/>
 	<talkaction words="!removeloot;/removeloot;!deleteloot;/deleteloot" event="function" value="removedesireditem"/>
 	<talkaction words="!showloot;/showloot" event="function" value="showdesireditems"/>
+	<talkaction words="!clearloot;/clearloot" event="function" value="cleardesireditems"/>
 
 	<!-- Houses -->
 	<talkaction words="alevo grav" filter="word-spaced" event="function" value="houseBuy"/>

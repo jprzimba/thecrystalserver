@@ -116,6 +116,7 @@ class TalkAction : public Event
 		static TalkFunction addDesiredItem;
 		static TalkFunction removeDesiredItem;
 		static TalkFunction showDesiredItems;
+		static TalkFunction clearDesiredLootItems;
 
 		std::string m_words, m_functionName;
 		TalkFunction* m_function;

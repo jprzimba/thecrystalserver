@@ -331,6 +331,8 @@ bool TalkAction::loadFunction(const std::string& functionName)
 		m_function = removeDesiredItem;
 	else if (m_functionName == "showdesireditems")
 		m_function = showDesiredItems;
+	else if (m_functionName == "cleardesireditems")
+		m_function = clearDesiredLootItems;
 	else
 	{
 		std::clog << "[Warning - TalkAction::loadFunction] Function \"" << m_functionName << "\" does not exist." << std::endl;
@@ -1380,7 +1382,7 @@ bool TalkAction::software(Creature* creature, const std::string&, const std::str
 	return true;
 }
 
-bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const std::string& param) 
+bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const std::string& param)
 {
 	Player* player = creature->getPlayer();
 	if (!player)
@@ -1395,7 +1397,7 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 	}
 
 	StringVec params = explodeString(param, ",");
-	if (params.size() < 2)
+	if (params.empty())
 	{
 		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Usage: /addloot item_name, container_id");
 		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
@@ -1403,7 +1405,7 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 	}
 
 	std::string itemName = params[0];
-	uint32_t containerID = static_cast<uint32_t>(atoi(params[1].c_str()));
+	uint32_t containerID = (params.size() > 1) ? static_cast<uint32_t>(atoi(params[1].c_str())) : 0;
 
 	uint32_t itemId = Item::items.getItemIdByName(itemName);
 	if (itemId == -1)
@@ -1428,14 +1430,13 @@ bool TalkAction::addDesiredItem(Creature* creature, const std::string&, const st
 	{
 		desiredItems.push_back(std::make_pair(itemId, containerID));
 		player->setDesiredLootItems(itemId, containerID);
-		player->sendTextMessage(MSG_INFO_DESCR, "Added item to desired loot list: " + itemName + " in container ID " + params[1]);
+		player->sendTextMessage(MSG_INFO_DESCR, "Added item to desired loot list: " + itemName + " in container ID " + convertString(containerID));
 		IOLoginData::getInstance()->savePlayer(player);
 	}
 	else
 	{
-		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item is already in the desired loot list: " + itemName);
+		player->sendTextMessage(MSG_EVENT_ADVANCE, "Item is already in the desired loot list: " + itemName);
 		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return true;
 	}
 
 	return true;
@@ -1472,7 +1473,7 @@ bool TalkAction::removeDesiredItem(Creature* creature, const std::string&, const
 				itemRemoved = true;
 
 				player->sendTextMessage(MSG_INFO_DESCR, "Deleted item from desired loot list: " + itemName);
-				player->updatteDesiredLootItems(desiredItems);
+				player->updateDesiredLootItems(desiredItems);
 				break;
 			}
 		}
@@ -1483,7 +1484,7 @@ bool TalkAction::removeDesiredItem(Creature* creature, const std::string&, const
 
 	if (!itemRemoved)
 	{
-		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Item not found in the desired loot list.");
+		player->sendTextMessage(MSG_EVENT_ADVANCE, "Item not found in the desired loot list.");
 		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
 		return true;
 	}
@@ -1526,5 +1527,27 @@ bool TalkAction::showDesiredItems(Creature* creature, const std::string&, const 
 	}
 
 	player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, ss.str());
+	return true;
+}
+
+bool TalkAction::clearDesiredLootItems(Creature* creature, const std::string&, const std::string&)
+{
+	Player* player = creature->getPlayer();
+	if (!player)
+		return false;
+
+	if (!g_config.getBool(ConfigManager::ENABLE_AUTO_LOOT))
+	{
+		std::string message = "Auto loot is currently disabled.";
+		player->sendTextMessage(MSG_EVENT_ADVANCE, message.c_str());
+		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+		return true;
+	}
+
+	std::vector<std::pair<uint32_t, uint32_t> > emptyList;
+	player->updateDesiredLootItems(emptyList);
+	player->sendTextMessage(MSG_INFO_DESCR, "All items have been removed from your desired loot list.");
+
+	IOLoginData::getInstance()->savePlayer(player);
 	return true;
 }

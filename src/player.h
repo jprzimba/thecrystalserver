@@ -732,7 +732,7 @@ class Player : public Creature, public Cylinder
 		void updateInventoryGoods(uint32_t itemId);
 
 		void setDesiredLootItems(uint32_t itemId, uint32_t containerId);
-		void updatteDesiredLootItems(const std::vector<std::pair<uint32_t, uint32_t> >& items);
+		void updateDesiredLootItems(const std::vector<std::pair<uint32_t, uint32_t> >& items);
 		bool isDesiredLootItem(uint32_t itemId);
 		std::vector<std::pair<uint32_t, uint32_t> > getDesiredLootItems() const;
 		int32_t getLootContainerId(uint32_t containerID) const; 

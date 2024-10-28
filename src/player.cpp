@@ -5366,7 +5366,7 @@ void Player::setDesiredLootItems(uint32_t itemId, uint32_t containerId)
 	desiredLootItems.push_back(itemPair);
 }
 
-void Player::updatteDesiredLootItems(const std::vector<std::pair<uint32_t, uint32_t> >& items)
+void Player::updateDesiredLootItems(const std::vector<std::pair<uint32_t, uint32_t> >& items)
 {
     desiredLootItems = items;
 }

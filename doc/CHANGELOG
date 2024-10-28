@@ -3,7 +3,7 @@
 		Crystal Server
 
 	Version
-		1.0
+		2.0
 
 	Website
 		https://github.com/jprzimba/thecrystalserver
@@ -17,7 +17,7 @@
 	M = Modified,
 	A = Added.
 
-	[ 1.0
+	[ 2.0
 		[ A...
 			Initial release has no charges.
 		]
@@ -33,9 +33,8 @@
 ]
 
 [ Charges made
-	[ 1.0
+	[ 2.0
 		[ DISTRO
-			Based on TFS 0.3.7 (0.4), downgraded to protocol 8.60. (Tryller)
 			Game protocol 8.60. (Tryller)
 			Support items 8.60. (OpenTibia, Tryller)
 			War system. (Elf, Tryller)
@@ -50,8 +49,8 @@
 			Separate map actions into a specific folder. (Tryller)
 			8.6 Monsters. (Talaturen, Elf)
 			8.6 Spells. (Talaturen, Elf)
-			NPC A.I. (Elf)
-			Ground cache needs to be compiled with the __GROUND_CACHE__  flag. (Elf)
+			NPC A.I system. (Elf)
+			Ground cache: needs to be compiled with the __GROUND_CACHE__  flag. (Elf)
 			Surprise bag system is configurable in config.lua with settings in data/items/bags.xml. (Tryller)
 			Auto bank system: the gold is added to the player's bank balance and removed from the inventory/bank balance when buying an item. (Tryller)
 			getPlayerMoney(cid) retrieves all gold from the player, including inventory and bank. (Tryller)
@@ -68,7 +67,8 @@
 			Auto loot with desired loot items is configurable in talkactions, including which container the loot goes to, and auto loot can be enabled in config.lua. (Tryller)
 				!addloot golden armor, 1
 				!removeloot golden armor
-				!showloot; show your desired loot list.
+				!showloot show your desired loot list.
+				!clearloot clear your desired loot list.
 			Auto loot shows the container ID instead of the backpack name if enableAutoLoot is active in config.lua. (Tryller)
 		]
 
