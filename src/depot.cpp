@@ -19,7 +19,7 @@
 #include "tools.h"
 
 Depot::Depot(uint16_t type):
-	Container(type), inbox(NULL), locker(NULL), depotLimit(1000)
+	Container(type), depotLimit(1000)
 {}
 
 Attr_ReadValue Depot::readAttr(AttrTypes_t attr, PropStream& propStream)
@@ -67,15 +67,6 @@ ReturnValue Depot::__queryMaxCount(int32_t index, const Thing* thing, uint32_t c
 	uint32_t& maxQueryCount, uint32_t flags) const
 {
 	return Container::__queryMaxCount(index, thing, count, maxQueryCount, flags);
-}
-
-std::map<uint32_t, uint32_t>& Depot::__getAllItemTypeCount(std::map<uint32_t,
-	uint32_t>& countMap) const
-{
-	for (ContainerIterator it = locker->begin(); it != locker->end(); ++it)
-		countMap[(*it)->getID()] += (*it)->getItemCount();
-
-	return countMap;
 }
 
 void Depot::postAddNotification(Creature* actor, Thing* thing, const Cylinder* oldParent,

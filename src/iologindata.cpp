@@ -1271,11 +1271,7 @@ bool IOLoginData::playerMail(Creature* actor, std::string name, uint32_t townId,
 		townId = player->getTown();
 
 	Depot* depot = player->getDepot(townId, true);
-	Container* inbox = NULL;
-	if (!(inbox = depot->getInbox()))
-		inbox = depot;
-
-	if (!inbox || g_game.internalMoveItem(actor, item->getParent(), inbox, INDEX_WHEREEVER,
+	if (!depot || g_game.internalMoveItem(actor, item->getParent(), depot, INDEX_WHEREEVER,
 		item, item->getItemCount(), NULL, FLAG_NOLIMIT) != RET_NOERROR)
 	{
 		if (player->isVirtual())
