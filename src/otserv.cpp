@@ -344,7 +344,7 @@ void otserv(StringVec, ServiceManager* services)
 	std::srand((uint32_t)OTSYS_TIME());
 #if defined(WINDOWS)
 	SetConsoleTitle(SOFTWARE_NAME);
-
+	system("color 70");
 #endif
 	g_game.setGameState(GAMESTATE_STARTUP);
 #if !defined(WINDOWS) && !defined(__ROOT_PERMISSION__)

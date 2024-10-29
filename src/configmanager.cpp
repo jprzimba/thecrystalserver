@@ -342,7 +342,6 @@ bool ConfigManager::load()
 	m_confNumber[ROOK_TOLEVEL] = getGlobalNumber("rookLevelToLeaveRook", 8);
 	m_confBool[HOUSE_SKIP_INIT_RENT] = getGlobalBool("houseSkipInitialRent", true);
 	m_confBool[HOUSE_PROTECTION] = getGlobalBool("houseProtection", true);
-	m_confBool[FAIRFIGHT_REDUCTION] = getGlobalBool("useFairfightReduction", true);
 	m_confNumber[MYSQL_RECONNECTION_ATTEMPTS] = getGlobalNumber("mysqlReconnectionAttempts", 3);
 	m_confNumber[HEALTH_HEALING_COLOR] = getGlobalNumber("healthHealingColor", COLOR_GREEN);
 	m_confNumber[MANA_HEALING_COLOR] = getGlobalNumber("manaHealingColor", COLOR_DARKPURPLE);
@@ -351,6 +350,7 @@ bool ConfigManager::load()
 	m_confBool[SURPRISE_BAGS] = getGlobalBool("dropSurpriseBagsFromMonsters", false);
 	m_confBool[ENABLE_AUTO_BANK] = getGlobalBool("enableAutoBank", false);
 	m_confBool[ENABLE_AUTO_LOOT] = getGlobalBool("enableAutoLoot", false);
+	m_confBool[ENABLE_AUTO_SHARE_EXPERIENCE] = getGlobalBool("enablePartyAutoShareExperience", false);
 
 	m_loaded = true;
 	return true;

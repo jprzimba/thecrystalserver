@@ -111,7 +111,6 @@
 	squareColor = 0
 	allowFightback = true
 	fistBaseAttack = 7
-	useFairfightReduction = true
 
 	-- Connection config
 	worldId = 0
@@ -351,6 +350,7 @@
 	-- Party
 	-- NOTE: experienceShareLevelDifference is float number.
 	-- experienceShareLevelDifference is highestLevel * value
+	enablePartyAutoShareExperience = true
 	experienceShareRadiusX = 30
 	experienceShareRadiusY = 30
 	experienceShareRadiusZ = 1

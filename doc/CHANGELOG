@@ -70,6 +70,7 @@
 				!showloot show your desired loot list.
 				!clearloot clear your desired loot list.
 			Auto loot shows the container ID instead of the backpack name if enableAutoLoot is active in config.lua. (Tryller)
+			Auto-enable shared experience is configurable in config.lua with enablePartyAutoShareExperience. (Tryller)
 		]
 
 		[ MAP

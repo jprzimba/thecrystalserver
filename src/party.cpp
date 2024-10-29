@@ -34,6 +34,9 @@ Party::Party(Player* _leader)
 		leader = _leader;
 		leader->setParty(this);
 		leader->sendPlayerIcons(leader);
+
+		if (g_config.getBool(ConfigManager::ENABLE_AUTO_SHARE_EXPERIENCE))
+			setSharedExperience(leader, true);
 	}
 }
 
