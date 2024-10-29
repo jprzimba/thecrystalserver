@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <creaturescripts>
 	<event type="login" name="PlayerLogin" event="script" value="login.lua"/>
+	<event type="login" name="FirstItems" event="script" value="firstitems.lua"/>
 
 	<event type="channeljoin" name="GuildEvents" event="script" value="guild.lua"/>
 	<event type="mailreceive" name="Mail" event="script" value="mail.lua"/>
@@ -9,4 +10,9 @@
 
 	<event type="think" name="Idle" event="script" value="idle.lua"/>
 	<event type="think" name="SkullCheck" event="script" value="skullcheck.lua"/>
+
+	<!-- Quests -->
+	<!-- Demon OAK -->
+	<event type="logout" name="demonOakLogout" event="script" value="quests/demon_oak/logout.lua"/>
+	<event type="death" name="demonOakDeath" event="script" value="quests/demon_oak/death.lua"/>
 </creaturescripts>
