@@ -344,7 +344,6 @@ void otserv(StringVec, ServiceManager* services)
 	std::srand((uint32_t)OTSYS_TIME());
 #if defined(WINDOWS)
 	SetConsoleTitle(SOFTWARE_NAME);
-	system("color 70");
 #endif
 	g_game.setGameState(GAMESTATE_STARTUP);
 #if !defined(WINDOWS) && !defined(__ROOT_PERMISSION__)
@@ -584,6 +583,15 @@ void otserv(StringVec, ServiceManager* services)
 		char buffer = OTSYS_getch();
 		if (buffer != 121 && buffer != 89)
 			startupErrorMessage("Unable to load items (XML)!");
+	}
+
+	std::clog << "Loading surprise bags" << std::endl;
+	if (!Item::items.loadSurpriseBags())
+	{
+		std::clog << "Unable to load surprise bags! Continue? (y/N)" << std::endl;
+		char buffer = OTSYS_getch();
+		if (buffer != 121 && buffer != 89)
+			startupErrorMessage("Unable to load surprise bags!");
 	}
 
 	std::clog << "Loading groups" << std::endl;

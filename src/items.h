@@ -275,6 +275,7 @@ class Items
 		int32_t loadFromOtb(std::string);
 		bool loadFromXml();
 		void parseItemNode(xmlNodePtr itemNode, uint32_t id);
+		bool loadSurpriseBags();
 
 		void addItemType(ItemType* iType);
 		ItemType& getItemType(int32_t id);
