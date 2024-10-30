@@ -309,7 +309,7 @@
 	rateExperienceFromPlayers = 0
 	rateSkill = 3.0
 	rateMagic = 3.0
-	rateLoot = 20.0
+	rateLoot = 2.0
 	rateSpawnMin = 1
 	rateSpawnMax = 1
 
