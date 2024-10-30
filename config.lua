@@ -266,7 +266,7 @@
 	-- Loot
 	-- monsterLootMessage 0 to disable, 1 - only party, 2 - only player, 3 - party or player (like Tibia's)
 	checkCorpseOwner = true
-	enableAutoLoot = false
+	enableAutoLoot = true
 	monsterLootMessage = 3
 	monsterLootMessageType = 25
 
@@ -309,7 +309,7 @@
 	rateExperienceFromPlayers = 0
 	rateSkill = 3.0
 	rateMagic = 3.0
-	rateLoot = 2.0
+	rateLoot = 20.0
 	rateSpawnMin = 1
 	rateSpawnMax = 1
 

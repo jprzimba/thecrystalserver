@@ -230,7 +230,16 @@ void MonsterType::dropLoot(Container* corpse)
 						owner->updateInventoryGoods(tmpItem->getID());
 					}
 
-					corpse->__internalAddThing(tmpItem);
+					Item* tmpItem = *iit;
+					if (Container* container = tmpItem->getContainer())
+					{
+						if (createChildLoot(container, *it))
+							corpse->__internalAddThing(tmpItem);
+						else
+							delete container;
+					}
+					else
+						corpse->__internalAddThing(tmpItem);
 				}
 			}
 			else
@@ -241,7 +250,16 @@ void MonsterType::dropLoot(Container* corpse)
 					owner->updateInventoryGoods(tmpItem->getID());
 				}
 
-				corpse->__internalAddThing(tmpItem);
+				Item* tmpItem = *iit;
+				if (Container* container = tmpItem->getContainer())
+				{
+					if (createChildLoot(container, *it))
+						corpse->__internalAddThing(tmpItem);
+					else
+						delete container;
+				}
+				else
+					corpse->__internalAddThing(tmpItem);
 			}
 		}
 
