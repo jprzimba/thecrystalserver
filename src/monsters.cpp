@@ -186,11 +186,11 @@ void MonsterType::dropLoot(Container* corpse)
 				if (tmpItem && owner && owner->isDesiredLootItem(tmpItem->getID()))
 				{
 					std::ostringstream msg;
-					msg << "You looted ";
+					msg << "You looted " << tmpItem->getItemCount() << "x ";
 					if (!tmpItem->getArticle().empty())
 						msg << tmpItem->getArticle() << " ";
 
-					msg << tmpItem->getItemCount() << "x " << tmpItem->getName() << ".";
+					msg << tmpItem->getName() << ".";
 					owner->sendTextMessage(MSG_EVENT_ADVANCE, msg.str());
 
 					Container* openContainer = NULL;
