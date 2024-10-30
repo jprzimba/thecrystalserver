@@ -211,7 +211,7 @@ void MonsterType::dropLoot(Container* corpse)
 					
 					if (openContainer)
 					{
-					    ReturnValue ret = g_game.internalAddItem(NULL, openContainer, tmpItem, INDEX_WHEREEVER, FLAG_NOLIMIT);
+					    ReturnValue ret = g_game.internalAddItem(NULL, openContainer, tmpItem, false);
 					    if (ret != RET_NOERROR)
 					        delete tmpItem;
 					}
