@@ -130,6 +130,9 @@ bool Items::reload()
 	if (!loadFromXml())
 		return false;
 
+	if (!loadSurpriseBags())
+		return false;
+
 	g_moveEvents->reload();
 	g_weapons->reload();
 	return true;
