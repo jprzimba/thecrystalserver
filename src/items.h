@@ -26,7 +26,7 @@
 #include "position.h"
 #include <libxml/parser.h>
 
-#define ITEMS_SIZE 15000
+#define ITEMS_SIZE 13000
 #define ITEMS_INCREMENT 500
 #define ITEMS_RANDOMIZATION 50
 
@@ -266,7 +266,6 @@ class Items
 			uint64_t minRange;
 			uint64_t maxRange;
 		};
-
 
 		Items(): m_randomizationChance(ITEMS_RANDOMIZATION), items(ITEMS_SIZE) {}
 		virtual ~Items() {clear();}
