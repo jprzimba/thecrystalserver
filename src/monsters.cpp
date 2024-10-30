@@ -206,7 +206,7 @@ void MonsterType::dropLoot(Container* corpse)
 						}
 					}
 
-					if (lootContainerId != 0)
+					if (lootContainerId != -1)
 					    openContainer = owner->getContainer(lootContainerId);
 					
 					if (openContainer)
