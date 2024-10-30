@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <houses>
 	<house name="Karmia House I" houseid="1" entryx="463" entryy="512" entryz="7" rent="10000" townid="1" size="42" />
-	<house name="Karmia House III" houseid="3" entryx="464" entryy="527" entryz="7" rent="7000" townid="1" size="67" />
-	<house name="Karmia House V" houseid="5" entryx="464" entryy="531" entryz="7" rent="7000" townid="1" size="141" />
+	<house name="Karmia House III" houseid="3" entryx="464" entryy="527" entryz="7" rent="7000" townid="1" size="69" />
+	<house name="Karmia House V" houseid="5" entryx="464" entryy="531" entryz="7" rent="7000" townid="1" size="145" />
 	<house name="Karmia House VI" houseid="6" entryx="479" entryy="528" entryz="7" rent="12000" townid="1" size="85" />
-	<house name="Karmia House VII" houseid="7" entryx="475" entryy="533" entryz="7" rent="12000" townid="1" size="84" />
-	<house name="Karmia House VIII" houseid="8" entryx="482" entryy="533" entryz="7" rent="12000" townid="1" size="82" />
-	<house name="Karmia House IX" houseid="9" entryx="485" entryy="530" entryz="7" rent="12000" townid="1" size="57" />
-	<house name="Karmia House X" houseid="10" entryx="460" entryy="512" entryz="6" rent="10000" townid="1" size="42" />
-	<house name="Karmia House XI" houseid="11" entryx="463" entryy="512" entryz="6" rent="10000" townid="1" size="39" />
-	<house name="Karmia House XII" houseid="12" entryx="479" entryy="498" entryz="7" rent="6000" townid="1" size="23" />
-	<house name="Karmia House XIII" houseid="13" entryx="483" entryy="501" entryz="7" rent="6000" townid="1" size="26" />
+	<house name="Karmia House VII" houseid="7" entryx="475" entryy="533" entryz="7" rent="12000" townid="1" size="86" />
+	<house name="Karmia House VIII" houseid="8" entryx="482" entryy="533" entryz="7" rent="12000" townid="1" size="84" />
+	<house name="Karmia House IX" houseid="9" entryx="485" entryy="530" entryz="7" rent="12000" townid="1" size="59" />
+	<house name="Karmia House X" houseid="10" entryx="460" entryy="512" entryz="6" rent="10000" townid="1" size="44" />
+	<house name="Karmia House XI" houseid="11" entryx="463" entryy="512" entryz="6" rent="10000" townid="1" size="41" />
+	<house name="Karmia House XII" houseid="12" entryx="479" entryy="498" entryz="7" rent="6000" townid="1" size="25" />
+	<house name="Karmia House XIII" houseid="13" entryx="483" entryy="501" entryz="7" rent="6000" townid="1" size="30" />
 	<house name="Karmia House XIV" houseid="14" entryx="486" entryy="499" entryz="6" rent="4000" townid="1" size="20" />
 	<house name="Desert House I" houseid="15" entryx="360" entryy="505" entryz="7" rent="5000" townid="2" size="35" />
 	<house name="Desert House II" houseid="16" entryx="342" entryy="504" entryz="7" rent="5000" townid="2" size="35" />
@@ -104,5 +104,5 @@
 	<house name="Liberty Bay House XV" houseid="104" entryx="517" entryy="684" entryz="7" rent="10000" townid="8" size="20" />
 	<house name="Liberty Bay House XVI" houseid="105" entryx="517" entryy="691" entryz="7" rent="10000" townid="8" size="25" />
 	<house name="Liberty Bay House XVII" houseid="106" entryx="518" entryy="697" entryz="7" rent="10000" townid="8" size="25" />
-	<house name="Karmia House II" houseid="107" entryx="457" entryy="527" entryz="7" rent="7000" townid="1" size="64" />
+	<house name="Karmia House II" houseid="107" entryx="457" entryy="527" entryz="7" rent="7000" townid="1" size="66" />
 </houses>

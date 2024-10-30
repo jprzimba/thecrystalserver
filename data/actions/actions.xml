@@ -6,7 +6,7 @@
 	<!-- Quests -->
 	<action actionid="2000" event="script" value="quests/system.lua"/>
 	<action actionid="2001" event="script" value="quests/system.lua"/>
-	<action uniqueid="30015" event="script" value="quests/annihilator.lua"/>
+	<!-- <action uniqueid="30015" event="script" value="quests/annihilator.lua"/> -->
 
 	<!-- Weapons enchanting (Gems) -->
 	<action itemid="2146" event="script" value="other/enchanting.lua"/>
@@ -234,12 +234,12 @@
 	<action uniqueid="5012" event="script" value="map/quests/behemoth_quest.lua"/>
 	<action uniqueid="5013" event="script" value="map/quests/behemoth_quest.lua"/>
 
-	<!-- Annhilator Quest -->
-	<action uniqueid="9000" event="script" value="map/quests/annhilator/chest.lua"/>
-	<action uniqueid="9001" event="script" value="map/quests/annhilator/chest.lua"/>
-	<action uniqueid="9002" event="script" value="map/quests/annhilator/chest.lua"/>
-	<action uniqueid="9003" event="script" value="map/quests/annhilator/chest.lua"/>
-	<action uniqueid="7000" event="script" value="map/quests/annhilator/switch.lua"/>
+	<!-- Annihilator Quest -->
+	<action uniqueid="9000" event="script" value="map/quests/annihilator/chest.lua"/>
+	<action uniqueid="9001" event="script" value="map/quests/annihilator/chest.lua"/>
+	<action uniqueid="9002" event="script" value="map/quests/annihilator/chest.lua"/>
+	<action uniqueid="9003" event="script" value="map/quests/annihilator/chest.lua"/>
+	<action uniqueid="7000" event="script" value="map/quests/annihilator/switch.lua"/>
 
 	<!-- Demon Helmet Quest -->
 	<action uniqueid="5049" event="script" value="map/quests/dh/chest.lua"/>
