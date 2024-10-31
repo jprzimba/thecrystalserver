@@ -1027,5 +1027,11 @@
 
 	<!-- Map -->
 	<!-- Under Water -->
-	<movevent event="StepIn" itemid="4820" actionid="4550" script="map/under_water/enter.lua"/>
+	<movevent type="StepIn" itemid="4820" actionid="4550" event="script" value="map/under_water/enter.lua"/>
+
+	<!-- Vengoth -->
+	<movevent type="StepIn" actionid="49331" event="script" value="map/vengoth.lua"/>
+	<movevent type="StepIn" actionid="49340" event="script" value="map/vengoth.lua"/>
+	<movevent type="StepIn" actionid="49341" event="script" value="map/vengoth.lua"/>
+	<movevent type="StepIn" actionid="49342" event="script" value="map/vengoth.lua"/>
 </movements>

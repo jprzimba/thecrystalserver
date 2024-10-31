@@ -14920,7 +14920,9 @@
 	<item fromid="8030" toid="8032" name="rifty earth"/>
 	<item fromid="8033" toid="8045" name="sand"/>
 	<item fromid="8048" toid="8057" name="earth"/>
-	<item id="8058" name="purple fire"/>
+	<item id="8058" name="purple fire">
+		<attribute key="type" value="teleport"/>
+	</item>
 	<item id="8059" article="a" name="grave"/>
 	<item id="8062" name="poisonous gas"/>
 	<item id="8072" article="a" name="yellow pillow"/>

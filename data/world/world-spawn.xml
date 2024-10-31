@@ -1,11 +1,176 @@
 <?xml version="1.0"?>
 <spawns>
+	<spawn centerx="635" centery="1008" centerz="0" radius="2">
+		<monster name="Energy Elemental" x="1" y="0" z="0" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="876" centerz="1" radius="3">
+		<monster name="Vampire" x="-2" y="-2" z="1" spawntime="60" />
+		<monster name="Vampire" x="2" y="-2" z="1" spawntime="60" />
+		<monster name="Vampire" x="-2" y="2" z="1" spawntime="60" />
+		<monster name="Vampire" x="2" y="2" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="693" centery="898" centerz="1" radius="5">
+		<npc name="ulala" x="-1" y="0" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="911" centerz="1" radius="3">
+		<monster name="Vampire Bride" x="-2" y="-2" z="1" spawntime="60" />
+		<monster name="Giant Spider" x="0" y="1" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="679" centery="972" centerz="1" radius="1">
+		<npc name="Chemar" x="0" y="0" z="1" spawntime="50" />
+	</spawn>
+	<spawn centerx="637" centery="988" centerz="1" radius="2">
+		<monster name="Energy Elemental" x="1" y="0" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="988" centerz="1" radius="2">
+		<monster name="Energy Elemental" x="-1" y="-1" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="645" centery="1004" centerz="1" radius="2">
+		<monster name="Energy Elemental" x="1" y="0" z="1" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="868" centerz="2" radius="3">
+		<monster name="Vampire Bride" x="-2" y="1" z="2" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="2" z="2" spawntime="60" />
+		<monster name="Vampire" x="-2" y="3" z="2" spawntime="60" />
+		<monster name="Vampire" x="2" y="3" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="641" centery="875" centerz="2" radius="3">
+		<monster name="Vampire Bride" x="2" y="-1" z="2" spawntime="60" />
+		<monster name="Vampire Bride" x="1" y="3" z="2" spawntime="60" />
+		<monster name="Vampire" x="3" y="3" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="875" centerz="2" radius="3">
+		<monster name="Vampire Bride" x="-2" y="-2" z="2" spawntime="60" />
+		<monster name="Vampire" x="-2" y="-1" z="2" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="2" z="2" spawntime="60" />
+		<monster name="Vampire" x="-2" y="3" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="884" centerz="2" radius="3">
+		<monster name="Vampire" x="-2" y="-2" z="2" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="-1" z="2" spawntime="60" />
+		<monster name="Vampire" x="3" y="-1" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="635" centery="886" centerz="2" radius="2">
+		<monster name="Hellspawn" x="0" y="2" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="636" centery="900" centerz="2" radius="2">
+		<monster name="Hellspawn" x="1" y="-1" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="905" centerz="2" radius="2">
+		<monster name="Haunted Treeling" x="-2" y="0" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="0" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="2" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="629" centery="910" centerz="2" radius="2">
+		<monster name="Haunted Treeling" x="0" y="-1" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="2" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="911" centerz="2" radius="6">
+		<monster name="Poison spider" x="0" y="-6" z="2" spawntime="60" />
+		<monster name="spider" x="2" y="-6" z="2" spawntime="60" />
+		<monster name="Poison spider" x="-4" y="-5" z="2" spawntime="60" />
+		<monster name="Poison spider" x="3" y="-4" z="2" spawntime="60" />
+		<monster name="spider" x="5" y="-4" z="2" spawntime="60" />
+		<monster name="spider" x="-5" y="-3" z="2" spawntime="60" />
+		<monster name="spider" x="1" y="-3" z="2" spawntime="60" />
+		<monster name="Giant Spider" x="6" y="-3" z="2" spawntime="60" />
+		<monster name="spider" x="0" y="-2" z="2" spawntime="60" />
+		<monster name="Poison spider" x="-6" y="-1" z="2" spawntime="60" />
+		<monster name="spider" x="-2" y="-1" z="2" spawntime="60" />
+		<monster name="spider" x="1" y="-1" z="2" spawntime="60" />
+		<monster name="spider" x="1" y="1" z="2" spawntime="60" />
+		<monster name="spider" x="6" y="1" z="2" spawntime="60" />
+		<monster name="Giant Spider" x="0" y="2" z="2" spawntime="60" />
+		<monster name="spider" x="-5" y="4" z="2" spawntime="60" />
+		<monster name="spider" x="4" y="5" z="2" spawntime="60" />
+		<monster name="Poison spider" x="0" y="6" z="2" spawntime="60" />
+		<monster name="spider" x="1" y="6" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="643" centery="912" centerz="2" radius="2">
+		<monster name="Haunted Treeling" x="-2" y="-2" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="-1" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="1" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="630" centery="916" centerz="2" radius="2">
+		<monster name="Haunted Treeling" x="0" y="-2" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="0" z="2" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="918" centerz="2" radius="2">
+		<monster name="Haunted Treeling" x="-1" y="-2" z="2" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="-1" z="2" spawntime="60" />
+	</spawn>
 	<spawn centerx="308" centery="352" centerz="3" radius="5">
 		<monster name="Warlock" x="-2" y="-3" z="3" spawntime="60" />
 		<monster name="Warlock" x="3" y="-3" z="3" spawntime="60" />
 		<monster name="Black Knight" x="-1" y="1" z="3" spawntime="60" />
 		<monster name="Black Knight" x="0" y="1" z="3" spawntime="60" />
 		<monster name="Black Knight" x="1" y="1" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="677" centery="866" centerz="3" radius="2">
+		<monster name="Demon Skeleton" x="0" y="-2" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="877" centerz="3" radius="8">
+		<monster name="Hellspawn" x="0" y="-7" z="3" spawntime="60" />
+		<monster name="Vampire" x="-3" y="-6" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="4" y="-6" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="-6" y="-4" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="4" y="-4" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="-1" y="-2" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="6" y="-2" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="-5" y="-1" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="-3" y="1" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="6" y="3" z="3" spawntime="60" />
+		<monster name="Vampire" x="-2" y="5" z="3" spawntime="60" />
+		<monster name="Hellspawn" x="1" y="5" z="3" spawntime="60" />
+		<monster name="Vampire" x="1" y="8" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="635" centery="893" centerz="3" radius="6">
+		<monster name="Nightmare" x="2" y="-5" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="-4" z="3" spawntime="60" />
+		<monster name="Nightmare Scion" x="-6" y="-2" z="3" spawntime="60" />
+		<monster name="Nightmare Scion" x="1" y="-2" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="-4" y="-1" z="3" spawntime="60" />
+		<monster name="Werewolf" x="-1" y="-1" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="6" y="0" z="3" spawntime="60" />
+		<monster name="Fury" x="5" y="2" z="3" spawntime="60" />
+		<monster name="Dark Torturer" x="4" y="3" z="3" spawntime="60" />
+		<monster name="Werewolf" x="-3" y="4" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="-1" y="5" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="665" centery="893" centerz="3" radius="8">
+		<monster name="Vampire Bride" x="-2" y="-5" z="3" spawntime="60" />
+		<monster name="Bonebeast" x="1" y="-4" z="3" spawntime="60" />
+		<monster name="Nightstalker" x="-3" y="-3" z="3" spawntime="60" />
+		<monster name="Nightstalker" x="-8" y="-2" z="3" spawntime="60" />
+		<monster name="Bonebeast" x="3" y="-2" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="5" y="-1" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="8" y="0" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="1" z="3" spawntime="60" />
+		<monster name="Vampire Bride" x="-5" y="3" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="689" centery="903" centerz="3" radius="3">
+		<npc name="lazaran" x="-1" y="-1" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="636" centery="911" centerz="3" radius="6">
+		<monster name="Earth Elemental" x="-1" y="-3" z="3" spawntime="60" />
+		<monster name="Haunted Treeling" x="-6" y="-2" z="3" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="-2" z="3" spawntime="60" />
+		<monster name="Haunted Treeling" x="5" y="-2" z="3" spawntime="60" />
+		<monster name="Bog Raider" x="5" y="0" z="3" spawntime="60" />
+		<monster name="Haunted Treeling" x="-5" y="4" z="3" spawntime="60" />
+		<monster name="Bog Raider" x="0" y="5" z="3" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="5" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="911" centerz="3" radius="6">
+		<monster name="Tarantula" x="-4" y="-5" z="3" spawntime="60" />
+		<monster name="Tarantula" x="5" y="-5" z="3" spawntime="60" />
+		<monster name="Giant Spider" x="1" y="-4" z="3" spawntime="60" />
+		<monster name="Tarantula" x="-1" y="3" z="3" spawntime="60" />
+		<monster name="Elder Beholder" x="4" y="3" z="3" spawntime="60" />
+		<monster name="Giant Spider" x="-2" y="5" z="3" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="986" centerz="3" radius="2">
+		<monster name="Energy Elemental" x="1" y="0" z="3" spawntime="60" />
 	</spawn>
 	<spawn centerx="306" centery="349" centerz="4" radius="5">
 		<monster name="Warlock" x="0" y="-1" z="4" spawntime="60" />
@@ -41,6 +206,116 @@
 		<monster name="Dragon" x="-1" y="-6" z="4" spawntime="60" />
 		<monster name="Dragon" x="2" y="-3" z="4" spawntime="60" />
 		<monster name="Dragon Lord" x="0" y="5" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="672" centery="859" centerz="4" radius="2">
+		<monster name="Ghoul" x="0" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="680" centery="860" centerz="4" radius="2">
+		<monster name="Ghoul" x="-1" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="875" centerz="4" radius="6">
+		<monster name="Hellspawn" x="-3" y="-4" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="-4" z="4" spawntime="60" />
+		<monster name="Spectre" x="5" y="-3" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="5" y="-1" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="-5" y="0" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="-2" y="3" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="5" y="4" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="1" y="6" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="659" centery="881" centerz="4" radius="2">
+		<monster name="Werewolf" x="1" y="1" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="2" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="882" centerz="4" radius="2">
+		<monster name="Vampire Bride" x="1" y="0" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="1" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="887" centerz="4" radius="2">
+		<monster name="Vampire Bride" x="-1" y="2" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="636" centery="893" centerz="4" radius="6">
+		<monster name="Vampire Bride" x="-4" y="-4" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="1" y="-3" z="4" spawntime="60" />
+		<monster name="Nightmare Scion" x="5" y="-1" z="4" spawntime="60" />
+		<monster name="Werewolf" x="-2" y="0" z="4" spawntime="60" />
+		<monster name="Nightmare Scion" x="-5" y="3" z="4" spawntime="60" />
+		<monster name="Werewolf" x="2" y="3" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="5" y="3" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="-3" y="4" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="893" centerz="4" radius="6">
+		<monster name="Vampire Bride" x="-3" y="-5" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="1" y="-5" z="4" spawntime="60" />
+		<monster name="Vampire" x="-6" y="-2" z="4" spawntime="60" />
+		<monster name="Vampire" x="-4" y="-2" z="4" spawntime="60" />
+		<monster name="Vampire" x="1" y="-2" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="3" y="-1" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="-4" y="2" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="5" y="3" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="5" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="894" centerz="4" radius="3">
+		<monster name="Hellspawn" x="-2" y="-1" z="4" spawntime="60" />
+		<monster name="Werewolf" x="2" y="-1" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="694" centery="894" centerz="4" radius="3">
+		<monster name="Bat" x="-2" y="-2" z="4" spawntime="60" />
+		<monster name="Skeleton" x="0" y="2" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="686" centery="898" centerz="4" radius="3">
+		<monster name="Skeleton" x="-1" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="902" centerz="4" radius="1">
+		<monster name="Hellspawn" x="1" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="650" centery="904" centerz="4" radius="5">
+		<monster name="Vampire Bride" x="4" y="-5" z="4" spawntime="60" />
+		<monster name="Vampire Bride" x="-4" y="-4" z="4" spawntime="60" />
+		<monster name="Werewolf" x="-5" y="-1" z="4" spawntime="60" />
+		<monster name="Werewolf" x="3" y="-1" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="4" y="1" z="4" spawntime="60" />
+		<monster name="Werewolf" x="0" y="4" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="636" centery="911" centerz="4" radius="6">
+		<monster name="Mutated Rat" x="-2" y="-4" z="4" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="-4" z="4" spawntime="60" />
+		<monster name="Vampire" x="-1" y="-3" z="4" spawntime="60" />
+		<monster name="Vampire" x="-5" y="0" z="4" spawntime="60" />
+		<monster name="Earth Elemental" x="-2" y="0" z="4" spawntime="60" />
+		<monster name="Mutated Rat" x="-2" y="3" z="4" spawntime="60" />
+		<monster name="Haunted Treeling" x="3" y="5" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="912" centerz="4" radius="6">
+		<monster name="Demon Skeleton" x="-3" y="-4" z="4" spawntime="60" />
+		<monster name="Skeleton" x="0" y="-4" z="4" spawntime="60" />
+		<monster name="Demon Skeleton" x="5" y="-2" z="4" spawntime="60" />
+		<monster name="Skeleton" x="-5" y="-1" z="4" spawntime="60" />
+		<monster name="Tarantula" x="-1" y="0" z="4" spawntime="60" />
+		<monster name="Giant Spider" x="5" y="0" z="4" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="2" z="4" spawntime="60" />
+		<monster name="Skeleton" x="1" y="4" z="4" spawntime="60" />
+		<monster name="Tarantula" x="4" y="4" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="913" centerz="4" radius="2">
+		<monster name="Werewolf" x="-1" y="0" z="4" spawntime="60" />
+		<monster name="Hellspawn" x="2" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="650" centery="971" centerz="4" radius="2">
+		<monster name="Energy Elemental" x="0" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="988" centerz="4" radius="3">
+		<monster name="Demon Skeleton" x="-1" y="-2" z="4" spawntime="60" />
+		<monster name="Vampire" x="1" y="1" z="4" spawntime="60" />
+		<monster name="Vampire" x="-3" y="2" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="633" centery="997" centerz="4" radius="3">
+		<monster name="Demon Skeleton" x="-1" y="-1" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="641" centery="999" centerz="4" radius="3">
+		<monster name="Vampire" x="-3" y="-3" z="4" spawntime="60" />
+		<monster name="Demon Skeleton" x="-1" y="1" z="4" spawntime="60" />
+		<monster name="Vampire" x="1" y="1" z="4" spawntime="60" />
 	</spawn>
 	<spawn centerx="250" centery="263" centerz="5" radius="12">
 		<monster name="Frost Troll" x="3" y="-3" z="5" spawntime="60" />
@@ -253,6 +528,155 @@
 		<monster name="Stone Golem" x="2" y="-2" z="5" spawntime="60" />
 		<monster name="Warlock" x="-3" y="-1" z="5" spawntime="60" />
 		<monster name="Stone Golem" x="3" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="668" centery="855" centerz="5" radius="4">
+		<monster name="Skeleton" x="-1" y="-2" z="5" spawntime="60" />
+		<monster name="Ghoul" x="-1" y="1" z="5" spawntime="60" />
+		<monster name="Skeleton" x="2" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="683" centery="856" centerz="5" radius="4">
+		<monster name="Skeleton" x="-4" y="-3" z="5" spawntime="60" />
+		<monster name="Ghoul" x="2" y="-3" z="5" spawntime="60" />
+		<monster name="Ghoul" x="-1" y="0" z="5" spawntime="60" />
+		<monster name="Ghoul" x="4" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="680" centery="870" centerz="5" radius="4">
+		<monster name="Ghoul" x="1" y="-1" z="5" spawntime="60" />
+		<monster name="Ghoul" x="-1" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="877" centerz="5" radius="3">
+		<monster name="Hellspawn" x="-1" y="0" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="-3" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="691" centery="881" centerz="5" radius="4">
+		<monster name="Ghoul" x="-2" y="-2" z="5" spawntime="60" />
+		<monster name="Ghoul" x="2" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="679" centery="882" centerz="5" radius="4">
+		<monster name="Skeleton" x="-1" y="-4" z="5" spawntime="60" />
+		<monster name="Skeleton" x="2" y="1" z="5" spawntime="60" />
+		<monster name="Skeleton" x="4" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="639" centery="883" centerz="5" radius="3">
+		<monster name="Vampire Bride" x="0" y="-2" z="5" spawntime="60" />
+		<monster name="Spectre" x="-1" y="0" z="5" spawntime="60" />
+		<monster name="Hellspawn" x="-3" y="2" z="5" spawntime="60" />
+		<monster name="Hellspawn" x="3" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="883" centerz="5" radius="3">
+		<monster name="Vampire Bride" x="-1" y="-3" z="5" spawntime="60" />
+		<monster name="Vampire" x="-2" y="-1" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="-1" z="5" spawntime="60" />
+		<monster name="Hellspawn" x="3" y="2" z="5" spawntime="60" />
+		<monster name="Mutated Bat" x="-2" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="886" centerz="5" radius="3">
+		<monster name="Vampire Bride" x="-1" y="-3" z="5" spawntime="60" />
+		<monster name="Vampire" x="3" y="-3" z="5" spawntime="60" />
+		<monster name="Hellspawn" x="1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="639" centery="892" centerz="5" radius="3">
+		<monster name="Vampire Bride" x="1" y="-3" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="2" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="3" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="660" centery="896" centerz="5" radius="6">
+		<monster name="Vampire Bride" x="3" y="-6" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="-5" y="-5" z="5" spawntime="60" />
+		<monster name="Vampire" x="-1" y="-5" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="-5" y="-1" z="5" spawntime="60" />
+		<monster name="Nightstalker" x="0" y="-1" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="3" y="-1" z="5" spawntime="60" />
+		<monster name="Vampire" x="-4" y="2" z="5" spawntime="60" />
+		<monster name="Nightstalker" x="-1" y="3" z="5" spawntime="60" />
+		<monster name="Vampire" x="1" y="3" z="5" spawntime="60" />
+		<monster name="Vampire" x="-1" y="5" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="651" centery="897" centerz="5" radius="2">
+		<monster name="Vampire" x="0" y="-1" z="5" spawntime="60" />
+		<monster name="Vampire" x="1" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="696" centery="897" centerz="5" radius="3">
+		<monster name="Skeleton" x="2" y="-2" z="5" spawntime="60" />
+		<monster name="Skeleton" x="-1" y="2" z="5" spawntime="60" />
+		<monster name="Bat" x="1" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="645" centery="899" centerz="5" radius="3">
+		<monster name="Vampire Bride" x="-1" y="-2" z="5" spawntime="60" />
+		<monster name="Werewolf" x="2" y="-2" z="5" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="676" centery="903" centerz="5" radius="3">
+		<monster name="Skeleton" x="2" y="-2" z="5" spawntime="60" />
+		<monster name="Skeleton" x="0" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="685" centery="903" centerz="5" radius="3">
+		<monster name="Ghoul" x="-2" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="907" centerz="5" radius="2">
+		<monster name="Haunted Treeling" x="1" y="-1" z="5" spawntime="60" />
+		<monster name="Mutated Rat" x="0" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="645" centery="907" centerz="5" radius="2">
+		<monster name="Vampire" x="-2" y="1" z="5" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="696" centery="909" centerz="5" radius="3">
+		<monster name="Bat" x="1" y="-3" z="5" spawntime="60" />
+		<monster name="Skeleton" x="1" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="913" centerz="5" radius="2">
+		<monster name="Haunted Treeling" x="1" y="-1" z="5" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="681" centery="915" centerz="5" radius="3">
+		<monster name="Skeleton" x="-1" y="0" z="5" spawntime="60" />
+		<monster name="Ghoul" x="1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="662" centery="917" centerz="5" radius="4">
+		<monster name="Tarantula" x="-2" y="-2" z="5" spawntime="60" />
+		<monster name="Poison spider" x="-1" y="-2" z="5" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="-2" z="5" spawntime="60" />
+		<monster name="Poison spider" x="-2" y="0" z="5" spawntime="60" />
+		<monster name="Beholder" x="2" y="0" z="5" spawntime="60" />
+		<monster name="Demon Skeleton" x="-1" y="2" z="5" spawntime="60" />
+		<monster name="Poison spider" x="1" y="3" z="5" spawntime="60" />
+		<monster name="Tarantula" x="2" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="695" centery="918" centerz="5" radius="3">
+		<monster name="Skeleton" x="0" y="-2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="689" centery="930" centerz="5" radius="4">
+		<monster name="Skeleton" x="-2" y="-1" z="5" spawntime="60" />
+		<monster name="Skeleton" x="2" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="697" centery="940" centerz="5" radius="4">
+		<monster name="Bat" x="-2" y="-3" z="5" spawntime="60" />
+		<monster name="Skeleton" x="-3" y="-2" z="5" spawntime="60" />
+		<monster name="Bat" x="1" y="2" z="5" spawntime="60" />
+		<monster name="Skeleton" x="-1" y="3" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="678" centery="942" centerz="5" radius="4">
+		<monster name="Skeleton" x="-1" y="-1" z="5" spawntime="60" />
+		<monster name="Ghoul" x="0" y="-1" z="5" spawntime="60" />
+		<monster name="Skeleton" x="1" y="2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="687" centery="948" centerz="5" radius="4">
+		<monster name="Skeleton" x="-4" y="-2" z="5" spawntime="60" />
+		<monster name="Skeleton" x="3" y="-2" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="642" centery="981" centerz="5" radius="2">
+		<monster name="Vampire" x="-1" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="653" centery="982" centerz="5" radius="2">
+		<monster name="Vampire" x="1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="629" centery="987" centerz="5" radius="3">
+		<monster name="Vampire" x="1" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="634" centery="1004" centerz="5" radius="3">
+		<monster name="Demon Skeleton" x="-2" y="-2" z="5" spawntime="60" />
+		<monster name="Vampire" x="1" y="1" z="5" spawntime="60" />
 	</spawn>
 	<spawn centerx="250" centery="263" centerz="6" radius="8">
 		<monster name="Frost Troll" x="0" y="-5" z="6" spawntime="60" />
@@ -779,10 +1203,102 @@
 		<monster name="Fire Elemental" x="-1" y="-1" z="6" spawntime="60" />
 		<monster name="Demon" x="-2" y="2" z="6" spawntime="60" />
 	</spawn>
+	<spawn centerx="649" centery="879" centerz="6" radius="3">
+		<monster name="Vampire Bride" x="3" y="0" z="6" spawntime="60" />
+		<monster name="Vampire" x="-3" y="2" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="315" centery="883" centerz="6" radius="5">
 		<monster name="Fire Elemental" x="-3" y="-1" z="6" spawntime="60" />
 		<monster name="Fire Elemental" x="4" y="-1" z="6" spawntime="60" />
 		<monster name="Demon" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="639" centery="884" centerz="6" radius="3">
+		<monster name="Vampire Bride" x="-1" y="-2" z="6" spawntime="60" />
+		<monster name="Hellspawn" x="2" y="2" z="6" spawntime="60" />
+		<monster name="Vampire" x="-2" y="3" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="659" centery="884" centerz="6" radius="3">
+		<monster name="Vampire Bride" x="1" y="-3" z="6" spawntime="60" />
+		<monster name="Hellspawn" x="1" y="0" z="6" spawntime="60" />
+		<monster name="Spectre" x="-1" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="892" centerz="6" radius="2">
+		<monster name="Bonebeast" x="-2" y="-1" z="6" spawntime="60" />
+		<monster name="Bonebeast" x="1" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="655" centery="893" centerz="6" radius="2">
+		<monster name="Vampire Bride" x="-1" y="-1" z="6" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="640" centery="895" centerz="6" radius="5">
+		<monster name="Vampire Bride" x="2" y="-4" z="6" spawntime="60" />
+		<monster name="Vampire Bride" x="-3" y="-2" z="6" spawntime="60" />
+		<monster name="Nightmare Scion" x="-2" y="0" z="6" spawntime="60" />
+		<monster name="Priestess" x="-1" y="1" z="6" spawntime="60" />
+		<monster name="Mutated Bat" x="0" y="3" z="6" spawntime="60" />
+		<monster name="Vampire Bride" x="4" y="3" z="6" spawntime="60" />
+		<monster name="Banshee" x="-3" y="4" z="6" spawntime="60" />
+		<monster name="Banshee" x="3" y="5" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="655" centery="899" centerz="6" radius="2">
+		<monster name="Vampire" x="-1" y="-2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="661" centery="899" centerz="6" radius="2">
+		<monster name="Vampire" x="0" y="-2" z="6" spawntime="60" />
+		<monster name="Vampire" x="-2" y="1" z="6" spawntime="60" />
+		<monster name="Vampire Bride" x="1" y="2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="906" centerz="6" radius="2">
+		<monster name="Vampire" x="-1" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="643" centery="906" centerz="6" radius="2">
+		<monster name="Vampire" x="1" y="-1" z="6" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="658" centery="911" centerz="6" radius="5">
+		<monster name="Bat" x="1" y="-5" z="6" spawntime="60" />
+		<monster name="Skeleton" x="-1" y="-1" z="6" spawntime="60" />
+		<monster name="Bat" x="4" y="-1" z="6" spawntime="60" />
+		<monster name="Skeleton" x="-1" y="2" z="6" spawntime="60" />
+		<monster name="Tarantula" x="-3" y="3" z="6" spawntime="60" />
+		<monster name="Beholder" x="3" y="3" z="6" spawntime="60" />
+		<monster name="Bat" x="5" y="4" z="6" spawntime="60" />
+		<monster name="Skeleton" x="-3" y="5" z="6" spawntime="60" />
+		<monster name="Bat" x="1" y="5" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="912" centerz="6" radius="2">
+		<monster name="Haunted Treeling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="643" centery="915" centerz="6" radius="2">
+		<monster name="Haunted Treeling" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="633" centery="919" centerz="6" radius="2">
+		<monster name="Haunted Treeling" x="0" y="-2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="920" centerz="6" radius="2">
+		<monster name="Tarantula" x="-1" y="-2" z="6" spawntime="60" />
+		<monster name="Tarantula" x="1" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="922" centerz="6" radius="2">
+		<monster name="Gargoyle" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="924" centerz="6" radius="4">
+		<monster name="Vampire" x="3" y="-3" z="6" spawntime="60" />
+		<monster name="Vampire" x="-1" y="2" z="6" spawntime="60" />
+		<monster name="Gargoyle" x="3" y="2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="660" centery="929" centerz="6" radius="3">
+		<monster name="Gargoyle" x="2" y="-1" z="6" spawntime="60" />
+		<monster name="Gargoyle" x="-3" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="652" centery="934" centerz="6" radius="3">
+		<monster name="Gargoyle" x="-2" y="-2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="645" centery="935" centerz="6" radius="2">
+		<monster name="Gargoyle" x="-1" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="661" centery="936" centerz="6" radius="2">
+		<monster name="Gargoyle" x="-1" y="1" z="6" spawntime="60" />
 	</spawn>
 	<spawn centerx="298" centery="937" centerz="6" radius="12">
 		<monster name="Hand of Cursed Fate" x="-2" y="-9" z="6" spawntime="60" />
@@ -800,6 +1316,35 @@
 		<monster name="Demon" x="-1" y="6" z="6" spawntime="60" />
 		<monster name="Hand of Cursed Fate" x="-6" y="8" z="6" spawntime="60" />
 		<monster name="Demon" x="7" y="8" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="653" centery="942" centerz="6" radius="3">
+		<monster name="Gargoyle" x="-2" y="-2" z="6" spawntime="60" />
+		<monster name="Gargoyle" x="1" y="2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="645" centery="961" centerz="6" radius="3">
+		<monster name="Elder Beholder" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="654" centery="961" centerz="6" radius="3">
+		<monster name="Gargoyle" x="-2" y="-3" z="6" spawntime="60" />
+		<monster name="Demon Skeleton" x="0" y="-2" z="6" spawntime="60" />
+		<monster name="Demon Skeleton" x="2" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="641" centery="975" centerz="6" radius="2">
+		<monster name="Gargoyle" x="2" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="977" centerz="6" radius="2">
+		<monster name="Vampire" x="0" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="620" centery="992" centerz="6" radius="3">
+		<monster name="Elder Beholder" x="-1" y="-1" z="6" spawntime="60" />
+		<monster name="Vampire" x="2" y="3" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="647" centery="1004" centerz="6" radius="1">
+		<monster name="Elder Beholder" x="1" y="0" z="6" spawntime="60" />
+		<monster name="Vampire" x="0" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="628" centery="1005" centerz="6" radius="1">
+		<monster name="Vampire" x="1" y="0" z="6" spawntime="60" />
 	</spawn>
 	<spawn centerx="250" centery="250" centerz="7" radius="5">
 		<monster name="Polar Bear" x="-3" y="-3" z="7" spawntime="60" />
@@ -1748,6 +2293,9 @@
 		<monster name="Hellfire Fighter" x="-2" y="-1" z="7" spawntime="60" />
 		<monster name="Diabolic Imp" x="-1" y="1" z="7" spawntime="60" />
 	</spawn>
+	<spawn centerx="717" centery="863" centerz="7" radius="6">
+		<monster name="sandcrawler" x="0" y="4" z="7" spawntime="60" />
+	</spawn>
 	<spawn centerx="331" centery="864" centerz="7" radius="5">
 		<monster name="Fire Elemental" x="4" y="0" z="7" spawntime="60" />
 		<monster name="Demon" x="0" y="1" z="7" spawntime="60" />
@@ -1767,27 +2315,177 @@
 		<monster name="Fire Elemental" x="4" y="-2" z="7" spawntime="60" />
 		<monster name="Demon" x="1" y="0" z="7" spawntime="60" />
 	</spawn>
+	<spawn centerx="716" centery="877" centerz="7" radius="6" />
 	<spawn centerx="293" centery="878" centerz="7" radius="5">
 		<monster name="Demon" x="1" y="0" z="7" spawntime="60" />
 		<monster name="Fire Elemental" x="4" y="1" z="7" spawntime="60" />
 		<monster name="Fire Elemental" x="1" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="663" centery="883" centerz="7" radius="2">
+		<monster name="Vampire" x="-1" y="0" z="7" spawntime="60" />
+		<monster name="Bonebeast" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="884" centerz="7" radius="3">
+		<monster name="Hellspawn" x="-3" y="-1" z="7" spawntime="60" />
+		<monster name="Hellspawn" x="2" y="2" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="301" centery="886" centerz="7" radius="5">
 		<monster name="Fire Elemental" x="4" y="-2" z="7" spawntime="60" />
 		<monster name="Demon" x="2" y="0" z="7" spawntime="60" />
 		<monster name="Hellfire Fighter" x="3" y="4" z="7" spawntime="60" />
 	</spawn>
+	<spawn centerx="653" centery="886" centerz="7" radius="2">
+		<monster name="Vampire Bride" x="-2" y="-1" z="7" spawntime="60" />
+		<monster name="Banshee" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="646" centery="888" centerz="7" radius="2">
+		<monster name="Mutated Bat" x="-1" y="-1" z="7" spawntime="60" />
+		<monster name="Banshee" x="2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="659" centery="889" centerz="7" radius="2">
+		<monster name="Vampire" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Vampire Bride" x="-1" y="-1" z="7" spawntime="60" />
+	</spawn>
 	<spawn centerx="288" centery="890" centerz="7" radius="5">
 		<monster name="Demon" x="-1" y="0" z="7" spawntime="60" />
 		<monster name="Hellfire Fighter" x="3" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="622" centery="891" centerz="7" radius="3">
+		<monster name="Tarantula" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="-1" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="653" centery="891" centerz="7" radius="2">
+		<monster name="Vampire" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="892" centerz="7" radius="2">
+		<monster name="Vampire Bride" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="1" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="306" centery="893" centerz="7" radius="5">
 		<monster name="Fire Elemental" x="2" y="-1" z="7" spawntime="60" />
 		<monster name="Fire Elemental" x="-3" y="1" z="7" spawntime="60" />
 		<monster name="Demon" x="0" y="1" z="7" spawntime="60" />
 	</spawn>
+	<spawn centerx="659" centery="895" centerz="7" radius="2">
+		<monster name="Priestess" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Vampire" x="1" y="0" z="7" spawntime="60" />
+		<monster name="Vampire" x="-2" y="2" z="7" spawntime="60" />
+	</spawn>
 	<spawn centerx="289" centery="898" centerz="7" radius="5">
 		<monster name="Hellfire Fighter" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="622" centery="899" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Tarantula" x="-3" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="638" centery="900" centerz="7" radius="2">
+		<monster name="Bat" x="-1" y="-2" z="7" spawntime="60" />
+		<monster name="Bat" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Vampire" x="-1" y="1" z="7" spawntime="60" />
+		<monster name="Bat" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="656" centery="901" centerz="7" radius="2">
+		<monster name="Bat" x="-1" y="-1" z="7" spawntime="60" />
+		<monster name="Bat" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="600" centery="902" centerz="7" radius="3">
+		<monster name="Tarantula" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="2" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="644" centery="903" centerz="7" radius="2">
+		<monster name="Bat" x="-1" y="-2" z="7" spawntime="60" />
+		<monster name="Vampire" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Bat" x="2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="650" centery="905" centerz="7" radius="2">
+		<monster name="Bat" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Gargoyle" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Bat" x="2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="906" centerz="7" radius="2">
+		<monster name="Vampire" x="1" y="-2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="615" centery="909" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="643" centery="909" centerz="7" radius="2">
+		<monster name="Mutated Rat" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Vampire" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Vampire" x="-2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="658" centery="909" centerz="7" radius="4">
+		<monster name="Skeleton" x="2" y="-4" z="7" spawntime="60" />
+		<monster name="Skeleton" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Tarantula" x="1" y="-1" z="7" spawntime="60" />
+		<monster name="Skeleton" x="2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="601" centery="910" centerz="7" radius="3">
+		<monster name="Tarantula" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-3" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="624" centery="910" centerz="7" radius="3">
+		<monster name="Scorpion" x="1" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="-1" z="7" spawntime="60" />
+		<monster name="Tarantula" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Slime" x="-1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="595" centery="918" centerz="7" radius="3">
+		<monster name="Tarantula" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Tarantula" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="619" centery="919" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="-1" y="-2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="610" centery="923" centerz="7" radius="3">
+		<monster name="Slime" x="3" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="-1" z="7" spawntime="60" />
+		<monster name="Scorpion" x="-1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="590" centery="927" centerz="7" radius="3">
+		<monster name="Scorpion" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="0" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="600" centery="927" centerz="7" radius="3">
+		<monster name="Slime" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="619" centery="927" centerz="7" radius="3">
+		<monster name="Scorpion" x="3" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-1" y="-1" z="7" spawntime="60" />
+		<monster name="Scorpion" x="3" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="627" centery="928" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="-2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="929" centerz="7" radius="3">
+		<monster name="Demon Skeleton" x="1" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-3" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="579" centery="933" centerz="7" radius="3">
+		<monster name="Slime" x="-1" y="-2" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="-2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="612" centery="935" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="603" centery="936" centerz="7" radius="3">
+		<monster name="Slime" x="-1" y="-2" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="392" centery="938" centerz="7" radius="25">
 		<monster name="Plaguesmith" x="-15" y="-14" z="7" spawntime="60" />
@@ -1822,6 +2520,169 @@
 		<monster name="Son of Verminor" x="4" y="15" z="7" spawntime="60" />
 		<monster name="Defiler" x="-16" y="16" z="7" spawntime="60" />
 		<monster name="Plaguesmith" x="2" y="16" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="588" centery="939" centerz="7" radius="3">
+		<monster name="Slime" x="-1" y="-3" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="3" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="621" centery="939" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="606" centery="944" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="597" centery="945" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="-1" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="615" centery="947" centerz="7" radius="3">
+		<monster name="Slime" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="625" centery="947" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="-1" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="-1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="580" centery="948" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="588" centery="951" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="597" centery="953" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="-1" y="-3" z="7" spawntime="60" />
+		<monster name="Slime" x="-2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="632" centery="953" centerz="7" radius="3">
+		<monster name="Tarantula" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="606" centery="954" centerz="7" radius="3">
+		<monster name="Slime" x="3" y="-2" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Tarantula" x="-1" y="2" z="7" spawntime="60" />
+		<monster name="Slime" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="641" centery="954" centerz="7" radius="3">
+		<monster name="Tarantula" x="-2" y="1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="623" centery="956" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="576" centery="957" centerz="7" radius="3">
+		<monster name="Demon Skeleton" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="632" centery="962" centerz="7" radius="2">
+		<monster name="Haunted Treeling" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="585" centery="963" centerz="7" radius="3">
+		<monster name="Scorpion" x="0" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="-1" z="7" spawntime="60" />
+		<monster name="Scorpion" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="606" centery="963" centerz="7" radius="3">
+		<monster name="Scorpion" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="3" y="0" z="7" spawntime="60" />
+		<monster name="Tarantula" x="-1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="573" centery="964" centerz="7" radius="3">
+		<monster name="Scorpion" x="-3" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="0" z="7" spawntime="60" />
+		<monster name="Scorpion" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="597" centery="964" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="616" centery="964" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="0" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="625" centery="971" centerz="7" radius="2">
+		<monster name="Slime" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Slime" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="608" centery="972" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="-1" y="-3" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Slime" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="577" centery="974" centerz="7" radius="3">
+		<monster name="Scorpion" x="3" y="-2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="-1" y="-1" z="7" spawntime="60" />
+		<monster name="Tarantula" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="616" centery="974" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="3" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="0" z="7" spawntime="60" />
+		<monster name="Slime" x="2" y="1" z="7" spawntime="60" />
+		<monster name="Tarantula" x="-1" y="3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="1" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="593" centery="975" centerz="7" radius="3">
+		<monster name="Slime" x="-2" y="-2" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="-1" y="1" z="7" spawntime="60" />
+		<monster name="Scorpion" x="2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="568" centery="978" centerz="7" radius="2">
+		<monster name="Slime" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="585" centery="978" centerz="7" radius="3">
+		<monster name="Slime" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="623" centery="978" centerz="7" radius="2">
+		<monster name="Tarantula" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="629" centery="979" centerz="7" radius="2">
+		<monster name="Demon Skeleton" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="Tarantula" x="-2" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="552" centery="982" centerz="7" radius="1">
+		<npc name="Nimral" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="600" centery="982" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="3" y="-3" z="7" spawntime="60" />
+		<monster name="Demon Skeleton" x="1" y="0" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="2" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="573" centery="983" centerz="7" radius="2">
+		<monster name="Haunted Treeling" x="-1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="609" centery="983" centerz="7" radius="3">
+		<monster name="Haunted Treeling" x="2" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="565" centery="985" centerz="7" radius="2">
+		<monster name="Slime" x="1" y="0" z="7" spawntime="60" />
+		<monster name="Scorpion" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="580" centery="988" centerz="7" radius="3">
+		<monster name="Slime" x="-2" y="-3" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Scorpion" x="-1" y="-1" z="7" spawntime="60" />
+		<monster name="Scorpion" x="1" y="-1" z="7" spawntime="60" />
+		<monster name="Haunted Treeling" x="-2" y="1" z="7" spawntime="60" />
+		<monster name="Slime" x="1" y="3" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="571" centery="989" centerz="7" radius="2">
+		<monster name="Slime" x="-1" y="-1" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="340" centery="994" centerz="7" radius="46">
 		<monster name="Fluffy" x="23" y="-29" z="7" spawntime="60" />
@@ -1874,6 +2735,10 @@
 		<monster name="Juggernaut" x="38" y="23" z="7" spawntime="60" />
 		<monster name="Fury" x="37" y="24" z="7" spawntime="60" />
 		<monster name="Fury" x="43" y="25" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="578" centery="997" centerz="7" radius="3">
+		<monster name="Scorpion" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="Slime" x="-3" y="0" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="384" centery="1010" centerz="7" radius="25">
 		<monster name="Fury" x="8" y="-7" z="7" spawntime="60" />
@@ -3346,6 +4211,66 @@
 		<monster name="Spectre" x="-1" y="5" z="8" spawntime="60" />
 		<monster name="Destroyer" x="-2" y="8" z="8" spawntime="60" />
 	</spawn>
+	<spawn centerx="638" centery="882" centerz="8" radius="5">
+		<monster name="Spectre" x="1" y="0" z="8" spawntime="60" />
+		<monster name="Werewolf" x="4" y="0" z="8" spawntime="60" />
+		<monster name="Werewolf" x="-2" y="2" z="8" spawntime="60" />
+		<monster name="Vampire Bride" x="4" y="4" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="882" centerz="8" radius="3">
+		<monster name="Banshee" x="2" y="-1" z="8" spawntime="60" />
+		<monster name="Mutated Bat" x="-2" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="655" centery="883" centerz="8" radius="2">
+		<monster name="Bonebeast" x="2" y="-1" z="8" spawntime="60" />
+		<monster name="Bonebeast" x="-2" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="662" centery="883" centerz="8" radius="2">
+		<monster name="Vampire Bride" x="-1" y="-1" z="8" spawntime="60" />
+		<monster name="Nightstalker" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="891" centerz="8" radius="3">
+		<monster name="Bonebeast" x="-2" y="-2" z="8" spawntime="60" />
+		<monster name="Nightstalker" x="3" y="-2" z="8" spawntime="60" />
+		<monster name="Nightstalker" x="-2" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="893" centerz="8" radius="3">
+		<monster name="Mutated Bat" x="-1" y="-3" z="8" spawntime="60" />
+		<monster name="Vampire Bride" x="-3" y="-2" z="8" spawntime="60" />
+		<monster name="Vampire Bride" x="2" y="-1" z="8" spawntime="60" />
+		<monster name="Banshee" x="2" y="1" z="8" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="639" centery="894" centerz="8" radius="4">
+		<monster name="Vampire Bride" x="1" y="-4" z="8" spawntime="60" />
+		<monster name="Nightmare Scion" x="-1" y="-3" z="8" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="0" z="8" spawntime="60" />
+		<monster name="Nightmare Scion" x="4" y="1" z="8" spawntime="60" />
+		<monster name="Banshee" x="0" y="4" z="8" spawntime="60" />
+		<monster name="Nightmare Scion" x="3" y="4" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="646" centery="899" centerz="8" radius="1">
+		<monster name="Vampire Bride" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="656" centery="900" centerz="8" radius="3">
+		<monster name="Gargoyle" x="-2" y="-2" z="8" spawntime="60" />
+		<monster name="Tarantula" x="3" y="-1" z="8" spawntime="60" />
+		<monster name="Gargoyle" x="2" y="3" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="636" centery="906" centerz="8" radius="4">
+		<monster name="Zombie" x="3" y="-4" z="8" spawntime="60" />
+		<monster name="Zombie" x="3" y="-2" z="8" spawntime="60" />
+		<monster name="Zombie" x="2" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="647" centery="906" centerz="8" radius="3">
+		<monster name="Zombie" x="2" y="-2" z="8" spawntime="60" />
+		<monster name="Vampire" x="-1" y="-1" z="8" spawntime="60" />
+		<monster name="Zombie" x="-1" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="658" centery="908" centerz="8" radius="3">
+		<monster name="Gargoyle" x="-1" y="-3" z="8" spawntime="60" />
+		<monster name="Beholder" x="2" y="1" z="8" spawntime="60" />
+	</spawn>
 	<spawn centerx="538" centery="259" centerz="9" radius="35">
 		<monster name="Cyclops Smith" x="24" y="-17" z="9" spawntime="60" />
 		<monster name="Cyclops Drone" x="6" y="-15" z="9" spawntime="60" />
@@ -4163,6 +5088,68 @@
 		<monster name="Elf Arcanist" x="6" y="9" z="9" spawntime="60" />
 		<monster name="Warlock" x="-8" y="11" z="9" spawntime="60" />
 	</spawn>
+	<spawn centerx="653" centery="877" centerz="9" radius="2">
+		<monster name="Mutated Bat" x="-2" y="2" z="9" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="2" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="644" centery="878" centerz="9" radius="2">
+		<monster name="Nightstalker" x="1" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="665" centery="882" centerz="9" radius="2">
+		<monster name="Rat" x="0" y="-1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="637" centery="883" centerz="9" radius="3">
+		<monster name="Vampire Bride" x="-1" y="-1" z="9" spawntime="60" />
+		<monster name="Mutated Bat" x="2" y="2" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="649" centery="883" centerz="9" radius="2">
+		<monster name="Vampire Bride" x="0" y="-2" z="9" spawntime="60" />
+		<monster name="Bonebeast" x="-2" y="1" z="9" spawntime="60" />
+		<monster name="Mutated Bat" x="2" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="658" centery="884" centerz="9" radius="2">
+		<monster name="Vampire Bride" x="1" y="-1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="650" centery="888" centerz="9" radius="2">
+		<monster name="Vampire Bride" x="1" y="-1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="641" centery="892" centerz="9" radius="4">
+		<monster name="Vampire Bride" x="4" y="-4" z="9" spawntime="60" />
+		<monster name="Nightmare Scion" x="-2" y="-3" z="9" spawntime="60" />
+		<monster name="Bonebeast" x="-1" y="-1" z="9" spawntime="60" />
+		<monster name="Nightmare Scion" x="-4" y="1" z="9" spawntime="60" />
+		<monster name="Mutated Bat" x="-1" y="3" z="9" spawntime="60" />
+		<monster name="Vampire Bride" x="3" y="3" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="658" centery="892" centerz="9" radius="4">
+		<monster name="Vampire Bride" x="1" y="-3" z="9" spawntime="60" />
+		<monster name="Nightstalker" x="-3" y="-2" z="9" spawntime="60" />
+		<monster name="Nightstalker" x="1" y="3" z="9" spawntime="60" />
+		<monster name="Vampire Bride" x="-1" y="4" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="650" centery="894" centerz="9" radius="2">
+		<monster name="Mutated Bat" x="1" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="655" centery="900" centerz="9" radius="3">
+		<monster name="Skeleton" x="3" y="-1" z="9" spawntime="60" />
+		<monster name="Vampire" x="1" y="0" z="9" spawntime="60" />
+		<monster name="Demon Skeleton" x="-2" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="642" centery="904" centerz="9" radius="5">
+		<monster name="Zombie" x="-1" y="-5" z="9" spawntime="60" />
+		<monster name="Dark Torturer" x="4" y="-5" z="9" spawntime="60" />
+		<monster name="Vampire" x="0" y="-3" z="9" spawntime="60" />
+		<monster name="Zombie" x="-4" y="-1" z="9" spawntime="60" />
+		<monster name="Vampire" x="-4" y="1" z="9" spawntime="60" />
+		<monster name="Vampire" x="3" y="3" z="9" spawntime="60" />
+		<monster name="Zombie" x="0" y="5" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="657" centery="908" centerz="9" radius="3">
+		<monster name="Bat" x="1" y="-2" z="9" spawntime="60" />
+		<monster name="Vampire" x="-3" y="0" z="9" spawntime="60" />
+		<monster name="Vampire" x="2" y="0" z="9" spawntime="60" />
+		<monster name="Bat" x="-2" y="1" z="9" spawntime="60" />
+	</spawn>
 	<spawn centerx="561" centery="242" centerz="10" radius="1">
 		<monster name="Cyclops Drone" x="0" y="0" z="10" spawntime="60" />
 	</spawn>
@@ -4833,6 +5820,40 @@
 		<monster name="Hand of Cursed Fate" x="-5" y="0" z="10" spawntime="60" />
 		<monster name="Spectre" x="-1" y="0" z="10" spawntime="60" />
 		<monster name="Spectre" x="2" y="0" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="880" centerz="10" radius="3">
+		<monster name="Vampire Bride" x="0" y="-3" z="10" spawntime="60" />
+		<monster name="Mutated Bat" x="3" y="-1" z="10" spawntime="60" />
+		<monster name="Mutated Bat" x="-1" y="2" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="643" centery="893" centerz="10" radius="3">
+		<monster name="Vampire Bride" x="-2" y="-2" z="10" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="3" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="654" centery="893" centerz="10" radius="3">
+		<monster name="Vampire" x="2" y="-1" z="10" spawntime="60" />
+		<monster name="Vampire Bride" x="-1" y="1" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="632" centery="895" centerz="10" radius="3">
+		<monster name="Vampire Bride" x="2" y="-1" z="10" spawntime="60" />
+		<monster name="Mutated Bat" x="-1" y="2" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="665" centery="895" centerz="10" radius="3">
+		<monster name="Vampire Bride" x="-2" y="-1" z="10" spawntime="60" />
+		<monster name="Mutated Bat" x="1" y="-1" z="10" spawntime="60" />
+		<monster name="Vampire Bride" x="0" y="1" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="644" centery="901" centerz="10" radius="3">
+		<monster name="Vampire" x="2" y="1" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="654" centery="901" centerz="10" radius="3">
+		<monster name="Vampire" x="1" y="-1" z="10" spawntime="60" />
+		<monster name="Vampire Bride" x="-2" y="1" z="10" spawntime="60" />
+	</spawn>
+	<spawn centerx="648" centery="911" centerz="10" radius="3">
+		<monster name="Mutated Bat" x="-1" y="-2" z="10" spawntime="60" />
+		<monster name="Vampire Bride" x="1" y="-2" z="10" spawntime="60" />
+		<monster name="Mutated Bat" x="2" y="1" z="10" spawntime="60" />
 	</spawn>
 	<spawn centerx="567" centery="259" centerz="11" radius="5">
 		<monster name="Fire Elemental" x="-1" y="0" z="11" spawntime="60" />
