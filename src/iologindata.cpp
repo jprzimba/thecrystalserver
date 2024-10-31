@@ -976,26 +976,25 @@ bool IOLoginData::savePlayer(Player* player, bool preSave/* = true*/, bool shall
 	// Save loot items
 	std::vector<std::pair<uint32_t, uint32_t> > desiredItems = player->getDesiredLootItems(); // Obt�m todos os itens desejados
 	query.str("");
-	query << "DELETE FROM player_autoloot WHERE player_id = " << player->getGUID(); // Remove itens antigos
+	query << "DELETE FROM player_autoloot WHERE player_id = " << player->getGUID();
 	if (!db->query(query.str()))
 		return false;
-	
-	if (desiredItems.empty())
-		return true;
 
-	std::stringstream insertQuery;
-	insertQuery << "INSERT INTO player_autoloot (player_id, itemid, containerid) VALUES ";
-	
-	for (size_t i = 0; i < desiredItems.size(); ++i)
+	if (!desiredItems.empty())
 	{
-		if (i > 0)
-			insertQuery << ", ";
-	        
-			insertQuery << "(" << player->getGUID() << ", " << desiredItems[i].first << ", " << desiredItems[i].second << ")";
-	}
+		query.str(""); 
+		query << "INSERT INTO player_autoloot (player_id, itemid, containerid) VALUES ";
+		for (size_t i = 0; i < desiredItems.size(); ++i)
+		{
+			if (i > 0)
+				query << ", ";
+            
+			query << "(" << player->getGUID() << ", " << desiredItems[i].first << ", " << desiredItems[i].second << ")";
+		}
 
-	if (!db->query(insertQuery.str()))
-		return false;
+		if (!db->query(query.str()))
+			return false;
+	}
  
 	//item saving
 	query.str("");
