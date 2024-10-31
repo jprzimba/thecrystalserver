@@ -333,6 +333,8 @@ bool TalkAction::loadFunction(const std::string& functionName)
 		m_function = showDesiredItems;
 	else if (m_functionName == "cleardesireditems")
 		m_function = clearDesiredLootItems;
+	else if (m_functionName == "banplayer")
+		m_function = banPlayer;
 	else
 	{
 		std::clog << "[Warning - TalkAction::loadFunction] Function \"" << m_functionName << "\" does not exist." << std::endl;
@@ -1549,5 +1551,64 @@ bool TalkAction::clearDesiredLootItems(Creature* creature, const std::string&, c
 	player->sendTextMessage(MSG_INFO_DESCR, "All items have been removed from your desired loot list.");
 
 	IOLoginData::getInstance()->savePlayer(player);
+	return true;
+}
+
+bool TalkAction::banPlayer(Creature* creature, const std::string&, const std::string& param)
+{
+	Player* player = creature->getPlayer();
+	StringVec params = explodeString(param, ",");
+	if (!player || params.empty())
+		return false;
+
+	std::string banName = params[0];
+	Player* target = g_game.getPlayerByName(banName.c_str());
+
+	if (!target || banName == "account manager")
+	{
+		player->sendCancel("A player with this name does not exist.");
+		return true;
+	}
+
+	if (target->hasFlag(PlayerFlag_CannotBeBanned))
+	{
+		player->sendTextMessage(MSG_EVENT_DEFAULT, "You cannot ban this player.");
+		return true;
+	}
+
+	// Determine ban duration in days; default to forever if not provided
+	int32_t bantime = 0; // Default to forever
+	if (params.size() > 1)
+		bantime = std::max(1, std::min(atoi(params[1].c_str()), 999));
+	
+	uint32_t banDuration = (bantime > 0) ? bantime * 86400 : 0xFFFFFFFF;
+	char buffer[4];
+	itoa(bantime, buffer, 10);
+
+	uint32_t reasonId = 11; // Game Weakness Abuse
+	ViolationAction_t actionId = ACTION_BANISHMENT;
+	std::string comment = "Automatic Banishment";
+	uint32_t gamemaster = player->getGUID();
+	PlayerBan_t type = PLAYERBAN_BANISHMENT;
+	std::string statement = "";
+
+	IOBan::getInstance()->addPlayerBanishment(
+		target->getName(), banDuration, reasonId, actionId,
+		comment, gamemaster, type, statement
+	);
+	target->kick(true, true);
+
+	if (g_config.getBool(ConfigManager::BROADCAST_BANISHMENTS))
+	{
+		std::stringstream banMessage;
+		if (bantime > 0)
+			banMessage << target->getName() << " has been banned for " << buffer << " day(s).";
+		else
+			banMessage << target->getName() << " has been banned forever.";
+
+		Dispatcher::getInstance().addTask(createTask(boost::bind(
+			&Game::broadcastMessage, &g_game, banMessage.str().c_str(), MSG_STATUS_WARNING)));
+	}
+
 	return true;
 }
