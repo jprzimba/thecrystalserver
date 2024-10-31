@@ -2322,6 +2322,9 @@
 		<monster name="Dworc Venomsniper" x="-2" y="1" z="8" spawntime="60" />
 		<monster name="Dworc Fleshhunter" x="0" y="4" z="8" spawntime="60" />
 	</spawn>
+	<spawn centerx="429" centery="448" centerz="8" radius="1">
+		<npc name="Lara" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
 	<spawn centerx="543" centery="449" centerz="8" radius="5">
 		<monster name="Dworc Fleshhunter" x="1" y="-2" z="8" spawntime="60" />
 		<monster name="Dworc Fleshhunter" x="-3" y="0" z="8" spawntime="60" />
@@ -2416,6 +2419,9 @@
 		<monster name="Larva" x="1" y="-4" z="8" spawntime="60" />
 		<monster name="Larva" x="4" y="-3" z="8" spawntime="60" />
 		<monster name="Larva" x="0" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="429" centery="467" centerz="8" radius="1">
+		<npc name="Lara" x="0" y="0" z="8" spawntime="60" />
 	</spawn>
 	<spawn centerx="509" centery="467" centerz="8" radius="1">
 		<monster name="Rotworm" x="0" y="0" z="8" spawntime="40" />
@@ -2512,6 +2518,9 @@
 		<monster name="Larva" x="-1" y="0" z="8" spawntime="60" />
 		<monster name="Larva" x="4" y="1" z="8" spawntime="60" />
 		<monster name="Scarab" x="-4" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="429" centery="485" centerz="8" radius="1">
+		<npc name="Lara" x="0" y="0" z="8" spawntime="60" />
 	</spawn>
 	<spawn centerx="484" centery="485" centerz="8" radius="1">
 		<monster name="Rotworm" x="0" y="-1" z="8" spawntime="40" />

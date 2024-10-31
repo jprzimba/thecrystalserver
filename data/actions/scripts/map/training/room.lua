@@ -27,7 +27,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 
     if othersidePos.x and othersidePos.y then
         local things = getThingfromPos(othersidePos)
-        if things.itemid == 1 and getPlayerLevel(things.uid) > 0 then
+        if things.uid > 0 and isPlayer(things.uid) and getPlayerLevel(things.uid) > 0 then
             emptyRoom = false
         end
     end
