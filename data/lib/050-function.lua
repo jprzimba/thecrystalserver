@@ -123,7 +123,7 @@ end
 
 function getTibiaTime(num)
 	local minutes, hours = getWorldTime(), 0
-	while (minutes > 60) do
+	while(minutes > 60) do
 		hours = hours + 1
 		minutes = minutes - 60
 	end

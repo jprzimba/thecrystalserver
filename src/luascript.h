@@ -244,7 +244,7 @@ class LuaInterface
 
 		static bool reserveEnv()
 		{
-			if (++m_scriptEnvIndex > 20)
+			if(++m_scriptEnvIndex > 20)
 			{
 				--m_scriptEnvIndex;
 				return false;
@@ -254,7 +254,7 @@ class LuaInterface
 		}
 		static void releaseEnv()
 		{
-			if (m_scriptEnvIndex >= 0)
+			if(m_scriptEnvIndex >= 0)
 			{
 				m_scriptEnv[m_scriptEnvIndex].reset();
 				--m_scriptEnvIndex;
@@ -539,7 +539,6 @@ class LuaInterface
 		static int32_t luaHasCreatureCondition(lua_State* L);
 		static int32_t luaGetCreatureConditionInfo(lua_State* L);
 		static int32_t luaHasPlayerClient(lua_State* L);
-		static int32_t luaGetDepotId(lua_State* L);
 		static int32_t luaGetVocationInfo(lua_State* L);
 		static int32_t luaGetGroupInfo(lua_State* L);
 		static int32_t luaGetMonsterInfo(lua_State* L);

@@ -55,7 +55,7 @@ ExceptionHandler::ExceptionHandler()
 
 ExceptionHandler::~ExceptionHandler()
 {
-	if (isInstalled)
+	if(isInstalled)
 		RemoveHandler();
 }
 
@@ -63,7 +63,7 @@ bool ExceptionHandler::InstallHandler()
 {
 #ifdef WINDOWS
 	++ref_counter;
-	if (ref_counter == 1)
+	if(ref_counter == 1)
 		SetUnhandledExceptionFilter(ExceptionHandler::MiniDumpExceptionHandler);
 
  //Unix/Linux
@@ -84,12 +84,12 @@ bool ExceptionHandler::InstallHandler()
 
 bool ExceptionHandler::RemoveHandler()
 {
-	if (!isInstalled)
+	if(!isInstalled)
 		return false;
 
 #ifdef WINDOWS
 	--ref_counter;
-	if (ref_counter == 0)
+	if(ref_counter == 0)
 		SetUnhandledExceptionFilter(NULL);
 
 //Unix/Linux
@@ -126,7 +126,7 @@ long ExceptionHandler::MiniDumpExceptionHandler(EXCEPTION_POINTERS* exceptionPoi
 		NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	// If we cannot create the file, then we cannot dump the memory
-	if (!hFile || hFile == INVALID_HANDLE_VALUE)
+	if(!hFile || hFile == INVALID_HANDLE_VALUE)
 	{
 		std::clog << "Cannot create dump file, error: " << GetLastError() << std::endl;
 		return EXCEPTION_CONTINUE_SEARCH;
@@ -150,7 +150,7 @@ long ExceptionHandler::MiniDumpExceptionHandler(EXCEPTION_POINTERS* exceptionPoi
 		&exceptionInformation, NULL, NULL);
 
 	// Delete the dump file if we cannot generate the crash trace
-	if (!dumpResult)
+	if(!dumpResult)
 	{
 		std::clog << "Cannot generate minidump, error: " << GetLastError() << std::endl;
 
@@ -186,7 +186,7 @@ void _SigHandler(int signum, siginfo_t *info, void* secret)
 	std::ostream *outdriver;
 	std::clog << "Error: generating report file..." <<std::endl;
 	std::ofstream output("report.txt",std::ios_base::app);
-	if (output.fail())
+	if(output.fail())
 	{
 		outdriver = &std::clog;
 		file = false;
@@ -204,10 +204,10 @@ void _SigHandler(int signum, siginfo_t *info, void* secret)
 	*outdriver << "Compiler info - " << COMPILER_STRING << std::endl;
 	*outdriver << "Compilation Date - " << COMPILATION_DATE << std::endl << std::endl;
 
-	if (getrusage(RUSAGE_SELF, &resources) != -1)
+	if(getrusage(RUSAGE_SELF, &resources) != -1)
 	{
 		//- global memory information
-		if (getrlimit(RLIMIT_AS, &resourcelimit) != -1)
+		if(getrlimit(RLIMIT_AS, &resourcelimit) != -1)
 		{
 			// note: This is not POSIX standard, but it is available in Unix System V release 4, Linux, and 4.3 BSD
 			long memusage = resources.ru_ixrss + resources.ru_idrss + resources.ru_isrss;
@@ -275,20 +275,20 @@ void _SigHandler(int signum, siginfo_t *info, void* secret)
 	// stack backtrace
 	addrs = backtrace(buffer, BACKTRACE_DEPTH);
 	symbols = backtrace_symbols(buffer, addrs);
-	if (symbols != NULL && addrs != 0) {
+	if(symbols != NULL && addrs != 0) {
 		*outdriver << "---Stack Trace---" << std::endl;
-		if (esp != 0) {
+		if(esp != 0) {
 			*outdriver << "From: " << (unsigned long)esp <<
 				" to: " << (unsigned long)(esp+addrs) << std::endl;
 		}
-		for (int i = 0; i != addrs; ++i)
+		for(int i = 0; i != addrs; ++i)
 		{
 			*outdriver << symbols[i] << std::endl;
 		}
 	}
 	outdriver->flush();
 
-	if (file) {
+	if(file) {
 		((std::ofstream*)outdriver)->close();
 	}
 

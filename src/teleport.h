@@ -68,13 +68,13 @@ class Teleport : public Item, public Cylinder
 		virtual void postAddNotification(Creature* actor, Thing* thing, const Cylinder* oldParent,
 			int32_t index, CylinderLink_t)
 		{
-			if (getParent())
+			if(getParent())
 				getParent()->postAddNotification(actor, thing, oldParent, index, LINK_PARENT);
 		}
 		virtual void postRemoveNotification(Creature* actor, Thing* thing, const Cylinder* newParent,
 			int32_t index, bool isCompleteRemoval, CylinderLink_t)
 		{
-			if (getParent())
+			if(getParent())
 				getParent()->postRemoveNotification(actor, thing, newParent, index, isCompleteRemoval, LINK_PARENT);
 		}
 

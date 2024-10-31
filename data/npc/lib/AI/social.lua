@@ -469,7 +469,7 @@ function SocialNpc:SocialOnHearCallback(event)
 		end
 		
 		return speechProccessed
-	elseif (self.GreetKeywords or self.StartTalkWithAnyInput) then 
+	elseif(self.GreetKeywords or self.StartTalkWithAnyInput) then 
 		local match = self:CheckForGreet(event.msg) 
 		if match or self.StartTalkWithAnyInput then
 		

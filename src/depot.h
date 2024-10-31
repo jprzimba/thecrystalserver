@@ -30,10 +30,8 @@ class Depot : public Container
 
 		//serialization
 		virtual Attr_ReadValue readAttr(AttrTypes_t attr, PropStream& propStream);
-		virtual uint32_t getItemHoldingCount() const {return Container::getItemHoldingCount() - 3;}
 
 		uint32_t getDepotId() const;
-		void setDepotId(int32_t depotId) {setAttribute("depotid", depotId);}
 
 		void setMaxDepotLimit(uint32_t count) {depotLimit = count;}
 
@@ -70,7 +68,7 @@ class Depot : public Container
 inline uint32_t Depot::getDepotId() const
 {
 	const int32_t* v = getIntegerAttribute("depotid");
-	if (v)
+	if(v)
 		return (uint32_t)*v;
 
 	return 0;

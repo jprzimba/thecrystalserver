@@ -53,7 +53,6 @@
 			Ground cache: needs to be compiled with the __GROUND_CACHE__  flag. (Elf)
 			Surprise bag system is configurable in config.lua with settings in data/items/bags.xml. (Tryller)
 			Auto bank system: the gold is added to the player's bank balance and removed from the inventory/bank balance when buying an item. (Tryller)
-			getPlayerMoney(cid) retrieves all gold from the player, including inventory and bank. (Tryller)
 			doPlayerRemoveMoney(cid, money) tries to remove gold from the player; if unsuccessful, it attempts to remove it from the bank if bankSystem and enableAutoBank are enabled in config.lua. (Tryller)
 			ShopWindow shows the player's total gold, including from inventory and bank. (Tryller)
 			New lua functions: getPlayerTotalMoney(cid), getPlayerInventoryItemId(cid, slot). (Tryller)
@@ -61,7 +60,6 @@
 			Added the !bank command by luanluciano93 for the bank system, modified to work with the server. (Tryller)
 			If enableAutoBank is active in config.lua, the server will add money to the player's bank balance instead of their inventory via NPC system. (Tryller)
 			Removed the account 'salt' from the accounts table in the database. (Tryller)
-			Initial database version set to 1. (Tryller)
 			Spawn monsters like in Tibia RL. (tetra20)
 			Updated houseBuy talkaction to work with the bank system if bankSystem is enabled in config.lua. (Tryller)
 			Auto loot with desired loot items is configurable in talkactions, including which container the loot goes to, and auto loot can be enabled in config.lua. (Tryller)
@@ -69,7 +67,6 @@
 				!removeloot golden armor
 				!showloot show your desired loot list.
 				!clearloot clear your desired loot list.
-			Auto loot shows the container ID instead of the backpack name if enableAutoLoot is active in config.lua. (Tryller)
 			Auto-enable shared experience is configurable in config.lua with enablePartyAutoShareExperience. (Tryller)
 			Updated the /pos talkaction to work with /pos 438, 503, 8 or /pos {x = 438, y = 503, z = 8} for compatibility with RME. (Tryller)
 			New talkaction function: /ban playerName or /ban player, 7 to set the number of ban days. (Tryller)

@@ -313,7 +313,7 @@ class DBTransaction
 
 		~DBTransaction()
 		{
-			if (m_state == STATE_READY)
+			if(m_state == STATE_READY)
 				m_db->rollback();
 		}
 
@@ -325,7 +325,7 @@ class DBTransaction
 
 		bool commit()
 		{
-			if (m_state != STATE_READY)
+			if(m_state != STATE_READY)
 				return false;
 
 			m_state = STATE_DONE;

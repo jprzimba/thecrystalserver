@@ -329,7 +329,7 @@ class Item : virtual public Thing, public ItemAttributes
 		void setDefaultDuration()
 		{
 			uint32_t duration = getDefaultDuration();
-			if (duration)
+			if(duration)
 				setDuration(duration);
 		}
 
@@ -355,7 +355,7 @@ class Item : virtual public Thing, public ItemAttributes
 inline std::string Item::getName() const
 {
 	const std::string* v = getStringAttribute("name");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].name;
@@ -364,7 +364,7 @@ inline std::string Item::getName() const
 inline std::string Item::getPluralName() const
 {
 	const std::string* v = getStringAttribute("pluralname");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].pluralName;
@@ -373,7 +373,7 @@ inline std::string Item::getPluralName() const
 inline std::string Item::getArticle() const
 {
 	const std::string* v = getStringAttribute("article");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].article;
@@ -382,7 +382,7 @@ inline std::string Item::getArticle() const
 inline bool Item::isScriptProtected() const
 {
 	const bool* v = getBooleanAttribute("scriptprotected");
-	if (v)
+	if(v)
 		return *v;
 
 	return false;
@@ -391,7 +391,7 @@ inline bool Item::isScriptProtected() const
 inline int32_t Item::getAttack() const
 {
 	const int32_t* v = getIntegerAttribute("attack");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].attack;
@@ -400,7 +400,7 @@ inline int32_t Item::getAttack() const
 inline int32_t Item::getExtraAttack() const
 {
 	const int32_t* v = getIntegerAttribute("extraattack");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].extraAttack;
@@ -409,7 +409,7 @@ inline int32_t Item::getExtraAttack() const
 inline int32_t Item::getDefense() const
 {
 	const int32_t* v = getIntegerAttribute("defense");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].defense;
@@ -418,7 +418,7 @@ inline int32_t Item::getDefense() const
 inline int32_t Item::getExtraDefense() const
 {
 	const int32_t* v = getIntegerAttribute("extradefense");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].extraDefense;
@@ -427,7 +427,7 @@ inline int32_t Item::getExtraDefense() const
 inline int32_t Item::getArmor() const
 {
 	const int32_t* v = getIntegerAttribute("armor");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].armor;
@@ -436,7 +436,7 @@ inline int32_t Item::getArmor() const
 inline int32_t Item::getAttackSpeed() const
 {
 	const int32_t* v = getIntegerAttribute("attackspeed");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].attackSpeed;
@@ -445,7 +445,7 @@ inline int32_t Item::getAttackSpeed() const
 inline int32_t Item::getHitChance() const
 {
 	const int32_t* v = getIntegerAttribute("hitchance");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].hitChance;
@@ -454,7 +454,7 @@ inline int32_t Item::getHitChance() const
 inline int32_t Item::getShootRange() const
 {
 	const int32_t* v = getIntegerAttribute("shootrange");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].shootRange;
@@ -463,7 +463,7 @@ inline int32_t Item::getShootRange() const
 inline bool Item::isDualWield() const
 {
 	const bool* v = getBooleanAttribute("dualwield");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].dualWield;
@@ -472,14 +472,14 @@ inline bool Item::isDualWield() const
 inline void Item::decreaseDuration(int32_t time)
 {
 	const int32_t* v = getIntegerAttribute("duration");
-	if (v)
+	if(v)
 		setAttribute("duration", *v - time);
 }
 
 inline int32_t Item::getDuration() const
 {
 	const int32_t* v = getIntegerAttribute("duration");
-	if (v)
+	if(v)
 		return *v;
 
 	return 0;
@@ -488,7 +488,7 @@ inline int32_t Item::getDuration() const
 inline std::string Item::getSpecialDescription() const
 {
 	const std::string* v = getStringAttribute("description");
-	if (v)
+	if(v)
 		return *v;
 
 	return "";
@@ -497,7 +497,7 @@ inline std::string Item::getSpecialDescription() const
 inline std::string Item::getText() const
 {
 	const std::string* v = getStringAttribute("text");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].text;
@@ -506,7 +506,7 @@ inline std::string Item::getText() const
 inline time_t Item::getDate() const
 {
 	const int32_t* v = getIntegerAttribute("date");
-	if (v)
+	if(v)
 		return (time_t)*v;
 
 	return items[id].date;
@@ -515,7 +515,7 @@ inline time_t Item::getDate() const
 inline std::string Item::getWriter() const
 {
 	const std::string* v = getStringAttribute("writer");
-	if (v)
+	if(v)
 		return *v;
 
 	return items[id].writer;
@@ -524,7 +524,7 @@ inline std::string Item::getWriter() const
 inline int32_t Item::getActionId() const
 {
 	const int32_t* v = getIntegerAttribute("aid");
-	if (v)
+	if(v)
 		return *v;
 
 	return 0;
@@ -533,7 +533,7 @@ inline int32_t Item::getActionId() const
 inline int32_t Item::getUniqueId() const
 {
 	const int32_t* v = getIntegerAttribute("uid");
-	if (v)
+	if(v)
 		return *v;
 
 	return 0;
@@ -542,7 +542,7 @@ inline int32_t Item::getUniqueId() const
 inline uint16_t Item::getCharges() const
 {
 	const int32_t* v = getIntegerAttribute("charges");
-	if (v && *v >= 0)
+	if(v && *v >= 0)
 		return (uint16_t)*v;
 
 	return 0;
@@ -551,7 +551,7 @@ inline uint16_t Item::getCharges() const
 inline uint16_t Item::getFluidType() const
 {
 	const int32_t* v = getIntegerAttribute("fluidtype");
-	if (v && *v >= 0)
+	if(v && *v >= 0)
 		return (uint16_t)*v;
 
 	return 0;
@@ -560,7 +560,7 @@ inline uint16_t Item::getFluidType() const
 inline uint32_t Item::getOwner() const
 {
 	const int32_t* v = getIntegerAttribute("owner");
-	if (v)
+	if(v)
 		return (uint32_t)*v;
 
 	return 0;
@@ -569,7 +569,7 @@ inline uint32_t Item::getOwner() const
 inline uint32_t Item::getCorpseOwner()
 {
 	const int32_t* v = getIntegerAttribute("corpseowner");
-	if (v)
+	if(v)
 		return (uint32_t)*v;
 
 	return 0;
@@ -578,7 +578,7 @@ inline uint32_t Item::getCorpseOwner()
 inline ItemDecayState_t Item::getDecaying() const
 {
 	const int32_t* v = getIntegerAttribute("decaying");
-	if (v)
+	if(v)
 		return (ItemDecayState_t)*v;
 
 	return DECAYING_FALSE;
@@ -586,7 +586,7 @@ inline ItemDecayState_t Item::getDecaying() const
 
 inline uint32_t Item::countByType(const Item* item, int32_t checkType)
 {
-	if (checkType != -1 && checkType != (int32_t)item->getSubType())
+	if(checkType != -1 && checkType != (int32_t)item->getSubType())
 		return 0;
 
 	return item->getItemCount();

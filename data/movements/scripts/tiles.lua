@@ -4,6 +4,8 @@ local config = {
 	maxLevel = getConfigInfo('maximumDoorLevel')
 }
 
+local depots = {2589, 2590, 2591, 2592}
+
 local checkCreature = {isPlayer, isMonster, isNpc}
 local function pushBack(cid, position, fromPosition, displayMessage)
 	doTeleportThing(cid, fromPosition, false)
@@ -100,12 +102,27 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 
 	if(getTileInfo(position).protection) then
-		local depotItem = getTileItemByType(getCreatureLookPosition(cid), ITEM_TYPE_DEPOT)
-		if(depotItem.itemid ~= 0) then
-			local depotItems = getPlayerDepotItems(cid, getDepotId(depotItem.uid))
-			doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, "Your depot contains " .. depotItems .. " item" .. (depotItems > 1 and "s" or "") .. ".")
-			return true
+		local depotPos, depot = getCreatureLookPosition(cid), {}
+		depotPos.stackpos = STACKPOS_GROUND
+		while(true) do
+			if(not getTileInfo(depotPos).depot) then
+				break
+			end
+
+			depotPos.stackpos = depotPos.stackpos + 1
+			depot = getThingFromPos(depotPos)
+			if(depot.uid == 0) then
+				break
+			end
+
+			if(isInArray(depots, depot.itemid)) then
+				local depotItems = getPlayerDepotItems(cid, getDepotId(depot.uid))
+				doPlayerSendTextMessage(cid, MESSAGE_STATUS_DEFAULT, "Your depot contains " .. depotItems .. " item" .. (depotItems > 1 and "s" or "") .. ".")
+				break
+			end
 		end
+
+		return true
 	end
 
 	return false

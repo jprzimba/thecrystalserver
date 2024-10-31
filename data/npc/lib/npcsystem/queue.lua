@@ -75,7 +75,7 @@ if(Queue == nil) then
 
 	-- Makes sure the next greetable player in the queue is greeted.
 	function Queue:greetNext()
-		while (not self:empty()) do
+		while(not self:empty()) do
 			local nextPlayer = self:pop()
 			if(self:canGreet(nextPlayer)) then
 				if(callback == nil or callback(nextPlayer)) then

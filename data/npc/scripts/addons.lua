@@ -43,7 +43,7 @@ function creatureSayCallback(cid, type, msg)
             npcHandler:say('Sorry, you don\'t have the items I requested.', cid)
         end
         talkState[talkUser] = 0
-    elseif (msgcontains(msg, 'second') or msgcontains(msg, 'second addon')) then
+    elseif(msgcontains(msg, 'second') or msgcontains(msg, 'second addon')) then
         if isPremium(cid) then
 			if getPlayerTotalMoney(cid) >= 20000 then
 				npcHandler:say('Did you bring me the 20k?', cid)
