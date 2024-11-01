@@ -732,7 +732,6 @@ class Player : public Creature, public Cylinder
 		void updateDesiredLootItems(const std::vector<std::pair<uint32_t, uint32_t> >& items);
 		bool isDesiredLootItem(uint32_t itemId);
 		std::vector<std::pair<uint32_t, uint32_t> > getDesiredLootItems() const;
-		int32_t getLootContainerId(uint32_t containerID) const; 
 
 	protected:
 		void checkTradeState(const Item* item);

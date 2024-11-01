@@ -5369,14 +5369,3 @@ std::vector<std::pair<uint32_t, uint32_t> > Player::getDesiredLootItems() const
 {
 	return desiredLootItems;
 }
-
-int32_t Player::getLootContainerId(uint32_t containerID) const
-{
-	for(ContainerVector::const_iterator cl = containerVec.begin(); cl != containerVec.end(); ++cl)
-	{
-		if(cl->first == containerID)
-			return cl->first;
-	}
-
-    return -1;
-}
