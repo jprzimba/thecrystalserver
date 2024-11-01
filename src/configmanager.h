@@ -320,6 +320,7 @@ class ConfigManager
 			ENABLE_AUTO_BANK,
 			ENABLE_AUTO_LOOT,
 			ENABLE_AUTO_SHARE_EXPERIENCE,
+			USE_RUNE_REQUIREMENTS,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

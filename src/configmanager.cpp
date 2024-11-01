@@ -351,6 +351,7 @@ bool ConfigManager::load()
 	m_confBool[ENABLE_AUTO_BANK] = getGlobalBool("enableAutoBank", false);
 	m_confBool[ENABLE_AUTO_LOOT] = getGlobalBool("enableAutoLoot", false);
 	m_confBool[ENABLE_AUTO_SHARE_EXPERIENCE] = getGlobalBool("enablePartyAutoShareExperience", false);
+	m_confBool[USE_RUNE_REQUIREMENTS] = getGlobalBool("useRunesRequirements", true);
 
 	m_loaded = true;
 	return true;

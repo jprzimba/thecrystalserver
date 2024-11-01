@@ -639,18 +639,21 @@ bool Spell::checkSpell(Player* player) const
 		return false;
 	}
 
-	if((int32_t)player->getLevel() < level)
+	if(g_config.getBool(ConfigManager::USE_RUNE_REQUIREMENTS))
 	{
-		player->sendCancelMessage(RET_NOTENOUGHLEVEL);
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
-	}
+		if((int32_t)player->getLevel() < level)
+		{
+			player->sendCancelMessage(RET_NOTENOUGHLEVEL);
+			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+			return false;
+		}
 
-	if((int32_t)player->getMagicLevel() < magLevel)
-	{
-		player->sendCancelMessage(RET_NOTENOUGHMAGICLEVEL);
-		g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
-		return false;
+		if((int32_t)player->getMagicLevel() < magLevel)
+		{
+			player->sendCancelMessage(RET_NOTENOUGHMAGICLEVEL);
+			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+			return false;
+		}
 	}
 
 	for(int16_t i = SKILL_FIRST; i <= SKILL_LAST; ++i)
