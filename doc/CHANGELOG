@@ -3,7 +3,7 @@
 		Crystal Server
 
 	Version
-		2.0
+		3.0
 
 	Website
 		https://github.com/jprzimba/thecrystalserver
@@ -17,7 +17,7 @@
 	M = Modified,
 	A = Added.
 
-	[ 2.0
+	[ 3.0
 		[ A...
 			Initial release has no charges.
 		]
@@ -33,7 +33,7 @@
 ]
 
 [ Charges made
-	[ 2.0
+	[ 3.0
 		[ DISTRO
 			Game protocol 8.60. (Tryller)
 			Support items 8.60. (OpenTibia, Tryller)

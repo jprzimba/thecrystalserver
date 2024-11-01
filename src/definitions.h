@@ -28,7 +28,7 @@
 //#define CLIENT_VERSION_DATA
 
 #define SOFTWARE_NAME "Crystal Server"
-#define SOFTWARE_VERSION "2.0"
+#define SOFTWARE_VERSION "3.0"
 #define SOFTWARE_CODENAME "Infinity Crystal"
 #define SOFTWARE_DEVELOPERS "Tryller"
 #define SOFTWARE_PROTOCOL "8.60"

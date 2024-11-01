@@ -30,21 +30,21 @@ CompilerSet=0
 CompilerSettings=0000000001100000000000
 
 [VersionInfo]
-Major=0
-Minor=2
+Major=3
+Minor=0
 Release=0
 Build=0
 LanguageID=1033
 CharsetID=1250
 CompanyName=
-FileVersion=2.0
+FileVersion=3.0
 FileDescription=Crystal Server
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=crystalserver.exe
 ProductName=Crystal Server
-ProductVersion=2.0
+ProductVersion=3.0
 AutoIncBuildNr=0
 
 [Unit1]
