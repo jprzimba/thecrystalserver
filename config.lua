@@ -373,6 +373,7 @@
 	deSpawnRange = 2
 	deSpawnRadius = 50
 	monsterSpawnWalkback = true
+	allowBlockSpawn = false
 
 	-- Summons
 	maxPlayerSummons = 2

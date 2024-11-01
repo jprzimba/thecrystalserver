@@ -321,6 +321,7 @@ class ConfigManager
 			ENABLE_AUTO_LOOT,
 			ENABLE_AUTO_SHARE_EXPERIENCE,
 			USE_RUNE_REQUIREMENTS,
+			ALLOW_BLOCK_SPAWN,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

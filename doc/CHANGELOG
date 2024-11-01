@@ -71,6 +71,7 @@
 			Updated the /pos talkaction to work with /pos 438, 503, 8 or /pos {x = 438, y = 503, z = 8} for compatibility with RME. (Tryller)
 			New talkaction function: /ban playerName or /ban player, 7 to set the number of ban days. (Tryller)
 			useRunesRequirements configurable in config.lua. (Tryller)
+			allowBlockSpawn is now configurable in config.lua. (Tryller)
 		]
 
 		[ MAP
