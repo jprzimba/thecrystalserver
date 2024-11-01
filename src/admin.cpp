@@ -36,10 +36,6 @@
 extern ConfigManager g_config;
 extern Game g_game;
 
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t ProtocolAdmin::protocolAdminCount = 0;
-#endif
-
 void ProtocolAdmin::onRecvFirstMessage(NetworkMessage& msg)
 {
 	m_state = NO_CONNECTED;

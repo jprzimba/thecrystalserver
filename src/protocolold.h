@@ -23,23 +23,10 @@ class NetworkMessage;
 class ProtocolOld : public Protocol
 {
 	public:
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-		static uint32_t protocolOldCount;
-#endif
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
-		ProtocolOld(Connection_ptr connection): Protocol(connection)
-		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolOldCount++;
-#endif
-		}
-		virtual ~ProtocolOld()
-		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolOldCount--;
-#endif
-		}
+		ProtocolOld(Connection_ptr connection): Protocol(connection){}
+		virtual ~ProtocolOld(){}
 
 		enum {isSingleSocket = false};
 		enum {hasChecksum = false};

@@ -12,13 +12,6 @@ OPTIONAL_FLAGS=""
 DEBUG_FLAGS="-O0 -march=native -fomit-frame-pointer"
 #DEBUG_FLAGS="-O3 -march=native -fomit-frame-pointer"
 
-# check if we want server diag enabled
-serverDiag=no
-AC_ARG_ENABLE(server-diag, [  --enable-server-diag		enable server diagnostic],
-	[OPTIONAL_FLAGS="$OPTIONAL_FLAGS -D__ENABLE_SERVER_DIAGNOSTIC__"]
-	serverDiag=yes
-)
-
 # check if we want login server mode
 AM_CONDITIONAL(LOGIN_SERVER, false)
 loginServer=no
@@ -252,7 +245,6 @@ echo $PACKAGE $VERSION
 echo
 echo Using LuaJIT................ : $luaJIT
 echo Using ground cache.......... : $groundCache
-echo Server diagnostics.......... : $serverDiag
 echo Home-directory configuration : $homedirConf
 echo Root run permission......... : $rootPermission
 echo Login server mode........... : $loginServer

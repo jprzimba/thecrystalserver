@@ -35,10 +35,6 @@
 extern ConfigManager g_config;
 bool Connection::m_logError = true;
 
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t Connection::connectionCount = 0;
-#endif
-
 Connection_ptr ConnectionManager::createConnection(boost::asio::ip::tcp::socket* socket,
 	boost::asio::io_service& io_service, ServicePort_ptr servicer)
 {

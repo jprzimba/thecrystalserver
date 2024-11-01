@@ -102,9 +102,6 @@ class Manager
 class ProtocolManager : public Protocol
 {
 	public:
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-		static uint32_t protocolManagerCount;
-#endif
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
 		ProtocolManager(Connection_ptr connection): Protocol(connection)
@@ -112,16 +109,8 @@ class ProtocolManager : public Protocol
 			m_state = NO_CONNECTED;
 			m_loginTries = m_lastCommand = m_channels = 0;
 			m_startTime = time(NULL);
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolManagerCount++;
-#endif
 		}
-		virtual ~ProtocolManager()
-		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolManagerCount--;
-#endif
-		}
+		virtual ~ProtocolManager(){}
 
 		enum {protocolId = 0xFD};
 		enum {isSingleSocket = false};

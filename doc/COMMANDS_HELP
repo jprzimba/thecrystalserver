@@ -114,10 +114,6 @@
 			/attr set string text "Hello guys"
 			/attr skull 2
 
-	/serverdiag
-		Works only if software is precompiled with __ENABLE_SERVER_DIAGNOSTIC__
-		Displays diagnostic informations.
-
 	/closeserver
 		Closes server.
 		All players without proper access will be kicked.

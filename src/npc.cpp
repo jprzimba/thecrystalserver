@@ -40,9 +40,6 @@ extern Spells* g_spells;
 extern Npcs g_npcs;
 
 AutoList<Npc> Npc::autoList;
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t Npc::npcCount = 0;
-#endif
 NpcScript* Npc::m_interface = NULL;
 
 Npcs::~Npcs()
@@ -240,9 +237,6 @@ Npc* Npc::createNpc(const std::string& name)
 
 Npc::Npc(NpcType* _nType) : Creature(), m_npcEventHandler(NULL)
 {
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-	++npcCount;
-#endif
 	nType = _nType;
 
 	m_npcEventHandler = NULL;
@@ -252,9 +246,6 @@ Npc::Npc(NpcType* _nType) : Creature(), m_npcEventHandler(NULL)
 Npc::~Npc()
 {
 	reset();
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-	--npcCount;
-#endif
 }
 
 void Npc::reset()

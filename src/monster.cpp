@@ -33,9 +33,6 @@ extern Monsters g_monsters;
 extern CreatureEvents* g_creatureEvents;
 
 AutoList<Monster>Monster::autoList;
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t Monster::monsterCount = 0;
-#endif
 
 Monster* Monster::createMonster(MonsterType* mType)
 {
@@ -54,9 +51,6 @@ Monster* Monster::createMonster(const std::string& name)
 Monster::Monster(MonsterType* _mType):
 	Creature()
 {
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-	monsterCount++;
-#endif
 	mType = _mType;
 
 	isIdle = true;
@@ -108,10 +102,6 @@ Monster::~Monster()
 {
 	clearTargetList();
 	clearFriendList();
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-
-	monsterCount--;
-#endif
 	if(raid)
 	{
 		raid->unRef();

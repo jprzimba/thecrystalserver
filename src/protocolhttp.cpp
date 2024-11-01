@@ -20,10 +20,6 @@
 #include "outputmessage.h"
 #include "connection.h"
 
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t ProtocolHTTP::protocolHTTPCount = 0;
-
-#endif
 #ifdef __DEBUG_NET_DETAIL__
 void ProtocolHTTP::deleteProtocolTask()
 {

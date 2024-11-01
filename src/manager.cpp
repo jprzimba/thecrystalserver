@@ -33,10 +33,6 @@ extern ConfigManager g_config;
 extern Game g_game;
 extern Chat g_chat;
 
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-uint32_t ProtocolManager::protocolManagerCount = 0;
-#endif
-
 void ProtocolManager::onRecvFirstMessage(NetworkMessage&)
 {
 	m_state = NO_CONNECTED;

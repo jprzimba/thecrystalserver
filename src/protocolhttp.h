@@ -23,24 +23,13 @@ class NetworkMessage;
 class ProtocolHTTP : public Protocol
 {
 	public:
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-		static uint32_t protocolHTTPCount;
-#endif
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
 		ProtocolHTTP(Connection_ptr connection) : Protocol(connection)
 		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolHTTPCount++;
-#endif
 			setRawMessages(true);
 		}
-		virtual ~ProtocolHTTP()
-		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolHTTPCount--;
-#endif
-		}
+		virtual ~ProtocolHTTP(){}
 
 		enum {protocolId = 0x00};
 		enum {isSingleSocket = true};

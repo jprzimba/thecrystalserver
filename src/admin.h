@@ -164,9 +164,6 @@ class Admin
 class ProtocolAdmin : public Protocol
 {
 	public:
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-		static uint32_t protocolAdminCount;
-#endif
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
 		ProtocolAdmin(Connection_ptr connection): Protocol(connection)
@@ -174,16 +171,8 @@ class ProtocolAdmin : public Protocol
 			m_state = NO_CONNECTED;
 			m_loginTries = m_lastCommand = 0;
 			m_startTime = time(NULL);
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolAdminCount++;
-#endif
 		}
-		virtual ~ProtocolAdmin()
-		{
-#ifdef __ENABLE_SERVER_DIAGNOSTIC__
-			protocolAdminCount--;
-#endif
-		}
+		virtual ~ProtocolAdmin(){}
 
 		enum {protocolId = 0xFE};
 		enum {isSingleSocket = false};

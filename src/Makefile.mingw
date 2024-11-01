@@ -2,7 +2,7 @@
 # Copyright (C) 2011 Fallen <janneangeselva@hotmail.com>
 CXX = @echo Compiling $< && g++
 
-CXXFLAGS = -O2 -Wall -Wno-strict-aliasing -D_THREAD_SAFE -D_REENTRANT -D__ENABLE_SERVER_DIAGNOSTIC__ -D__NO_CRYPTOPP__
+CXXFLAGS = -O2 -Wall -Wno-strict-aliasing -D_THREAD_SAFE -D_REENTRANT -D__NO_CRYPTOPP__
 
 LIBS = -llua5.1 -lboost_system -lboost_thread -lboost_regex -lboost_filesystem -leay32 -lxml2 -lws2_32 -lwsock32
 
