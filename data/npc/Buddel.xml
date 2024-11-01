@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Buddel" script="default.lua" walkinterval="2000" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="143" head="19" body="57" legs="22" feet="20" addons="0"/>
+    <parameters>
+        <parameter key="module_travel" value="1"/>
+		<parameter key="message_greet" value="Hello |PLAYERNAME|. If you don't know where to flow, say {travel}."/>
+		<parameter key="travel_destinations" value="okolnir,458,1110,7,275;folda,248,368,7,220;"/>
+	</parameters>
+</npc>

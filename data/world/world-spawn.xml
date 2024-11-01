@@ -9,15 +9,9 @@
 		<monster name="Vampire" x="-2" y="2" z="1" spawntime="60" />
 		<monster name="Vampire" x="2" y="2" z="1" spawntime="60" />
 	</spawn>
-	<spawn centerx="693" centery="898" centerz="1" radius="5">
-		<npc name="ulala" x="-1" y="0" z="1" spawntime="60" />
-	</spawn>
 	<spawn centerx="663" centery="911" centerz="1" radius="3">
 		<monster name="Vampire Bride" x="-2" y="-2" z="1" spawntime="60" />
 		<monster name="Giant Spider" x="0" y="1" z="1" spawntime="60" />
-	</spawn>
-	<spawn centerx="679" centery="972" centerz="1" radius="1">
-		<npc name="Chemar" x="0" y="0" z="1" spawntime="50" />
 	</spawn>
 	<spawn centerx="637" centery="988" centerz="1" radius="2">
 		<monster name="Energy Elemental" x="1" y="0" z="1" spawntime="60" />
@@ -147,9 +141,6 @@
 		<monster name="Vampire Bride" x="8" y="0" z="3" spawntime="60" />
 		<monster name="Vampire Bride" x="2" y="1" z="3" spawntime="60" />
 		<monster name="Vampire Bride" x="-5" y="3" z="3" spawntime="60" />
-	</spawn>
-	<spawn centerx="689" centery="903" centerz="3" radius="3">
-		<npc name="lazaran" x="-1" y="-1" z="3" spawntime="60" />
 	</spawn>
 	<spawn centerx="636" centery="911" centerz="3" radius="6">
 		<monster name="Earth Elemental" x="-1" y="-3" z="3" spawntime="60" />
@@ -316,6 +307,12 @@
 		<monster name="Vampire" x="-3" y="-3" z="4" spawntime="60" />
 		<monster name="Demon Skeleton" x="-1" y="1" z="4" spawntime="60" />
 		<monster name="Vampire" x="1" y="1" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="499" centery="1090" centerz="4" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="4" spawntime="60" />
+	</spawn>
+	<spawn centerx="509" centery="1095" centerz="4" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="4" spawntime="60" />
 	</spawn>
 	<spawn centerx="250" centery="263" centerz="5" radius="12">
 		<monster name="Frost Troll" x="3" y="-3" z="5" spawntime="60" />
@@ -677,6 +674,52 @@
 	<spawn centerx="634" centery="1004" centerz="5" radius="3">
 		<monster name="Demon Skeleton" x="-2" y="-2" z="5" spawntime="60" />
 		<monster name="Vampire" x="1" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="494" centery="1116" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="478" centery="1118" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="481" centery="1122" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="492" centery="1125" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="483" centery="1129" centerz="5" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="479" centery="1130" centerz="5" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="489" centery="1131" centerz="5" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="499" centery="1138" centerz="5" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="490" centery="1145" centerz="5" radius="2">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="427" centery="1149" centerz="5" radius="2">
+		<monster name="Frost Dragon" x="2" y="-2" z="5" spawntime="60" />
+		<monster name="Frost Dragon" x="-1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="416" centery="1157" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="428" centery="1157" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="419" centery="1162" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="403" centery="1166" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="5" spawntime="60" />
+	</spawn>
+	<spawn centerx="392" centery="1174" centerz="5" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="5" spawntime="60" />
 	</spawn>
 	<spawn centerx="250" centery="263" centerz="6" radius="8">
 		<monster name="Frost Troll" x="0" y="-5" z="6" spawntime="60" />
@@ -1346,6 +1389,89 @@
 	<spawn centerx="628" centery="1005" centerz="6" radius="1">
 		<monster name="Vampire" x="1" y="0" z="6" spawntime="60" />
 	</spawn>
+	<spawn centerx="501" centery="1094" centerz="6" radius="3">
+		<monster name="Frost Dragon" x="1" y="-2" z="6" spawntime="60" />
+		<monster name="Frost Dragon" x="-1" y="2" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="483" centery="1116" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="478" centery="1117" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="513" centery="1122" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="483" centery="1125" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="511" centery="1125" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="503" centery="1126" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="525" centery="1127" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="508" centery="1136" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="475" centery="1137" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="436" centery="1138" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="0" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="442" centery="1139" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="467" centery="1141" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="6" spawntime="60" />
+		<monster name="Frost Dragon" x="0" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="472" centery="1141" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="443" centery="1144" centerz="6" radius="2">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="427" centery="1148" centerz="6" radius="2">
+		<monster name="Frost Dragon" x="0" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="436" centery="1148" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="443" centery="1149" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="441" centery="1157" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="455" centery="1159" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="459" centery="1161" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="390" centery="1166" centerz="6" radius="2">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="397" centery="1168" centerz="6" radius="2">
+		<monster name="Frost Dragon" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="419" centery="1169" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="418" centery="1179" centerz="6" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="409" centery="1186" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
+	<spawn centerx="413" centery="1186" centerz="6" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="6" spawntime="60" />
+	</spawn>
 	<spawn centerx="250" centery="250" centerz="7" radius="5">
 		<monster name="Polar Bear" x="-3" y="-3" z="7" spawntime="60" />
 		<monster name="Frost Dragon" x="-3" y="-1" z="7" spawntime="60" />
@@ -1498,8 +1624,8 @@
 		<monster name="Frost Dragon" x="-1" y="-3" z="7" spawntime="60" />
 		<monster name="Frost Dragon" x="2" y="2" z="7" spawntime="60" />
 	</spawn>
-	<spawn centerx="231" centery="335" centerz="7" radius="5">
-		<npc name="Mark" x="0" y="0" z="7" spawntime="60" direction="2" />
+	<spawn centerx="233" centery="335" centerz="7" radius="1">
+		<npc name="Mark" x="0" y="-1" z="7" spawntime="60" direction="2" />
 	</spawn>
 	<spawn centerx="388" centery="336" centerz="7" radius="5">
 		<monster name="Elf" x="-3" y="0" z="7" spawntime="60" />
@@ -1553,6 +1679,9 @@
 	</spawn>
 	<spawn centerx="355" centery="363" centerz="7" radius="1">
 		<monster name="Cyclops" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="247" centery="369" centerz="7" radius="1">
+		<npc name="Buddel" x="0" y="0" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="331" centery="372" centerz="7" radius="1">
 		<monster name="Cyclops" x="0" y="0" z="7" spawntime="60" />
@@ -2792,6 +2921,171 @@
 		<monster name="Dark Torturer" x="-17" y="14" z="7" spawntime="60" />
 		<monster name="Lost Soul" x="-12" y="14" z="7" spawntime="60" />
 		<monster name="Demon" x="-4" y="15" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="497" centery="1071" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="493" centery="1077" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="501" centery="1078" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="499" centery="1085" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="458" centery="1111" centerz="7" radius="2">
+		<npc name="Buddel" x="-1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="480" centery="1114" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="475" centery="1120" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="522" centery="1129" centerz="7" radius="4">
+		<monster name="Frost Dragon" x="2" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="512" centery="1133" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="frost dragon hatchling" x="-2" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="397" centery="1145" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="403" centery="1145" centerz="7" radius="2">
+		<monster name="Penguin" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="434" centery="1146" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="521" centery="1147" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="512" centery="1148" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="516" centery="1149" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="-1" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="392" centery="1150" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="405" centery="1150" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="507" centery="1150" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="399" centery="1151" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="435" centery="1151" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="2" y="-1" z="7" spawntime="60" />
+		<monster name="frost dragon hatchling" x="-1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="404" centery="1153" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="457" centery="1154" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="498" centery="1154" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="492" centery="1155" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="443" centery="1156" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="-1" z="7" spawntime="60" />
+		<monster name="frost dragon hatchling" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="513" centery="1156" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="530" centery="1156" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="417" centery="1157" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="461" centery="1157" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="502" centery="1157" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="482" centery="1158" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="522" centery="1158" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="475" centery="1159" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="0" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="457" centery="1160" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="463" centery="1161" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="393" centery="1162" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="389" centery="1165" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="457" centery="1165" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="-1" y="0" z="7" spawntime="60" />
+		<monster name="frost dragon hatchling" x="2" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="396" centery="1166" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="433" centery="1166" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="-2" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="440" centery="1166" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="470" centery="1170" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="443" centery="1171" centerz="7" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="398" centery="1172" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="414" centery="1175" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="434" centery="1175" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="1" y="-2" z="7" spawntime="60" />
+		<monster name="frost dragon hatchling" x="1" y="2" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="450" centery="1176" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="427" centery="1178" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="416" centery="1182" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="428" centery="1184" centerz="7" radius="2">
+		<monster name="frost dragon hatchling" x="2" y="-2" z="7" spawntime="60" />
+		<monster name="Frost Dragon" x="-1" y="1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="430" centery="1190" centerz="7" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="396" centery="1191" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="-1" z="7" spawntime="60" />
+	</spawn>
+	<spawn centerx="420" centery="1197" centerz="7" radius="2">
+		<monster name="Frost Dragon" x="0" y="1" z="7" spawntime="60" />
 	</spawn>
 	<spawn centerx="197" centery="255" centerz="8" radius="29">
 		<monster name="War Wolf" x="-8" y="-25" z="8" spawntime="60" />
@@ -4271,6 +4565,168 @@
 		<monster name="Gargoyle" x="-1" y="-3" z="8" spawntime="60" />
 		<monster name="Beholder" x="2" y="1" z="8" spawntime="60" />
 	</spawn>
+	<spawn centerx="485" centery="1068" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="489" centery="1071" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="507" centery="1072" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="486" centery="1075" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="504" centery="1075" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="492" centery="1086" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="504" centery="1089" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="499" centery="1091" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="506" centery="1091" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="504" centery="1094" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="461" centery="1135" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="456" centery="1136" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="-1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="492" centery="1137" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="463" centery="1138" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="458" centery="1140" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="482" centery="1142" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="493" centery="1143" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="464" centery="1145" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="476" centery="1145" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="480" centery="1145" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="497" centery="1145" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="463" centery="1149" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="484" centery="1149" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="-1" z="8" spawntime="60" />
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="477" centery="1150" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="466" centery="1152" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="532" centery="1156" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="527" centery="1157" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="530" centery="1159" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="487" centery="1160" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="492" centery="1161" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="533" centery="1161" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="384" centery="1162" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="524" centery="1162" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="389" centery="1163" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="8" spawntime="60" />
+		<monster name="frost dragon hatchling" x="0" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="482" centery="1163" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="528" centery="1164" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="0" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="379" centery="1165" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="416" centery="1165" centerz="8" radius="2">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="485" centery="1166" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="490" centery="1166" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="382" centery="1167" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="392" centery="1167" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="406" centery="1168" centerz="8" radius="2">
+		<monster name="Frost Dragon" x="0" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="420" centery="1168" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="393" centery="1170" centerz="8" radius="1">
+		<monster name="frost dragon hatchling" x="-1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="383" centery="1171" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="390" centery="1172" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="-1" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="387" centery="1175" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="409" centery="1175" centerz="8" radius="2">
+		<monster name="Frost Dragon" x="2" y="-2" z="8" spawntime="60" />
+		<monster name="Frost Dragon" x="-1" y="0" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="404" centery="1185" centerz="8" radius="2">
+		<monster name="Frost Dragon" x="1" y="-2" z="8" spawntime="60" />
+		<monster name="Frost Dragon" x="-1" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="410" centery="1185" centerz="8" radius="2">
+		<monster name="frost dragon hatchling" x="1" y="-1" z="8" spawntime="60" />
+		<monster name="frost dragon hatchling" x="1" y="2" z="8" spawntime="60" />
+	</spawn>
+	<spawn centerx="411" centery="1192" centerz="8" radius="1">
+		<monster name="Frost Dragon" x="-1" y="0" z="8" spawntime="60" />
+	</spawn>
 	<spawn centerx="538" centery="259" centerz="9" radius="35">
 		<monster name="Cyclops Smith" x="24" y="-17" z="9" spawntime="60" />
 		<monster name="Cyclops Drone" x="6" y="-15" z="9" spawntime="60" />
@@ -5149,6 +5605,42 @@
 		<monster name="Vampire" x="-3" y="0" z="9" spawntime="60" />
 		<monster name="Vampire" x="2" y="0" z="9" spawntime="60" />
 		<monster name="Bat" x="-2" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="497" centery="1084" centerz="9" radius="1">
+		<monster name="frost dragon hatchling" x="0" y="0" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="479" centery="1143" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="485" centery="1151" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="536" centery="1161" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="530" centery="1162" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="536" centery="1164" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="531" centery="1166" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="391" centery="1171" centerz="9" radius="2">
+		<monster name="Frost Dragon" x="1" y="-1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="534" centery="1173" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="0" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="541" centery="1174" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="1" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="531" centery="1179" centerz="9" radius="1">
+		<monster name="Frost Dragon" x="0" y="1" z="9" spawntime="60" />
+	</spawn>
+	<spawn centerx="404" centery="1183" centerz="9" radius="2">
+		<monster name="Frost Dragon" x="1" y="-1" z="9" spawntime="60" />
 	</spawn>
 	<spawn centerx="561" centery="242" centerz="10" radius="1">
 		<monster name="Cyclops Drone" x="0" y="0" z="10" spawntime="60" />
