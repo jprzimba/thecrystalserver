@@ -353,6 +353,7 @@ bool ConfigManager::load()
 	m_confBool[ENABLE_AUTO_SHARE_EXPERIENCE] = getGlobalBool("enablePartyAutoShareExperience", false);
 	m_confBool[USE_RUNE_REQUIREMENTS] = getGlobalBool("useRunesRequirements", true);
 	m_confBool[ALLOW_BLOCK_SPAWN] = getGlobalBool("allowBlockSpawn", true);
+	m_confBool[BEDS_REGEN] = getGlobalBool("bedsRegenPlayer", true);
 
 	m_loaded = true;
 	return true;

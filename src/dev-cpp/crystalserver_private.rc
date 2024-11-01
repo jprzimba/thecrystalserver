@@ -21,7 +21,7 @@ FILETYPE VFT_APP
 			 VALUE "CompanyName", ""
 			 VALUE "FileVersion", "3.0"
 			 VALUE "FileDescription", "Crystal Server"
-			 VALUE "InternalName", ""
+			 VALUE "InternalName", "Infinity Crystal"
 			 VALUE "LegalCopyright", ""
 			 VALUE "LegalTrademarks", ""
 			 VALUE "OriginalFilename", "crystalserver.exe"

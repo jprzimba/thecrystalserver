@@ -322,6 +322,7 @@ class ConfigManager
 			ENABLE_AUTO_SHARE_EXPERIENCE,
 			USE_RUNE_REQUIREMENTS,
 			ALLOW_BLOCK_SPAWN,
+			BEDS_REGEN,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

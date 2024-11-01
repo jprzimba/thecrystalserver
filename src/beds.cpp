@@ -173,6 +173,9 @@ void BedItem::wakeUp()
 
 void BedItem::regeneratePlayer(Player* player) const
 {
+	if(!g_config.getBool(ConfigManager::BEDS_REGEN))
+		return;
+
 	const int32_t* sleepStart = getIntegerAttribute("sleepstart");
 	int32_t sleptTime = (int32_t)time(NULL) - (sleepStart ? *sleepStart : 0);
 	if(Condition* condition = player->getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT))

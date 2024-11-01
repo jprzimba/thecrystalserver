@@ -13,7 +13,7 @@
 #define COMPANY_NAME	""
 #define FILE_VERSION	"3.0"
 #define FILE_DESCRIPTION	"Crystal Server"
-#define INTERNAL_NAME	""
+#define INTERNAL_NAME	"Infinity Crystal"
 #define LEGAL_COPYRIGHT	""
 #define LEGAL_TRADEMARKS	""
 #define ORIGINAL_FILENAME	"crystalserver.exe"

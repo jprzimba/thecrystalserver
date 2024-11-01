@@ -175,6 +175,7 @@
 	houseCleanOld = 0
 	guildHalls = false
 	houseProtection = true
+	bedsRegenPlayer = true
 
 	-- Item usage
 	timeBetweenActions = 200
