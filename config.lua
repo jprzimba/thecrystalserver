@@ -194,7 +194,7 @@
 	cleanProtectedZones = true
 
 	-- Christmas Decoration
-	enableChristmasDecoration = true
+	enableChristmasDecoration = false
 	christmasPercent = 80
 
 	-- Mailbox

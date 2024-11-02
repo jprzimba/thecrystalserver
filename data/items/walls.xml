@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+	<!--
+	To add new walls, please follow the existing pattern for horizontal and vertical walls.
+	Each wall should have a unique id and a type attribute indicating whether it's "horizontal" or "vertical".
+	-->
+	<item id="1025" type="vertical" />
+	<item id="1030" type="vertical" />
+	<item id="1032" type="vertical" />
+	<item id="1036" type="vertical" />
+	<item id="1041" type="vertical" />
+	<item id="1043" type="vertical" />
+	<item id="1049" type="vertical" />
+	<item id="1054" type="vertical" />
+	<item id="1056" type="vertical" />
+	<item id="1060" type="vertical" />
+	<item id="1065" type="vertical" />
+	<item id="1067" type="vertical" />
+	<item id="1100" type="vertical" />
+	<item id="1105" type="vertical" />
+	<item id="1107" type="vertical" />
+	<item id="1111" type="vertical" />
+	<item id="1116" type="vertical" />
+	<item id="5010" type="vertical" />
+	<item id="3463" type="vertical" />
+	<item id="1026" type="horizontal" />
+	<item id="1028" type="horizontal" />
+	<item id="1034" type="horizontal" />
+	<item id="1037" type="horizontal" />
+	<item id="1039" type="horizontal" />
+	<item id="1045" type="horizontal" />
+	<item id="1050" type="horizontal" />
+	<item id="1052" type="horizontal" />
+	<item id="1058" type="horizontal" />
+	<item id="1061" type="horizontal" />
+	<item id="1063" type="horizontal" />
+	<item id="1069" type="horizontal" />
+	<item id="1101" type="horizontal" />
+	<item id="1103" type="horizontal" />
+	<item id="1109" type="horizontal" />
+	<item id="1112" type="horizontal" />
+	<item id="1114" type="horizontal" />
+	<item id="1118" type="horizontal" />
+	<item id="3454" type="horizontal" />
+</items>

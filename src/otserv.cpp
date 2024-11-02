@@ -594,6 +594,18 @@ void otserv(StringVec, ServiceManager* services)
 			startupErrorMessage("Unable to load surprise bags!");
 	}
 
+	if(g_config.getBool(ConfigManager::ENABLE_CHRISTMAS_DECORATION))
+	{
+		std::clog << "Loading christmas decoration" << std::endl;
+		if(!Item::items.loadWallsItems())
+		{
+			std::clog << "Unable to load christmas decoration! Continue? (y/N)" << std::endl;
+			char buffer = OTSYS_getch();
+			if(buffer != 121 && buffer != 89)
+				startupErrorMessage("Unable to load christmas decoration!");
+		}
+	}
+
 	std::clog << "Loading groups" << std::endl;
 	if(!Groups::getInstance()->loadFromXml())
 		startupErrorMessage("Unable to load groups!");

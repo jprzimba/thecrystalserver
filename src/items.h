@@ -274,7 +274,9 @@ class Items
 		int32_t loadFromOtb(std::string);
 		bool loadFromXml();
 		void parseItemNode(xmlNodePtr itemNode, uint32_t id);
+
 		bool loadSurpriseBags();
+		bool loadWallsItems();
 
 		void addItemType(ItemType* iType);
 		ItemType& getItemType(int32_t id);
@@ -318,6 +320,8 @@ class Items
 			bagItems[itemId] = itemInfo;
 		}
 
+		 std::string getChristmasItemType(uint16_t itemId);
+
 	private:
 		uint8_t m_randomizationChance;
 		void clear();
@@ -326,7 +330,9 @@ class Items
 
 		Array<ItemType*> items;
 		RandomizationMap randomizationMap;
+
 		std::map<int32_t, BagItemInfo> bagItems;
+		std::map<uint16_t, std::string> christmasItemTypes;
 
 		IntegerMap moneyMap;
 		IntegerMap reverseItemMap;

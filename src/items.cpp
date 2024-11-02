@@ -1991,6 +1991,44 @@ bool Items::loadSurpriseBags()
 	return true;
 }
 
+bool Items::loadWallsItems()
+{
+	xmlDocPtr doc = xmlParseFile(getFilePath(FILE_TYPE_OTHER, "items/walls.xml").c_str());
+	if (!doc)
+	{
+		std::clog << "[Warning - Items::loadWallsItems] Cannot load walls file." << std::endl;
+		return false;
+	}
+
+	xmlNodePtr root = xmlDocGetRootElement(doc);
+	if (xmlStrcmp(root->name, (const xmlChar*)"items"))
+	{
+		xmlFreeDoc(doc);
+		std::clog << "[Warning - Items::loadWallsItems] Malformed walls file." << std::endl;
+		return false;
+	}
+
+	for (xmlNodePtr node = root->children; node; node = node->next)
+	{
+		if (node->type != XML_ELEMENT_NODE || xmlStrcmp(node->name, (const xmlChar*)"item"))
+			continue;
+
+		int32_t itemId = 0;
+		std::string type;
+
+		if (xmlHasProp(node, (const xmlChar*)"id") && xmlHasProp(node, (const xmlChar*)"type"))
+		{
+			itemId = atoi((const char*)xmlGetProp(node, (const xmlChar*)"id"));
+			type = (const char*)xmlGetProp(node, (const xmlChar*)"type");
+			christmasItemTypes[itemId] = type;
+		}
+	}
+
+	xmlFreeDoc(doc);
+	return true;
+}
+
+
 void Items::parseRandomizationBlock(int32_t id, int32_t fromId, int32_t toId, int32_t chance)
 {
 	RandomizationMap::iterator it = randomizationMap.find(id);
@@ -2073,4 +2111,13 @@ int32_t Items::getItemIdByName(const std::string& name)
 	}
 
 	return -1;
+}
+
+std::string Items::getChristmasItemType(uint16_t itemId)
+{
+	std::map<uint16_t, std::string>::iterator it = christmasItemTypes.find(itemId);
+	if (it != christmasItemTypes.end())
+		return it->second;
+
+	return "";
 }
