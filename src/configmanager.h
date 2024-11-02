@@ -196,6 +196,7 @@ class ConfigManager
 			SERVICE_THREADS,
 			HEALTH_HEALING_COLOR,
 			MANA_HEALING_COLOR,
+			CHRISTMAS_PERCENT,
 			LAST_NUMBER_CONFIG /* this must be the last one */
 		};
 
@@ -323,6 +324,7 @@ class ConfigManager
 			USE_RUNE_REQUIREMENTS,
 			ALLOW_BLOCK_SPAWN,
 			BEDS_REGEN,
+			ENABLE_CHRISTMAS_DECORATION,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

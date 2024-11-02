@@ -354,6 +354,8 @@ bool ConfigManager::load()
 	m_confBool[USE_RUNE_REQUIREMENTS] = getGlobalBool("useRunesRequirements", true);
 	m_confBool[ALLOW_BLOCK_SPAWN] = getGlobalBool("allowBlockSpawn", true);
 	m_confBool[BEDS_REGEN] = getGlobalBool("bedsRegenPlayer", true);
+	m_confBool[ENABLE_CHRISTMAS_DECORATION] = getGlobalBool("enableChristmasDecoration", false);
+	m_confNumber[CHRISTMAS_PERCENT] = getGlobalNumber("christmasPercent", 50);
 
 	m_loaded = true;
 	return true;

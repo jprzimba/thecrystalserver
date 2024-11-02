@@ -6356,3 +6356,23 @@ void Game::showHotkeyUseMessage(Player* player, Item* item)
 
 	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
 }
+
+uint16_t Game::IsWall(uint16_t ItemID)
+{
+	if (ItemID == 1025 || ItemID == 1030 || ItemID == 1032 || ItemID == 1036 || ItemID == 1041 ||
+		ItemID == 1043 || ItemID == 1049 || ItemID == 1054 || ItemID == 1056 || ItemID == 1060 ||
+		ItemID == 1065 || ItemID == 1067 || ItemID == 1100 || ItemID == 1105 || ItemID == 1107 ||
+		ItemID == 1111 || ItemID == 1116 || ItemID == 5010 || ItemID == 3463)
+	{
+		return 1;
+	}
+	else if (ItemID == 1026 || ItemID == 1028 || ItemID == 1034 || ItemID == 1037 || ItemID == 1039 ||
+			 ItemID == 1045 || ItemID == 1050 || ItemID == 1052 || ItemID == 1058 || ItemID == 1061 ||
+			 ItemID == 1063 || ItemID == 1069 || ItemID == 1101 || ItemID == 1103 || ItemID == 1109 ||
+			 ItemID == 1112 || ItemID == 1114 || ItemID == 1118 || ItemID == 3454)
+	{
+		return 2;
+	}
+
+	return 0;
+}

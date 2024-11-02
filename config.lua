@@ -193,6 +193,10 @@
 	storeTrash = true
 	cleanProtectedZones = true
 
+	-- Christmas Decoration
+	enableChristmasDecoration = true
+	christmasPercent = 80
+
 	-- Mailbox
 	mailboxDisabledTowns = ""
 	mailMaxAttempts = 20

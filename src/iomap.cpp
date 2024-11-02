@@ -466,6 +466,10 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 								return false;
 							}
 
+							uint16_t iswall = g_game.IsWall(item->getID());
+							if(g_config.getBool(ConfigManager::ENABLE_CHRISTMAS_DECORATION) && (iswall == 1 || iswall == 2))
+								addChristmasDecoration(iswall, tile);
+
 							if(item->unserializeItemNode(f, nodeItem, propStream))
 							{
 								if(item->getItemCount() <= 0)
@@ -702,4 +706,40 @@ bool IOMap::loadHouses(Map* map)
 		map->housefile = g_config.getString(ConfigManager::MAP_NAME) + "-house.xml";
 
 	return Houses::getInstance()->loadFromXml(map->housefile);
+}
+
+void IOMap::addChristmasDecoration(uint16_t IsWALL, Tile* tile)
+{
+    if (tile == NULL || IsWALL == 0)
+        return;
+
+	uint16_t percent = 100 / g_config.getNumber(ConfigManager::CHRISTMAS_PERCENT);
+	uint16_t x = random_range(1, percent);
+	uint16_t itemtype = random_range(1, 3);
+	uint16_t itemId = 0;
+
+	switch (IsWALL)
+	{
+		case 1:
+			if (x == 1 && itemtype == 1)
+				itemId = 6517;
+			else if (x == 1 && itemtype == 2)
+				itemId = 6518;
+			else if (x == 1 && itemtype == 3)
+				itemId = 6519;
+			break;
+		case 2:
+			if (x == 1 && itemtype == 1)
+				itemId = 6513;
+			else if (x == 1 && itemtype == 2)
+				itemId = 6514;
+			else if (x == 1 && itemtype == 3)
+				itemId = 6515;
+			break;
+		default:
+			break;
+	}
+
+	if (itemId != 0)
+		tile->__internalAddThing(Item::CreateItem(itemId));
 }
