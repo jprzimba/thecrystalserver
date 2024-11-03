@@ -1,6 +1,6 @@
 local config = {
-	removeOnUse = "no",
-	usableOnTarget = "yes", -- can be used on target? (fe. healing friend)
+	removeOnUse = getConfigValue('removePotionsOnUse'),
+	usableOnTarget = getConfigValue('usablePotionsOnTarget'), -- can be used on target? (fe. healing friend), configurable in config.lua
 	splashable = "yes",
 	range = -1,
 	area = {1, 1} -- if not set correctly, the message will be sent only to user of the item

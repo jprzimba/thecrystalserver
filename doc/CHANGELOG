@@ -72,6 +72,7 @@
 			New talkaction function: /ban playerName or /ban player, 7 to set the number of ban days. (Tryller)
 			New configs in config.lua: useRunesRequirements, allowBlockSpawn, bedsRegenPlayer. (Tryller)
 			Christmas decoration system (Zorzin, Tryller)
+			Configurable potions in config.lu: removePotionsOnUse, usablePotionsOnTarget . (Tryller)
 		]
 
 		[ MAP

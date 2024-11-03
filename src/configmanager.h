@@ -324,6 +324,8 @@ class ConfigManager
 			ALLOW_BLOCK_SPAWN,
 			BEDS_REGEN,
 			ENABLE_CHRISTMAS_DECORATION,
+			REMOVE_POTIONS,
+			USABLE_POTIONS_ON_TARGET,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

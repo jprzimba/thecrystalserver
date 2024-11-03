@@ -185,6 +185,10 @@
 	tibiaClassicSlots = true
 	canOnlyRopePlayers = true
 
+	-- Potions
+	removePotionsOnUse = false
+	usablePotionsOnTarget = true
+
 	-- Map
 	-- NOTE: storeTrash costs more memory, but will perform alot faster cleaning.
 	mapName = "world.otbm"

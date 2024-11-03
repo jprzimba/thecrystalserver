@@ -356,6 +356,8 @@ bool ConfigManager::load()
 	m_confBool[USE_RUNE_REQUIREMENTS] = getGlobalBool("useRunesRequirements", true);
 	m_confBool[ALLOW_BLOCK_SPAWN] = getGlobalBool("allowBlockSpawn", true);
 	m_confBool[BEDS_REGEN] = getGlobalBool("bedsRegenPlayer", true);
+	m_confBool[REMOVE_POTIONS] = getGlobalBool("removePotionsOnUse", true);
+	m_confBool[USABLE_POTIONS_ON_TARGET] = getGlobalBool("usablePotionsOnTarget", true);
 
 	m_loaded = true;
 	return true;
