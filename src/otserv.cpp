@@ -585,13 +585,16 @@ void otserv(StringVec, ServiceManager* services)
 			startupErrorMessage("Unable to load items (XML)!");
 	}
 
-	std::clog << "Loading surprise bags" << std::endl;
-	if(!Item::items.loadSurpriseBags())
+	if(g_config.getBool(ConfigManager::SURPRISE_BAGS))
 	{
-		std::clog << "Unable to load surprise bags! Continue? (y/N)" << std::endl;
-		char buffer = OTSYS_getch();
-		if(buffer != 121 && buffer != 89)
-			startupErrorMessage("Unable to load surprise bags!");
+		std::clog << "Loading surprise bags" << std::endl;
+		if(!Item::items.loadSurpriseBags())
+		{
+			std::clog << "Unable to load surprise bags! Continue? (y/N)" << std::endl;
+			char buffer = OTSYS_getch();
+			if(buffer != 121 && buffer != 89)
+				startupErrorMessage("Unable to load surprise bags!");
+		}
 	}
 
 	if(g_config.getBool(ConfigManager::ENABLE_CHRISTMAS_DECORATION))
