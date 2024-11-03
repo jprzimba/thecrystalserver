@@ -6357,7 +6357,7 @@ void Game::showHotkeyUseMessage(Player* player, Item* item)
 	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
 }
 
-uint16_t Game::IsWall(uint16_t id)
+uint16_t Game::wallType(uint16_t id)
 {
 	std::string itemType = Item::items.getChristmasItemType(id);
 	if (itemType == "vertical")

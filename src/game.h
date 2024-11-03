@@ -173,7 +173,7 @@ class Game
 			height = map->mapHeight;
 		}
 
-		uint16_t IsWall(uint16_t id);
+		uint16_t wallType(uint16_t id);
 
 		void setWorldType(WorldType_t type) {worldType = type;}
 		WorldType_t getWorldType() const {return worldType;}

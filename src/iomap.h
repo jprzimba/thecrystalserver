@@ -123,7 +123,7 @@ class IOMap
 		const std::string& getLastErrorString() const {return errorString;}
 		void setLastErrorString(const std::string& _errorString) {errorString = _errorString;}
 
-		void addChristmasDecoration(uint16_t IsWALL, Tile* tile);
+		void addChristmasDecoration(uint16_t wallType, Tile* tile);
 
 	protected:
 		std::string errorString;

@@ -466,9 +466,9 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 								return false;
 							}
 
-							uint16_t iswall = g_game.IsWall(item->getID());
-							if(g_config.getBool(ConfigManager::ENABLE_CHRISTMAS_DECORATION) && (iswall == 1 || iswall == 2))
-								addChristmasDecoration(iswall, tile);
+							uint16_t wallType = g_game.wallType(item->getID());
+							if(g_config.getBool(ConfigManager::ENABLE_CHRISTMAS_DECORATION) && (wallType == 1 || wallType == 2))
+								addChristmasDecoration(wallType, tile);
 
 							if(item->unserializeItemNode(f, nodeItem, propStream))
 							{
@@ -708,38 +708,29 @@ bool IOMap::loadHouses(Map* map)
 	return Houses::getInstance()->loadFromXml(map->housefile);
 }
 
-void IOMap::addChristmasDecoration(uint16_t IsWALL, Tile* tile)
+void IOMap::addChristmasDecoration(uint16_t wallType, Tile* tile)
 {
-    if (tile == NULL || IsWALL == 0)
-        return;
+	if (!tile || wallType == 0) 
+		return;
 
-	uint16_t percent = 100 / g_config.getNumber(ConfigManager::CHRISTMAS_PERCENT);
-	uint16_t x = random_range(1, percent);
-	uint16_t itemtype = random_range(1, 3);
+	uint16_t percentChance = 100 / g_config.getNumber(ConfigManager::CHRISTMAS_PERCENT);
+	if (random_range(1, percentChance) != 1) 
+		return;
+
+	uint16_t itemType = random_range(1, 3);
 	uint16_t itemId = 0;
 
-	switch (IsWALL)
+	switch (wallType)
 	{
 		case 1:
-			if (x == 1 && itemtype == 1)
-				itemId = 6517;
-			else if (x == 1 && itemtype == 2)
-				itemId = 6518;
-			else if (x == 1 && itemtype == 3)
-				itemId = 6519;
+			itemId = 6516 + itemType; // itemIds 6517, 6518, 6519
 			break;
 		case 2:
-			if (x == 1 && itemtype == 1)
-				itemId = 6513;
-			else if (x == 1 && itemtype == 2)
-				itemId = 6514;
-			else if (x == 1 && itemtype == 3)
-				itemId = 6515;
+			itemId = 6512 + itemType; // itemIds 6513, 6514, 6515
 			break;
 		default:
-			break;
+			return;
 	}
 
-	if (itemId != 0)
-		tile->__internalAddThing(Item::CreateItem(itemId));
+	tile->__internalAddThing(Item::CreateItem(itemId));
 }
