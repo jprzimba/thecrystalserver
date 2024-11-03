@@ -504,8 +504,8 @@ void otserv(StringVec, ServiceManager* services)
 	{
 		g_config.setNumber(ConfigManager::ENCRYPTION, ENCRYPTION_PLAIN);
 		std::clog << "Using plaintext encryption" << std::endl << std::endl
-			<< "> WARNING: This method is completely unsafe!" << std::endl
-			<< "> Please set encryptionType = \"sha1\" (or any other available method) in config.lua" << std::endl;
+			<< "WARNING: This method is completely unsafe!" << std::endl
+			<< "Please set encryptionType = \"sha1\" (or any other available method) in config.lua" << std::endl;
 		boost::this_thread::sleep(boost::posix_time::seconds(15));
 	}
 
