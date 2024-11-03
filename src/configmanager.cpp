@@ -147,8 +147,7 @@ bool ConfigManager::load()
 	m_confDouble[RATE_SKILL] = getGlobalDouble("rateSkill", 1);
 	m_confDouble[RATE_MAGIC] = getGlobalDouble("rateMagic", 1);
 	m_confDouble[RATE_LOOT] = getGlobalDouble("rateLoot", 1);
-	m_confNumber[RATE_SPAWN_MIN] = getGlobalNumber("rateSpawnMin", 1);
-	m_confNumber[RATE_SPAWN_MAX] = getGlobalNumber("rateSpawnMax", 1);
+	m_confNumber[RATE_SPAWN] = getGlobalNumber("rateSpawn", 1);
 	m_confNumber[PARTY_RADIUS_X] = getGlobalNumber("experienceShareRadiusX", 30);
 	m_confNumber[PARTY_RADIUS_Y] = getGlobalNumber("experienceShareRadiusY", 30);
 	m_confNumber[PARTY_RADIUS_Z] = getGlobalNumber("experienceShareRadiusZ", 1);
