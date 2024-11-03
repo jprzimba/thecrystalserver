@@ -326,6 +326,7 @@ class ConfigManager
 			ENABLE_CHRISTMAS_DECORATION,
 			REMOVE_POTIONS,
 			USABLE_POTIONS_ON_TARGET,
+			ENABLE_FREE_TRAVEL,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

@@ -56,7 +56,7 @@
 			doPlayerRemoveMoney(cid, money) tries to remove gold from the player; if unsuccessful, it attempts to remove it from the bank if bankSystem and enableAutoBank are enabled in config.lua. (Tryller)
 			ShopWindow shows the player's total gold, including from inventory and bank. (Tryller)
 			New lua functions: getPlayerTotalMoney(cid), getPlayerInventoryItemId(cid, slot). (Tryller)
-			Modified NPC system modules to work with the bank system and the getPlayerTotalMoney(cid) function. (Tryller)
+			Modified the NPC system modules to integrate with the bank system and the getPlayerTotalMoney(cid) function, as well as the travel system. (Tryller)
 			Added the !bank command by luanluciano93 for the bank system, modified to work with the server. (Tryller)
 			If enableAutoBank is active in config.lua, the server will add money to the player's bank balance instead of their inventory via NPC system. (Tryller)
 			Removed the account 'salt' from the accounts table in the database. (Tryller)
@@ -73,6 +73,7 @@
 			New configs in config.lua: useRunesRequirements, allowBlockSpawn, bedsRegenPlayer. (Tryller)
 			Christmas decoration system (Zorzin, Tryller)
 			Configurable potions in config.lu: removePotionsOnUse, usablePotionsOnTarget . (Tryller)
+			Configurable anableFreeTravel in config.lua and add new lua function isFreeTravel(). (Tryller)
 		]
 
 		[ MAP

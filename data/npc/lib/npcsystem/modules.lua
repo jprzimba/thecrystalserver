@@ -197,6 +197,9 @@ if(Modules == nil) then
 			return false
 		end
 
+		local freeTravel = isFreeTravel()
+		local travelCost = freeTravel and 0 or parameters.cost
+
 		local storage, pzLocked = parameters.storageValue or (EMPTY_STORAGE + 1), parameters.allowLocked or false
 		if(parameters.premium and not isPremium(cid)) then
 			npcHandler:say('I\'m sorry, but you need a premium account in order to travel onboard our ships.', cid)
@@ -206,10 +209,10 @@ if(Modules == nil) then
 			npcHandler:say(parameters.storageInfo or 'You may not travel there yet!', cid)
 		elseif(not pzLocked and isPlayerPzLocked(cid)) then
 			npcHandler:say('First get rid of those blood stains! You are not going to ruin my vehicle!', cid)
-		elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
+		elseif(not freeTravel and not doPlayerRemoveMoney(cid, travelCost)) then
 			npcHandler:say('You don\'t have enough money.', cid)
 		else
-			npcHandler:say('Set the sails!', cid)
+			npcHandler:say(freeTravel and 'Enjoy your free trip!' or 'Set the sails!', cid)
 			npcHandler:releaseFocus(cid)
 
 			doTeleportThing(cid, parameters.destination, false)
@@ -440,7 +443,14 @@ if(Modules == nil) then
 			return false
 		end
 
-		module.npcHandler:say('Do you want to travel to ' .. keywords[1] .. ' for ' .. parameters.cost .. ' gold coins?', cid)
+		local freeTravel = isFreeTravel()
+		local cost = freeTravel and 0 or parameters.cost
+
+		if freeTravel then
+			module.npcHandler:say('Do you want to travel to ' .. keywords[1] .. ' for free?', cid)
+		else
+			module.npcHandler:say('Do you want to travel to ' .. keywords[1] .. ' for ' .. cost .. ' gold coins?', cid)
+		end
 		return true
 	end
 
@@ -451,10 +461,12 @@ if(Modules == nil) then
 		end
 
 		local parent = node:getParent():getParameters()
+		local freeTravel = isFreeTravel()
+
 		if(isPremium(cid) or not parent.premium) then
 			if(not isPlayerPzLocked(cid)) then
-				if(doPlayerRemoveMoney(cid, parent.cost)) then
-					module.npcHandler:say('Set the sails!', cid)
+				if(freeTravel or doPlayerRemoveMoney(cid, parent.cost)) then
+					module.npcHandler:say(freeTravel and 'Enjoy your free trip!' or 'Set the sails!', cid)
 					module.npcHandler:releaseFocus(cid)
 
 					doTeleportThing(cid, parent.destination, true)
@@ -509,7 +521,7 @@ if(Modules == nil) then
 			return false
 		end
 
-		local msg = nil
+		local msg = "Where would you like to travel to? "
 		for _, destination in ipairs(module.destinations) do
 			if(msg ~= nil) then
 				msg = msg .. ", "

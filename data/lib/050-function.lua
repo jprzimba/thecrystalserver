@@ -414,3 +414,7 @@ function valid(f)
 		end
 	end
 end
+
+function isFreeTravel()
+	return getBooleanFromString(getConfigValue('enableFreeTravel'))
+end
