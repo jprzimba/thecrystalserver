@@ -12,16 +12,46 @@
 	<npc name="Ruby" file="ruby.xml"/>
 	-->
 	
+	<npc name="Adolfo" file="Adolfo.xml"/>
 	<npc name="Aldo" file="Aldo.xml"/>
 	<npc name="Alice" file="Alice.xml"/>
+	<npc name="Alladin" file="Alladin.xml"/>
+	<npc name="Athan" file="Athan.xml"/>
+	<npc name="Banker" file="Banker.xml"/>
+	<npc name="Buddel" file="Buddel.xml"/>
+	<npc name="Carpetman" file="Carpetman.xml"/>
+	<npc name="Dark Rodo" file="Dark Rodo.xml"/>
 	<npc name="Deruno" file="Deruno.xml"/>
 	<npc name="Dimral" file="Dimral.xml"/>
 	<npc name="Donald" file="Donald.xml"/>
+	<npc name="Dufi" file="Dufi.xml"/>
+	<npc name="Eremo" file="Eremo.xml"/>
 	<npc name="Eryn" file="Eryn.xml"/>
+	<npc name="Frodo" file="Frodo.xml"/>
+	<npc name="George" file="George.xml"/>
+	<npc name="Jimbim" file="Jimbim.xml"/>
+	<npc name="Johnny" file="Johnny.xml"/>
+	<npc name="Julian" file="Julian.xml"/>
+	<npc name="Junior" file="Junior.xml"/>
+	<npc name="Klaus" file="Klaus.xml"/>
+	<npc name="Lara" file="Lara.xml"/>
+	<npc name="Lector" file="Lector.xml"/>
 	<npc name="Lola" file="Lola.xml"/>
+	<npc name="Mad" file="Mad.xml"/>
+	<npc name="Malak" file="Malak.xml"/>
+	<npc name="Maria" file="Maria.xml"/>
+	<npc name="Mark" file="Mark.xml"/>
+	<npc name="Maya" file="Maya.xml"/>
 	<npc name="Nimral" file="Nimral.xml"/>
+	<npc name="Obi" file="Obi.xml"/>
+	<npc name="Orlan" file="Orlan.xml"/>
+	<npc name="Perac" file="Perac.xml"/>
 	<npc name="Riona" file="Riona.xml"/>
+	<npc name="Roger" file="Roger.xml"/>
+	<npc name="Roy" file="Roy.xml"/>
+	<npc name="Seller" file="Seller.xml"/>
 	<npc name="Soya" file="Soya.xml"/>
+	<npc name="Steven" file="Steven.xml"/>
 	<npc name="The King" file="The King.xml"/>
 	<npc name="The Oracle" file="The Oracle.xml"/>
 	<npc name="Timral" file="Timral.xml"/>
