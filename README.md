@@ -4,6 +4,7 @@ Crystal Server is a server application written in C++ for the MMORPG Tibia. It i
 
 ### TODO
 - [ ] Pugixml support for improve XML performance.
+- [ ] Update libs.
 - [x] Chritimas decoration system.
 - [ ] Account Manager items configuration at config.lua.
 - [ ] Party vocation bonus configurable in config.lua.
