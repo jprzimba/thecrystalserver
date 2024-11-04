@@ -187,7 +187,7 @@
 				actions/channels/config/creatureevents/gameservers/globalevents
 				groups/highscores/houseprices/items/monsters/moveevents/npcs
 				outfits/quests/raids/spells/stages/talkactions/vocations/weapons
-				mods, all
+				all
 
 		Examples
 			/reload spells

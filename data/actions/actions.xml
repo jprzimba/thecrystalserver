@@ -18,6 +18,11 @@
 	<action itemid="7761" event="script" value="other/enchanting.lua"/>
 	<action itemid="7762" event="script" value="other/enchanting.lua"/>
 
+	<!-- Change gold -->
+	<action itemid="2148" event="script" value="other/changegold.lua"/>
+	<action itemid="2152" event="script" value="other/changegold.lua"/>
+	<action itemid="2160" event="script" value="other/changegold.lua"/>
+
 	<!-- Tools -->
 	<action itemid="2420" event="script" value="tools/machete.lua"/>
 	<action itemid="2442" event="script" value="tools/machete.lua"/>
@@ -213,6 +218,7 @@
 	<action itemid="7735" event="script" value="other/spellwand.lua"/>
 	<action itemid="7537;7585" event="script" value="other/spideregg.lua" />
 	<action itemid="6561" event="script" value="other/blessings.lua"/>
+	<action itemid="1981" event="script" value="other/highscore_book.lua"/>
 
 	<!-- Map -->
 	<!-- Other Scripts -->

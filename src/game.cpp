@@ -5975,7 +5975,7 @@ void Game::loadPlayersRecord()
 	result->free();
 }
 
-bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool completeReload/* = false*/)
+bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/)
 {
 	bool done = false;
 	switch(reload)
@@ -6068,16 +6068,6 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 			//TODO?
 			std::clog << "[Notice - Game::reloadInfo] Reload type does not work." << std::endl;
 			done = true;
-			break;
-		}
-
-		case RELOAD_MODS:
-		{
-			if(ScriptManager::getInstance()->reloadMods())
-				done = true;
-			else
-				std::clog << "[Error - Game::reloadInfo] Failed to reload mods." << std::endl;
-
 			break;
 		}
 
@@ -6194,12 +6184,9 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 			done = true;
 			for(int32_t i = RELOAD_FIRST; i <= RELOAD_LAST; ++i)
 			{
-				if(!reloadInfo((ReloadInfo_t)i, 0, true) && done)
+				if(!reloadInfo((ReloadInfo_t)i, 0) && done)
 					done = false;
 			}
-
-			if(!ScriptManager::getInstance()->reloadMods() && done)
-				done = false;
 
 			break;
 		}
@@ -6210,9 +6197,6 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/, bool compl
 			break;
 		}
 	}
-
-	if(reload != RELOAD_CONFIG && reload != RELOAD_MODS && !completeReload && !ScriptManager::getInstance()->reloadMods())
-		std::clog << "[Error - Game::reloadInfo] Failed to reload mods." << std::endl;
 
 	if(!playerId)
 		return done;

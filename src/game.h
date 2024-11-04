@@ -102,8 +102,7 @@ enum ReloadInfo_t
 	RELOAD_TALKACTIONS = 19,
 	RELOAD_VOCATIONS = 20,
 	RELOAD_WEAPONS = 21,
-	RELOAD_MODS = 22,
-	RELOAD_ALL = 23,
+	RELOAD_ALL = 22,
 	RELOAD_LAST = RELOAD_WEAPONS
 };
 
@@ -532,7 +531,7 @@ class Game
 		void loadPlayersRecord();
 		void checkPlayersRecord(Player* player);
 
-		bool reloadInfo(ReloadInfo_t reload, uint32_t playerId = 0, bool completeReload = false);
+		bool reloadInfo(ReloadInfo_t reload, uint32_t playerId = 0);
 		void cleanup();
 		void shutdown();
 		void freeThing(Thing* thing);
