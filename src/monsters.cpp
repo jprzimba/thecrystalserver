@@ -344,44 +344,59 @@ void MonsterType::dropLoot(Container* corpse)
 bool Monsters::loadFromXml(bool reloading /*= false*/)
 {
 	loaded = false;
-	xmlDocPtr doc = xmlParseFile(getFilePath(FILE_TYPE_OTHER, "monster/monsters.xml").c_str());
-	if(!doc)
-	{
-		std::clog << "[Warning - Monsters::loadFromXml] Cannot load monsters file." << std::endl;
-		std::clog << getLastXMLError() << std::endl;
-		return false;
-	}
-
-	xmlNodePtr root = xmlDocGetRootElement(doc);
-	if(xmlStrcmp(root->name,(const xmlChar*)"monsters"))
-	{
-		std::clog << "[Error - Monsters::loadFromXml] Malformed monsters file." << std::endl;
-		xmlFreeDoc(doc);
-		return false;
-	}
-
-	for(xmlNodePtr p = root->children; p; p = p->next)
-	{
-		if(p->type != XML_ELEMENT_NODE)
-			continue;
-
-		if(xmlStrcmp(p->name, (const xmlChar*)"monster"))
-		{
-			std::clog << "[Warning - Monsters::loadFromXml] Unknown node name (" << p->name << ")." << std::endl;
-			continue;
-		}
-
-		std::string file, name;
-		if(!readXMLString(p, "file", file) || !readXMLString(p, "name", name))
-			continue;
-
-		file = getFilePath(FILE_TYPE_OTHER, "monster/" + file);
-		loadMonster(file, name, reloading);
-	}
-
-	xmlFreeDoc(doc);
+	loadMonstersFromDirectory(getFilePath(FILE_TYPE_OTHER, "monster/"), reloading);
 	loaded = true;
 	return loaded;
+}
+
+void Monsters::loadMonstersFromDirectory(const boost::filesystem::path& directoryPath, bool reloading)
+{
+	if(!boost::filesystem::exists(directoryPath) || !boost::filesystem::is_directory(directoryPath))
+	{
+		std::clog << "[Warning - Monsters::loadMonstersFromDirectory] Directory does not exist: " << directoryPath << std::endl;
+		return;
+	}
+
+	for(boost::filesystem::directory_iterator it(directoryPath); it != boost::filesystem::directory_iterator(); ++it)
+	{
+		if(boost::filesystem::is_directory(it->status()))
+			loadMonstersFromDirectory(it->path(), reloading);
+		else if(it->path().extension() == ".xml")
+		{
+			xmlDocPtr doc = xmlParseFile(it->path().string().c_str());
+			if(!doc)
+			{
+				std::clog << "[Warning - Monsters::loadMonstersFromDirectory] Cannot load XML file: " << it->path() << std::endl;
+				continue;
+			}
+
+			xmlNodePtr root = xmlDocGetRootElement(doc);
+			if(xmlStrcmp(root->name, (const xmlChar*)"monster"))
+			{
+				std::clog << "[Warning - Monsters::loadMonstersFromDirectory] Unknown root node name: " << root->name << std::endl;
+				xmlFreeDoc(doc);
+				continue;
+			}
+
+			std::string name = BOOST_DIR_ITER_FILENAME_STEM(it); // monster name is file name without file extension
+			boost::filesystem::path fullPath = it->path();
+			boost::filesystem::path basePath = getFilePath(FILE_TYPE_OTHER, "monster/");
+			std::string file = fullPath.string();
+
+			if (file.find(basePath.string()) == 0)
+				file = file.substr(basePath.string().length());
+			else
+			{
+				std::clog << "[Warning - Monsters::loadMonstersFromDirectory] File is not in the expected path: " << file << std::endl;
+				xmlFreeDoc(doc);
+				continue;
+			}
+
+			file = getFilePath(FILE_TYPE_OTHER, "monster/" + file);
+			loadMonster(file, name, reloading);
+			xmlFreeDoc(doc);
+		}
+	}
 }
 
 ConditionDamage* Monsters::getDamageCondition(ConditionType_t conditionType,

@@ -19,6 +19,8 @@
 #define __MONSTERS__
 #include "otsystem.h"
 
+#include <boost/filesystem.hpp>
+
 #include "creature.h"
 #define MAX_LOOTCHANCE 100000
 #define MAX_STATICWALK 100
@@ -128,6 +130,7 @@ class Monsters
 		bool loadFromXml(bool reloading = false);
 
 		bool loadMonster(const std::string& file, const std::string& monsterName, bool reloading = false);
+		void loadMonstersFromDirectory(const boost::filesystem::path& directoryPath, bool reloading);
 
 		MonsterType* getMonsterType(const std::string& name);
 		MonsterType* getMonsterType(uint32_t mid);

@@ -74,6 +74,7 @@
 			Christmas decoration system (Zorzin, Tryller)
 			Configurable potions in config.lu: removePotionsOnUse, usablePotionsOnTarget . (Tryller)
 			Configurable anableFreeTravel in config.lua and add new lua function isFreeTravel(). (Tryller)
+			Goodbye, monsters.xml! Monsters are now automatically loaded from the folder. (Tryller)
 		]
 
 		[ MAP
