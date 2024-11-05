@@ -879,10 +879,6 @@
 			eachBlessReduction determine by how many percentage points does each bless decrease an experience/magic/skills loss.
 			Default: 8
 
-		pvpBlessingThreshold
-			pvpBlessingThreshold is damage percent received from PvP that is required to enable pvpBlessing.
-			Default: 40
-
 		fairFightTimeRange
 			Last X seconds from which damage to player counts.
 			(In seconds.)

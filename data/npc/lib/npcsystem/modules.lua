@@ -157,9 +157,7 @@ if(Modules == nil) then
 					doPlayerAddBlessing(cid, parameters.number)
 				end
 			else
-				if(getPlayerPVPBlessing(cid)) then
-					npcHandler:say("Gods have already blessed you with this blessing!", cid)
-				elseif(not doPlayerRemoveMoney(cid, price)) then
+				if(not doPlayerRemoveMoney(cid, price)) then
 					npcHandler:say("You don't have enough money for blessing.", cid)
 				else
 					local any = false
@@ -172,7 +170,6 @@ if(Modules == nil) then
 
 					if(any) then
 						npcHandler:say("You have been blessed by the god of war!", cid)
-						doPlayerSetPVPBlessing(cid)
 					else
 						npcHandler:say("You need to be blessed by at least one god to get this blessing.", cid)
 					end
