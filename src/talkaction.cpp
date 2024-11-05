@@ -1518,7 +1518,6 @@ bool TalkAction::banPlayer(Creature* creature, const std::string&, const std::st
 		return true;
 	}
 
-	// Determine ban duration in days; default to forever if not provided
 	int32_t bantime = 0; // Default to forever
 	if(params.size() > 1)
 		bantime = std::max(1, std::min(atoi(params[1].c_str()), 999));
