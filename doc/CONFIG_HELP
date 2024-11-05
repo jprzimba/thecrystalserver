@@ -689,10 +689,6 @@
 			In global Tibia it's enabled. (it has been added in 8.6 update)
 			Default: true
 
-		enableCooldown
-			New for 8.7 update, if active then cooldown icons are shown when using a spell.
-			Default: true
-
 	*OUTFIT
 		allowChangeOutfit
 			Should player's be able to change their outfits?

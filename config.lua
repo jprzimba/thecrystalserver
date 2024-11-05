@@ -232,7 +232,6 @@
 	spellNameInsteadOfWords = false
 	emoteSpells = false
 	unifiedSpells = true
-	enableCooldowns = true
 
 	-- Outfits
 	allowChangeOutfit = true
