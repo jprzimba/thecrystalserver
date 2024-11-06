@@ -411,17 +411,3 @@
 	managerPassword = ""
 	managerLocalhostOnly = true
 	managerConnectionsLimit = 1
-
-	-- Admin
-	-- NOTE: adminPassword left blank disables manager.
-	-- Set to anything if you set adminRequireLogin to false.
-	-- adminEncryption available options: rsa1024xtea;
-	-- remember to set correct data!
-	adminPort = 7171
-	adminLogs = true
-	adminPassword = ""
-	adminLocalhostOnly = true
-	adminConnectionsLimit = 1
-	adminRequireLogin = true
-	adminEncryption = ""
-	adminEncryptionData = ""

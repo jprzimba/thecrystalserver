@@ -49,13 +49,9 @@
 #include "protocollogin.h"
 #include "protocolgame.h"
 #include "protocolold.h"
-#include "protocolhttp.h"
 
 #include "status.h"
 #include "manager.h"
-#ifdef __OTADMIN__
-#include "admin.h"
-#endif
 
 #include "configmanager.h"
 #include "scriptmanager.h"
@@ -78,9 +74,7 @@
 #ifdef __EXCEPTION_TRACER__
 #include "exception.h"
 #endif
-#ifndef __OTADMIN__
 #include "textlogger.h"
-#endif
 
 #ifdef __NO_BOOST_EXCEPTIONS__
 #include <exception>
@@ -157,8 +151,6 @@ bool argumentsHandler(StringVec args)
 			g_config.setNumber(ConfigManager::LOGIN_PORT, atoi(tmp[1].c_str()));
 		else if(tmp[0] == "--game-port")
 			g_config.setNumber(ConfigManager::GAME_PORT, atoi(tmp[1].c_str()));
-		else if(tmp[0] == "--admin-port")
-			g_config.setNumber(ConfigManager::ADMIN_PORT, atoi(tmp[1].c_str()));
 		else if(tmp[0] == "--manager-port")
 			g_config.setNumber(ConfigManager::MANAGER_PORT, atoi(tmp[1].c_str()));
 		else if(tmp[0] == "--status-port")
@@ -764,11 +756,7 @@ void otserv(StringVec, ServiceManager* services)
 
 	services->add<ProtocolStatus>(g_config.getNumber(ConfigManager::STATUS_PORT), ipList);
 	services->add<ProtocolManager>(g_config.getNumber(ConfigManager::MANAGER_PORT), ipList);
-	#ifdef __OTADMIN__
-	services->add<ProtocolAdmin>(g_config.getNumber(ConfigManager::ADMIN_PORT), ipList);
-	#endif
 
-	//services->add<ProtocolHTTP>(8080, ipList);
 	if(
 #ifdef __LOGIN_SERVER__
 	true

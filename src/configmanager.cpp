@@ -30,7 +30,7 @@ ConfigManager::ConfigManager()
 	m_confNumber[ENCRYPTION] = ENCRYPTION_SHA256;
 	m_confString[CONFIG_FILE] = getFilePath(FILE_TYPE_CONFIG, "config.lua");
 
-	m_confNumber[LOGIN_PORT] = m_confNumber[ADMIN_PORT] = m_confNumber[MANAGER_PORT] = m_confNumber[STATUS_PORT] = 0;
+	m_confNumber[LOGIN_PORT] = m_confNumber[MANAGER_PORT] = m_confNumber[STATUS_PORT] = 0;
 	m_confString[DATA_DIRECTORY] = m_confString[LOGS_DIRECTORY] = m_confString[IP] = m_confString[RUNFILE] = m_confString[OUTPUT_LOG] = "";
 	m_confBool[LOGIN_ONLY_LOGINSERVER] = m_confBool[START_CLOSED] = m_confBool[DAEMONIZE] = false;
 	m_confBool[SCRIPT_SYSTEM] = true;
@@ -69,9 +69,6 @@ bool ConfigManager::load()
 
 		if(m_confString[GAME_PORT] == "")
 			m_confString[GAME_PORT] = getGlobalString("gamePort", "7172");
-
-		if(m_confNumber[ADMIN_PORT] == 0)
-			m_confNumber[ADMIN_PORT] = getGlobalNumber("adminPort", 7171);
 
 		if(m_confNumber[MANAGER_PORT] == 0)
 			m_confNumber[MANAGER_PORT] = getGlobalNumber("managerPort", 7171);
@@ -313,13 +310,6 @@ bool ConfigManager::load()
 	m_confNumber[MANAGER_CONNECTIONS_LIMIT] = getGlobalNumber("managerConnectionsLimit", 1);
 	m_confString[MANAGER_PASSWORD] = getGlobalString("managerPassword", "");
 	m_confBool[MANAGER_LOGS] = getGlobalBool("managerLogs", false);
-	m_confBool[ADMIN_LOGS] = getGlobalBool("adminLogs", false);
-	m_confString[ADMIN_PASSWORD] = getGlobalString("adminPassword", "");
-	m_confNumber[ADMIN_CONNECTIONS_LIMIT] = getGlobalNumber("adminConnectionsLimit", 1);
-	m_confBool[ADMIN_LOCALHOST_ONLY] = getGlobalBool("adminLocalhostOnly", true);
-	m_confBool[ADMIN_REQUIRE_LOGIN] = getGlobalBool("adminRequireLogin", true);
-	m_confString[ADMIN_ENCRYPTION] = getGlobalString("adminEncryption", "");
-	m_confString[ADMIN_ENCRYPTION_DATA] = getGlobalString("adminEncryptionData", "");
 	m_confBool[ADDONS_PREMIUM] = getGlobalBool("addonsOnlyPremium", true);
 	m_confBool[UNIFIED_SPELLS] = getGlobalBool("unifiedSpells", true);
 	m_confBool[OPTIONAL_WAR_ATTACK_ALLY] = getGlobalBool("optionalWarAttackableAlly", false);

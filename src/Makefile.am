@@ -16,11 +16,8 @@ endif
 if LOGIN_SERVER
 MAYBE_LOGIN = gameservers.cpp gameservers.h
 endif
-if OT_ADMIN
-MAYBE_OTADMIN = admin.cpp admin.h
-endif
 
-crystalserver_SOURCES = account.h actions.cpp actions.h $(MAYBE_OTADMIN) \
+crystalserver_SOURCES = account.h actions.cpp actions.h \
 	allocator.cpp allocator.h baseevents.cpp baseevents.h beds.cpp \
 	beds.h chat.cpp chat.h combat.cpp combat.h condition.cpp condition.h \
 	config.h configmanager.cpp configmanager.h connection.cpp connection.h \
@@ -40,7 +37,7 @@ crystalserver_SOURCES = account.h actions.cpp actions.h $(MAYBE_OTADMIN) \
 	npc.cpp npc.h otpch.h otserv.cpp otsystem.h outfit.cpp outfit.h \
 	outputmessage.cpp outputmessage.h party.cpp party.h player.cpp player.h \
 	position.cpp position.h protocol.cpp protocol.h protocolgame.cpp \
-	protocolgame.h protocolhttp.cpp protocolhttp.h protocollogin.cpp \
+	protocolgame.h protocollogin.cpp \
 	protocollogin.h protocolold.cpp protocolold.h quests.cpp quests.h \
 	raids.cpp raids.h scheduler.cpp scheduler.h scriptmanager.cpp \
 	scriptmanager.h server.cpp server.h spawn.cpp spawn.h spells.cpp \

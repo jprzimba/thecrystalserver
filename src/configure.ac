@@ -21,15 +21,6 @@ AC_ARG_ENABLE(login-server, [  --enable-login-server		enable login server mode],
 	loginServer=yes
 )
 
-# check if we want OTAdmin protocol
-AM_CONDITIONAL(OT_ADMIN, false)
-otAdmin=no
-AC_ARG_ENABLE(ot-admin, [  --enable-ot-admin		enable OTAdmin protocol],
-	[OPTIONAL_FLAGS="$OPTIONAL_FLAGS -D__OTADMIN__"]
-	AM_CONDITIONAL(OT_ADMIN, true)
-	otAdmin=yes
-)
-
 # check if we want otserv allocator enabled
 otservAllocator=no
 AC_ARG_ENABLE(otserv-allocator, [  --enable-otserv-allocator	enable otserv custom allocator],

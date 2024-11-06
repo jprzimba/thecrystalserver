@@ -19,15 +19,12 @@ endif
 ifdef LOGIN_SERVER
     MAYBE_LOGIN = gameservers.cpp
 endif
-ifdef OT_ADMIN
-    MAYBE_OTADMIN = admin.cpp
-endif
 
 SRC = weapons.cpp waitlist.cpp vocation.cpp trashholder.cpp tools.cpp \
 	tile.cpp thing.cpp textlogger.cpp teleport.cpp talkaction.cpp \
 	status.cpp spells.cpp spawn.cpp server.cpp scriptmanager.cpp \
 	scheduler.cpp raids.cpp quests.cpp protocolold.cpp protocollogin.cpp \
-	protocolhttp.cpp protocolgame.cpp protocol.cpp position.cpp player.cpp \
+	protocolgame.cpp protocol.cpp position.cpp player.cpp \
 	party.cpp outputmessage.cpp outfit.cpp otserv.cpp npc.cpp \
 	networkmessage.cpp movement.cpp monsters.cpp monster.cpp \
 	map.cpp manager.cpp mailbox.cpp luascript.cpp items.cpp \
@@ -36,9 +33,9 @@ SRC = weapons.cpp waitlist.cpp vocation.cpp trashholder.cpp tools.cpp \
 	globalevent.cpp gameservers.cpp game.cpp fileloader.cpp exception.cpp \
 	dispatcher.cpp depot.cpp databasemanager.cpp database.cpp cylinder.cpp \
 	creatureevent.cpp creature.cpp container.cpp connection.cpp configmanager.cpp \
-	condition.cpp combat.cpp chat.cpp beds.cpp baseevents.cpp allocator.cpp admin.cpp \
+	condition.cpp combat.cpp chat.cpp beds.cpp baseevents.cpp allocator.cpp \
 	actions.cpp $(MAYBE_MYSQL) $(MAYBE_SQLITE)  \
-	$(MAYBE_LOGIN) $(MAYBE_OTADMIN)
+	$(MAYBE_LOGIN)
 
 INCPATH = -I"."
 
