@@ -320,6 +320,7 @@ class ConfigManager
 			REMOVE_POTIONS,
 			USABLE_POTIONS_ON_TARGET,
 			ENABLE_FREE_TRAVEL,
+			SHOW_ITEM_DESCRIPTION,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

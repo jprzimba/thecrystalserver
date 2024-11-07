@@ -244,6 +244,7 @@
 	-- NOTE: promptExceptionTracerErrorBox works only with precompiled support feature,
 	-- called "exception tracer" (__EXCEPTION_TRACER__ flag).
 	-- Note: enableFreeTravel will make all boat and carpet travels free.
+	-- NOTE: showItemDescription will display the description 'Created by ......' for items created by the command.
 	dataDirectory = "data/"
 	logsDirectory = "data/logs/"
 	promptExceptionTracerErrorBox = true
@@ -252,6 +253,7 @@
 	tradeLimit = 100
 	useCapacity = true
 	enableFreeTravel = false
+	showItemDescription = true
 
 	-- Bank system
 	-- NOTE: If enableAutoBank is true, the server will try to remove/add gold to/from the player's bank balance

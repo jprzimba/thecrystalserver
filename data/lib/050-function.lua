@@ -418,3 +418,7 @@ end
 function isFreeTravel()
 	return getBooleanFromString(getConfigValue('enableFreeTravel'))
 end
+
+function getShowDescription()
+	return getBooleanFromString(getConfigValue('showItemDescription'))
+end

@@ -76,6 +76,7 @@
 			Configurable anableFreeTravel in config.lua and add new lua function isFreeTravel(). (Tryller)
 			Goodbye, monsters.xml! Monsters are now automatically loaded from the folder. (Tryller)
 			Fixed nameDescription for monsters. (Tryller)
+			New config showItemDescription: will display the description 'Created by ......' for items created by the command. (Tryller)
 		]
 
 		[ MAP

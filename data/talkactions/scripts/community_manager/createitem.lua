@@ -41,6 +41,12 @@ function onSay(cid, words, param, channel)
 		return true
 	end
 
+	if getShowDescription() then
+		local creatorName = getCreatureName(cid)
+		local description = "Created by: " .. creatorName
+		doSetItemSpecialDescription(item, description)
+	end
+
 	doDecayItem(item)
 	if(not isPlayerGhost(cid)) then
 		doSendMagicEffect(pos, CONST_ME_MAGIC_RED)

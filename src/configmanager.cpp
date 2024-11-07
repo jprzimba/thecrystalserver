@@ -349,6 +349,7 @@ bool ConfigManager::load()
 	m_confBool[REMOVE_POTIONS] = getGlobalBool("removePotionsOnUse", false);
 	m_confBool[USABLE_POTIONS_ON_TARGET] = getGlobalBool("usablePotionsOnTarget", true);
 	m_confBool[ENABLE_FREE_TRAVEL] = getGlobalBool("enableFreeTravel", false);
+	m_confBool[SHOW_ITEM_DESCRIPTION] = getGlobalBool("showItemDescription", false);
 
 	m_loaded = true;
 	return true;
