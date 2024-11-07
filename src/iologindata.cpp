@@ -1840,10 +1840,3 @@ bool IOLoginData::resetGuildInformation(uint32_t guid)
 	query << "UPDATE `players` SET `rank_id` = 0, `guildnick` = '' WHERE `id` = " << guid << " AND `deleted` = 0" << db->getUpdateLimiter();
 	return db->query(query.str());
 }
-
-void IOLoginData::increaseBankBalance(uint32_t guid, uint64_t bankBalance)
-{
-	DBQuery query;
-	query << "UPDATE `players` SET `balance` = `balance` + " << bankBalance << " WHERE `id` = " << guid << ";";
-	Database::getInstance()->query(query.str());
-}
