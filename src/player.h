@@ -305,6 +305,9 @@ class Player : public Creature, public Cylinder
 		void setBankBalance(uint64_t newBalance) {balance = newBalance;}
 		void handleAutoBankGold(Item* item);
 
+		uint64_t getMarriage() const {return marriage;}
+		void setMarriage(uint64_t newMarriage) {marriage = newMarriage;}
+
 		int64_t getLastLoad() const {return lastLoad;}
 		time_t getLastLogin() const {return lastLogin;}
 		time_t getLastLogout() const {return lastLogout;}
@@ -722,8 +725,6 @@ class Player : public Creature, public Cylinder
 		Container transferContainer;
 
 		// TODO: make it private?
-		uint32_t marriage;
-		uint64_t balance;
 		double rates[SKILL__LAST + 1];
 		
 		void updateInventoryGoods(uint32_t itemId);
@@ -889,6 +890,8 @@ class Player : public Creature, public Cylinder
 		uint64_t manaSpent;
 		uint64_t lastAttack;
 		uint64_t lastMail;
+		uint64_t balance;
+		uint32_t marriage;
 		uint64_t skills[SKILL_LAST + 1][3];
 
 		double inventoryWeight;

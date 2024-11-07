@@ -44,13 +44,13 @@ void ProtocolLogin::deleteProtocolTask()
 }
 
 #endif
-void ProtocolLogin::disconnectClient(uint8_t error, const char* message)
+void ProtocolLogin::disconnectClient(const std::string& message)
 {
 	OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
 	if(output)
 	{
 		TRACK_MESSAGE(output);
-		output->put<char>(error);
+		output->put<char>(0x0A);
 		output->putString(message);
 		OutputMessagePool::getInstance()->send(output);
 	}
@@ -67,17 +67,10 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	}
 
 	uint32_t clientIp = getConnection()->getIP();
-	msg.skip(2); // client platform
+	/*uint16_t operatingSystem = msg.get<uint16_t>();*/msg.skip(2);
 	uint16_t version = msg.get<uint16_t>();
 
-#ifdef CLIENT_VERSION_DATA
-	uint32_t datSignature = msg.get<uint32_t>();
-	uint32_t sprSignature = msg.get<uint32_t>();
-
-	uint32_t picSignature = msg.get<uint32_t>();
-#else
 	msg.skip(12);
-#endif
 	if(!RSA_decrypt(msg))
 	{
 		getConnection()->close();
@@ -88,74 +81,54 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	enableXTEAEncryption();
 	setXTEAKey(key);
 
-	std::string name = msg.getString(), password = msg.getString();
-	if(name.empty())
+	std::string accountName = msg.getString(), password = msg.getString();
+	if(accountName.empty())
 	{
 		if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
 		{
-			disconnectClient(0x0A, "Invalid account name.");
+			disconnectClient("Invalid account name.");
 			return;
 		}
 
-		name = "1";
+		accountName = "1";
 		password = "1";
 	}
 
 	if(version < CLIENT_VERSION_MIN || version > CLIENT_VERSION_MAX)
 	{
-		disconnectClient(0x0A, CLIENT_VERSION_STRING);
+		disconnectClient(CLIENT_VERSION_STRING);
 		return;
 	}
-#ifdef CLIENT_VERSION_DATA
-
-	if(sprSignature != CLIENT_VERSION_SPR)
-	{
-		disconnectClient(0x0A, CLIENT_VERSION_DATA);
-		return;
-	}
-
-	if(datSignature != CLIENT_VERSION_DAT)
-	{
-		disconnectClient(0x0A, CLIENT_VERSION_DATA);
-		return;
-	}
-
-	if(picSignature != CLIENT_VERSION_PIC)
-	{
-		disconnectClient(0x0A, CLIENT_VERSION_DATA);
-		return;
-	}
-#endif
 
 	if(g_game.getGameState() < GAMESTATE_NORMAL)
 	{
-		disconnectClient(0x0A, "Server is just starting up, please wait.");
+		disconnectClient("Server is just starting up, please wait.");
 		return;
 	}
 
 	if(g_game.getGameState() == GAMESTATE_MAINTAIN)
 	{
-		disconnectClient(0x0A, "Server is under maintenance, please re-connect in a while.");
+		disconnectClient("Server is under maintenance, please re-connect in a while.");
 		return;
 	}
 
 	if(ConnectionManager::getInstance()->isDisabled(clientIp, protocolId))
 	{
-		disconnectClient(0x0A, "Too many connections attempts from your IP address, please try again later.");
+		disconnectClient("Too many connections attempts from your IP address, please try again later.");
 		return;
 	}
 
 	if(IOBan::getInstance()->isIpBanished(clientIp))
 	{
-		disconnectClient(0x0A, "Your IP is banished!");
+		disconnectClient("Your IP is banished!");
 		return;
 	}
 
 	Account account;
-	if(!IOLoginData::getInstance()->loadAccount(account, name) || !encryptTest(password, account.password))
+	if(!IOLoginData::getInstance()->loadAccount(account, accountName) || !encryptTest(password, account.password))
 	{
 		ConnectionManager::getInstance()->addAttempt(clientIp, protocolId, false);
-		disconnectClient(0x0A, "Invalid account name or password.");
+		disconnectClient("Invalid account name or password.");
 		return;
 	}
 
@@ -177,7 +150,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 			<< " by: " << name_.c_str() << ".\nThe comment given was:\n" << ban.comment.c_str() << ".\nYour " << (deletion ?
 			"account won't be undeleted" : "banishment will be lifted at:\n") << (deletion ? "" : formatDateEx(ban.expires).c_str()) << ".";
 
-		disconnectClient(0x0A, ss.str().c_str());
+		disconnectClient(ss.str().c_str());
 		return;
 	}
 
@@ -186,7 +159,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	IOLoginData::getInstance()->removePremium(account);
 	if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !account.charList.size())
 	{
-		disconnectClient(0x0A, std::string("This account does not contain any character yet.\nCreate a new character on the "
+		disconnectClient(std::string("This account does not contain any character yet.\nCreate a new character on the "
 			+ g_config.getString(ConfigManager::SERVER_NAME) + " website at " + g_config.getString(ConfigManager::URL) + ".").c_str());
 		return;
 	}
@@ -201,7 +174,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	IOLoginData::getInstance()->removePremium(account);
 	if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !charList.size())
 	{
-		disconnectClient(0x0A, std::string("This account does not contain any character on this client yet.\nCreate a new character on the "
+		disconnectClient(std::string("This account does not contain any character on this client yet.\nCreate a new character on the "
 			+ g_config.getString(ConfigManager::SERVER_NAME) + " website at " + g_config.getString(ConfigManager::URL) + ".").c_str());
 		return;
 	}

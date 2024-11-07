@@ -41,6 +41,6 @@ class ProtocolLogin : public Protocol
 		#ifdef __DEBUG_NET_DETAIL__
 		virtual void deleteProtocolTask();
 		#endif
-		void disconnectClient(uint8_t error, const char* message);
+		void disconnectClient(const std::string& message);
 };
 #endif

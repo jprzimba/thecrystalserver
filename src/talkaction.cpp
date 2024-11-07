@@ -1083,9 +1083,9 @@ bool TalkAction::thingProporties(Creature* creature, const std::string&, const s
 					}
 				}
 				else if(action == "marriage" || action == "partner")
-					_player->marriage = atoi(parseParams(it, tokens.end()).c_str());
+					_player->setMarriage(atoi(parseParams(it, tokens.end()).c_str()));
 				else if(action == "balance")
-					_player->balance = atoi(parseParams(it, tokens.end()).c_str());
+					_player->setBankBalance(_player->getBankBalance() + atoi(parseParams(it, tokens.end()).c_str()));
 				else if(action == "rates")
 					_player->rates[atoi(parseParams(it, tokens.end()).c_str())] = atof(
 						parseParams(it, tokens.end()).c_str());

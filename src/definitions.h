@@ -22,11 +22,6 @@
 #define CLIENT_VERSION_MAX 860
 #define CLIENT_VERSION_STRING "Only clients with protocol 8.60 allowed!"
 
-#define CLIENT_VERSION_DAT 0
-#define CLIENT_VERSION_SPR 0
-#define CLIENT_VERSION_PIC 0
-//#define CLIENT_VERSION_DATA
-
 #define SOFTWARE_NAME "Crystal Server"
 #define SOFTWARE_VERSION "3.0"
 #define SOFTWARE_CODENAME "Infinity Crystal"

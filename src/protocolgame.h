@@ -59,7 +59,7 @@ class ProtocolGame : public Protocol
 		void setPlayer(Player* p);
 
 	private:
-		void disconnectClient(uint8_t error, const char* message);
+		void disconnectClient(const std::string& message);
 
 		std::list<uint32_t> knownCreatureList;
 		void checkCreatureAsKnown(uint32_t id, bool& known, uint32_t& removedKnown);

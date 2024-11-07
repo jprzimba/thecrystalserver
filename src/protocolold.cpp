@@ -31,12 +31,12 @@ void ProtocolOld::deleteProtocolTask()
 }
 
 #endif
-void ProtocolOld::disconnectClient(uint8_t error, const char* message)
+void ProtocolOld::disconnectClient(const std::string& message)
 {
 	if(OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
 	{
 		TRACK_MESSAGE(output);
-		output->put<char>(error);
+		output->put<char>(0x0A);
 		output->putString(message);
 		OutputMessagePool::getInstance()->send(output);
 	}
@@ -52,12 +52,10 @@ void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 		return;
 	}
 
-	msg.skip(2);
 	uint16_t version = msg.get<uint16_t>();
-
 	msg.skip(12);
 	if(version <= 760)
-		disconnectClient(0x0A, CLIENT_VERSION_STRING);
+		disconnectClient(CLIENT_VERSION_STRING);
 
 	if(!RSA_decrypt(msg))
 	{
@@ -72,5 +70,5 @@ void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 	if(version <= 822)
 		disableChecksum();
 
-	disconnectClient(0x0A, CLIENT_VERSION_STRING);
+	disconnectClient(CLIENT_VERSION_STRING);
 }
