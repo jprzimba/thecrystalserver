@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <monster name="Ferumbras" nameDescription="ferumbras" race="venom" experience="12000" speed="320" manacost="0">
-	<health now="35000" max="35000"/>
+	<health now="90000" max="90000"/>
 	<look type="229" corpse="6078"/>
 	<targetchange interval="5000" chance="8"/>
 	<strategy attack="100" defense="0"/>
@@ -18,30 +18,30 @@
 		<flag runonhealth="2500"/>
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="-100" max="-350"/>
+		<attack name="melee" interval="2000" min="-100" max="-1800"/>
 		<attack name="manadrain" interval="2000" chance="20" range="7" min="-300" max="-700">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</attack>
-		<attack name="poison" interval="3000" chance="20" radius="6" target="0" min="-250" max="-550">
+		<attack name="poison" interval="3000" chance="20" radius="6" target="0" min="-250" max="-840">
 			<attribute key="areaEffect" value="poison"/>
 		</attack>
-		<attack name="energy" interval="2000" chance="18" radius="6" target="0" min="-200" max="-400">
+		<attack name="energy" interval="2000" chance="18" radius="6" target="0" min="-200" max="-485">
 			<attribute key="areaEffect" value="energy"/>
 		</attack>
-		<attack name="manadrain" interval="2000" chance="16" radius="6" target="0" min="-225" max="-375">
+		<attack name="manadrain" interval="2000" chance="16" radius="6" target="0" min="-225" max="-650">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</attack>
-		<attack name="lifedrain" interval="2000" chance="21" radius="6" target="0" min="-200" max="-450">
+		<attack name="lifedrain" interval="2000" chance="21" radius="6" target="0" min="-200" max="-575">
 			<attribute key="areaEffect" value="poff"/>
 		</attack>
-		<attack name="effect" interval="3000" chance="20" radius="5" target="0" min="-200" max="-600">
+		<attack name="effect" interval="3000" chance="20" radius="5" target="0" min="-200" max="-655">
 			<attribute key="areaEffect" value="blackspark"/>
 		</attack>
-		<attack name="firecondition" interval="3000" chance="20" range="7" radius="7" target="1" min="-200" max="-800">
+		<attack name="firecondition" interval="3000" chance="20" range="7" radius="7" target="1" min="-200" max="-750">
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="firearea"/>
 		</attack>
-		<attack name="lifedrain" interval="2000" chance="25" length="8" spread="0" min="-50" max="-250">
+		<attack name="lifedrain" interval="2000" chance="25" length="8" spread="0" min="-50" max="-400">
 			<attribute key="areaEffect" value="greenspark"/>
 		</attack>
 	</attacks>
