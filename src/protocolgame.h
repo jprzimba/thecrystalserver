@@ -150,7 +150,7 @@ class ProtocolGame : public Protocol
 		void parseCloseNpc(NetworkMessage& msg);
 
 		//rule violation
-		void parseViolationWindow(NetworkMessage& msg)
+		void parseViolationWindow(NetworkMessage& msg);
 
 		//Send functions
 		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel);
