@@ -5369,3 +5369,23 @@ std::vector<std::pair<uint32_t, uint32_t> > Player::getDesiredLootItems() const
 {
 	return desiredLootItems;
 }
+
+void Player::addPremiumDays(int32_t days)
+{
+	if(premiumDays < GRATIS_PREMIUM)
+	{
+		Account account = IOLoginData::getInstance()->loadAccount(accountId);
+		if(days < 0)
+		{
+			account.premiumDays = std::max((uint32_t)0, uint32_t(account.premiumDays + (int32_t)days));
+			premiumDays = std::max((uint32_t)0, uint32_t(premiumDays + (int32_t)days));
+		}
+		else
+		{
+			account.premiumDays = std::min((uint32_t)65534, uint32_t(account.premiumDays + (uint32_t)days));
+			premiumDays = std::min((uint32_t)65534, uint32_t(premiumDays + (uint32_t)days));
+		}
+
+		IOLoginData::getInstance()->saveAccount(account);
+	}
+}
