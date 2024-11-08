@@ -9238,7 +9238,7 @@ int32_t LuaInterface::luaDoPlayerSetPartner(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Player* player = env->getPlayerByUID(popNumber(L)))
 	{
-		player->marriage = guid;
+		player->setMarriage(guid);
 		lua_pushboolean(L, true);
 	}
 	else
@@ -9428,6 +9428,9 @@ int32_t LuaInterface::luaGetGroupInfo(lua_State* L)
 	setField(L, "depotLimit", group->getDepotLimit(premium));
 	setField(L, "maxVips", group->getMaxVips(premium));
 	setField(L, "outfit", group->getOutfit());
+	setField(L, "violationReasons", group->getViolationReasons());
+	setField(L, "nameViolationFlags", group->getNameViolationFlags());
+	setField(L, "statementViolationFlags", group->getStatementViolationFlags());
 	return 1;
 }
 
