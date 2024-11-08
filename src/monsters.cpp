@@ -383,7 +383,7 @@ void Monsters::loadMonstersFromDirectory(const boost::filesystem::path& director
 			boost::filesystem::path basePath = getFilePath(FILE_TYPE_OTHER, "monster/");
 			std::string file = fullPath.string();
 
-			if (file.find(basePath.string()) == 0)
+			if(file.find(basePath.string()) == 0)
 				file = file.substr(basePath.string().length());
 			else
 			{

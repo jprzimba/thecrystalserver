@@ -773,6 +773,10 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 				parseBugReport(msg);
 				break;
 
+			case 0xE7:
+				parseViolationWindow(msg);
+				break;
+
 			case 0xE8:
 				parseDebugAssert(msg);
 				break;
@@ -783,10 +787,6 @@ void ProtocolGame::parsePacket(NetworkMessage &msg)
 
 			case 0xF1:
 				parseQuestInfo(msg);
-				break;
-
-			case 0xE7:
-				parseViolationWindow(msg);
 				break;
 
 			default:

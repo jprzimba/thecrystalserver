@@ -710,11 +710,11 @@ bool IOMap::loadHouses(Map* map)
 
 void IOMap::addChristmasDecoration(uint16_t wallType, Tile* tile)
 {
-	if (!tile || wallType == 0) 
+	if(!tile || wallType == 0) 
 		return;
 
 	uint16_t percentChance = 100 / g_config.getNumber(ConfigManager::CHRISTMAS_PERCENT);
-	if (random_range(1, percentChance) != 1) 
+	if(random_range(1, percentChance) != 1) 
 		return;
 
 	uint16_t itemType = random_range(1, 3);

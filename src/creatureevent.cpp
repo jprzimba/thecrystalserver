@@ -153,6 +153,8 @@ CreatureEventType_t CreatureEvents::getType(const std::string& type)
 		_type = CREATURE_EVENT_CHANNEL_JOIN;
 	else if(type == "channelleave")
 		_type = CREATURE_EVENT_CHANNEL_LEAVE;
+	else if(type == "channelrequest")
+		_type = CREATURE_EVENT_CHANNEL_REQUEST;
 	else if(type == "advance")
 		_type = CREATURE_EVENT_ADVANCE;
 	else if(type == "mailsend")
@@ -270,6 +272,8 @@ std::string CreatureEvent::getScriptEventName() const
 			return "onChannelJoin";
 		case CREATURE_EVENT_CHANNEL_LEAVE:
 			return "onChannelLeave";
+		case CREATURE_EVENT_CHANNEL_REQUEST:
+			return "onChannelRequest";
 		case CREATURE_EVENT_THINK:
 			return "onThink";
 		case CREATURE_EVENT_ADVANCE:
@@ -339,6 +343,8 @@ std::string CreatureEvent::getScriptEventParams() const
 		case CREATURE_EVENT_CHANNEL_JOIN:
 		case CREATURE_EVENT_CHANNEL_LEAVE:
 			return "cid, channel, users";
+		case CREATURE_EVENT_CHANNEL_REQUEST:
+			return "cid, channel, custom";
 		case CREATURE_EVENT_ADVANCE:
 			return "cid, skill, oldLevel, newLevel";
 		case CREATURE_EVENT_LOOK:
@@ -707,6 +713,70 @@ uint32_t CreatureEvent::executeMail(Player* player, Player* target, Item* item, 
 	else
 	{
 		std::clog << "[Error - CreatureEvent::executeMail] Call stack overflow." << std::endl;
+		return 0;
+	}
+}
+
+uint32_t CreatureEvent::executeChannelRequest(Player* player, const std::string& channel, bool isPrivate, bool custom)
+{
+	//onChannelRequest(cid, channel, custom)
+	if(m_interface->reserveEnv())
+	{
+		ScriptEnviroment* env = m_interface->getEnv();
+		if(m_scripted == EVENT_SCRIPT_BUFFER)
+		{
+			env->setRealPos(player->getPosition());
+			std::stringstream scriptstream;
+
+			scriptstream << "local cid = " << env->addThing(player) << std::endl;
+			if(!isPrivate)
+				scriptstream << "local channel = " << atoi(channel.c_str()) << std::endl;
+			else
+				scriptstream << "local channel = " << channel << std::endl;
+
+			scriptstream << "local custom = " << (custom ? "true" : "false") << std::endl;
+			if(m_scriptData)
+				scriptstream << *m_scriptData;
+
+			bool result = true;
+			if(m_interface->loadBuffer(scriptstream.str()))
+			{
+				lua_State* L = m_interface->getState();
+				result = m_interface->getGlobalBool(L, "_result", true);
+			}
+
+			m_interface->releaseEnv();
+			return result;
+		}
+		else
+		{
+			#ifdef __DEBUG_LUASCRIPTS__
+			char desc[35];
+			sprintf(desc, "%s", player->getName().c_str());
+			env->setEvent(desc);
+			#endif
+
+			env->setScriptId(m_scriptId, m_interface);
+			env->setRealPos(player->getPosition());
+
+			lua_State* L = m_interface->getState();
+			m_interface->pushFunction(m_scriptId);
+
+			lua_pushnumber(L, env->addThing(player));
+			if(!isPrivate)
+				lua_pushnumber(L, atoi(channel.c_str()));
+			else
+				lua_pushstring(L, channel.c_str());
+
+			lua_pushboolean(L, custom);
+			bool result = m_interface->callFunction(3);
+			m_interface->releaseEnv();
+			return result;
+		}
+	}
+	else
+	{
+		std::clog << "[Error - CreatureEvent::executeChannelRequest] Call stack overflow." << std::endl;
 		return 0;
 	}
 }

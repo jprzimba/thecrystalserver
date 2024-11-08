@@ -1994,29 +1994,29 @@ bool Items::loadSurpriseBags()
 bool Items::loadWallsItems()
 {
 	xmlDocPtr doc = xmlParseFile(getFilePath(FILE_TYPE_OTHER, "items/walls.xml").c_str());
-	if (!doc)
+	if(!doc)
 	{
 		std::clog << "[Warning - Items::loadWallsItems] Cannot load walls file." << std::endl;
 		return false;
 	}
 
 	xmlNodePtr root = xmlDocGetRootElement(doc);
-	if (xmlStrcmp(root->name, (const xmlChar*)"items"))
+	if(xmlStrcmp(root->name, (const xmlChar*)"items"))
 	{
 		xmlFreeDoc(doc);
 		std::clog << "[Warning - Items::loadWallsItems] Malformed walls file." << std::endl;
 		return false;
 	}
 
-	for (xmlNodePtr node = root->children; node; node = node->next)
+	for(xmlNodePtr node = root->children; node; node = node->next)
 	{
-		if (node->type != XML_ELEMENT_NODE || xmlStrcmp(node->name, (const xmlChar*)"item"))
+		if(node->type != XML_ELEMENT_NODE || xmlStrcmp(node->name, (const xmlChar*)"item"))
 			continue;
 
 		int32_t itemId = 0;
 		std::string type;
 
-		if (xmlHasProp(node, (const xmlChar*)"id") && xmlHasProp(node, (const xmlChar*)"type"))
+		if(xmlHasProp(node, (const xmlChar*)"id") && xmlHasProp(node, (const xmlChar*)"type"))
 		{
 			itemId = atoi((const char*)xmlGetProp(node, (const xmlChar*)"id"));
 			type = (const char*)xmlGetProp(node, (const xmlChar*)"type");
@@ -2116,7 +2116,7 @@ int32_t Items::getItemIdByName(const std::string& name)
 std::string Items::getChristmasItemType(uint16_t itemId)
 {
 	std::map<uint16_t, std::string>::iterator it = christmasItemTypes.find(itemId);
-	if (it != christmasItemTypes.end())
+	if(it != christmasItemTypes.end())
 		return it->second;
 
 	return "";

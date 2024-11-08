@@ -31,6 +31,7 @@ enum CreatureEventType_t
 	CREATURE_EVENT_SPAWN_GLOBAL,
 	CREATURE_EVENT_CHANNEL_JOIN,
 	CREATURE_EVENT_CHANNEL_LEAVE,
+	CREATURE_EVENT_CHANNEL_REQUEST,
 	CREATURE_EVENT_ADVANCE,
 	CREATURE_EVENT_LOOK,
 	CREATURE_EVENT_DIRECTION,
@@ -122,6 +123,7 @@ class CreatureEvent : public Event
 		uint32_t executeLogout(Player* player, bool forceLogout);
 		uint32_t executeSpawn(Monster* monster);
 		uint32_t executeChannel(Player* player, uint16_t channelId, UsersMap usersMap);
+		uint32_t executeChannelRequest(Player* player, const std::string& channel, bool isPrivate, bool custom);
 		uint32_t executeAdvance(Player* player, skills_t skill, uint32_t oldLevel, uint32_t newLevel);
 		uint32_t executeLook(Player* player, Thing* thing, const Position& position, int16_t stackpos, int32_t lookDistance);
 		uint32_t executeMail(Player* player, Player* target, Item* item, bool openBox);

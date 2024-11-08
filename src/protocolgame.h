@@ -99,7 +99,7 @@ class ProtocolGame : public Protocol
 		void parseFollow(NetworkMessage& msg);
 
 		void parseBugReport(NetworkMessage& msg);
-		void parseDebugAssert(NetworkMessage& msg);
+		void parseDebugAssert(NetworkMessage& msg);;
 
 		void parseThrow(NetworkMessage& msg);
 		void parseUseItemEx(NetworkMessage& msg);
@@ -148,6 +148,9 @@ class ProtocolGame : public Protocol
 		void parseOpenPrivate(NetworkMessage& msg);
 		void parseCloseChannel(NetworkMessage& msg);
 		void parseCloseNpc(NetworkMessage& msg);
+
+		//rule violation
+		void parseViolationWindow(NetworkMessage& msg)
 
 		//Send functions
 		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint16_t channel);
@@ -281,9 +284,6 @@ class ProtocolGame : public Protocol
 		void AddInventoryItem(NetworkMessage_ptr msg, slots_t slot, const Item* item);
 		void UpdateInventoryItem(NetworkMessage_ptr msg, slots_t slot, const Item* item);
 		void RemoveInventoryItem(NetworkMessage_ptr msg, slots_t slot);
-
-		//rule violation window
-		void parseViolationWindow(NetworkMessage& msg);
 
 		//shop
 		void AddShopItem(NetworkMessage_ptr msg, const ShopInfo& item);

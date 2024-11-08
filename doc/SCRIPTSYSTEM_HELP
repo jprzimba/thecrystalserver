@@ -57,8 +57,7 @@
 					push, target, follow,
 					attack, combat, areacombat, cast
 					kill, death, preparedeath,
-					channelrequest, reportviolation,
-					thankyou, houseedit, throw
+					channelrequest, houseedit, throw
 		Functions:
 			onLogin(cid)
 			onLogout(cid, forceLogout)
@@ -79,8 +78,6 @@
 			onTextEdit(cid, item, newText)
 			onHouseEdit(cid, house, list, text)
 			onReportBug(cid, comment)
-			onReportViolation(cid, type, reason, name, comment, translation, statementId)
-			onThankYou(cid, statementId)
 			onAreaCombat(cid, ground, position, aggressive)
 			onPush(cid, target, ground, position)
 			onTarget(cid, target)

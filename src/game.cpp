@@ -2357,6 +2357,7 @@ bool Game::playerRequestChannels(uint32_t playerId)
 		return false;
 
 	player->sendChannelsDialog();
+	player->setSentChat(true);
 	return true;
 }
 
@@ -2364,6 +2365,18 @@ bool Game::playerOpenChannel(uint32_t playerId, uint16_t channelId)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
+		return false;
+
+	bool deny = false;
+	CreatureEventList openEvents = player->getCreatureEvents(CREATURE_EVENT_CHANNEL_REQUEST);
+	for(CreatureEventList::iterator it = openEvents.begin(); it != openEvents.end(); ++it)
+	{
+		if(!(*it)->executeChannelRequest(player, asString(channelId), false, !player->hasSentChat()) && !deny)
+			deny = true;
+	}
+
+	player->setSentChat(false);
+	if(deny)
 		return false;
 
 	ChatChannel* channel = g_chat.addUserToChannel(player, channelId);
@@ -2393,6 +2406,18 @@ bool Game::playerOpenPrivateChannel(uint32_t playerId, std::string& receiver)
 {
 	Player* player = getPlayerByID(playerId);
 	if(!player || player->isRemoved())
+		return false;
+
+	bool deny = false;
+	CreatureEventList openEvents = player->getCreatureEvents(CREATURE_EVENT_CHANNEL_REQUEST);
+	for(CreatureEventList::iterator it = openEvents.begin(); it != openEvents.end(); ++it)
+	{
+		if(!(*it)->executeChannelRequest(player, receiver, true, !player->hasSentChat()) && !deny)
+			deny = true;
+	}
+
+	player->setSentChat(false);
+	if(deny)
 		return false;
 
 	if(IOLoginData::getInstance()->playerExists(receiver))
@@ -6344,9 +6369,9 @@ void Game::showHotkeyUseMessage(Player* player, Item* item)
 uint16_t Game::wallType(uint16_t id)
 {
 	std::string itemType = Item::items.getChristmasItemType(id);
-	if (itemType == "vertical")
+	if(itemType == "vertical")
 		return 1;
-	else if (itemType == "horizontal")
+	else if(itemType == "horizontal")
 		return 2;
 
 	return 0;

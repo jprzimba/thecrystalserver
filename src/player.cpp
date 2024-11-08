@@ -53,7 +53,7 @@ Player::Player(const std::string& _name, ProtocolGame* p):
 	if(client)
 		p->setPlayer(this);
 
-	pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = outfitAttributes = false;
+	pzLocked = isConnecting = addAttackSkillPoint = requestedOutfit = outfitAttributes = sentChat = false;
 	saving = true;
 
 	lastAttackBlockType = BLOCK_NONE;

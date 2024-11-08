@@ -364,6 +364,9 @@ class Player : public Creature, public Cylinder
 
 		virtual bool canSeeInvisibility() const {return hasFlag(PlayerFlag_CanSenseInvisibility);}
 
+		bool hasSentChat() const {return sentChat;}
+		void setSentChat(bool sending) {sentChat = sending;}
+
 		virtual RaceType_t getRace() const {return RACE_BLOOD;}
 
 		//safe-trade functions
@@ -822,6 +825,7 @@ class Player : public Creature, public Cylinder
 		bool requestedOutfit;
 		bool outfitAttributes;
 		bool addAttackSkillPoint;
+		bool sentChat;
 
 		OperatingSystem_t operatingSystem;
 		AccountManager_t accountManager;
