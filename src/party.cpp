@@ -212,12 +212,20 @@ bool Party::invitePlayer(Player* player)
 	inviteList.push_back(player);
 	player->addPartyInvitation(this);
 
-	char buffer[150];
-	sprintf(buffer, "%s has been invited.%s", player->getName().c_str(), (!memberList.size() ? " Open the party channel to communicate with your members." : ""));
-	leader->sendTextMessage(MSG_INFO_DESCR, buffer);
+	std::ostringstream ss;
+	ss << player->getName() << " has been invited.";
+	if(memberList.empty()) {
+		ss << " Open the party channel to communicate with your members.";
+	}
+	leader->sendTextMessage(MSG_INFO_DESCR, ss.str());
 
-	sprintf(buffer, "%s has invited you to %s party.", leader->getName().c_str(), (leader->getSex(false) ? "his" : "her"));
-	player->sendTextMessage(MSG_INFO_DESCR, buffer);
+	ss.str("");
+	ss << leader->getName() << " has invited you to " << (leader->getSex(false) ? "his" : "her") << " party.";
+	
+	if(g_config.getBool(ConfigManager::SHOW_PARTY_RANGE_LEVEL))
+		ss << " (Share range: " << getMinLevel() << " to " << getMaxLevel() << ").";
+
+	player->sendTextMessage(MSG_INFO_DESCR, ss.str());
 
 	leader->sendPlayerIcons(player);
 	player->sendPlayerIcons(leader);
@@ -334,20 +342,53 @@ void Party::shareExperience(double experience, Creature* target, bool multiplied
 	}
 }
 
+uint32_t Party::getHighestLevel() const
+{
+	if(!leader)
+		return 0;
+
+	uint32_t highestLevel = leader->getLevel();
+	for(PlayerVector::const_iterator it = memberList.begin(); it != memberList.end(); ++it)
+	{
+		if((*it)->getLevel() > highestLevel)
+			highestLevel = (*it)->getLevel();
+	}
+
+	return highestLevel;
+}
+
+uint32_t Party::getLowestLevel() const
+{
+	if(!leader)
+		return 0;
+
+	uint32_t lowestLevel = leader->getLevel();
+	for(PlayerVector::const_iterator it = memberList.begin(); it != memberList.end(); ++it)
+	{
+		if((*it)->getLevel() < lowestLevel)
+			lowestLevel = (*it)->getLevel();
+	}
+
+	return lowestLevel;
+}
+
+uint32_t Party::getMinLevel()
+{
+	return static_cast<uint32_t>(std::ceil(static_cast<float>(getHighestLevel()) / 1.5));
+}
+
+uint32_t Party::getMaxLevel()
+{
+	return static_cast<uint32_t>(std::floor(static_cast<float>(getLowestLevel()) * 1.5));
+}
+
 bool Party::canUseSharedExperience(const Player* player, uint32_t highestLevel/* = 0*/) const
 {
 	if(!player || player->isRemoved() || !memberList.size())
 		return false;
 
 	if(!highestLevel)
-	{
-		highestLevel = leader->getLevel();
-		for(PlayerVector::const_iterator it = memberList.begin(); it != memberList.end(); ++it)
-		{
-			if((*it)->getLevel() > highestLevel)
-				highestLevel = (*it)->getLevel();
-		}
-	}
+		 highestLevel = getHighestLevel();
 
 	if(player->getLevel() < (uint32_t)std::ceil((double)highestLevel * g_config.getDouble(
 		ConfigManager::PARTY_DIFFERENCE)) || !Position::areInRange(Position(
@@ -366,13 +407,7 @@ bool Party::canEnableSharedExperience()
 	if(!memberList.size())
 		return false;
 
-	uint32_t highestLevel = leader->getLevel();
-	for(PlayerVector::iterator it = memberList.begin(); it != memberList.end(); ++it)
-	{
-		if((*it)->getLevel() > highestLevel)
-			highestLevel = (*it)->getLevel();
-	}
-
+	uint32_t highestLevel = getHighestLevel();
 	for(PlayerVector::iterator it = memberList.begin(); it != memberList.end(); ++it)
 	{
 		if(!canUseSharedExperience((*it), highestLevel))

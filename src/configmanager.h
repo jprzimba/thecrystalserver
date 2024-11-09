@@ -321,6 +321,7 @@ class ConfigManager
 			USABLE_POTIONS_ON_TARGET,
 			ENABLE_FREE_TRAVEL,
 			SHOW_ITEM_DESCRIPTION,
+			SHOW_PARTY_RANGE_LEVEL,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

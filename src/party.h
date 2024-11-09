@@ -64,6 +64,11 @@ class Party
 		bool isPlayerInvited(const Player* player, bool result = false) const;
 		bool canOpenCorpse(uint32_t ownerId);
 
+		uint32_t getHighestLevel() const;
+		uint32_t getLowestLevel() const;
+		uint32_t getMinLevel();
+		uint32_t getMaxLevel();
+
 	protected:
 		bool canEnableSharedExperience();
 

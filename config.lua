@@ -362,6 +362,7 @@
 	-- NOTE: experienceShareLevelDifference is float number.
 	-- experienceShareLevelDifference is highestLevel * value
 	enablePartyAutoShareExperience = true
+	showPartyRangeLevel = true
 	experienceShareRadiusX = 30
 	experienceShareRadiusY = 30
 	experienceShareRadiusZ = 1

@@ -68,6 +68,7 @@
 				!showloot show your desired loot list.
 				!clearloot clear your desired loot list.
 			Auto-enable shared experience is configurable in config.lua with enablePartyAutoShareExperience. (Tryller)
+			Show party range level configurable in config.lua: showPartyRangeLevel. (Tryller)
 			Updated the /pos talkaction to work with /pos 438, 503, 8 or /pos {x = 438, y = 503, z = 8} for compatibility with RME. (Tryller)
 			New talkaction function: /ban playerName or /ban player, 7 to set the number of ban days. (Tryller)
 			New configs in config.lua: useRunesRequirements, allowBlockSpawn, bedsRegenPlayer. (Tryller)
