@@ -1,7 +1,7 @@
 [Project]
 FileName=crystalserver.dev
 Name=Crystal Server
-UnitCount=160
+UnitCount=154
 Type=1
 Ver=1
 ObjFiles=
@@ -12,7 +12,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=-D__USE_MYSQL___@@_-D__USE_SQLITE___@@_-D__USE_DEVCPP___@@_-O3_@@_
-Linker=-lboost_system_@@_-llua5.1_@@_-lmysql_@@_-lboost_regex_@@_-lsqlite3_@@_-lwsock32_@@_-lxml2_@@_-lmysql_@@_-lgmp_@@_-lws2_32_@@_-lboost_filesystem_@@_-lboost_thread_@@_-s_@@_
+Linker=-lboost_system_@@_-llua5.1_@@_-lmysql_@@_-lboost_regex_@@_-lsqlite3_@@_-lwsock32_@@_-lxml2_@@_-lmysql_@@_-lws2_32_@@_-lboost_filesystem_@@_-lboost_thread_@@_-lcryptopp_@@_-leay32_@@_-s_@@_-m64_@@_
 IsCpp=1
 Icon=crystalserver.ico
 ExeOutput=..\..\..\thecrystalserver
@@ -1488,7 +1488,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit155]
-FileName=..\md5.cpp
+FileName=..\waitlist.h
 CompileCpp=1
 Folder=Crystal Server
 Compile=1
@@ -1498,7 +1498,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit156]
-FileName=..\md5.h
+FileName=..\waypoints.h
 CompileCpp=1
 Folder=Crystal Server
 Compile=1
@@ -1508,7 +1508,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit157]
-FileName=..\rsa.cpp
+FileName=..\weapons.cpp
 CompileCpp=1
 Folder=Crystal Server
 Compile=1
@@ -1548,7 +1548,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit158]
-FileName=..\rsa.h
+FileName=..\weapons.h
 CompileCpp=1
 Folder=Crystal Server
 Compile=1
@@ -1558,7 +1558,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit159]
-FileName=..\sha1.cpp
+FileName=..\weapons.cpp
 CompileCpp=1
 Folder=Crystal Server
 Compile=1
@@ -1568,7 +1568,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit160]
-FileName=..\sha1.h
+FileName=..\weapons.h
 CompileCpp=1
 Folder=Crystal Server
 Compile=1

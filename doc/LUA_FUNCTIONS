@@ -1012,6 +1012,8 @@
 	std.cerr(...)
 	std.md5(string[, upperCase = false])
 	std.sha1(string[, upperCase = false])
+	std.sha256(string[, upperCase = false])
+	std.sha512(string[, upperCase = false])
 	std.vahash(string[, upperCase = false])
 
 	//os table

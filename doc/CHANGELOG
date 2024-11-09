@@ -40,6 +40,7 @@
 			War system. (Elf, Tryller)
 			Skull system. (OpenTibia, Elf, Tryller)
 			Auto stacking items. (Elf)
+			MD5, SHA1 and RSA implementations improved using OpenSSL (Dalkon)
 			LuaJIT support, up to 130 times faster Lua scripts (Talaturen, Elf)
 			A lot of Lua stack errors fixed (Elf, Talaturen)
 			Lua function doRelocate is now approximately 100 times faster (Elf)

@@ -469,8 +469,8 @@
 		encryptionType
 			Encryption method used to store passwords (and other sensitive data) safely in the database.
 				WARNING: Using plain passwords is not recommended and may lead to serious data leakage.
-			Values: md5, sha1, plain
-			Default: sha1
+			Values: md5, sha1, sha256, sha512, plain
+			Default: sha256
 
 	*DEATHLIST
 		deathListEnabled

@@ -22,12 +22,12 @@ endif
 
 SRC = weapons.cpp waitlist.cpp vocation.cpp trashholder.cpp tools.cpp \
 	tile.cpp thing.cpp textlogger.cpp teleport.cpp talkaction.cpp \
-	status.cpp spells.cpp spawn.cpp sha1.cpp server.cpp scriptmanager.cpp \
-	scheduler.cpp rsa.cpp raids.cpp quests.cpp protocolold.cpp protocollogin.cpp \
+	status.cpp spells.cpp spawn.cpp server.cpp scriptmanager.cpp \
+	scheduler.cpp raids.cpp quests.cpp protocolold.cpp protocollogin.cpp \
 	protocolgame.cpp protocol.cpp position.cpp player.cpp \
 	party.cpp outputmessage.cpp outfit.cpp otserv.cpp npc.cpp \
 	networkmessage.cpp movement.cpp monsters.cpp monster.cpp \
-	md5.cpp map.cpp manager.cpp mailbox.cpp luascript.cpp items.cpp \
+	map.cpp manager.cpp mailbox.cpp luascript.cpp items.cpp \
 	itemattributes.cpp item.cpp iomapserialize.cpp iomap.cpp \
 	iologindata.cpp ioguild.cpp ioban.cpp housetile.cpp house.cpp group.cpp \
 	globalevent.cpp gameservers.cpp game.cpp fileloader.cpp exception.cpp \
