@@ -110,7 +110,7 @@ class ProtocolManager : public Protocol
 			m_loginTries = m_lastCommand = m_channels = 0;
 			m_startTime = time(NULL);
 		}
-		virtual ~ProtocolManager(){}
+		virtual ~ProtocolManager() {}
 
 		enum {protocolId = 0xFD};
 		enum {isSingleSocket = false};

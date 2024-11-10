@@ -53,7 +53,7 @@ class Towns
 		bool addTown(uint32_t townId, Town* town)
 		{
 			TownMap::iterator it = townMap.find(townId);
-			if(it != townMap.end())
+			if (it != townMap.end())
 				return false;
 
 			townMap[townId] = town;
@@ -62,9 +62,9 @@ class Towns
 
 		Town* getTown(const std::string& townName)
 		{
-			for(TownMap::iterator it = townMap.begin(); it != townMap.end(); ++it)
+			for (TownMap::iterator it = townMap.begin(); it != townMap.end(); ++it)
 			{
-				if(boost::algorithm::iequals(it->second->getName(), townName))
+				if (boost::algorithm::iequals(it->second->getName(), townName))
 					return it->second;
 			}
 
@@ -74,7 +74,7 @@ class Towns
 		Town* getTown(uint32_t townId)
 		{
 			TownMap::iterator it = townMap.find(townId);
-			if(it != townMap.end())
+			if (it != townMap.end())
 				return it->second;
 
 			return NULL;

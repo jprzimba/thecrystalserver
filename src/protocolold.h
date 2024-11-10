@@ -25,8 +25,8 @@ class ProtocolOld : public Protocol
 	public:
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
-		ProtocolOld(Connection_ptr connection): Protocol(connection){}
-		virtual ~ProtocolOld(){}
+		ProtocolOld(Connection_ptr connection): Protocol(connection) {}
+		virtual ~ProtocolOld() {}
 
 		enum {isSingleSocket = false};
 		enum {hasChecksum = false};

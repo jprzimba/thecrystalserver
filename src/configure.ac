@@ -21,13 +21,6 @@ AC_ARG_ENABLE(login-server, [  --enable-login-server		enable login server mode],
 	loginServer=yes
 )
 
-# check if we want otserv allocator enabled
-otservAllocator=no
-AC_ARG_ENABLE(otserv-allocator, [  --enable-otserv-allocator	enable otserv custom allocator],
-	[OPTIONAL_FLAGS="$OPTIONAL_FLAGS -D__OTSERV_ALLOCATOR__"]
-	otservAllocator=yes
-)
-
 # check if we want homedir conf enabled
 homedirConf=no
 AC_ARG_ENABLE(homedir-conf, [  --enable-homedir-conf		enable home directory configuration],
@@ -240,7 +233,6 @@ echo Home-directory configuration : $homedirConf
 echo Root run permission......... : $rootPermission
 echo Login server mode........... : $loginServer
 echo OTAdmin protocol............ : $otAdmin
-echo OTServ custom allocator..... : $otservAllocator
 echo Debug build................. : $debugBuild
 echo
 echo Build with MySQL............ : $useMySQL

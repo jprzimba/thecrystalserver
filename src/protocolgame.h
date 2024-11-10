@@ -45,7 +45,7 @@ class ProtocolGame : public Protocol
 			m_eventConnect = 0;
 			m_debugAssertSent = m_acceptPackets = false;
 		}
-		virtual ~ProtocolGame(){}
+		virtual ~ProtocolGame() {}
 
 		enum {protocolId = 0x0A};
 		enum {isSingleSocket = true};

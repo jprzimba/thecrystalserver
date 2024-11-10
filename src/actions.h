@@ -25,8 +25,7 @@
 class Action;
 class Container;
 
-enum ActionType_t
-{
+enum ActionType_t {
 	ACTION_ANY,
 	ACTION_UNIQUEID,
 	ACTION_ACTIONID,
@@ -92,14 +91,23 @@ class Action : public Event
 		virtual bool configureEvent(xmlNodePtr p);
 
 		//scripting
-		virtual bool executeUse(Player* player, Item* item, const PositionEx& posFrom,
-			const PositionEx& posTo, bool extendedUse, uint32_t creatureId);
+		virtual bool executeUse(Player* player, Item* item, const PositionEx& posFrom, const PositionEx& posTo, bool extendedUse, uint32_t creatureId);
 
-		bool getAllowFarUse() const {return allowFarUse;}
-		void setAllowFarUse(bool v) {allowFarUse = v;}
+		bool getAllowFarUse() const {
+			return allowFarUse;
+		}
 
-		bool getCheckLineOfSight() const {return checkLineOfSight;}
-		void setCheckLineOfSight(bool v) {checkLineOfSight = v;}
+		void setAllowFarUse(bool v) {
+			allowFarUse = v;
+		}
+
+		bool getCheckLineOfSight() const {
+			return checkLineOfSight;
+		}
+
+		void setCheckLineOfSight(bool v) {
+			checkLineOfSight = v;
+		}
 
 		virtual ReturnValue canExecuteAction(const Player* player, const Position& pos);
 		virtual bool hasOwnErrorHandler() {return false;}

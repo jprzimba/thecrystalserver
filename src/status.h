@@ -39,8 +39,8 @@ class ProtocolStatus : public Protocol
 	public:
 		virtual void onRecvFirstMessage(NetworkMessage& msg);
 
-		ProtocolStatus(Connection_ptr connection): Protocol(connection){}
-		virtual ~ProtocolStatus(){}
+		ProtocolStatus(Connection_ptr connection): Protocol(connection) {}
+		virtual ~ProtocolStatus() {}
 
 		enum {protocolId = 0xFF};
 		enum {isSingleSocket = false};

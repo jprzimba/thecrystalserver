@@ -33,7 +33,7 @@ void ProtocolOld::deleteProtocolTask()
 #endif
 void ProtocolOld::disconnectClient(const std::string& message)
 {
-	if(OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
+	if (OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
 	{
 		TRACK_MESSAGE(output);
 		output->put<char>(0x0A);
@@ -46,7 +46,7 @@ void ProtocolOld::disconnectClient(const std::string& message)
 
 void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 {
-	if(g_game.getGameState() == GAMESTATE_SHUTDOWN)
+	if (g_game.getGameState() == GAMESTATE_SHUTDOWN)
 	{
 		getConnection()->close();
 		return;
@@ -54,10 +54,10 @@ void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 
 	uint16_t version = msg.get<uint16_t>();
 	msg.skip(12);
-	if(version <= 760)
+	if (version <= 760)
 		disconnectClient(CLIENT_VERSION_STRING);
 
-	if(!RSA_decrypt(msg))
+	if (!RSA_decrypt(msg))
 	{
 		getConnection()->close();
 		return;
@@ -67,7 +67,7 @@ void ProtocolOld::onRecvFirstMessage(NetworkMessage& msg)
 	enableXTEAEncryption();
 	setXTEAKey(key);
 
-	if(version <= 822)
+	if (version <= 822)
 		disableChecksum();
 
 	disconnectClient(CLIENT_VERSION_STRING);

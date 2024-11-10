@@ -34,13 +34,25 @@ class BedItem : public Item
 		virtual Attr_ReadValue readAttr(AttrTypes_t attr, PropStream& propStream);
 		virtual bool serializeAttr(PropWriteStream& propWriteStream) const;
 
-		virtual bool canRemove() const {return house != NULL;}
+		virtual bool canRemove() const {
+			return house != NULL;
+		}
 
-		uint32_t getSleeper() const {return sleeper;}
-		void setSleeper(uint32_t guid) {sleeper = guid;}
+		uint32_t getSleeper() const {
+			return sleeper;
+		}
 
-		House* getHouse() const {return house;}
-		void setHouse(House* h) {house = h;}
+		void setSleeper(uint32_t guid) {
+			sleeper = guid;
+		}
+
+		House* getHouse() const {
+			return house;
+		}
+	
+		void setHouse(House* h) {
+			house = h;
+		}
 
 		bool canUse(Player* player);
 
@@ -64,17 +76,20 @@ class Beds
 {
 	public:
 		virtual ~Beds() {}
-		static Beds* getInstance()
-		{
+		static Beds* getInstance() {
 			static Beds instance;
 			return &instance;
 		}
 
 		BedItem* getBedBySleeper(uint32_t guid);
-		void setBedSleeper(BedItem* bed, uint32_t guid) {BedSleepersMap[guid] = bed;}
+		void setBedSleeper(BedItem* bed, uint32_t guid) {
+			BedSleepersMap[guid] = bed;
+		}
 
 	protected:
-		Beds() {BedSleepersMap.clear();}
+		Beds() {
+			BedSleepersMap.clear();
+		}
 		std::map<uint32_t, BedItem*> BedSleepersMap;
 };
 #endif

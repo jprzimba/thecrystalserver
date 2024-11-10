@@ -38,7 +38,9 @@ class Waypoints
 		// Does not require either constructor nor destructor
 		inline void addWaypoint(WaypointPtr waypoint);
 		WaypointPtr getWaypointByName(const std::string& name) const;
-		const WaypointMap& getWaypointsMap() const {return waypoints;}
+		const WaypointMap& getWaypointsMap() const {
+			return waypoints;
+		}
 
 	protected:
 		WaypointMap waypoints;
@@ -49,11 +51,13 @@ inline void Waypoints::addWaypoint(WaypointPtr waypoint)
 {
 	waypoints[waypoint->name] = waypoint;
 }
+
 inline WaypointPtr Waypoints::getWaypointByName(const std::string& name) const
 {
 	WaypointMap::const_iterator it = waypoints.find(name);
-	if(it != waypoints.end())
+	if (it != waypoints.end()) {
 		return it->second;
+	}
 
 	return WaypointPtr();
 }
