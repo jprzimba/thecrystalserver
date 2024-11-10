@@ -191,7 +191,7 @@
 
 	-- Map
 	-- NOTE: storeTrash costs more memory, but will perform alot faster cleaning.
-	mapName = "world.otbm"
+	mapName = "world"
 	mapAuthor = "SadSoul Team"
 	randomizeTiles = true
 	storeTrash = true

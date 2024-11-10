@@ -301,16 +301,24 @@ void Game::saveGameState(uint8_t flags)
 		<< " house storage." << std::endl;
 }
 
-int32_t Game::loadMap(std::string filename)
+bool Game::loadMainMap(const std::string& filename)
 {
 	if(!map)
 		map = new Map;
 
-	std::string file = getFilePath(FILE_TYPE_CONFIG, "world/" + filename);
+	std::string file = getFilePath(FILE_TYPE_CONFIG, "world/" + filename + ".otbm");
 	if(!fileExists(file.c_str()))
-		file = getFilePath(FILE_TYPE_OTHER, "world/" + filename);
+		file = getFilePath(FILE_TYPE_OTHER, "world/" + filename + ".otbm");
 
-	return map->loadMap(file);
+	return  map->loadMap(file, true);
+}
+
+void Game::loadMap(const std::string& path)
+{
+	if(!map)
+		map = new Map;
+
+	 map->loadMap(path, false);
 }
 
 void Game::cleanMapEx(uint32_t& count)

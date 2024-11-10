@@ -664,7 +664,7 @@ void otserv(StringVec, ServiceManager* services)
 	Raids::getInstance()->loadFromXml();
 
 	std::clog << "Loading map and spawns..." << std::endl;
-	if(!g_game.loadMap(g_config.getString(ConfigManager::MAP_NAME)))
+	if(!g_game.loadMainMap(g_config.getString(ConfigManager::MAP_NAME)))
 		startupErrorMessage();
 
 	std::clog << "Checking world type... ";

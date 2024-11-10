@@ -154,12 +154,8 @@ class Game
 		void prepareGlobalSave(uint8_t minutes);
 		void globalSave();
 
-		/**
-		  * Load a map.
-		  * \param filename Mapfile to load
-		  * \returns int32_t 0 built-in spawns, 1 needs xml spawns, 2 needs sql spawns, -1 if got error
-		  */
-		int32_t loadMap(std::string filename);
+		bool loadMainMap(const std::string& filename);
+		void loadMap(const std::string& path);
 
 		/**
 		  * Get the map size - info purpose only
