@@ -162,10 +162,6 @@ bool argumentsHandler(StringVec args)
 		else if(tmp[0] == "--daemon" || tmp[0] == "-d")
 			g_config.setBool(ConfigManager::DAEMONIZE, true);
 #endif
-		else if(tmp[0] == "--closed")
-			g_config.setBool(ConfigManager::START_CLOSED, true);
-		else if(tmp[0] == "--no-script" || tmp[0] == "--noscript")
-			g_config.setBool(ConfigManager::SCRIPT_SYSTEM, false);
 	}
 
 	return true;
@@ -610,14 +606,9 @@ void otserv(StringVec, ServiceManager* services)
 	if(!g_chat.loadFromXml())
 		startupErrorMessage("Unable to load chat channels!");
 
-	if(g_config.getBool(ConfigManager::SCRIPT_SYSTEM))
-	{
-		std::clog << "Loading script systems" << std::endl;
-		if(!ScriptManager::getInstance()->loadSystem())
-			startupErrorMessage();
-	}
-	else
-		ScriptManager::getInstance();
+	std::clog << "Loading script systems" << std::endl;
+	if(!ScriptManager::getInstance()->loadSystem())
+		startupErrorMessage();
 
 	#ifdef __LOGIN_SERVER__
 	std::clog << "Loading game servers" << std::endl;
@@ -683,8 +674,7 @@ void otserv(StringVec, ServiceManager* services)
 		startupErrorMessage("Unknown world type: " + g_config.getString(ConfigManager::WORLD_TYPE));
 	}
 
-	std::clog << "Starting to dominate the world... done." << std::endl
-		<< "Initializing game state and binding services..." << std::endl;
+	std::clog << "Initializing game state and binding services..." << std::endl;
 	g_game.setGameState(GAMESTATE_INIT);
 	IPAddressList ipList;
 
@@ -774,6 +764,6 @@ void otserv(StringVec, ServiceManager* services)
 
 	std::clog << std::endl << "Everything smells good, server is starting up..." << std::endl;
 	g_game.start(services);
-	g_game.setGameState(g_config.getBool(ConfigManager::START_CLOSED) ? GAMESTATE_CLOSED : GAMESTATE_NORMAL);
+	g_game.setGameState(GAMESTATE_NORMAL);
 	g_loaderSignal.notify_all();
 }

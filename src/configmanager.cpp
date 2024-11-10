@@ -32,8 +32,7 @@ ConfigManager::ConfigManager()
 
 	m_confNumber[LOGIN_PORT] = m_confNumber[MANAGER_PORT] = m_confNumber[STATUS_PORT] = 0;
 	m_confString[DATA_DIRECTORY] = m_confString[LOGS_DIRECTORY] = m_confString[IP] = m_confString[RUNFILE] = m_confString[OUTPUT_LOG] = "";
-	m_confBool[LOGIN_ONLY_LOGINSERVER] = m_confBool[START_CLOSED] = m_confBool[DAEMONIZE] = false;
-	m_confBool[SCRIPT_SYSTEM] = true;
+	m_confBool[LOGIN_ONLY_LOGINSERVER] = m_confBool[DAEMONIZE] = false;
 }
 
 bool ConfigManager::load()
