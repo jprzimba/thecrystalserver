@@ -28,13 +28,13 @@ bool DatabaseManager::optimizeTables()
 {
 	Database* db = Database::getInstance();
 	DBQuery query;
-	switch (db->getDatabaseEngine())
+	switch(db->getDatabaseEngine())
 	{
 		case DATABASE_ENGINE_MYSQL:
 		{
 			query << "SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = " << db->escapeString(g_config.getString(ConfigManager::SQL_DB)) << " AND `DATA_FREE` > 0;";
 			DBResult* result;
-			if (!(result = db->storeQuery(query.str())))
+			if(!(result = db->storeQuery(query.str())))
 				break;
 
 			query.str("");
@@ -42,14 +42,14 @@ bool DatabaseManager::optimizeTables()
 			{
 				std::clog << "Optimizing table: " << result->getDataString("TABLE_NAME") << "... ";
 				query << "OPTIMIZE TABLE `" << result->getDataString("TABLE_NAME") << "`;";
-				if (db->query(query.str()))
+				if(db->query(query.str()))
 					std::clog << "[success]" << std::endl;
 				else
 					std::clog << "[failure]" << std::endl;
 
 				query.str("");
 			}
-			while (result->next());
+			while(result->next());
 
 			result->free();
 			return true;
@@ -57,7 +57,7 @@ bool DatabaseManager::optimizeTables()
 
 		case DATABASE_ENGINE_SQLITE:
 		{
-			if (!db->query("VACUUM;"))
+			if(!db->query("VACUUM;"))
 				break;
 
 			std::clog << "Optimized database." << std::endl;
@@ -75,7 +75,7 @@ bool DatabaseManager::triggerExists(std::string trigger)
 {
 	Database* db = Database::getInstance();
 	DBQuery query;
-	switch (db->getDatabaseEngine())
+	switch(db->getDatabaseEngine())
 	{
 		case DATABASE_ENGINE_SQLITE:
 			query << "SELECT `name` FROM `sqlite_master` WHERE `type` = 'trigger' AND `name` = " << db->escapeString(trigger) << ";";
@@ -91,7 +91,7 @@ bool DatabaseManager::triggerExists(std::string trigger)
 	}
 
 	DBResult* result;
-	if (!(result = db->storeQuery(query.str())))
+	if(!(result = db->storeQuery(query.str())))
 		return false;
 
 	result->free();
@@ -102,7 +102,7 @@ bool DatabaseManager::tableExists(std::string table)
 {
 	Database* db = Database::getInstance();
 	DBQuery query;
-	switch (db->getDatabaseEngine())
+	switch(db->getDatabaseEngine())
 	{
 		case DATABASE_ENGINE_SQLITE:
 			query << "SELECT `name` FROM `sqlite_master` WHERE `type` = 'table' AND `name` = " << db->escapeString(table) << ";";
@@ -117,7 +117,7 @@ bool DatabaseManager::tableExists(std::string table)
 	}
 
 	DBResult* result;
-	if (!(result = db->storeQuery(query.str())))
+	if(!(result = db->storeQuery(query.str())))
 		return false;
 
 	result->free();
@@ -127,7 +127,7 @@ bool DatabaseManager::tableExists(std::string table)
 bool DatabaseManager::isDatabaseSetup()
 {
 	Database* db = Database::getInstance();
-	switch (db->getDatabaseEngine())
+	switch(db->getDatabaseEngine())
 	{
 		case DATABASE_ENGINE_MYSQL:
 		{
@@ -135,7 +135,7 @@ bool DatabaseManager::isDatabaseSetup()
 			query << "SELECT `TABLE_NAME` FROM `information_schema`.`tables` WHERE `TABLE_SCHEMA` = " << db->escapeString(g_config.getString(ConfigManager::SQL_DB)) << ";";
 
 			DBResult* result;
-			if (!(result = db->storeQuery(query.str())))
+			if(!(result = db->storeQuery(query.str())))
 				return false;
 
 			result->free();
@@ -155,11 +155,11 @@ bool DatabaseManager::isDatabaseSetup()
 
 int32_t DatabaseManager::getDatabaseVersion()
 {
-	if (!tableExists("server_config"))
+	if(!tableExists("server_config"))
 		return 0;
 
 	int32_t value = 0;
-	if (getDatabaseConfig("db_version", value))
+	if(getDatabaseConfig("db_version", value))
 		return value;
 
 	return 1;
@@ -169,7 +169,7 @@ uint32_t DatabaseManager::updateDatabase()
 {
 	Database* db = Database::getInstance();
 	uint32_t version = getDatabaseVersion();
-	if (version < 0)
+	if(version < 0)
 	{
 		std::clog << "WARNING: Couldn't update database." << std::endl;
 		registerDatabaseConfig("db_version", 0);
@@ -177,7 +177,7 @@ uint32_t DatabaseManager::updateDatabase()
 	}
 
 	DBQuery query;
-	switch (version)
+	switch(version)
 	{
 		case 0:
 		{
@@ -189,7 +189,7 @@ uint32_t DatabaseManager::updateDatabase()
 		case 1:
 		{
 			std::clog << "Updating database to version: 2 (Auto Loot)." << std::endl;
-			if (db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
+			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "CREATE TABLE IF NOT EXISTS `player_autoloot` ("
 				"`id` INT NOT NULL AUTO_INCREMENT, "
@@ -217,7 +217,7 @@ uint32_t DatabaseManager::updateDatabase()
 		case 2:
 		{
 			std::clog << "Updating database to version: 3 (Auto Loot with Container ID)." << std::endl;
-			if (db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
+			if(db->getDatabaseEngine() == DATABASE_ENGINE_MYSQL)
 			{
 				query << "ALTER TABLE `player_autoloot` "
 					"ADD COLUMN `containerid` INT NOT NULL DEFAULT 0 AFTER`itemid`;";
@@ -266,7 +266,7 @@ bool DatabaseManager::getDatabaseConfig(std::string config, int32_t &value)
 
 	DBQuery query;
 	query << "SELECT `value` FROM `server_config` WHERE `config` = " << db->escapeString(config) << ";";
-	if (!(result = db->storeQuery(query.str())))
+	if(!(result = db->storeQuery(query.str())))
 		return false;
 
 	value = atoi(result->getDataString("value").c_str());
@@ -283,7 +283,7 @@ bool DatabaseManager::getDatabaseConfig(std::string config, std::string &value)
 
 	DBQuery query;
 	query << "SELECT `value` FROM `server_config` WHERE `config` = " << db->escapeString(config) << ";";
-	if (!(result = db->storeQuery(query.str())))
+	if(!(result = db->storeQuery(query.str())))
 		return false;
 
 	value = result->getDataString("value");
@@ -297,7 +297,7 @@ void DatabaseManager::registerDatabaseConfig(std::string config, int32_t value)
 	DBQuery query;
 
 	int32_t tmp = 0;
-	if (!getDatabaseConfig(config, tmp))
+	if(!getDatabaseConfig(config, tmp))
 		query << "INSERT INTO `server_config` VALUES (" << db->escapeString(config) << ", '" << value << "');";
 	else
 		query << "UPDATE `server_config` SET `value` = '" << value << "' WHERE `config` = " << db->escapeString(config) << ";";
@@ -311,7 +311,7 @@ void DatabaseManager::registerDatabaseConfig(std::string config, std::string val
 	DBQuery query;
 
 	std::string tmp;
-	if (!getDatabaseConfig(config, tmp))
+	if(!getDatabaseConfig(config, tmp))
 		query << "INSERT INTO `server_config` VALUES (" << db->escapeString(config) << ", " << db->escapeString(value) << ");";
 	else
 		query << "UPDATE `server_config` SET `value` = " << db->escapeString(value) << " WHERE `config` = " << db->escapeString(config) << ";";
@@ -323,15 +323,15 @@ void DatabaseManager::checkEncryption()
 {
 	Encryption_t newValue = (Encryption_t)g_config.getNumber(ConfigManager::ENCRYPTION);
 	int32_t value = (int32_t)ENCRYPTION_PLAIN;
-	if (getDatabaseConfig("encryption", value))
+	if(getDatabaseConfig("encryption", value))
 	{
-		if (newValue != (Encryption_t)value)
+		if(newValue != (Encryption_t)value)
 		{
-			switch (newValue)
+			switch(newValue)
 			{
 				case ENCRYPTION_MD5:
 				{
-					if ((Encryption_t)value != ENCRYPTION_PLAIN)
+					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
 						std::clog << "WARNING: You cannot change the encryption to MD5, change it back in config.lua." << std::endl;
 						return;
@@ -339,17 +339,17 @@ void DatabaseManager::checkEncryption()
 
 					Database* db = Database::getInstance();
 					DBQuery query;
-					if (db->getDatabaseEngine() != DATABASE_ENGINE_MYSQL)
+					if(db->getDatabaseEngine() != DATABASE_ENGINE_MYSQL)
 					{
 						query << "SELECT `id`, `password`, `key` FROM `accounts`;";
-						if (DBResult* result = db->storeQuery(query.str()))
+						if(DBResult* result = db->storeQuery(query.str()))
 						{
 							do
 							{
 								query << "UPDATE `accounts` SET `password` = " << db->escapeString(transformToMD5(result->getDataString("password"), false)) << ", `key` = " << db->escapeString(transformToMD5(result->getDataString("key"), false)) << " WHERE `id` = " << result->getDataInt("id") << ";";
 								db->query(query.str());
 							}
-							while (result->next());
+							while(result->next());
 							result->free();
 						}
 					}
@@ -363,7 +363,7 @@ void DatabaseManager::checkEncryption()
 
 				case ENCRYPTION_SHA1:
 				{
-					if ((Encryption_t)value != ENCRYPTION_PLAIN)
+					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
 						std::clog << "WARNING: You cannot change the encryption to SHA1, change it back in config.lua." << std::endl;
 						return;
@@ -371,17 +371,17 @@ void DatabaseManager::checkEncryption()
 
 					Database* db = Database::getInstance();
 					DBQuery query;
-					if (db->getDatabaseEngine() != DATABASE_ENGINE_MYSQL)
+					if(db->getDatabaseEngine() != DATABASE_ENGINE_MYSQL)
 					{
 						query << "SELECT `id`, `password`, `key` FROM `accounts`;";
-						if (DBResult* result = db->storeQuery(query.str()))
+						if(DBResult* result = db->storeQuery(query.str()))
 						{
 							do
 							{
 								query << "UPDATE `accounts` SET `password` = " << db->escapeString(transformToSHA1(result->getDataString("password"), false)) << ", `key` = " << db->escapeString(transformToSHA1(result->getDataString("key"), false)) << " WHERE `id` = " << result->getDataInt("id") << ";";
 								db->query(query.str());
 							}
-							while (result->next());
+							while(result->next());
 							result->free();
 						}
 					}
@@ -395,7 +395,7 @@ void DatabaseManager::checkEncryption()
 
 				case ENCRYPTION_SHA256:
 				{
-					if ((Encryption_t)value != ENCRYPTION_PLAIN)
+					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
 						std::clog << "WARNING: You cannot change the encryption to SHA256, change it back in config.lua." << std::endl;
 						return;
@@ -405,14 +405,14 @@ void DatabaseManager::checkEncryption()
 					DBQuery query;
 
 					query << "SELECT `id`, `password`, `key` FROM `accounts`;";
-					if (DBResult* result = db->storeQuery(query.str()))
+					if(DBResult* result = db->storeQuery(query.str()))
 					{
 						do
 						{
 							query << "UPDATE `accounts` SET `password` = " << db->escapeString(transformToSHA256(result->getDataString("password"), false)) << ", `key` = " << db->escapeString(transformToSHA256(result->getDataString("key"), false)) << " WHERE `id` = " << result->getDataInt("id") << ";";
 							db->query(query.str());
 						}
-						while (result->next());
+						while(result->next());
 						result->free();
 					}
 
@@ -423,7 +423,7 @@ void DatabaseManager::checkEncryption()
 
 				case ENCRYPTION_SHA512:
 				{
-					if ((Encryption_t)value != ENCRYPTION_PLAIN)
+					if((Encryption_t)value != ENCRYPTION_PLAIN)
 					{
 						std::clog << "WARNING: You cannot change the encryption to SHA512, change it back in config.lua." << std::endl;
 						return;
@@ -433,14 +433,14 @@ void DatabaseManager::checkEncryption()
 					DBQuery query;
 
 					query << "SELECT `id`, `password`, `key` FROM `accounts`;";
-					if (DBResult* result = db->storeQuery(query.str()))
+					if(DBResult* result = db->storeQuery(query.str()))
 					{
 						do
 						{
 							query << "UPDATE `accounts` SET `password` = " << db->escapeString(transformToSHA512(result->getDataString("password"), false)) << ", `key` = " << db->escapeString(transformToSHA512(result->getDataString("key"), false)) << " WHERE `id` = " << result->getDataInt("id") << ";";
 							db->query(query.str());
 						}
-						while (result->next());
+						while(result->next());
 						result->free();
 					}
 
@@ -460,9 +460,9 @@ void DatabaseManager::checkEncryption()
 	else
 	{
 		registerDatabaseConfig("encryption", (int32_t)newValue);
-		if (g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
+		if(g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
 		{
-			switch (newValue)
+			switch(newValue)
 			{
 				case ENCRYPTION_MD5:
 				{
@@ -510,7 +510,7 @@ void DatabaseManager::checkEncryption()
 void DatabaseManager::checkTriggers()
 {
 	Database* db = Database::getInstance();
-	switch (db->getDatabaseEngine())
+	switch(db->getDatabaseEngine())
 	{
 		case DATABASE_ENGINE_MYSQL:
 		{
@@ -533,9 +533,9 @@ void DatabaseManager::checkTriggers()
 			};
 
 			DBQuery query;
-			for (uint32_t i = 0; i < sizeof(triggerName) / sizeof(std::string); ++i)
+			for(uint32_t i = 0; i < sizeof(triggerName) / sizeof(std::string); ++i)
 			{
-				if (!triggerExists(triggerName[i]))
+				if(!triggerExists(triggerName[i]))
 				{
 					std::clog << "Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
 					db->query(triggerStatement[i]);
@@ -698,9 +698,9 @@ END;",
 			};
 
 			DBQuery query;
-			for (uint32_t i = 0; i < sizeof(triggerName) / sizeof(std::string); ++i)
+			for(uint32_t i = 0; i < sizeof(triggerName) / sizeof(std::string); ++i)
 			{
-				if (!triggerExists(triggerName[i]))
+				if(!triggerExists(triggerName[i]))
 				{
 					std::clog << "Trigger: " << triggerName[i] << " does not exist, creating it..." << std::endl;
 					db->query(triggerStatement[i]);

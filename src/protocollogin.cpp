@@ -47,7 +47,7 @@ void ProtocolLogin::deleteProtocolTask()
 void ProtocolLogin::disconnectClient(const std::string& message)
 {
 	OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
-	if (output)
+	if(output)
 	{
 		TRACK_MESSAGE(output);
 		output->put<char>(0x0A);
@@ -60,7 +60,7 @@ void ProtocolLogin::disconnectClient(const std::string& message)
 
 void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 {
-	if (g_game.getGameState() == GAMESTATE_SHUTDOWN)
+	if(g_game.getGameState() == GAMESTATE_SHUTDOWN)
 	{
 		getConnection()->close();
 		return;
@@ -71,7 +71,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	uint16_t version = msg.get<uint16_t>();
 
 	msg.skip(12);
-	if (!RSA_decrypt(msg))
+	if(!RSA_decrypt(msg))
 	{
 		getConnection()->close();
 		return;
@@ -82,9 +82,9 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	setXTEAKey(key);
 
 	std::string accountName = msg.getString(), password = msg.getString();
-	if (accountName.empty())
+	if(accountName.empty())
 	{
-		if (!g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
+		if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER))
 		{
 			disconnectClient("Invalid account name.");
 			return;
@@ -94,38 +94,38 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		password = "1";
 	}
 
-	if (version < CLIENT_VERSION_MIN || version > CLIENT_VERSION_MAX)
+	if(version < CLIENT_VERSION_MIN || version > CLIENT_VERSION_MAX)
 	{
 		disconnectClient(CLIENT_VERSION_STRING);
 		return;
 	}
 
-	if (g_game.getGameState() < GAMESTATE_NORMAL)
+	if(g_game.getGameState() < GAMESTATE_NORMAL)
 	{
 		disconnectClient("Server is just starting up, please wait.");
 		return;
 	}
 
-	if (g_game.getGameState() == GAMESTATE_MAINTAIN)
+	if(g_game.getGameState() == GAMESTATE_MAINTAIN)
 	{
 		disconnectClient("Server is under maintenance, please re-connect in a while.");
 		return;
 	}
 
-	if (ConnectionManager::getInstance()->isDisabled(clientIp, protocolId))
+	if(ConnectionManager::getInstance()->isDisabled(clientIp, protocolId))
 	{
 		disconnectClient("Too many connections attempts from your IP address, please try again later.");
 		return;
 	}
 
-	if (IOBan::getInstance()->isIpBanished(clientIp))
+	if(IOBan::getInstance()->isIpBanished(clientIp))
 	{
 		disconnectClient("Your IP is banished!");
 		return;
 	}
 
 	Account account;
-	if (!IOLoginData::getInstance()->loadAccount(account, accountName) || !encryptTest(password, account.password))
+	if(!IOLoginData::getInstance()->loadAccount(account, accountName) || !encryptTest(password, account.password))
 	{
 		ConnectionManager::getInstance()->addAttempt(clientIp, protocolId, false);
 		disconnectClient("Invalid account name or password.");
@@ -136,11 +136,11 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	ban.value = account.number;
 
 	ban.type = BAN_ACCOUNT;
-	if (IOBan::getInstance()->getData(ban) && !IOLoginData::getInstance()->hasFlag(account.number, PlayerFlag_CannotBeBanned))
+	if(IOBan::getInstance()->getData(ban) && !IOLoginData::getInstance()->hasFlag(account.number, PlayerFlag_CannotBeBanned))
 	{
 		bool deletion = ban.expires < 0;
 		std::string name_ = "Automatic ";
-		if (!ban.adminId)
+		if(!ban.adminId)
 			name_ += (deletion ? "deletion" : "banishment");
 		else
 			IOLoginData::getInstance()->getNameByGuid(ban.adminId, name_, true);
@@ -157,7 +157,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	// remove premium days
 	#ifndef __LOGIN_SERVER__
 	IOLoginData::getInstance()->removePremium(account);
-	if (!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !account.charList.size())
+	if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !account.charList.size())
 	{
 		disconnectClient(std::string("This account does not contain any character yet.\nCreate a new character on the "
 			+ g_config.getString(ConfigManager::SERVER_NAME) + " website at " + g_config.getString(ConfigManager::URL) + ".").c_str());
@@ -165,14 +165,14 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	}
 	#else
 	Characters charList;
-	for (Characters::iterator it = account.charList.begin(); it != account.charList.end(); ++it)
+	for(Characters::iterator it = account.charList.begin(); it != account.charList.end(); ++it)
 	{
-		if (version >= it->second.server->getVersionMin() && version <= it->second.server->getVersionMax())
+		if(version >= it->second.server->getVersionMin() && version <= it->second.server->getVersionMax())
 			charList[it->first] = it->second;
 	}
 
 	IOLoginData::getInstance()->removePremium(account);
-	if (!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !charList.size())
+	if(!g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && !charList.size())
 	{
 		disconnectClient(std::string("This account does not contain any character on this client yet.\nCreate a new character on the "
 			+ g_config.getString(ConfigManager::SERVER_NAME) + " website at " + g_config.getString(ConfigManager::URL) + ".").c_str());
@@ -181,7 +181,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 	#endif
 
 	ConnectionManager::getInstance()->addAttempt(clientIp, protocolId, true);
-	if (OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
+	if(OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false))
 	{
 		TRACK_MESSAGE(output);
 		output->put<char>(0x14);
@@ -193,7 +193,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 
 		//Add char list
 		output->put<char>(0x64);
-		if (g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && account.number != 1)
+		if(g_config.getBool(ConfigManager::ACCOUNT_MANAGER) && account.number != 1)
 		{
 			output->put<char>(account.charList.size() + 1);
 			output->putString("Account Manager");
@@ -208,12 +208,12 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 			output->put<char>((uint8_t)account.charList.size());
 
 		#ifndef __LOGIN_SERVER__
-		for (Characters::iterator it = account.charList.begin(); it != account.charList.end(); ++it)
+		for(Characters::iterator it = account.charList.begin(); it != account.charList.end(); ++it)
 		{
 			output->putString((*it));
-			if (g_config.getBool(ConfigManager::ON_OR_OFF_CHARLIST))
+			if(g_config.getBool(ConfigManager::ON_OR_OFF_CHARLIST))
 			{
-				if (g_game.getPlayerByName((*it)))
+				if(g_game.getPlayerByName((*it)))
 					output->putString("Online");
 				else
 					output->putString("Offline");
@@ -226,12 +226,12 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 			output->put<uint16_t>(games[random_range(0, games.size() - 1)]);
 		}
 		#else
-		for (Characters::iterator it = charList.begin(); it != charList.end(); ++it)
+		for(Characters::iterator it = charList.begin(); it != charList.end(); ++it)
 		{
 			output->putString(it->second.name);
-			if (!g_config.getBool(ConfigManager::ON_OR_OFF_CHARLIST) || it->second.status < 0)
+			if(!g_config.getBool(ConfigManager::ON_OR_OFF_CHARLIST) || it->second.status < 0)
 				output->putString(it->second.server->getName());
-			else if (it->second.status)
+			else if(it->second.status)
 				output->putString("Online");
 			else
 				output->putString("Offline");
@@ -243,7 +243,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		#endif
 
 		//Add premium days
-		if (g_config.getBool(ConfigManager::FREE_PREMIUM))
+		if(g_config.getBool(ConfigManager::FREE_PREMIUM))
 			output->put<uint16_t>(GRATIS_PREMIUM);
 		else
 			output->put<uint16_t>(account.premiumDays);

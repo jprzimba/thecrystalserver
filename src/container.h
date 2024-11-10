@@ -76,7 +76,7 @@ class Container : public Item, public Cylinder
 		uint32_t size() const {return (uint32_t)itemlist.size();}
 		bool full() const
 		{
-			if (maxSize)
+			if(maxSize)
 				return itemlist.size() >= maxSize;
 
 			return true;

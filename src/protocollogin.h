@@ -29,7 +29,7 @@ class ProtocolLogin : public Protocol
 		{
 			enableChecksum();
 		}
-		virtual ~ProtocolLogin() {}
+		virtual ~ProtocolLogin(){}
 
 		enum {protocolId = 0x01};
 		enum {isSingleSocket = false};

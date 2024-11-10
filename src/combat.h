@@ -28,15 +28,18 @@ class Creature;
 class Position;
 class Item;
 
-struct CombatEffects {
-	CombatEffects(bool _show): show(_show) {
+struct CombatEffects
+{
+	CombatEffects(bool _show): show(_show)
+	{
 		color = COLOR_UNKNOWN;
 		distance = SHOOT_EFFECT_NONE;
 		impact = MAGIC_EFFECT_NONE;
 		hit = MAGIC_EFFECT_UNKNOWN;
 	}
 
-	CombatEffects() {
+	CombatEffects()
+	{
 		color = COLOR_UNKNOWN;
 		distance = SHOOT_EFFECT_NONE;
 		impact = MAGIC_EFFECT_NONE;
@@ -50,8 +53,10 @@ struct CombatEffects {
 	bool show;
 };
 
-struct CombatElement {
-	CombatElement() {
+struct CombatElement
+{
+	CombatElement()
+	{
 		type = COMBAT_NONE;
 		damage = 0;
 	}
@@ -64,8 +69,10 @@ class TargetCallback;
 class ValueCallback;
 class TileCallback;
 
-struct CombatParams {
-	CombatParams() {
+struct CombatParams
+{
+	CombatParams()
+	{
 		blockedByArmor = blockedByShield = targetCasterOrTopMost = targetPlayersOrSummons = differentAreaDamage = false;
 		isAggressive = useCharges = true;
 		dispelType = CONDITION_NONE;
@@ -91,7 +98,8 @@ struct CombatParams {
 	std::list<const Condition*> conditionList;
 };
 
-struct Combat2Var {
+struct Combat2Var
+{
 	int32_t minChange, maxChange, change;
 	Combat2Var() {minChange = maxChange = change = 0;}
 };
@@ -131,40 +139,42 @@ typedef bool (*COMBATFUNC)(Creature*, Creature*, const CombatParams&, void*);
 class MatrixArea
 {
 	public:
-		MatrixArea(uint32_t _rows, uint32_t _cols) {
+		MatrixArea(uint32_t _rows, uint32_t _cols)
+		{
 			centerX = centerY = 0;
 			rows = _rows;
 			cols = _cols;
 
 			data_ = new bool*[rows];
-			for (uint32_t row = 0; row < rows; ++row) {
+			for(uint32_t row = 0; row < rows; ++row)
+			{
 				data_[row] = new bool[cols];
-				for (uint32_t col = 0; col < cols; ++col) {
+				for(uint32_t col = 0; col < cols; ++col)
 					data_[row][col] = 0;
-				}
 			}
 		}
 
-		MatrixArea(const MatrixArea& rhs) {
+		MatrixArea(const MatrixArea& rhs)
+		{
 			centerX = rhs.centerX;
 			centerY = rhs.centerY;
 			rows = rhs.rows;
 			cols = rhs.cols;
 
 			data_ = new bool*[rows];
-			for (uint32_t row = 0; row < rows; ++row) {
+			for(uint32_t row = 0; row < rows; ++row)
+			{
 				data_[row] = new bool[cols];
 
-				for (uint32_t col = 0; col < cols; ++col) {
+				for(uint32_t col = 0; col < cols; ++col)
 					data_[row][col] = rhs.data_[row][col];
-				}
 			}
 		}
 
-		virtual ~MatrixArea() {
-			for (uint32_t row = 0; row < rows; ++row) {
+		virtual ~MatrixArea()
+		{
+			for(uint32_t row = 0; row < rows; ++row)
 				delete[] data_[row];
-			}
 
 			delete[] data_;
 		}
@@ -206,7 +216,8 @@ class CombatArea
 		void clear();
 
 	protected:
-		enum MatrixOperation_t {
+		enum MatrixOperation_t
+		{
 			MATRIXOPERATION_COPY,
 			MATRIXOPERATION_MIRROR,
 			MATRIXOPERATION_FLIP,
@@ -218,35 +229,34 @@ class CombatArea
 		MatrixArea* createArea(const std::list<uint32_t>& list, uint32_t rows);
 		void copyArea(const MatrixArea* input, MatrixArea* output, MatrixOperation_t op) const;
 
-		MatrixArea* getArea(const Position& centerPos, const Position& targetPos) const {
+		MatrixArea* getArea(const Position& centerPos, const Position& targetPos) const
+		{
 			int32_t dx = targetPos.x - centerPos.x, dy = targetPos.y - centerPos.y;
 			Direction dir = NORTH;
-			if (dx < 0) {
+			if(dx < 0)
 				dir = WEST;
-			} else if (dx > 0) {
+			else if(dx > 0)
 				dir = EAST;
-			} else if (dy < 0) {
+			else if(dy < 0)
 				dir = NORTH;
-			} else {
+			else
 				dir = SOUTH;
-			}
 
-			if (hasExtArea) {
-				if (dx < 0 && dy < 0) {
+			if(hasExtArea)
+			{
+				if(dx < 0 && dy < 0)
 					dir = NORTHWEST;
-				} else if (dx > 0 && dy < 0) {
+				else if(dx > 0 && dy < 0)
 					dir = NORTHEAST;
-				} else if (dx < 0 && dy > 0) {
+				else if(dx < 0 && dy > 0)
 					dir = SOUTHWEST;
-				} else if (dx > 0 && dy > 0) {
+				else if(dx > 0 && dy > 0)
 					dir = SOUTHEAST;
-				}
 			}
 
 			CombatAreas::const_iterator it = areas.find(dir);
-			if (it != areas.end()) {
+			if(it != areas.end())
 				return it->second;
-			}
 
 			return NULL;
 		}
@@ -303,23 +313,23 @@ class Combat
 		bool setCallback(CallBackParam_t key);
 		CallBack* getCallback(CallBackParam_t key);
 
-		void setArea(CombatArea* _area) {
+		void setArea(CombatArea* _area)
+		{
+
 			delete area;
+
 			area = _area;
 		}
-
-		bool hasArea() const {
-			return area != NULL;
-		}
+		bool hasArea() const {return area != NULL;}
 
 		bool setParam(CombatParam_t param, uint32_t value);
 		void setCondition(const Condition* _condition) {params.conditionList.push_back(_condition);}
-		void setPlayerCombatValues(formulaType_t _type, double _mina, double _minb, double _maxa, double _maxb,
-			double _minl, double _maxl, double _minm, double _maxm, int32_t _minc, int32_t _maxc);
+		void setPlayerCombatValues(formulaType_t _type, double _mina, double _minb, double _maxa,
+			double _maxb, double _minl, double _maxl, double _minm, double _maxm, int32_t _minc,
+			int32_t _maxc);
 
-		void postCombatEffects(Creature* caster, const Position& pos) const {
-			Combat::postCombatEffects(caster, pos, params);
-		}
+		void postCombatEffects(Creature* caster, const Position& pos) const
+			{Combat::postCombatEffects(caster, pos, params);}
 
 	protected:
 		static void doCombatDefault(Creature* caster, Creature* target, const CombatParams& params);
@@ -352,24 +362,15 @@ class MagicField : public Item
 		MagicField(uint16_t _type) : Item(_type) {createTime = OTSYS_TIME();}
 		virtual ~MagicField() {}
 
-		virtual MagicField* getMagicField() {
-			return this;
-		}
-		virtual const MagicField* getMagicField() const {
-			return this;
-		}
+		virtual MagicField* getMagicField() {return this;}
+		virtual const MagicField* getMagicField() const {return this;}
 
 		virtual bool isBlocking(const Creature* creature) const;
 
-		bool isReplacable() const {
-			return Item::items[id].replacable;
-		}
-
-		bool isUnstepable() const {
-			return id == ITEM_MAGICWALL_SAFE || id == ITEM_WILDGROWTH_SAFE;
-		}
-
-		CombatType_t getCombatType() const {
+		bool isReplacable() const {return Item::items[id].replacable;}
+		bool isUnstepable() const {return id == ITEM_MAGICWALL_SAFE || id == ITEM_WILDGROWTH_SAFE;}
+		CombatType_t getCombatType() const
+		{
 			const ItemType& it = items[id];
 			return it.combatType;
 		}

@@ -122,7 +122,7 @@ class Connection : public boost::enable_shared_from_this<Connection>, boost::non
 		friend class ConnectionManager;
 
 	public:
-		virtual ~Connection() {}
+		virtual ~Connection(){}
 
 		boost::asio::ip::tcp::socket& getHandle() {return *m_socket;}
 		uint32_t getIP() const;

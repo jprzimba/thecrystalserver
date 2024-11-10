@@ -77,16 +77,6 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit5]
-FileName=..\baseevents.h
-CompileCpp=1
-Folder=Crystal Server
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit6]
 FileName=..\beds.cpp
 CompileCpp=1
@@ -1679,6 +1669,16 @@ BuildCmd=
 
 [Unit4]
 FileName=..\baseevents.cpp
+CompileCpp=1
+Folder=Crystal Server
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=..\baseevents.h
 CompileCpp=1
 Folder=Crystal Server
 Compile=1

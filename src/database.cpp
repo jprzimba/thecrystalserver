@@ -35,15 +35,15 @@ Database* _Database::m_instance = NULL;
 
 Database* _Database::getInstance()
 {
-	if (!m_instance)
+	if(!m_instance)
 	{
 #if defined MULTI_SQL_DRIVERS
 #ifdef __USE_MYSQL__
-		if (g_config.getString(ConfigManager::SQL_TYPE) == "mysql")
+		if(g_config.getString(ConfigManager::SQL_TYPE) == "mysql")
 			m_instance = new DatabaseMySQL;
 #endif
 #ifdef __USE_SQLITE__
-		else if (g_config.getString(ConfigManager::SQL_TYPE) == "sqlite")
+		else if(g_config.getString(ConfigManager::SQL_TYPE) == "sqlite")
 			m_instance = new DatabaseSQLite;
 #endif
 #else
@@ -57,7 +57,7 @@ Database* _Database::getInstance()
 
 DBResult* _Database::verifyResult(DBResult* result)
 {
-	if (result->next())
+	if(result->next())
 		return result;
 
 	result->free();
@@ -73,15 +73,15 @@ void DBInsert::setQuery(std::string query)
 
 bool DBInsert::addRow(std::string row)
 {
-	if (!m_db->multiLine())
+	if(!m_db->multiLine())
 		return m_db->query(m_query + "(" + row + ")");
 
 	++m_rows;
-	if (m_buf.empty())
+	if(m_buf.empty())
 		m_buf = "(" + row + ")";
-	else if (m_buf.length() > 8192)
+	else if(m_buf.length() > 8192)
 	{
-		if (!execute())
+		if(!execute())
 			return false;
 
 		m_buf = "(" + row + ")";
@@ -101,7 +101,7 @@ bool DBInsert::addRow(std::stringstream& row)
 
 bool DBInsert::execute()
 {
-	if (!m_db->multiLine() || m_buf.empty() || !m_rows)
+	if(!m_db->multiLine() || m_buf.empty() || !m_rows)
 		return true;
 
 	m_rows = 0;

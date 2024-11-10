@@ -47,7 +47,8 @@ class BaseEvents
 		bool m_loaded;
 };
 
-enum EventScript_t {
+enum EventScript_t
+{
 	EVENT_SCRIPT_FALSE,
 	EVENT_SCRIPT_BUFFER,
 	EVENT_SCRIPT_TRUE

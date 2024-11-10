@@ -24,7 +24,8 @@
 #include "party.h"
 
 class Player;
-enum ChannelFlags_t {
+enum ChannelFlags_t
+{
 	CHANNELFLAG_NONE = 0,
 	CHANNELFLAG_ENABLED = 1 << 0,
 	CHANNELFLAG_ACTIVE = 1 << 1,
@@ -47,55 +48,26 @@ class ChatChannel
 		}
 		static uint16_t staticFlags;
 
-		uint16_t getId() const {
-			return m_id;
-		}
+		uint16_t getId() const {return m_id;}
+		const std::string& getName() const {return m_name;}
+		uint16_t getFlags() const {return m_flags;}
 
-		const std::string& getName() const {
-			return m_name;
-		}
+		int32_t getConditionId() const {return m_conditionId;}
+		const std::string& getConditionMessage() const {return m_conditionMessage;}
+		const UsersMap& getUsers() const {return m_users;}
 
-		uint16_t getFlags() const {
-			return m_flags;
-		}
+		uint32_t getLevel() const {return m_level;}
+		uint32_t getAccess() const {return m_access;}
+		virtual uint32_t getOwner() {return 0;}
 
-		int32_t getConditionId() const {
-			return m_conditionId;
-		}
-
-		const std::string& getConditionMessage() const {
-			return m_conditionMessage;
-		}
-	
-		const UsersMap& getUsers() const {
-			return m_users;
-		}
-
-		uint32_t getLevel() const {
-			return m_level;
-		}
-
-		uint32_t getAccess() const {
-			return m_access;
-		}
-	
-		virtual uint32_t getOwner() {
-			return 0;
-		}
-
-		bool hasFlag(uint16_t value) const {
-			return ((m_flags & (uint16_t)value) == (uint16_t)value);
-		}
-
-		bool checkVocation(uint32_t vocationId) const {
-			return !m_vocationMap || m_vocationMap->empty() || m_vocationMap->find(vocationId) != m_vocationMap->end();
-		}
+		bool hasFlag(uint16_t value) const {return ((m_flags & (uint16_t)value) == (uint16_t)value);}
+		bool checkVocation(uint32_t vocationId) const
+			{return !m_vocationMap || m_vocationMap->empty() || m_vocationMap->find(
+				vocationId) != m_vocationMap->end();}
 
 		bool addUser(Player* player);
 		bool removeUser(Player* player, bool exclude = false);
-		bool hasUser(Player* player) const {
-			return player && m_users.find(player->getID()) != m_users.end();
-		}
+		bool hasUser(Player* player) const {return player && m_users.find(player->getID()) != m_users.end();}
 
 		bool talk(Player* player, SpeakClasses type, const std::string& text, uint32_t _time = 0);
 		bool talk(std::string nick, SpeakClasses type, std::string text);
@@ -119,12 +91,8 @@ class PrivateChatChannel : public ChatChannel
 		PrivateChatChannel(uint16_t id, std::string name, uint16_t flags);
 		virtual ~PrivateChatChannel() {}
 
-		virtual uint32_t getOwner() {
-			return m_owner;
-		}
-		void setOwner(uint32_t id) {
-			m_owner = id;
-		}
+		virtual uint32_t getOwner() {return m_owner;}
+		void setOwner(uint32_t id) {m_owner = id;}
 
 		bool isInvited(const Player* player);
 
@@ -136,9 +104,7 @@ class PrivateChatChannel : public ChatChannel
 
 		void closeChannel();
 
-		const InviteList& getInvitedUsers() {
-			return m_invites;
-		}
+		const InviteList& getInvitedUsers() {return m_invites;}
 
 	protected:
 		InviteList m_invites;
@@ -174,14 +140,11 @@ class Chat
 		ChannelList getChannelList(Player* player);
 
 		PrivateChatChannel* getPrivateChannel(Player* player);
-		bool isPrivateChannel(uint16_t cid) const {
-			return m_privateChannels.find(cid) != m_privateChannels.end();
-		}
+		bool isPrivateChannel(uint16_t cid) const {return m_privateChannels.find(cid) != m_privateChannels.end();}
 
 		ChannelList getPublicChannels() const;
-		bool isPublicChannel(uint16_t cid) const {
-			return cid != CHANNEL_GUILD && cid != CHANNEL_PARTY && !isPrivateChannel(cid);
-		}
+		bool isPublicChannel(uint16_t cid) const {return cid != CHANNEL_GUILD && cid
+			!= CHANNEL_PARTY && !isPrivateChannel(cid);}
 
 		uint32_t statement;
 		StatementMap statementMap;
