@@ -35,15 +35,15 @@ bool Condition::setParam(ConditionParam_t param, int32_t value)
 {
 	switch(param)
 	{
-		case CONDITIONPARAM_TICKS:
+		case CONDITION_PARAM_TICKS:
 			ticks = value;
 			return true;
 
-		case CONDITIONPARAM_BUFF:
+		case CONDITION_PARAM_BUFF:
 			buff = (value != 0);
 			return true;
 
-		case CONDITIONPARAM_SUBID:
+		case CONDITION_PARAM_SUBID:
 			subId = value;
 			return true;
 
@@ -527,99 +527,99 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 	bool ret = ConditionGeneric::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_SKILL_MELEE:
+		case CONDITION_PARAM_SKILL_MELEE:
 			skills[SKILL_CLUB] = skills[SKILL_AXE] = skills[SKILL_SWORD] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_FIST:
+		case CONDITION_PARAM_SKILL_FIST:
 			skills[SKILL_FIST] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_CLUB:
+		case CONDITION_PARAM_SKILL_CLUB:
 			skills[SKILL_CLUB] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_SWORD:
+		case CONDITION_PARAM_SKILL_SWORD:
 			skills[SKILL_SWORD] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_AXE:
+		case CONDITION_PARAM_SKILL_AXE:
 			skills[SKILL_AXE] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_DISTANCE:
+		case CONDITION_PARAM_SKILL_DISTANCE:
 			skills[SKILL_DIST] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_SHIELD:
+		case CONDITION_PARAM_SKILL_SHIELD:
 			skills[SKILL_SHIELD] = value;
 			return true;
 
-		case CONDITIONPARAM_SKILL_FISHING:
+		case CONDITION_PARAM_SKILL_FISHING:
 			skills[SKILL_FISH] = value;
 			return true;
 
-		case CONDITIONPARAM_STAT_MAXHEALTH:
+		case CONDITION_PARAM_STAT_MAXHEALTH:
 			stats[STAT_MAXHEALTH] = value;
 			return true;
 
-		case CONDITIONPARAM_STAT_MAXMANA:
+		case CONDITION_PARAM_STAT_MAXMANA:
 			stats[STAT_MAXMANA] = value;
 			return true;
 
-		case CONDITIONPARAM_STAT_SOUL:
+		case CONDITION_PARAM_STAT_SOUL:
 			stats[STAT_SOUL] = value;
 			return true;
 
-		case CONDITIONPARAM_STAT_MAGICLEVEL:
+		case CONDITION_PARAM_STAT_MAGICLEVEL:
 			stats[STAT_MAGICLEVEL] = value;
 			return true;
 
-		case CONDITIONPARAM_STAT_MAXHEALTHPERCENT:
+		case CONDITION_PARAM_STAT_MAXHEALTHPERCENT:
 			statsPercent[STAT_MAXHEALTH] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_STAT_MAXMANAPERCENT:
+		case CONDITION_PARAM_STAT_MAXMANAPERCENT:
 			statsPercent[STAT_MAXMANA] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_STAT_SOULPERCENT:
+		case CONDITION_PARAM_STAT_SOULPERCENT:
 			statsPercent[STAT_SOUL] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_STAT_MAGICLEVELPERCENT:
+		case CONDITION_PARAM_STAT_MAGICLEVELPERCENT:
 			statsPercent[STAT_MAGICLEVEL] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_MELEEPERCENT:
+		case CONDITION_PARAM_SKILL_MELEEPERCENT:
 			skillsPercent[SKILL_CLUB] = skillsPercent[SKILL_AXE] = skillsPercent[SKILL_SWORD] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_FISTPERCENT:
+		case CONDITION_PARAM_SKILL_FISTPERCENT:
 			skillsPercent[SKILL_FIST] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_CLUBPERCENT:
+		case CONDITION_PARAM_SKILL_CLUBPERCENT:
 			skillsPercent[SKILL_CLUB] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_SWORDPERCENT:
+		case CONDITION_PARAM_SKILL_SWORDPERCENT:
 			skillsPercent[SKILL_SWORD] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_AXEPERCENT:
+		case CONDITION_PARAM_SKILL_AXEPERCENT:
 			skillsPercent[SKILL_AXE] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_DISTANCEPERCENT:
+		case CONDITION_PARAM_SKILL_DISTANCEPERCENT:
 			skillsPercent[SKILL_DIST] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_SHIELDPERCENT:
+		case CONDITION_PARAM_SKILL_SHIELDPERCENT:
 			skillsPercent[SKILL_SHIELD] = std::max((int32_t)0, value);
 			return true;
 
-		case CONDITIONPARAM_SKILL_FISHINGPERCENT:
+		case CONDITION_PARAM_SKILL_FISHINGPERCENT:
 			skillsPercent[SKILL_FISH] = std::max((int32_t)0, value);
 			return true;
 
@@ -761,19 +761,19 @@ bool ConditionRegeneration::setParam(ConditionParam_t param, int32_t value)
 	bool ret = ConditionGeneric::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_HEALTHGAIN:
+		case CONDITION_PARAM_HEALTHGAIN:
 			healthGain = value;
 			return true;
 
-		case CONDITIONPARAM_HEALTHTICKS:
+		case CONDITION_PARAM_HEALTHTICKS:
 			healthTicks = value;
 			return true;
 
-		case CONDITIONPARAM_MANAGAIN:
+		case CONDITION_PARAM_MANAGAIN:
 			manaGain = value;
 			return true;
 
-		case CONDITIONPARAM_MANATICKS:
+		case CONDITION_PARAM_MANATICKS:
 			manaTicks = value;
 			return true;
 
@@ -867,11 +867,11 @@ bool ConditionSoul::setParam(ConditionParam_t param, int32_t value)
 	bool ret = ConditionGeneric::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_SOULGAIN:
+		case CONDITION_PARAM_SOULGAIN:
 			soulGain = value;
 			return true;
 
-		case CONDITIONPARAM_SOULTICKS:
+		case CONDITION_PARAM_SOULTICKS:
 			soulTicks = value;
 			return true;
 
@@ -895,39 +895,39 @@ bool ConditionDamage::setParam(ConditionParam_t param, int32_t value)
 	bool ret = Condition::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_OWNER:
+		case CONDITION_PARAM_OWNER:
 			owner = value;
 			return true;
 
-		case CONDITIONPARAM_FORCEUPDATE:
+		case CONDITION_PARAM_FORCEUPDATE:
 			forceUpdate = (value != 0);
 			return true;
 
-		case CONDITIONPARAM_DELAYED:
+		case CONDITION_PARAM_DELAYED:
 			delayed = (value != 0);
 			return true;
 
-		case CONDITIONPARAM_MAXVALUE:
+		case CONDITION_PARAM_MAXVALUE:
 			maxDamage = std::abs(value);
 			break;
 
-		case CONDITIONPARAM_MINVALUE:
+		case CONDITION_PARAM_MINVALUE:
 			minDamage = std::abs(value);
 			break;
 
-		case CONDITIONPARAM_STARTVALUE:
+		case CONDITION_PARAM_STARTVALUE:
 			startDamage = std::abs(value);
 			break;
 
-		case CONDITIONPARAM_TICKINTERVAL:
+		case CONDITION_PARAM_TICKINTERVAL:
 			tickInterval = std::abs(value);
 			break;
 
-		case CONDITIONPARAM_PERIODICDAMAGE:
+		case CONDITION_PARAM_PERIODICDAMAGE:
 			periodDamage = value;
 			break;
 
-		case CONDITIONPARAM_FIELD:
+		case CONDITION_PARAM_FIELD:
 			field = (value != 0);
 			break;
 
@@ -1039,8 +1039,8 @@ bool ConditionDamage::addDamage(int32_t rounds, int32_t time, int32_t value)
 {
 	if(rounds == -1) //periodic damage
 	{
-		setParam(CONDITIONPARAM_TICKINTERVAL, time);
-		setParam(CONDITIONPARAM_TICKS, -1);
+		setParam(CONDITION_PARAM_TICKINTERVAL, time);
+		setParam(CONDITION_PARAM_TICKS, -1);
 
 		periodDamage = value;
 		return true;
@@ -1327,7 +1327,7 @@ bool ConditionSpeed::setParam(ConditionParam_t param, int32_t value)
 	bool ret = ConditionOutfit::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_SPEED:
+		case CONDITION_PARAM_SPEED:
 		{
 			speedDelta = value;
 			if(value > 0)
@@ -1641,11 +1641,11 @@ bool ConditionLight::setParam(ConditionParam_t param, int32_t value)
 	bool ret = Condition::setParam(param, value);
 	switch(param)
 	{
-		case CONDITIONPARAM_LIGHT_LEVEL:
+		case CONDITION_PARAM_LIGHT_LEVEL:
 			lightInfo.level = value;
 			return true;
 
-		case CONDITIONPARAM_LIGHT_COLOR:
+		case CONDITION_PARAM_LIGHT_COLOR:
 			lightInfo.color = value;
 			return true;
 

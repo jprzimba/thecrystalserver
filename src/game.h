@@ -357,7 +357,7 @@ class Game
 		ReturnValue internalRemoveItem(Creature* actor, Item* item, int32_t count = -1, bool test = false, uint32_t flags = 0);
 
 		ReturnValue internalPlayerAddItem(Creature* actor, Player* player, Item* item,
-			bool dropOnMap = true, slots_t slot = SLOT_WHEREEVER);
+			bool dropOnMap = true, slots_t slot = CONST_SLOT_WHEREEVER);
 		ReturnValue internalPlayerAddItem(Creature* actor, Player* player, Item* item,
 			bool dropOnMap, slots_t slot, Item** toItem);
 
@@ -589,7 +589,7 @@ class Game
 			int32_t& healthChange, bool checkDefense, bool checkArmor, bool field = false, bool element = false);
 
 		bool combatChangeHealth(CombatType_t combatType, Creature* attacker, Creature* target, int32_t healthChange,
-			MagicEffect_t hitEffect = MAGIC_EFFECT_UNKNOWN, Color_t hitColor = COLOR_UNKNOWN, bool force = false);
+			MagicEffect_t hitEffect = CONST_ME_UNKNOWN, Color_t hitColor = COLOR_UNKNOWN, bool force = false);
 		bool combatChangeHealth(const CombatParams& params, Creature* attacker, Creature* target, int32_t healthChange, bool force);
 		bool combatChangeMana(Creature* attacker, Creature* target, int32_t manaChange,
 			CombatType_t combatType = COMBAT_MANADRAIN, bool inherited = false);

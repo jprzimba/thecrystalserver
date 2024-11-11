@@ -318,7 +318,7 @@ bool ProtocolGame::logout(bool displayEffect, bool forceLogout)
 			return false;
 
 		if(displayEffect && !player->isGhost())
-			g_game.addMagicEffect(player->getPosition(), MAGIC_EFFECT_POFF);
+			g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 	}
 
 	disconnect();
@@ -1909,7 +1909,7 @@ void ProtocolGame::sendCancel(const std::string& message)
 	if(msg)
 	{
 		TRACK_MESSAGE(msg);
-		AddTextMessage(msg, MSG_STATUS_SMALL, message);
+		AddTextMessage(msg, MESSAGE_STATUS_SMALL, message);
 	}
 }
 
@@ -1972,7 +1972,7 @@ void ProtocolGame::sendPing()
 
 void ProtocolGame::sendDistanceShoot(const Position& from, const Position& to, uint8_t type)
 {
-	if(type > SHOOT_EFFECT_LAST || (!canSee(from) && !canSee(to)))
+	if(type > CONST_ANI_LAST || (!canSee(from) && !canSee(to)))
 		return;
 
 	NetworkMessage_ptr msg = getOutputBuffer();
@@ -1985,7 +1985,7 @@ void ProtocolGame::sendDistanceShoot(const Position& from, const Position& to, u
 
 void ProtocolGame::sendMagicEffect(const Position& pos, uint8_t type)
 {
-	if(type > MAGIC_EFFECT_LAST || !canSee(pos))
+	if(type > CONST_ME_LAST || !canSee(pos))
 		return;
 
 	NetworkMessage_ptr msg = getOutputBuffer();
@@ -2144,7 +2144,7 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 	}
 
 	AddMapDescription(msg, pos);
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 		AddInventoryItem(msg, (slots_t)i, player->getInventoryItem((slots_t)i));
 
 	AddPlayerStats(msg);

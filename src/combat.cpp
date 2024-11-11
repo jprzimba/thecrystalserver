@@ -38,7 +38,7 @@ Combat::Combat()
 	params.targetCallback = NULL;
 	area = NULL;
 
-	formulaType = FORMULA_UNDEFINED;
+	formulaType = COMBAT_FORMULA_UNDEFINED;
 	mina = minb = maxa = maxb = minl = maxl = minm = maxm = minc = maxc = 0;
 }
 
@@ -73,7 +73,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, CombatParams&
 			min = max = 0;
 			switch(formulaType)
 			{
-				case FORMULA_LEVELMAGIC:
+				case COMBAT_FORMULA_LEVELMAGIC:
 				{
 					min = (int32_t)((player->getLevel() / minl + player->getMagicLevel() * minm) * 1. * mina + minb);
 					max = (int32_t)((player->getLevel() / maxl + player->getMagicLevel() * maxm) * 1. * maxa + maxb);
@@ -87,7 +87,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, CombatParams&
 					return true;
 				}
 
-				case FORMULA_SKILL:
+				case COMBAT_FORMULA_SKILL:
 				{
 					Item* item = player->getWeapon(false);
 					if(const Weapon* weapon = g_weapons->getWeapon(item))
@@ -113,7 +113,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, CombatParams&
 					return true;
 				}
 
-				case FORMULA_VALUE:
+				case COMBAT_FORMULA_DAMAGE:
 				{
 					min = (int32_t)minb;
 					max = (int32_t)maxb;
@@ -128,7 +128,7 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, CombatParams&
 		}
 	}
 
-	if(formulaType != FORMULA_VALUE)
+	if(formulaType != COMBAT_FORMULA_DAMAGE)
 		return false;
 
 	min = (int32_t)mina;
@@ -403,67 +403,67 @@ bool Combat::setParam(CombatParam_t param, uint32_t value)
 {
 	switch(param)
 	{
-		case COMBATPARAM_COMBATTYPE:
+		case COMBAT_PARAM_TYPE:
 			params.combatType = (CombatType_t)value;
 			return true;
 
-		case COMBATPARAM_EFFECT:
+		case COMBAT_PARAM_EFFECT:
 			params.effects.impact = (MagicEffect_t)value;
 			return true;
 
-		case COMBATPARAM_DISTANCEEFFECT:
+		case COMBAT_PARAM_DISTANCEEFFECT:
 			params.effects.distance = (ShootEffect_t)value;
 			return true;
 
-		case COMBATPARAM_BLOCKEDBYARMOR:
+		case COMBAT_PARAM_BLOCKARMOR:
 			params.blockedByArmor = (value != 0);
 			return true;
 
-		case COMBATPARAM_BLOCKEDBYSHIELD:
+		case COMBAT_PARAM_BLOCKSHIELD:
 			params.blockedByShield = (value != 0);
 			return true;
 
-		case COMBATPARAM_TARGETCASTERORTOPMOST:
+		case COMBAT_PARAM_TARGETCASTERORTOPMOST:
 			params.targetCasterOrTopMost = (value != 0);
 			return true;
 
-		case COMBATPARAM_TARGETPLAYERSORSUMMONS:
+		case COMBAT_PARAM_TARGETPLAYERSORSUMMONS:
 			params.targetPlayersOrSummons = (value != 0);
 			return true;
 
-		case COMBATPARAM_DIFFERENTAREADAMAGE:
+		case COMBAT_PARAM_DIFFERENTAREADAMAGE:
 			params.differentAreaDamage = (value != 0);
 			return true;
 
-		case COMBATPARAM_CREATEITEM:
+		case COMBAT_PARAM_CREATEITEM:
 			params.itemId = value;
 			return true;
 
-		case COMBATPARAM_AGGRESSIVE:
+		case COMBAT_PARAM_AGGRESSIVE:
 			params.isAggressive = (value != 0);
 			return true;
 
-		case COMBATPARAM_DISPEL:
+		case COMBAT_PARAM_DISPEL:
 			params.dispelType = (ConditionType_t)value;
 			return true;
 
-		case COMBATPARAM_USECHARGES:
+		case COMBAT_PARAM_USECHARGES:
 			params.useCharges = (value != 0);
 			return true;
 
-		case COMBATPARAM_HITEFFECT:
+		case COMBAT_PARAM_HITEFFECT:
 			params.effects.hit = (MagicEffect_t)value;
 			return true;
 
-		case COMBATPARAM_HITCOLOR:
+		case COMBAT_PARAM_HITCOLOR:
 			params.effects.color = (Color_t)value;
 			return true;
 
-		case COMBATPARAM_ELEMENTDAMAGE:
+		case COMBAT_PARAM_ELEMENTDAMAGE:
 			params.element.damage = value;
 			break;
 
-		case COMBATPARAM_ELEMENTTYPE:
+		case COMBAT_PARAM_ELEMENTTYPE:
 			params.element.type = (CombatType_t)value;
 			break;
 
@@ -478,28 +478,28 @@ bool Combat::setCallback(CallBackParam_t key)
 {
 	switch(key)
 	{
-		case CALLBACKPARAM_LEVELMAGICVALUE:
+		case CALLBACK_PARAM_LEVELMAGICVALUE:
 		{
 			delete params.valueCallback;
-			params.valueCallback = new ValueCallback(FORMULA_LEVELMAGIC);
+			params.valueCallback = new ValueCallback(COMBAT_FORMULA_LEVELMAGIC);
 			return true;
 		}
 
-		case CALLBACKPARAM_SKILLVALUE:
+		case CALLBACK_PARAM_SKILLVALUE:
 		{
 			delete params.valueCallback;
-			params.valueCallback = new ValueCallback(FORMULA_SKILL);
+			params.valueCallback = new ValueCallback(COMBAT_FORMULA_SKILL);
 			return true;
 		}
 
-		case CALLBACKPARAM_TARGETTILECALLBACK:
+		case CALLBACK_PARAM_TARGETTILE:
 		{
 			delete params.tileCallback;
 			params.tileCallback = new TileCallback();
 			break;
 		}
 
-		case CALLBACKPARAM_TARGETCREATURECALLBACK:
+		case CALLBACK_PARAM_TARGETCREATURE:
 		{
 			delete params.targetCallback;
 			params.targetCallback = new TargetCallback();
@@ -518,14 +518,14 @@ CallBack* Combat::getCallback(CallBackParam_t key)
 {
 	switch(key)
 	{
-		case CALLBACKPARAM_LEVELMAGICVALUE:
-		case CALLBACKPARAM_SKILLVALUE:
+		case CALLBACK_PARAM_LEVELMAGICVALUE:
+		case CALLBACK_PARAM_SKILLVALUE:
 			return params.valueCallback;
 
-		case CALLBACKPARAM_TARGETTILECALLBACK:
+		case CALLBACK_PARAM_TARGETTILE:
 			return params.tileCallback;
 
-		case CALLBACKPARAM_TARGETCREATURECALLBACK:
+		case CALLBACK_PARAM_TARGETCREATURE:
 			return params.targetCallback;
 
 		default:
@@ -605,7 +605,7 @@ bool Combat::CombatConditionFunc(Creature* caster, Creature* target, const Comba
 		Condition* tmp = (*it)->clone();
 		if(caster)
 		{
-			tmp->setParam(CONDITIONPARAM_OWNER, caster->getID());
+			tmp->setParam(CONDITION_PARAM_OWNER, caster->getID());
 			if(params.isAggressive)
 				caster->onTargetDrain(target, 0);
 			else
@@ -629,7 +629,7 @@ bool Combat::CombatDispelFunc(Creature* caster, Creature* target, const CombatPa
 	{
 		if(Player* player = target->getPlayer())
 		{
-			Item* item = player->getEquippedItem(SLOT_RING);
+			Item* item = player->getEquippedItem(CONST_SLOT_RING);
 			if(item && item->getID() == ITEM_STEALTH_RING && (g_game.getWorldType() == WORLDTYPE_HARDCORE
 				|| player->getTile()->hasFlag(TILESTATE_HARDCOREZONE)) && random_range(1, 100) <= 10)
 				g_game.internalRemoveItem(NULL, item);
@@ -709,46 +709,46 @@ void Combat::combatTileEffects(const SpectatorVec& list, Creature* caster, Tile*
 	if(params.tileCallback)
 		params.tileCallback->onTileCombat(caster, tile);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(list, tile->getPosition(), params.effects.impact);
 }
 
 void Combat::postCombatEffects(Creature* caster, const Position& pos, const CombatParams& params)
 {
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), pos, params.effects.distance);
 }
 
 void Combat::addDistanceEffect(Creature* caster, const Position& fromPos, const Position& toPos, ShootEffect_t effect)
 {
-	if(effect == SHOOT_EFFECT_WEAPONTYPE)
+	if(effect == CONST_ANI_WEAPONTYPE)
 	{
 		switch(caster->getWeaponType())
 		{
 			case WEAPON_AXE:
-				effect = SHOOT_EFFECT_WHIRLWINDAXE;
+				effect = CONST_ANI_WHIRLWINDAXE;
 				break;
 
 			case WEAPON_SWORD:
-				effect = SHOOT_EFFECT_WHIRLWINDSWORD;
+				effect = CONST_ANI_WHIRLWINDSWORD;
 				break;
 
 			case WEAPON_CLUB:
-				effect = SHOOT_EFFECT_WHIRLWINDCLUB;
+				effect = CONST_ANI_WHIRLWINDCLUB;
 				break;
 
 			case WEAPON_FIST:
-				effect = SHOOT_EFFECT_LARGEROCK;
+				effect = CONST_ANI_LARGEROCK;
 				break;
 
 			default:
-				effect = SHOOT_EFFECT_NONE;
+				effect = CONST_ANI_NONE;
 				break;
 		}
 	}
 
-	if(caster && effect != SHOOT_EFFECT_NONE)
+	if(caster && effect != CONST_ANI_NONE)
 		g_game.addDistanceEffect(fromPos, toPos, effect);
 }
 
@@ -877,11 +877,11 @@ void Combat::doCombatHealth(Creature* caster, Creature* target, int32_t minChang
 	if(params.targetCallback)
 		params.targetCallback->onTargetCombat(caster, target);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
 
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
 }
 
@@ -907,11 +907,11 @@ void Combat::doCombatMana(Creature* caster, Creature* target, int32_t minChange,
 	if(params.targetCallback)
 		params.targetCallback->onTargetCombat(caster, target);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
 
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
 }
 
@@ -939,11 +939,11 @@ void Combat::doCombatCondition(Creature* caster, Creature* target, const CombatP
 	if(params.targetCallback)
 		params.targetCallback->onTargetCombat(caster, target);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
 
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
 }
 
@@ -962,11 +962,11 @@ void Combat::doCombatDispel(Creature* caster, Creature* target, const CombatPara
 	if(params.targetCallback)
 		params.targetCallback->onTargetCombat(caster, target);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
 
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
 }
 
@@ -982,11 +982,11 @@ void Combat::doCombatDefault(Creature* caster, Creature* target, const CombatPar
 	if(params.targetCallback)
 		params.targetCallback->onTargetCombat(caster, target);
 
-	if(params.effects.impact != MAGIC_EFFECT_NONE && (!caster || !caster->isGhost()
+	if(params.effects.impact != CONST_ME_NONE && (!caster || !caster->isGhost()
 		|| g_config.getBool(ConfigManager::GHOST_SPELL_EFFECTS)))
 		g_game.addMagicEffect(target->getPosition(), params.effects.impact);
 
-	if(caster && params.effects.distance != SHOOT_EFFECT_NONE)
+	if(caster && params.effects.distance != CONST_ANI_NONE)
 		addDistanceEffect(caster, caster->getPosition(), target->getPosition(), params.effects.distance);
 }
 
@@ -1012,7 +1012,7 @@ void ValueCallback::getMinMaxValues(Player* player, CombatParams& params, int32_
 	int32_t parameters = 1;
 	switch(type)
 	{
-		case FORMULA_LEVELMAGIC:
+		case COMBAT_FORMULA_LEVELMAGIC:
 		{
 			//"onGetPlayerMinMaxValues"(cid, level, magLevel)
 			lua_pushnumber(L, player->getLevel());
@@ -1022,7 +1022,7 @@ void ValueCallback::getMinMaxValues(Player* player, CombatParams& params, int32_
 			break;
 		}
 
-		case FORMULA_SKILL:
+		case COMBAT_FORMULA_SKILL:
 		{
 			//"onGetPlayerMinMaxValues"(cid, level, skill, attack, element, factor)
 			lua_pushnumber(L, player->getLevel());
@@ -1078,7 +1078,7 @@ void ValueCallback::getMinMaxValues(Player* player, CombatParams& params, int32_
 		params.element.damage = LuaInterface::popNumber(L);
 		max = LuaInterface::popNumber(L);
 		min = LuaInterface::popNumber(L);
-		player->increaseCombatValues(min, max, params.useCharges, type != FORMULA_SKILL);
+		player->increaseCombatValues(min, max, params.useCharges, type != COMBAT_FORMULA_SKILL);
 	}
 	else
 		LuaInterface::error(NULL, std::string(LuaInterface::popString(L)));
@@ -1493,7 +1493,7 @@ void MagicField::onStepInField(Creature* creature, bool purposeful/* = true*/)
 
 			if(!harmful || (OTSYS_TIME() - createTime) <= (uint32_t)g_config.getNumber(
 				ConfigManager::FIELD_OWNERSHIP) || creature->hasBeenAttacked(ownerId))
-				condition->setParam(CONDITIONPARAM_OWNER, ownerId);
+				condition->setParam(CONDITION_PARAM_OWNER, ownerId);
 		}
 	}
 

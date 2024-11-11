@@ -381,19 +381,19 @@ bool AnnounceEvent::configureRaidEvent(xmlNodePtr eventNode)
 	{
 		std::string tmpStrValue = asLowerCaseString(strValue);
 		if(tmpStrValue == "warning")
-			m_messageType = MSG_STATUS_WARNING;
+			m_messageType = MESSAGE_STATUS_WARNING;
 		else if(tmpStrValue == "event")
-			m_messageType = MSG_EVENT_ADVANCE;
+			m_messageType = MESSAGE_EVENT_ADVANCE;
 		else if(tmpStrValue == "default")
-			m_messageType = MSG_EVENT_DEFAULT;
+			m_messageType = MESSAGE_EVENT_DEFAULT;
 		else if(tmpStrValue == "description")
-			m_messageType = MSG_INFO_DESCR;
+			m_messageType = MESSAGE_INFO_DESCR;
 		else if(tmpStrValue == "status")
-			m_messageType = MSG_STATUS_SMALL;
+			m_messageType = MESSAGE_STATUS_SMALL;
 		else if(tmpStrValue == "blue")
-			m_messageType = MSG_STATUS_CONSOLE_BLUE;
+			m_messageType = MESSAGE_STATUS_CONSOLE_BLUE;
 		else if(tmpStrValue == "red")
-			m_messageType = MSG_STATUS_CONSOLE_RED;
+			m_messageType = MESSAGE_STATUS_CONSOLE_RED;
 		else
 			std::clog << "[Notice - AnnounceEvent::configureRaidEvent] Unknown type tag for announce event, using default: "
 				<< (int32_t)m_messageType << std::endl;
@@ -928,7 +928,7 @@ bool ScriptEvent::configureRaidEvent(xmlNodePtr eventNode)
 	if(!m_interface.getState())
 	{
 		m_interface.initState();
-		std::string path = getFilePath(FILE_TYPE_OTHER, std::string(scriptsName + "/lib/"));
+		std::string path = getFilePath(FILE_TYPE_OTHER, scriptsName + "/lib/");
 		if(!m_interface.loadDirectory(path, false, true))
 			std::clog << "[Warning - ScriptEvent::configureRaidEvent] Cannot load " << path << std::endl;
 	}
@@ -936,7 +936,7 @@ bool ScriptEvent::configureRaidEvent(xmlNodePtr eventNode)
 	std::string strValue;
 	if(readXMLString(eventNode, "file", strValue))
 	{
-		std::string path = getFilePath(FILE_TYPE_OTHER, std::string(scriptsName + "/scripts/" + strValue));
+		std::string path = getFilePath(FILE_TYPE_OTHER, scriptsName + "/scripts/" + strValue);
 		if(!fileExists(path.c_str()))
 		{
 			std::clog << "[Error - ScriptEvent::configureRaidEvent] Cannot find script file " << strValue << std::endl;
@@ -949,13 +949,11 @@ bool ScriptEvent::configureRaidEvent(xmlNodePtr eventNode)
 		std::clog << "[Error - ScriptEvent::configureRaidEvent] Cannot load script file " << path << std::endl;
 		return false;
 	}
-	else if(parseXMLContentString(eventNode->children, strValue) &&
-		checkBuffer(scriptsName, strValue) && loadBuffer(strValue))
-		return true;
 
-	std::clog << "[Error - ScriptEvent::configureRaidEvent] Cannot load script buffer." << std::endl;
+	std::clog << "[Error - ScriptEvent::configureRaidEvent] Expected a file input for script loading." << std::endl;
 	return false;
 }
+
 
 bool ScriptEvent::executeEvent(const std::string& name) const
 {
@@ -963,36 +961,15 @@ bool ScriptEvent::executeEvent(const std::string& name) const
 	if(m_interface.reserveEnv())
 	{
 		ScriptEnviroment* env = m_interface.getEnv();
-		if(m_scripted == EVENT_SCRIPT_BUFFER)
-		{
-			std::stringstream scriptstream;
-			scriptstream << "local name = \"" << name << "\"" << std::endl;
+		env->setScriptId(m_scriptId, &m_interface);
+		lua_State* L = m_interface.getState();
 
-			bool result = true;
-			if(m_scriptData && m_interface.loadBuffer(*m_scriptData))
-			{
-				lua_State* L = m_interface.getState();
-				result = m_interface.getGlobalBool(L, "_result", true);
-			}
+		m_interface.pushFunction(m_scriptId);
+		lua_pushstring(L, name.c_str());
 
-			m_interface.releaseEnv();
-			return result;
-		}
-		else
-		{
-			#ifdef __DEBUG_LUASCRIPTS__
-			env->setEvent("Raid event");
-			#endif
-			env->setScriptId(m_scriptId, &m_interface);
-			lua_State* L = m_interface.getState();
-
-			m_interface.pushFunction(m_scriptId);
-			lua_pushstring(L, name.c_str());
-
-			bool result = m_interface.callFunction(1);
-			m_interface.releaseEnv();
-			return result;
-		}
+		bool result = m_interface.callFunction(1);
+		m_interface.releaseEnv();
+		return result;
 	}
 	else
 	{

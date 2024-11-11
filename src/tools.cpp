@@ -1022,123 +1022,123 @@ struct WeaponTypeNames
 
 MagicEffectNames magicEffectNames[] =
 {
-	{"redspark",			MAGIC_EFFECT_DRAW_BLOOD},
-	{"bluebubble",			MAGIC_EFFECT_LOSE_ENERGY},
-	{"poff",				MAGIC_EFFECT_POFF},
-	{"yellowspark",			MAGIC_EFFECT_BLOCKHIT},
-	{"explosionarea",		MAGIC_EFFECT_EXPLOSION_AREA},
-	{"explosion",			MAGIC_EFFECT_EXPLOSION_DAMAGE},
-	{"firearea",			MAGIC_EFFECT_FIRE_AREA},
-	{"yellowbubble",		MAGIC_EFFECT_YELLOW_RINGS},
-	{"greenbubble",			MAGIC_EFFECT_POISON_RINGS},
-	{"blackspark",			MAGIC_EFFECT_HIT_AREA},
-	{"teleport",			MAGIC_EFFECT_TELEPORT},
-	{"energy",				MAGIC_EFFECT_ENERGY_DAMAGE},
-	{"blueshimmer",			MAGIC_EFFECT_WRAPS_BLUE},
-	{"redshimmer",			MAGIC_EFFECT_WRAPS_RED},
-	{"greenshimmer",		MAGIC_EFFECT_WRAPS_GREEN},
-	{"fire",				MAGIC_EFFECT_HITBY_FIRE},
-	{"greenspark",			MAGIC_EFFECT_POISON},
-	{"mortarea",			MAGIC_EFFECT_MORT_AREA},
-	{"greennote",			MAGIC_EFFECT_SOUND_GREEN},
-	{"rednote",				MAGIC_EFFECT_SOUND_RED},
-	{"poison",				MAGIC_EFFECT_POISON_AREA},
-	{"yellownote",			MAGIC_EFFECT_SOUND_YELLOW},
-	{"purplenote",			MAGIC_EFFECT_SOUND_PURPLE},
-	{"bluenote",			MAGIC_EFFECT_SOUND_BLUE},
-	{"whitenote",			MAGIC_EFFECT_SOUND_WHITE},
-	{"bubbles",				MAGIC_EFFECT_BUBBLES},
-	{"dice",				MAGIC_EFFECT_CRAPS},
-	{"giftwraps",			MAGIC_EFFECT_GIFT_WRAPS},
-	{"yellowfirework",		MAGIC_EFFECT_FIREWORK_YELLOW},
-	{"redfirework",			MAGIC_EFFECT_FIREWORK_RED},
-	{"bluefirework",		MAGIC_EFFECT_FIREWORK_BLUE},
-	{"stun",				MAGIC_EFFECT_STUN},
-	{"sleep",				MAGIC_EFFECT_SLEEP},
-	{"watercreature",		MAGIC_EFFECT_WATERCREATURE},
-	{"groundshaker",		MAGIC_EFFECT_GROUNDSHAKER},
-	{"hearts",				MAGIC_EFFECT_HEARTS},
-	{"fireattack",			MAGIC_EFFECT_FIREATTACK},
-	{"energyarea",			MAGIC_EFFECT_ENERGY_AREA},
-	{"smallclouds",			MAGIC_EFFECT_SMALLCLOUDS},
-	{"holydamage",			MAGIC_EFFECT_HOLYDAMAGE},
-	{"bigclouds",			MAGIC_EFFECT_BIGCLOUDS},
-	{"icearea",				MAGIC_EFFECT_ICEAREA},
-	{"icetornado",			MAGIC_EFFECT_ICETORNADO},
-	{"iceattack",			MAGIC_EFFECT_ICEATTACK},
-	{"stones",				MAGIC_EFFECT_STONES},
-	{"smallplants",			MAGIC_EFFECT_SMALLPLANTS},
-	{"carniphila",			MAGIC_EFFECT_CARNIPHILA},
-	{"purpleenergy",		MAGIC_EFFECT_PURPLEENERGY},
-	{"yellowenergy",		MAGIC_EFFECT_YELLOWENERGY},
-	{"holyarea",			MAGIC_EFFECT_HOLYAREA},
-	{"bigplants",			MAGIC_EFFECT_BIGPLANTS},
-	{"cake",				MAGIC_EFFECT_CAKE},
-	{"giantice",			MAGIC_EFFECT_GIANTICE},
-	{"watersplash",			MAGIC_EFFECT_WATERSPLASH},
-	{"plantattack",			MAGIC_EFFECT_PLANTATTACK},
-	{"tutorialarrow",		MAGIC_EFFECT_TUTORIALARROW},
-	{"tutorialsquare",		MAGIC_EFFECT_TUTORIALSQUARE},
-	{"mirrorhorizontal",	MAGIC_EFFECT_MIRRORHORIZONTAL},
-	{"mirrorvertical",		MAGIC_EFFECT_MIRRORVERTICAL},
-	{"skullhorizontal",		MAGIC_EFFECT_SKULLHORIZONTAL},
-	{"skullvertical",		MAGIC_EFFECT_SKULLVERTICAL},
-	{"assassin",			MAGIC_EFFECT_ASSASSIN},
-	{"stepshorizontal",		MAGIC_EFFECT_STEPSHORIZONTAL},
-	{"bloodysteps",			MAGIC_EFFECT_BLOODYSTEPS},
-	{"stepsvertical",		MAGIC_EFFECT_STEPSVERTICAL},
-	{"yalaharighost",		MAGIC_EFFECT_YALAHARIGHOST},
-	{"bats",				MAGIC_EFFECT_BATS},
-	{"smoke",				MAGIC_EFFECT_SMOKE},
-	{"insects",				MAGIC_EFFECT_INSECTS},
-	{"dragonhead",			MAGIC_EFFECT_DRAGONHEAD}
+	{"redspark",			CONST_ME_DRAWBLOOD},
+	{"bluebubble",			CONST_ME_LOSEENERGY},
+	{"poff",				CONST_ME_POFF},
+	{"yellowspark",			CONST_ME_BLOCKHIT},
+	{"explosionarea",		CONST_ME_EXPLOSIONAREA},
+	{"explosion",			CONST_ME_EXPLOSIONHIT},
+	{"firearea",			CONST_ME_FIREAREA},
+	{"yellowbubble",		CONST_ME_YELLOW_RINGS},
+	{"greenbubble",			CONST_ME_GREEN_RINGS},
+	{"blackspark",			CONST_ME_HITAREA},
+	{"teleport",			CONST_ME_TELEPORT},
+	{"energy",				CONST_ME_ENERGYHIT},
+	{"blueshimmer",			CONST_ME_MAGIC_BLUE},
+	{"redshimmer",			CONST_ME_MAGIC_RED},
+	{"greenshimmer",		CONST_ME_MAGIC_GREEN},
+	{"fire",				CONST_ME_HITBYFIRE},
+	{"greenspark",			CONST_ME_HITBYPOISON},
+	{"mortarea",			CONST_ME_MORTAREA},
+	{"greennote",			CONST_ME_SOUND_GREEN},
+	{"rednote",				CONST_ME_SOUND_RED},
+	{"poison",				CONST_ME_POISONAREA},
+	{"yellownote",			CONST_ME_SOUND_YELLOW},
+	{"purplenote",			CONST_ME_SOUND_PURPLE},
+	{"bluenote",			CONST_ME_SOUND_BLUE},
+	{"whitenote",			CONST_ME_SOUND_WHITE},
+	{"bubbles",				CONST_ME_BUBBLES},
+	{"dice",				CONST_ME_CRAPS},
+	{"giftwraps",			CONST_ME_GIFT_WRAPS},
+	{"yellowfirework",		CONST_ME_FIREWORK_YELLOW},
+	{"redfirework",			CONST_ME_FIREWORK_RED},
+	{"bluefirework",		CONST_ME_FIREWORK_BLUE},
+	{"stun",				CONST_ME_STUN},
+	{"sleep",				CONST_ME_SLEEP},
+	{"watercreature",		CONST_ME_WATERCREATURE},
+	{"groundshaker",		CONST_ME_GROUNDSHAKER},
+	{"hearts",				CONST_ME_HEARTS},
+	{"fireattack",			CONST_ME_FIREATTACK},
+	{"energyarea",			CONST_ME_ENERGYAREA},
+	{"smallclouds",			CONST_ME_SMALLCLOUDS},
+	{"holydamage",			CONST_ME_HOLYDAMAGE},
+	{"bigclouds",			CONST_ME_BIGCLOUDS},
+	{"icearea",				CONST_ME_ICEAREA},
+	{"icetornado",			CONST_ME_ICETORNADO},
+	{"iceattack",			CONST_ME_ICEATTACK},
+	{"stones",				CONST_ME_STONES},
+	{"smallplants",			CONST_ME_SMALLPLANTS},
+	{"carniphila",			CONST_ME_CARNIPHILA},
+	{"purpleenergy",		CONST_ME_PURPLEENERGY},
+	{"yellowenergy",		CONST_ME_YELLOWENERGY},
+	{"holyarea",			CONST_ME_HOLYAREA},
+	{"bigplants",			CONST_ME_BIGPLANTS},
+	{"cake",				CONST_ME_CAKE},
+	{"giantice",			CONST_ME_GIANTICE},
+	{"watersplash",			CONST_ME_WATERSPLASH},
+	{"plantattack",			CONST_ME_PLANTATTACK},
+	{"tutorialarrow",		CONST_ME_TUTORIALARROW},
+	{"tutorialsquare",		CONST_ME_TUTORIALSQUARE},
+	{"mirrorhorizontal",	CONST_ME_MIRRORHORIZONTAL},
+	{"mirrorvertical",		CONST_ME_MIRRORVERTICAL},
+	{"skullhorizontal",		CONST_ME_SKULLHORIZONTAL},
+	{"skullvertical",		CONST_ME_SKULLVERTICAL},
+	{"assassin",			CONST_ME_ASSASSIN},
+	{"stepshorizontal",		CONST_ME_STEPSHORIZONTAL},
+	{"bloodysteps",			CONST_ME_BLOODYSTEPS},
+	{"stepsvertical",		CONST_ME_STEPSVERTICAL},
+	{"yalaharighost",		CONST_ME_YALAHARIGHOST},
+	{"bats",				CONST_ME_BATS},
+	{"smoke",				CONST_ME_SMOKE},
+	{"insects",				CONST_ME_INSECTS},
+	{"dragonhead",			CONST_ME_DRAGONHEAD}
 };
 
 ShootTypeNames shootTypeNames[] =
 {
-	{"spear",			SHOOT_EFFECT_SPEAR},
-	{"bolt",			SHOOT_EFFECT_BOLT},
-	{"arrow",			SHOOT_EFFECT_ARROW},
-	{"fire",			SHOOT_EFFECT_FIRE},
-	{"energy",			SHOOT_EFFECT_ENERGY},
-	{"poisonarrow",		SHOOT_EFFECT_POISONARROW},
-	{"burstarrow",		SHOOT_EFFECT_BURSTARROW},
-	{"throwingstar",	SHOOT_EFFECT_THROWINGSTAR},
-	{"throwingknife",	SHOOT_EFFECT_THROWINGKNIFE},
-	{"smallstone",		SHOOT_EFFECT_SMALLSTONE},
-	{"death",			SHOOT_EFFECT_DEATH},
-	{"largerock",		SHOOT_EFFECT_LARGEROCK},
-	{"snowball",		SHOOT_EFFECT_SNOWBALL},
-	{"powerbolt",		SHOOT_EFFECT_POWERBOLT},
-	{"poison",			SHOOT_EFFECT_POISONFIELD},
-	{"infernalbolt",	SHOOT_EFFECT_INFERNALBOLT},
-	{"huntingspear",	SHOOT_EFFECT_HUNTINGSPEAR},
-	{"enchantedspear",	SHOOT_EFFECT_ENCHANTEDSPEAR},
-	{"redstar",			SHOOT_EFFECT_REDSTAR},
-	{"greenstar",		SHOOT_EFFECT_GREENSTAR},
-	{"royalspear",		SHOOT_EFFECT_ROYALSPEAR},
-	{"sniperarrow",		SHOOT_EFFECT_SNIPERARROW},
-	{"onyxarrow",		SHOOT_EFFECT_ONYXARROW},
-	{"piercingbolt",	SHOOT_EFFECT_PIERCINGBOLT},
-	{"whirlwindsword",	SHOOT_EFFECT_WHIRLWINDSWORD},
-	{"whirlwindaxe",	SHOOT_EFFECT_WHIRLWINDAXE},
-	{"whirlwindclub",	SHOOT_EFFECT_WHIRLWINDCLUB},
-	{"etherealspear",	SHOOT_EFFECT_ETHEREALSPEAR},
-	{"ice",				SHOOT_EFFECT_ICE},
-	{"earth",			SHOOT_EFFECT_EARTH},
-	{"holy",			SHOOT_EFFECT_HOLY},
-	{"suddendeath",		SHOOT_EFFECT_SUDDENDEATH},
-	{"flasharrow",		SHOOT_EFFECT_FLASHARROW},
-	{"flammingarrow",	SHOOT_EFFECT_FLAMMINGARROW},
-	{"flamingarrow",	SHOOT_EFFECT_FLAMMINGARROW},
-	{"shiverarrow",		SHOOT_EFFECT_SHIVERARROW},
-	{"energyball",		SHOOT_EFFECT_ENERGYBALL},
-	{"smallice",		SHOOT_EFFECT_SMALLICE},
-	{"smallholy",		SHOOT_EFFECT_SMALLHOLY},
-	{"smallearth",		SHOOT_EFFECT_SMALLEARTH},
-	{"eartharrow",		SHOOT_EFFECT_EARTHARROW},
-	{"explosion",		SHOOT_EFFECT_EXPLOSION},
-	{"cake",			SHOOT_EFFECT_CAKE}
+	{"spear",			CONST_ANI_SPEAR},
+	{"bolt",			CONST_ANI_BOLT},
+	{"arrow",			CONST_ANI_ARROW},
+	{"fire",			CONST_ANI_FIRE},
+	{"energy",			CONST_ANI_ENERGY},
+	{"poisonarrow",		CONST_ANI_POISONARROW},
+	{"burstarrow",		CONST_ANI_BURSTARROW},
+	{"throwingstar",	CONST_ANI_THROWINGSTAR},
+	{"throwingknife",	CONST_ANI_THROWINGKNIFE},
+	{"smallstone",		CONST_ANI_SMALLSTONE},
+	{"death",			CONST_ANI_DEATH},
+	{"largerock",		CONST_ANI_LARGEROCK},
+	{"snowball",		CONST_ANI_SNOWBALL},
+	{"powerbolt",		CONST_ANI_POWERBOLT},
+	{"poison",			CONST_ANI_POISON},
+	{"infernalbolt",	CONST_ANI_INFERNALBOLT},
+	{"huntingspear",	CONST_ANI_HUNTINGSPEAR},
+	{"enchantedspear",	CONST_ANI_ENCHANTEDSPEAR},
+	{"redstar",			CONST_ANI_REDSTAR},
+	{"greenstar",		CONST_ANI_GREENSTAR},
+	{"royalspear",		CONST_ANI_ROYALSPEAR},
+	{"sniperarrow",		CONST_ANI_SNIPERARROW},
+	{"onyxarrow",		CONST_ANI_ONYXARROW},
+	{"piercingbolt",	CONST_ANI_PIERCINGBOLT},
+	{"whirlwindsword",	CONST_ANI_WHIRLWINDSWORD},
+	{"whirlwindaxe",	CONST_ANI_WHIRLWINDAXE},
+	{"whirlwindclub",	CONST_ANI_WHIRLWINDCLUB},
+	{"etherealspear",	CONST_ANI_ETHEREALSPEAR},
+	{"ice",				CONST_ANI_ICE},
+	{"earth",			CONST_ANI_EARTH},
+	{"holy",			CONST_ANI_HOLY},
+	{"suddendeath",		CONST_ANI_SUDDENDEATH},
+	{"flasharrow",		CONST_ANI_FLASHARROW},
+	{"flammingarrow",	CONST_ANI_FLAMMINGARROW},
+	{"flamingarrow",	CONST_ANI_FLAMMINGARROW},
+	{"shiverarrow",		CONST_ANI_SHIVERARROW},
+	{"energyball",		CONST_ANI_ENERGYBALL},
+	{"smallice",		CONST_ANI_SMALLICE},
+	{"smallholy",		CONST_ANI_SMALLHOLY},
+	{"smallearth",		CONST_ANI_SMALLEARTH},
+	{"eartharrow",		CONST_ANI_EARTHARROW},
+	{"explosion",		CONST_ANI_EXPLOSION},
+	{"cake",			CONST_ANI_CAKE}
 };
 
 CombatTypeNames combatTypeNames[] =
@@ -1262,7 +1262,7 @@ MagicEffect_t getMagicEffect(const std::string& strValue)
 			return magicEffectNames[i].magicEffect;
 	}
 
-	return MAGIC_EFFECT_UNKNOWN;
+	return CONST_ME_UNKNOWN;
 }
 
 ShootEffect_t getShootType(const std::string& strValue)
@@ -1273,7 +1273,7 @@ ShootEffect_t getShootType(const std::string& strValue)
 			return shootTypeNames[i].shootType;
 	}
 
-	return SHOOT_EFFECT_UNKNOWN;
+	return CONST_ANI_UNKNOWN;
 }
 
 CombatType_t getCombatType(const std::string& strValue)
@@ -1349,70 +1349,70 @@ void getCombatDetails(CombatType_t combatType, MagicEffect_t& magicEffect, Color
 		case COMBAT_PHYSICALDAMAGE:
 		{
 			textColor = COLOR_RED;
-			magicEffect = MAGIC_EFFECT_DRAW_BLOOD;
+			magicEffect = CONST_ME_DRAWBLOOD;
 			break;
 		}
 
 		case COMBAT_ENERGYDAMAGE:
 		{
 			textColor = COLOR_PURPLE;
-			magicEffect = MAGIC_EFFECT_ENERGY_DAMAGE;
+			magicEffect = CONST_ME_ENERGYHIT;
 			break;
 		}
 
 		case COMBAT_EARTHDAMAGE:
 		{
 			textColor = COLOR_LIGHTGREEN;
-			magicEffect = MAGIC_EFFECT_POISON_RINGS;
+			magicEffect = CONST_ME_GREEN_RINGS;
 			break;
 		}
 
 		case COMBAT_DROWNDAMAGE:
 		{
 			textColor = COLOR_LIGHTBLUE;
-			magicEffect = MAGIC_EFFECT_LOSE_ENERGY;
+			magicEffect = CONST_ME_LOSEENERGY;
 			break;
 		}
 
 		case COMBAT_FIREDAMAGE:
 		{
 			textColor = COLOR_ORANGE;
-			magicEffect = MAGIC_EFFECT_HITBY_FIRE;
+			magicEffect = CONST_ME_HITBYFIRE;
 			break;
 		}
 
 		case COMBAT_ICEDAMAGE:
 		{
 			textColor = COLOR_TEAL;
-			magicEffect = MAGIC_EFFECT_ICEATTACK;
+			magicEffect = CONST_ME_ICEATTACK;
 			break;
 		}
 
 		case COMBAT_HOLYDAMAGE:
 		{
 			textColor = COLOR_YELLOW;
-			magicEffect = MAGIC_EFFECT_HOLYDAMAGE;
+			magicEffect = CONST_ME_HOLYDAMAGE;
 			break;
 		}
 
 		case COMBAT_DEATHDAMAGE:
 		{
 			textColor = COLOR_DARKRED;
-			magicEffect = MAGIC_EFFECT_SMALLCLOUDS;
+			magicEffect = CONST_ME_SMALLCLOUDS;
 			break;
 		}
 
 		case COMBAT_LIFEDRAIN:
 		{
 			textColor = COLOR_RED;
-			magicEffect = MAGIC_EFFECT_WRAPS_RED;
+			magicEffect = CONST_ME_MAGIC_RED;
 			break;
 		}
 
 		case COMBAT_MANADRAIN:
 		{
 			textColor = COLOR_BLUE;
-			magicEffect = MAGIC_EFFECT_LOSE_ENERGY;
+			magicEffect = CONST_ME_LOSEENERGY;
 		}
 
 		default:

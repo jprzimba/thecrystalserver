@@ -263,10 +263,9 @@ bool Weapon::loadFunction(const std::string& functionName)
 	std::string tmpFunctionName = asLowerCaseString(functionName);
 	if(tmpFunctionName == "internalloadweapon" || tmpFunctionName == "default")
 	{
-		m_scripted = EVENT_SCRIPT_FALSE;
-		return configureWeapon(Item::items[getID()]);
+		if(configureWeapon(Item::items[getID()]))
+			return true;
 	}
-
 	return false;
 }
 
@@ -421,7 +420,7 @@ bool Weapon::internalUseWeapon(Player* player, Item* item, Tile* tile) const
 	else
 	{
 		Combat::postCombatEffects(player, tile->getPosition(), params);
-		g_game.addMagicEffect(tile->getPosition(), MAGIC_EFFECT_POFF);
+		g_game.addMagicEffect(tile->getPosition(), CONST_ME_POFF);
 	}
 
 	onUsedAmmo(player, item, tile);
@@ -499,48 +498,18 @@ bool Weapon::executeUseWeapon(Player* player, const LuaVariant& var) const
 	if(m_interface->reserveEnv())
 	{
 		ScriptEnviroment* env = m_interface->getEnv();
-		if(m_scripted == EVENT_SCRIPT_BUFFER)
-		{
-			env->setRealPos(player->getPosition());
-			std::stringstream scriptstream;
+		env->setScriptId(m_scriptId, m_interface);
+		env->setRealPos(player->getPosition());
 
-			scriptstream << "local cid = " << env->addThing(player) << std::endl;
-			env->streamVariant(scriptstream, "var", var);
+		lua_State* L = m_interface->getState();
+		m_interface->pushFunction(m_scriptId);
 
-			if(m_scriptData)
-				scriptstream << *m_scriptData;
+		lua_pushnumber(L, env->addThing(player));
+		m_interface->pushVariant(L, var);
 
-			bool result = true;
-			if(m_interface->loadBuffer(scriptstream.str()))
-			{
-				lua_State* L = m_interface->getState();
-				result = m_interface->getGlobalBool(L, "_result", true);
-			}
-
-			m_interface->releaseEnv();
-			return result;
-		}
-		else
-		{
-			#ifdef __DEBUG_LUASCRIPTS__
-			char desc[60];
-			sprintf(desc, "onUseWeapon - %s", player->getName().c_str());
-			env->setEvent(desc);
-			#endif
-
-			env->setScriptId(m_scriptId, m_interface);
-			env->setRealPos(player->getPosition());
-
-			lua_State* L = m_interface->getState();
-			m_interface->pushFunction(m_scriptId);
-
-			lua_pushnumber(L, env->addThing(player));
-			m_interface->pushVariant(L, var);
-
-			bool result = m_interface->callFunction(2);
-			m_interface->releaseEnv();
-			return result;
-		}
+		bool result = m_interface->callFunction(2);
+		m_interface->releaseEnv();
+		return result;
 	}
 	else
 	{

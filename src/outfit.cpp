@@ -675,16 +675,16 @@ bool Outfits::addAttributes(uint32_t playerId, uint32_t outfitId, uint16_t sex, 
 	{
 		Condition* condition = Condition::createCondition(CONDITIONID_OUTFIT, CONDITION_REGENERATION, -1, 0);
 		if(outfit.healthGain)
-			condition->setParam(CONDITIONPARAM_HEALTHGAIN, outfit.healthGain);
+			condition->setParam(CONDITION_PARAM_HEALTHGAIN, outfit.healthGain);
 
 		if(outfit.healthTicks)
-			condition->setParam(CONDITIONPARAM_HEALTHTICKS, outfit.healthTicks);
+			condition->setParam(CONDITION_PARAM_HEALTHTICKS, outfit.healthTicks);
 
 		if(outfit.manaGain)
-			condition->setParam(CONDITIONPARAM_MANAGAIN, outfit.manaGain);
+			condition->setParam(CONDITION_PARAM_MANAGAIN, outfit.manaGain);
 
 		if(outfit.manaTicks)
-			condition->setParam(CONDITIONPARAM_MANATICKS, outfit.manaTicks);
+			condition->setParam(CONDITION_PARAM_MANATICKS, outfit.manaTicks);
 
 		player->addCondition(condition);
 	}

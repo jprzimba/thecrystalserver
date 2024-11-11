@@ -1460,6 +1460,10 @@ void LuaInterface::moveValue(lua_State* from, lua_State* to)
 	lua_pop(from, 1); // Pop the value we just read
 }
 
+#define registerEnum(value) { std::string enumName = #value; registerGlobalVariable(enumName.substr(enumName.find_last_of(':') + 1), value); }
+#define registerEnumIn(tableName, value) { std::string enumName = #value; registerVariable(tableName, enumName.substr(enumName.find_last_of(':') + 1), value); }
+
+
 void LuaInterface::registerFunctions()
 {
 	//example(...)
@@ -2528,6 +2532,467 @@ void LuaInterface::registerFunctions()
 
 	//std table
 	luaL_register(m_luaState, "std", LuaInterface::luaStdTable);
+
+	/* New functions */
+	//registerClass(className, baseClass, newFunction)
+	//registerTable(tableName)
+	//registerMethod(className, functionName, function)
+	//registerMetaMethod(className, functionName, function)
+	//registerGlobalMethod(functionName, function)
+	//registerVariable(tableName, name, value)
+	//registerGlobalVariable(name, value)
+	//registerEnum(value)
+	//registerEnumIn(tableName, value)
+	
+	// Enums
+	//creature type
+	registerEnum(CREATURETYPE_PLAYER)
+	registerEnum(CREATURETYPE_MONSTER)
+	registerEnum(CREATURETYPE_NPC)
+
+	//dtaabase
+	registerEnum(DATABASE_ENGINE_NONE)
+	registerEnum(DATABASE_ENGINE_MYSQL)
+	registerEnum(DATABASE_ENGINE_SQLITE)
+
+	//encryption
+	registerEnum(ENCRYPTION_PLAIN)
+	registerEnum(ENCRYPTION_MD5)
+	registerEnum(ENCRYPTION_SHA1)
+	registerEnum(ENCRYPTION_SHA256)
+	registerEnum(ENCRYPTION_SHA512)
+
+	//guilds
+	registerEnum(GUILDLEVEL_NONE)
+	registerEnum(GUILDLEVEL_MEMBER)
+	registerEnum(GUILDLEVEL_VICE)
+	registerEnum(GUILDLEVEL_LEADER)
+
+	//channels
+	registerEnum(CHANNEL_GUILD)
+	registerEnum(CHANNEL_PARTY)
+	registerEnum(CHANNEL_HELP)
+	registerEnum(CHANNEL_DEFAULT)
+	registerEnum(CHANNEL_PRIVATE)
+
+	//race
+	registerEnum(RACE_NONE)
+	registerEnum(RACE_VENOM)
+	registerEnum(RACE_BLOOD)
+	registerEnum(RACE_UNDEAD)
+	registerEnum(RACE_FIRE)
+	registerEnum(RACE_ENERGY)
+
+	//violation action
+	registerEnum(ACTION_NOTATION)
+	registerEnum(ACTION_NAMEREPORT)
+	registerEnum(ACTION_BANISHMENT)
+	registerEnum(ACTION_BANREPORT)
+	registerEnum(ACTION_BANFINAL)
+	registerEnum(ACTION_BANREPORTFINAL)
+	registerEnum(ACTION_STATEMENT)
+	registerEnum(ACTION_DELETION)
+	registerEnum(ACTION_NAMELOCK)
+	registerEnum(ACTION_BANLOCK)
+	registerEnum(ACTION_BANLOCKFINAL)
+	registerEnum(ACTION_PLACEHOLDER)
+
+	//combat types
+	registerEnum(COMBAT_NONE)
+	registerEnum(COMBAT_PHYSICALDAMAGE)
+	registerEnum(COMBAT_ENERGYDAMAGE)
+	registerEnum(COMBAT_EARTHDAMAGE)
+	registerEnum(COMBAT_FIREDAMAGE)
+	registerEnum(COMBAT_UNDEFINEDDAMAGE)
+	registerEnum(COMBAT_LIFEDRAIN)
+	registerEnum(COMBAT_MANADRAIN)
+	registerEnum(COMBAT_HEALING)
+	registerEnum(COMBAT_DROWNDAMAGE)
+	registerEnum(COMBAT_ICEDAMAGE)
+	registerEnum(COMBAT_HOLYDAMAGE)
+	registerEnum(COMBAT_DEATHDAMAGE)
+
+	//combat params
+	registerEnum(COMBAT_PARAM_TYPE)
+	registerEnum(COMBAT_PARAM_EFFECT)
+	registerEnum(COMBAT_PARAM_DISTANCEEFFECT)
+	registerEnum(COMBAT_PARAM_BLOCKSHIELD)
+	registerEnum(COMBAT_PARAM_BLOCKARMOR)
+	registerEnum(COMBAT_PARAM_TARGETCASTERORTOPMOST)
+	registerEnum(COMBAT_PARAM_CREATEITEM)
+	registerEnum(COMBAT_PARAM_AGGRESSIVE)
+	registerEnum(COMBAT_PARAM_DISPEL)
+	registerEnum(COMBAT_PARAM_USECHARGES)
+	registerEnum(COMBAT_PARAM_TARGETPLAYERSORSUMMONS)
+	registerEnum(COMBAT_PARAM_DIFFERENTAREADAMAGE)
+	registerEnum(COMBAT_PARAM_HITEFFECT)
+	registerEnum(COMBAT_PARAM_HITCOLOR)
+	registerEnum(COMBAT_PARAM_ELEMENTTYPE)
+	registerEnum(COMBAT_PARAM_ELEMENTDAMAGE)
+
+	//callback param
+	registerEnum(CALLBACK_PARAM_LEVELMAGICVALUE)
+	registerEnum(CALLBACK_PARAM_SKILLVALUE)
+	registerEnum(CALLBACK_PARAM_TARGETTILE)
+	registerEnum(CALLBACK_PARAM_TARGETCREATURE)
+
+	//condititon params
+	registerEnum(CONDITION_PARAM_OWNER)
+	registerEnum(CONDITION_PARAM_TICKS)
+	registerEnum(CONDITION_PARAM_OUTFIT)
+	registerEnum(CONDITION_PARAM_HEALTHGAIN)
+	registerEnum(CONDITION_PARAM_HEALTHTICKS)
+	registerEnum(CONDITION_PARAM_MANAGAIN)
+	registerEnum(CONDITION_PARAM_MANATICKS)
+	registerEnum(CONDITION_PARAM_DELAYED)
+	registerEnum(CONDITION_PARAM_SPEED)
+	registerEnum(CONDITION_PARAM_LIGHT_LEVEL)
+	registerEnum(CONDITION_PARAM_LIGHT_COLOR)
+	registerEnum(CONDITION_PARAM_SOULGAIN)
+	registerEnum(CONDITION_PARAM_SOULTICKS)
+	registerEnum(CONDITION_PARAM_MINVALUE)
+	registerEnum(CONDITION_PARAM_MAXVALUE)
+	registerEnum(CONDITION_PARAM_STARTVALUE)
+	registerEnum(CONDITION_PARAM_TICKINTERVAL)
+	registerEnum(CONDITION_PARAM_FORCEUPDATE)
+	registerEnum(CONDITION_PARAM_SKILL_MELEE)
+	registerEnum(CONDITION_PARAM_SKILL_FIST)
+	registerEnum(CONDITION_PARAM_SKILL_CLUB)
+	registerEnum(CONDITION_PARAM_SKILL_SWORD)
+	registerEnum(CONDITION_PARAM_SKILL_AXE)
+	registerEnum(CONDITION_PARAM_SKILL_DISTANCE)
+	registerEnum(CONDITION_PARAM_SKILL_SHIELD)
+	registerEnum(CONDITION_PARAM_SKILL_FISHING)
+	registerEnum(CONDITION_PARAM_STAT_MAXHEALTH)
+	registerEnum(CONDITION_PARAM_STAT_MAXMANA)
+	registerEnum(CONDITION_PARAM_STAT_SOUL)
+	registerEnum(CONDITION_PARAM_STAT_MAGICLEVEL)
+	registerEnum(CONDITION_PARAM_STAT_MAXHEALTHPERCENT)
+	registerEnum(CONDITION_PARAM_STAT_MAXMANAPERCENT)
+	registerEnum(CONDITION_PARAM_STAT_SOULPERCENT)
+	registerEnum(CONDITION_PARAM_STAT_MAGICLEVELPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_MELEEPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_FISTPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_CLUBPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_SWORDPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_AXEPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_DISTANCEPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_SHIELDPERCENT)
+	registerEnum(CONDITION_PARAM_SKILL_FISHINGPERCENT)
+	registerEnum(CONDITION_PARAM_PERIODICDAMAGE)
+	registerEnum(CONDITION_PARAM_BUFF)
+	registerEnum(CONDITION_PARAM_SUBID)
+	registerEnum(CONDITION_PARAM_FIELD)
+
+	//exhaust
+	registerEnum(EXHAUST_COMBAT)
+	registerEnum(EXHAUST_HEALING)
+
+	//block type
+	registerEnum(BLOCK_NONE)
+	registerEnum(BLOCK_DEFENSE)
+	registerEnum(BLOCK_ARMOR)
+	registerEnum(BLOCK_IMMUNITY)
+
+	//reflect type
+	registerEnum(REFLECT_PERCENT)
+	registerEnum(REFLECT_CHANCE)
+
+	//increment
+	registerEnum(HEALING_VALUE)
+	registerEnum(HEALING_PERCENT)
+	registerEnum(MAGIC_VALUE)
+	registerEnum(MAGIC_PERCENT)
+
+	//stat
+	registerEnum(STAT_MAXHEALTH)
+	registerEnum(STAT_MAXMANA)
+	registerEnum(STAT_SOUL)
+	registerEnum(STAT_LEVEL)
+	registerEnum(STAT_MAGICLEVEL)
+
+	//loss types
+	registerEnum(LOSS_EXPERIENCE)
+	registerEnum(LOSS_MANA)
+	registerEnum(LOSS_SKILLS)
+	registerEnum(LOSS_CONTAINERS)
+	registerEnum(LOSS_ITEMS)
+
+	//formula
+	registerEnum(COMBAT_FORMULA_UNDEFINED)
+	registerEnum(COMBAT_FORMULA_LEVELMAGIC)
+	registerEnum(COMBAT_FORMULA_SKILL)
+	registerEnum(COMBAT_FORMULA_DAMAGE)
+
+	//condiiton id
+	registerEnum(CONDITIONID_DEFAULT)
+	registerEnum(CONDITIONID_COMBAT)
+	registerEnum(CONDITIONID_HEAD)
+	registerEnum(CONDITIONID_NECKLACE)
+	registerEnum(CONDITIONID_BACKPACK)
+	registerEnum(CONDITIONID_ARMOR)
+	registerEnum(CONDITIONID_RIGHT)
+	registerEnum(CONDITIONID_LEFT)
+	registerEnum(CONDITIONID_LEGS)
+	registerEnum(CONDITIONID_FEET)
+	registerEnum(CONDITIONID_RING)
+	registerEnum(CONDITIONID_AMMO)
+	registerEnum(CONDITIONID_OUTFIT)
+
+	//player sex
+	registerEnum(PLAYERSEX_FEMALE)
+	registerEnum(PLAYERSEX_MALE)
+
+	//war system
+	registerEnum(WAR_GUILD)
+	registerEnum(WAR_ENEMY)
+
+	//direction
+	registerEnum(NORTH)
+	registerEnum(EAST)
+	registerEnum(SOUTH)
+	registerEnum(WEST)
+	registerEnum(SOUTHWEST)
+	registerEnum(SOUTHEAST)
+	registerEnum(NORTHWEST)
+	registerEnum(NORTHEAST)
+
+	//conditions
+	registerEnum(CONDITION_NONE)
+	registerEnum(CONDITION_POISON)
+	registerEnum(CONDITION_FIRE)
+	registerEnum(CONDITION_ENERGY)
+	registerEnum(CONDITION_PHYSICAL)
+	registerEnum(CONDITION_HASTE)
+	registerEnum(CONDITION_PARALYZE)
+	registerEnum(CONDITION_OUTFIT)
+	registerEnum(CONDITION_INVISIBLE)
+	registerEnum(CONDITION_LIGHT)
+	registerEnum(CONDITION_MANASHIELD)
+	registerEnum(CONDITION_INFIGHT)
+	registerEnum(CONDITION_DRUNK)
+	registerEnum(CONDITION_EXHAUST)
+	registerEnum(CONDITION_REGENERATION)
+	registerEnum(CONDITION_SOUL)
+	registerEnum(CONDITION_DROWN)
+	registerEnum(CONDITION_ATTRIBUTES)
+	registerEnum(CONDITION_FREEZING)
+	registerEnum(CONDITION_DAZZLED)
+	registerEnum(CONDITION_CURSED)
+	registerEnum(CONDITION_PACIFIED)
+	registerEnum(CONDITION_GAMEMASTER)
+	registerEnum(CONDITION_HUNTING)
+
+	//gamemaster rinvisible
+	registerEnum(GAMEMASTER_INVISIBLE)
+	registerEnum(GAMEMASTER_IGNORE)
+	registerEnum(GAMEMASTER_TELEPORT)
+
+	//slots
+	registerEnum(CONST_SLOT_HEAD)
+	registerEnum(CONST_SLOT_NECKLACE)
+	registerEnum(CONST_SLOT_BACKPACK)
+	registerEnum(CONST_SLOT_ARMOR)
+	registerEnum(CONST_SLOT_RIGHT)
+	registerEnum(CONST_SLOT_LEFT)
+	registerEnum(CONST_SLOT_LEGS)
+	registerEnum(CONST_SLOT_FEET)
+	registerEnum(CONST_SLOT_RING)
+	registerEnum(CONST_SLOT_AMMO)
+
+	//client os
+	registerEnum(CLIENTOS_LINUX)
+	registerEnum(CLIENTOS_WINDOWS)
+
+	//magic effects
+	registerEnum(CONST_ME_DRAWBLOOD)
+	registerEnum(CONST_ME_LOSEENERGY)
+	registerEnum(CONST_ME_POFF)
+	registerEnum(CONST_ME_BLOCKHIT)
+	registerEnum(CONST_ME_EXPLOSIONAREA)
+	registerEnum(CONST_ME_EXPLOSIONHIT)
+	registerEnum(CONST_ME_FIREAREA)
+	registerEnum(CONST_ME_YELLOW_RINGS)
+	registerEnum(CONST_ME_GREEN_RINGS)
+	registerEnum(CONST_ME_HITAREA)
+	registerEnum(CONST_ME_TELEPORT)
+	registerEnum(CONST_ME_ENERGYHIT)
+	registerEnum(CONST_ME_MAGIC_BLUE)
+	registerEnum(CONST_ME_MAGIC_RED)
+	registerEnum(CONST_ME_MAGIC_GREEN)
+	registerEnum(CONST_ME_HITBYFIRE)
+	registerEnum(CONST_ME_HITBYPOISON)
+	registerEnum(CONST_ME_MORTAREA)
+	registerEnum(CONST_ME_SOUND_GREEN)
+	registerEnum(CONST_ME_SOUND_RED)
+	registerEnum(CONST_ME_POISONAREA)
+	registerEnum(CONST_ME_SOUND_YELLOW)
+	registerEnum(CONST_ME_SOUND_PURPLE)
+	registerEnum(CONST_ME_SOUND_BLUE)
+	registerEnum(CONST_ME_SOUND_WHITE)
+	registerEnum(CONST_ME_BUBBLES)
+	registerEnum(CONST_ME_CRAPS)
+	registerEnum(CONST_ME_GIFT_WRAPS)
+	registerEnum(CONST_ME_FIREWORK_YELLOW)
+	registerEnum(CONST_ME_FIREWORK_RED)
+	registerEnum(CONST_ME_FIREWORK_BLUE)
+	registerEnum(CONST_ME_STUN)
+	registerEnum(CONST_ME_SLEEP)
+	registerEnum(CONST_ME_WATERCREATURE)
+	registerEnum(CONST_ME_GROUNDSHAKER)
+	registerEnum(CONST_ME_HEARTS)
+	registerEnum(CONST_ME_FIREATTACK)
+	registerEnum(CONST_ME_ENERGYAREA)
+	registerEnum(CONST_ME_SMALLCLOUDS)
+	registerEnum(CONST_ME_HOLYDAMAGE)
+	registerEnum(CONST_ME_BIGCLOUDS)
+	registerEnum(CONST_ME_ICEAREA)
+	registerEnum(CONST_ME_ICETORNADO)
+	registerEnum(CONST_ME_ICEATTACK)
+	registerEnum(CONST_ME_STONES)
+	registerEnum(CONST_ME_SMALLPLANTS)
+	registerEnum(CONST_ME_CARNIPHILA)
+	registerEnum(CONST_ME_PURPLEENERGY)
+	registerEnum(CONST_ME_YELLOWENERGY)
+	registerEnum(CONST_ME_HOLYAREA)
+	registerEnum(CONST_ME_BIGPLANTS)
+	registerEnum(CONST_ME_CAKE)
+	registerEnum(CONST_ME_GIANTICE)
+	registerEnum(CONST_ME_WATERSPLASH)
+	registerEnum(CONST_ME_PLANTATTACK)
+	registerEnum(CONST_ME_TUTORIALARROW)
+	registerEnum(CONST_ME_TUTORIALSQUARE)
+	registerEnum(CONST_ME_MIRRORHORIZONTAL)
+	registerEnum(CONST_ME_MIRRORVERTICAL)
+	registerEnum(CONST_ME_SKULLHORIZONTAL)
+	registerEnum(CONST_ME_SKULLVERTICAL)
+	registerEnum(CONST_ME_ASSASSIN)
+	registerEnum(CONST_ME_STEPSHORIZONTAL)
+	registerEnum(CONST_ME_BLOODYSTEPS)
+	registerEnum(CONST_ME_STEPSVERTICAL)
+	registerEnum(CONST_ME_YALAHARIGHOST)
+	registerEnum(CONST_ME_BATS)
+	registerEnum(CONST_ME_SMOKE)
+	registerEnum(CONST_ME_INSECTS)
+	registerEnum(CONST_ME_DRAGONHEAD)
+	registerEnum(CONST_ME_LAST)
+	registerEnum(CONST_ME_NONE)
+
+	//distance effects
+	registerEnum(CONST_ANI_SPEAR)
+	registerEnum(CONST_ANI_BOLT)
+	registerEnum(CONST_ANI_ARROW)
+	registerEnum(CONST_ANI_FIRE)
+	registerEnum(CONST_ANI_ENERGY)
+	registerEnum(CONST_ANI_POISONARROW)
+	registerEnum(CONST_ANI_BURSTARROW)
+	registerEnum(CONST_ANI_THROWINGSTAR)
+	registerEnum(CONST_ANI_THROWINGKNIFE)
+	registerEnum(CONST_ANI_SMALLSTONE)
+	registerEnum(CONST_ANI_DEATH)
+	registerEnum(CONST_ANI_LARGEROCK)
+	registerEnum(CONST_ANI_SNOWBALL)
+	registerEnum(CONST_ANI_POWERBOLT)
+	registerEnum(CONST_ANI_POISON)
+	registerEnum(CONST_ANI_INFERNALBOLT)
+	registerEnum(CONST_ANI_HUNTINGSPEAR)
+	registerEnum(CONST_ANI_ENCHANTEDSPEAR)
+	registerEnum(CONST_ANI_REDSTAR)
+	registerEnum(CONST_ANI_GREENSTAR)
+	registerEnum(CONST_ANI_ROYALSPEAR)
+	registerEnum(CONST_ANI_SNIPERARROW)
+	registerEnum(CONST_ANI_ONYXARROW)
+	registerEnum(CONST_ANI_PIERCINGBOLT)
+	registerEnum(CONST_ANI_WHIRLWINDSWORD)
+	registerEnum(CONST_ANI_WHIRLWINDAXE)
+	registerEnum(CONST_ANI_WHIRLWINDCLUB)
+	registerEnum(CONST_ANI_ETHEREALSPEAR)
+	registerEnum(CONST_ANI_ICE)
+	registerEnum(CONST_ANI_EARTH)
+	registerEnum(CONST_ANI_HOLY)
+	registerEnum(CONST_ANI_SUDDENDEATH)
+	registerEnum(CONST_ANI_FLASHARROW)
+	registerEnum(CONST_ANI_FLAMMINGARROW)
+	registerEnum(CONST_ANI_SHIVERARROW)
+	registerEnum(CONST_ANI_ENERGYBALL)
+	registerEnum(CONST_ANI_SMALLICE)
+	registerEnum(CONST_ANI_SMALLHOLY)
+	registerEnum(CONST_ANI_SMALLEARTH)
+	registerEnum(CONST_ANI_EARTHARROW)
+	registerEnum(CONST_ANI_EXPLOSION)
+	registerEnum(CONST_ANI_CAKE)
+	registerEnum(CONST_ANI_WEAPONTYPE)
+	registerEnum(CONST_ANI_NONE)
+
+	//game states
+	registerEnum(GAMESTATE_STARTUP)
+	registerEnum(GAMESTATE_INIT)
+	registerEnum(GAMESTATE_NORMAL)
+	registerEnum(GAMESTATE_CLOSED)
+	registerEnum(GAMESTATE_SHUTDOWN)
+	registerEnum(GAMESTATE_CLOSING)
+	registerEnum(GAMESTATE_MAINTAIN)
+
+	//game window messages
+	registerEnum(MESSAGE_FIRST)
+	registerEnum(MESSAGE_STATUS_CONSOLE_RED)
+	registerEnum(MESSAGE_EVENT_ORANGE)
+	registerEnum(MESSAGE_STATUS_CONSOLE_ORANGE)
+	registerEnum(MESSAGE_STATUS_WARNING)
+	registerEnum(MESSAGE_EVENT_ADVANCE)
+	registerEnum(MESSAGE_EVENT_DEFAULT)
+	registerEnum(MESSAGE_STATUS_DEFAULT)
+	registerEnum(MESSAGE_INFO_DESCR)
+	registerEnum(MESSAGE_STATUS_SMALL)
+	registerEnum(MESSAGE_STATUS_CONSOLE_BLUE)
+	registerEnum(MESSAGE_LAST)
+
+	//_G
+	registerGlobalVariable("INDEX_WHEREEVER", INDEX_WHEREEVER);
+	registerGlobalBoolean("VIRTUAL_PARENT", true);
+
+	registerGlobalMethod("rawgetmetatable", LuaInterface::luaRawGetMetatable);
+}
+
+#undef registerEnum
+#undef registerEnumIn
+
+// Push
+void LuaInterface::pushBoolean(lua_State* L, bool value)
+{
+	lua_pushboolean(L, value ? 1 : 0);
+}
+
+void LuaInterface::registerGlobalMethod(const std::string& functionName, lua_CFunction func)
+{
+	// _G[functionName] = func
+	lua_pushcfunction(m_luaState, func);
+	lua_setglobal(m_luaState, functionName.c_str());
+}
+
+void LuaInterface::registerVariable(const std::string& tableName, const std::string& name, lua_Number value)
+{
+	// tableName.name = value
+	lua_getglobal(m_luaState, tableName.c_str());
+	setField(m_luaState, name.c_str(), value);
+
+	// pop tableName
+	lua_pop(m_luaState, 1);
+}
+
+void LuaInterface::registerGlobalVariable(const std::string& name, lua_Number value)
+{
+	// _G[name] = value
+	lua_pushnumber(m_luaState, value);
+	lua_setglobal(m_luaState, name.c_str());
+}
+
+
+void LuaInterface::registerGlobalBoolean(const std::string& name, bool value)
+{
+	// _G[name] = value
+	pushBoolean(m_luaState, value);
+	lua_setglobal(m_luaState, name.c_str());
 }
 
 const luaL_Reg LuaInterface::luaSystemTable[] =
@@ -2639,6 +3104,25 @@ const luaL_Reg LuaInterface::luaStdTable[] =
 	{"checkName", LuaInterface::luaStdCheckName},
 	{NULL, NULL}
 };
+
+//Get
+std::string LuaInterface::getString(lua_State* L, int32_t arg)
+{
+	size_t len;
+	const char* c_str = lua_tolstring(L, arg, &len);
+	if (!c_str || len == 0) 
+		return std::string();
+
+	return std::string(c_str, len);
+}
+
+// _G
+int32_t LuaInterface::luaRawGetMetatable(lua_State* L)
+{
+	// rawgetmetatable(metatableName)
+	luaL_getmetatable(L, popString(L).c_str());
+	return 1;
+}
 
 int32_t LuaInterface::internalGetPlayerInfo(lua_State* L, PlayerInfo_t info)
 {
@@ -3833,7 +4317,7 @@ int32_t LuaInterface::luaDoCreatureAddHealth(lua_State* L)
 	if(params > 3)
 		hitColor = (Color_t)popNumber(L);
 
-	MagicEffect_t hitEffect = MAGIC_EFFECT_UNKNOWN;
+	MagicEffect_t hitEffect = CONST_ME_UNKNOWN;
 	if(params > 2)
 		hitEffect = (MagicEffect_t)popNumber(L);
 
@@ -3910,7 +4394,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 {
 	//doPlayerAddItem(cid, itemid[, count/subtype = 1[, canDropOnMap = true[, slot = 0]]])
 	//doPlayerAddItem(cid, itemid[, count = 1[, canDropOnMap = true[, subtype = 1[, slot = 0]]]])
-	int32_t params = lua_gettop(L), subType = 1, slot = SLOT_WHEREEVER;
+	int32_t params = lua_gettop(L), subType = 1, slot = CONST_SLOT_WHEREEVER;
 	if(params > 5)
 		slot = popNumber(L);
 
@@ -3931,7 +4415,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 		count = popNumber(L);
 
 	uint32_t itemId = popNumber(L);
-	if(slot > SLOT_AMMO)
+	if(slot > CONST_SLOT_AMMO)
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);
@@ -4003,7 +4487,7 @@ int32_t LuaInterface::luaDoPlayerAddItem(lua_State* L)
 int32_t LuaInterface::luaDoPlayerAddItemEx(lua_State* L)
 {
 	//doPlayerAddItemEx(cid, uid[, canDropOnMap = false[, slot = 0]])
-	int32_t params = lua_gettop(L), slot = SLOT_WHEREEVER;
+	int32_t params = lua_gettop(L), slot = CONST_SLOT_WHEREEVER;
 	if(params > 3)
 		slot = popNumber(L);
 
@@ -4012,7 +4496,7 @@ int32_t LuaInterface::luaDoPlayerAddItemEx(lua_State* L)
 		canDropOnMap = popBoolean(L);
 
 	uint32_t uid = (uint32_t)popNumber(L);
-	if(slot > SLOT_AMMO)
+	if(slot > CONST_SLOT_AMMO)
 	{
 		errorEx("Invalid slot");
 		lua_pushboolean(L, false);
@@ -6387,7 +6871,7 @@ int32_t LuaInterface::luaDoCombat(lua_State* L)
 			if(!combat->hasArea())
 			{
 				combat->postCombatEffects(creature, var.pos);
-				g_game.addMagicEffect(var.pos, MAGIC_EFFECT_POFF);
+				g_game.addMagicEffect(var.pos, CONST_ME_POFF);
 			}
 			else
 				combat->doCombat(creature, var.pos);

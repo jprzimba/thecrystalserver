@@ -67,11 +67,11 @@ void PrivateChatChannel::invitePlayer(Player* player, Player* invitePlayer)
 
 	std::stringstream msg;
 	msg << player->getName() << " invites you to " << (player->getSex(false) ? "his" : "her") << " private chat channel.";
-	invitePlayer->sendTextMessage(MSG_INFO_DESCR, msg.str().c_str());
+	invitePlayer->sendTextMessage(MESSAGE_INFO_DESCR, msg.str().c_str());
 
 	msg.str("");
 	msg << invitePlayer->getName() << " has been invited.";
-	player->sendTextMessage(MSG_INFO_DESCR, msg.str().c_str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, msg.str().c_str());
 }
 
 void PrivateChatChannel::excludePlayer(Player* player, Player* excludePlayer)
@@ -81,7 +81,7 @@ void PrivateChatChannel::excludePlayer(Player* player, Player* excludePlayer)
 
 	std::string msg = excludePlayer->getName();
 	msg += " has been excluded.";
-	player->sendTextMessage(MSG_INFO_DESCR, msg.c_str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, msg.c_str());
 
 	removeUser(excludePlayer, true);
 	excludePlayer->sendClosePrivate(getId());
@@ -510,7 +510,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 	{
 		if(!channel->hasFlag(CHANNELFLAG_ACTIVE))
 		{
-			player->sendTextMessage(MSG_STATUS_SMALL, "You may not speak into this channel.");
+			player->sendTextMessage(MESSAGE_STATUS_SMALL, "You may not speak into this channel.");
 			return true;
 		}
 
@@ -592,7 +592,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 						if(!paramPlayer->isGuildInvited(player->getGuildId()))
 						{
 							sprintf(buffer, "%s has invited you to join the guild, %s. You may join this guild by writing: !joinguild %s", player->getName().c_str(), player->getGuildName().c_str(), player->getGuildName().c_str());
-							paramPlayer->sendTextMessage(MSG_INFO_DESCR, buffer);
+							paramPlayer->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
 							sprintf(buffer, "%s has invited %s to the guild.", player->getName().c_str(), paramPlayer->getName().c_str());
 							channel->talk(player, SPEAK_CHANNEL_W, buffer);
@@ -670,7 +670,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 						if(it != paramPlayer->invitationsList.end())
 						{
 							sprintf(buffer, "%s has revoked your invite to %s guild.", player->getName().c_str(), (player->getSex(false) ? "his" : "her"));
-							paramPlayer->sendTextMessage(MSG_INFO_DESCR, buffer);
+							paramPlayer->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
 							sprintf(buffer, "%s has revoked the guildinvite of %s.", player->getName().c_str(), paramPlayer->getName().c_str());
 							channel->talk(player, SPEAK_CHANNEL_W, buffer);

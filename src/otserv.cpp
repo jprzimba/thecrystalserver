@@ -355,9 +355,6 @@ void otserv(StringVec, ServiceManager* services)
 #ifdef __DEBUG_HOUSES__
 	ss << " HOUSES";
 #endif
-#ifdef __DEBUG_LUASCRIPTS__
-	ss << " LUA-SCRIPTS";
-#endif
 #ifdef __DEBUG_MAILBOX__
 	ss << " MAILBOX";
 #endif

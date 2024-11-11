@@ -301,7 +301,7 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 	}
 	else
 	{
-		g_game.addMagicEffect(pos, MAGIC_EFFECT_TELEPORT);
+		g_game.addMagicEffect(pos, CONST_ME_TELEPORT);
 		Scheduler::getInstance().addEvent(createSchedulerTask(1400,
 			boost::bind(&Spawn::spawnMonster, this, spawnId, mType, pos, dir, delay - 1400, false)));
 		return true;

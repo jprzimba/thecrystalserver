@@ -44,7 +44,7 @@ void Party::disband()
 {
 	leader->sendClosePrivate(CHANNEL_PARTY);
 	leader->setParty(NULL);
-	leader->sendTextMessage(MSG_INFO_DESCR, "Your party has been disbanded.");
+	leader->sendTextMessage(MESSAGE_INFO_DESCR, "Your party has been disbanded.");
 
 	leader->sendPlayerIcons(leader);
 	for(PlayerVector::iterator it = inviteList.begin(); it != inviteList.end(); ++it)
@@ -60,7 +60,7 @@ void Party::disband()
 	{
 		(*it)->sendClosePrivate(CHANNEL_PARTY);
 		(*it)->setParty(NULL);
-		(*it)->sendTextMessage(MSG_INFO_DESCR, "Your party has been disbanded.");
+		(*it)->sendTextMessage(MESSAGE_INFO_DESCR, "Your party has been disbanded.");
 
 		(*it)->sendPlayerIcons(*it);
 		(*it)->sendPlayerIcons(leader);
@@ -103,7 +103,7 @@ bool Party::leave(Player* player)
 	player->setParty(NULL);
 	player->sendClosePrivate(CHANNEL_PARTY);
 
-	player->sendTextMessage(MSG_INFO_DESCR, "You have left the party.");
+	player->sendTextMessage(MESSAGE_INFO_DESCR, "You have left the party.");
 	player->sendPlayerIcons(player);
 
 	updateSharedExperience();
@@ -113,7 +113,7 @@ bool Party::leave(Player* player)
 	char buffer[105];
 	sprintf(buffer, "%s has left the party.", player->getName().c_str());
 
-	broadcastMessage(MSG_INFO_DESCR, buffer);
+	broadcastMessage(MESSAGE_INFO_DESCR, buffer);
 	if(missingLeader || canDisband())
 		disband();
 
@@ -136,9 +136,9 @@ bool Party::passLeadership(Player* player)
 
 	char buffer[125];
 	sprintf(buffer, "%s is now the leader of the party.", player->getName().c_str());
-	broadcastMessage(MSG_INFO_DESCR, buffer, true);
+	broadcastMessage(MESSAGE_INFO_DESCR, buffer, true);
 
-	player->sendTextMessage(MSG_INFO_DESCR, "You are now the leader of the party.");
+	player->sendTextMessage(MESSAGE_INFO_DESCR, "You are now the leader of the party.");
 	updateSharedExperience();
 
 	updateIcons(oldLeader);
@@ -161,10 +161,10 @@ bool Party::join(Player* player)
 
 	char buffer[200];
 	sprintf(buffer, "%s has joined the party.", player->getName().c_str());
-	broadcastMessage(MSG_INFO_DESCR, buffer);
+	broadcastMessage(MESSAGE_INFO_DESCR, buffer);
 
 	sprintf(buffer, "You have joined %s'%s party. Open the party channel to communicate with your companions.", leader->getName().c_str(), (leader->getName()[leader->getName().length() - 1] == 's' ? "" : "s"));
-	player->sendTextMessage(MSG_INFO_DESCR, buffer);
+	player->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
 	updateSharedExperience();
 	updateIcons(player);
@@ -197,10 +197,10 @@ void Party::revokeInvitation(Player* player)
 
 	char buffer[150];
 	sprintf(buffer, "%s has revoked %s invitation.", leader->getName().c_str(), (leader->getSex(false) ? "his" : "her"));
-	player->sendTextMessage(MSG_INFO_DESCR, buffer);
+	player->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
 	sprintf(buffer, "Invitation for %s has been revoked.", player->getName().c_str());
-	leader->sendTextMessage(MSG_INFO_DESCR, buffer);
+	leader->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 	removeInvite(player);
 }
 
@@ -217,7 +217,7 @@ bool Party::invitePlayer(Player* player)
 	if(memberList.empty()) {
 		ss << " Open the party channel to communicate with your members.";
 	}
-	leader->sendTextMessage(MSG_INFO_DESCR, ss.str());
+	leader->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 
 	ss.str("");
 	ss << leader->getName() << " has invited you to " << (leader->getSex(false) ? "his" : "her") << " party.";
@@ -225,7 +225,7 @@ bool Party::invitePlayer(Player* player)
 	if(g_config.getBool(ConfigManager::SHOW_PARTY_RANGE_LEVEL))
 		ss << " (Share range: " << getMinLevel() << " to " << getMaxLevel() << ").";
 
-	player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 
 	leader->sendPlayerIcons(player);
 	player->sendPlayerIcons(leader);
@@ -314,12 +314,12 @@ bool Party::setSharedExperience(Player* player, bool _sharedExpActive)
 	{
 		sharedExpEnabled = canEnableSharedExperience();
 		if(sharedExpEnabled)
-			leader->sendTextMessage(MSG_INFO_DESCR, "Shared Experience is now active.");
+			leader->sendTextMessage(MESSAGE_INFO_DESCR, "Shared Experience is now active.");
 		else
-			leader->sendTextMessage(MSG_INFO_DESCR, "Shared Experience has been activated, but some members of your party are inactive.");
+			leader->sendTextMessage(MESSAGE_INFO_DESCR, "Shared Experience has been activated, but some members of your party are inactive.");
 	}
 	else
-		leader->sendTextMessage(MSG_INFO_DESCR, "Shared Experience has been deactivated.");
+		leader->sendTextMessage(MESSAGE_INFO_DESCR, "Shared Experience has been deactivated.");
 
 	updateAllIcons();
 	return true;

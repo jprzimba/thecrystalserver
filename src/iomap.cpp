@@ -406,7 +406,7 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 
 #ifdef __GROUND_CACHE__
 									const ItemType& tit = Item::items[item->getID()];
-									if(!(tit.magicEffect != MAGIC_EFFECT_NONE || !tit.walkStack || tit.transformUseTo != 0 || tit.cache ||
+									if(!(tit.magicEffect != CONST_ME_NONE || !tit.walkStack || tit.transformUseTo != 0 || tit.cache ||
 										item->floorChange() || item->canDecay() || item->getActionId() > 0 || item->getUniqueId() > 0))
 									{
 										CacheMap::iterator it = groundCache.find(item->getID());
@@ -515,7 +515,7 @@ bool IOMap::loadMap(Map* map, const std::string& identifier)
 
 #ifdef __GROUND_CACHE__
 									const ItemType& tit = Item::items[item->getID()];
-									if(!(tit.magicEffect != MAGIC_EFFECT_NONE || !tit.walkStack || tit.transformUseTo != 0 || tit.cache ||
+									if(!(tit.magicEffect != CONST_ME_NONE || !tit.walkStack || tit.transformUseTo != 0 || tit.cache ||
 										item->floorChange() || item->canDecay() || item->getActionId() > 0 || item->getUniqueId() > 0))
 									{
 										CacheMap::iterator it = groundCache.find(item->getID());

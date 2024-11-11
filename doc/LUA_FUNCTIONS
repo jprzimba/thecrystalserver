@@ -409,7 +409,6 @@
 					For example:
 						PLAYERSEX_FEMALE (0) - when player is female
 						PLAYERSEX_MALE (1) - when player is male
-						PLAYERSEX_GAMEMASTER (2) - gamemaster (Means if player have changed their sex to type = 2)
 
 				Example
 					local playerPos = getCreaturePosition(cid)

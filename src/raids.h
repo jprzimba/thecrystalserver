@@ -165,7 +165,7 @@ class AnnounceEvent : public RaidEvent
 {
 	public:
 		AnnounceEvent(Raid* raid, bool ref): RaidEvent(raid, ref),
-			m_messageType(MSG_EVENT_ADVANCE) {}
+			m_messageType(MESSAGE_EVENT_ADVANCE) {}
 		virtual ~AnnounceEvent() {}
 
 		virtual bool configureRaidEvent(xmlNodePtr eventNode);
@@ -180,7 +180,7 @@ class EffectEvent : public RaidEvent
 {
 	public:
 		EffectEvent(Raid* raid, bool ref): RaidEvent(raid, ref),
-			m_effect(MAGIC_EFFECT_NONE) {}
+			m_effect(CONST_ME_NONE) {}
 		virtual ~EffectEvent() {}
 
 		virtual bool configureRaidEvent(xmlNodePtr eventNode);

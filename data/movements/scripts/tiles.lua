@@ -52,7 +52,7 @@ function onStepIn(cid, item, position, fromPosition)
 	end
 
 	local gender = item.actionid - 186
-	if(isInArray({PLAYERSEX_FEMALE,  PLAYERSEX_MALE, PLAYERSEX_GAMEMASTER}, gender)) then
+	if(isInArray({PLAYERSEX_FEMALE,  PLAYERSEX_MALE}, gender)) then
 		if(gender ~= getPlayerSex(cid)) then
 			pushBack(cid, position, fromPosition, true)
 		end

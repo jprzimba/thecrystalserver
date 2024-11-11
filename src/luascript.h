@@ -18,6 +18,7 @@
 #ifndef __LUASCRIPT__
 #define __LUASCRIPT__
 #include "otsystem.h"
+#include <stdint.h>
 
 #if defined(__ALT_LUA_PATH__)
 extern "C"
@@ -290,6 +291,7 @@ class LuaInterface
 		static void pushPosition(lua_State* L, const Position& position, uint32_t stackpos);
 		static void pushOutfit(lua_State* L, const Outfit_t& outfit);
 		static void pushCallback(lua_State* L, int32_t callback);
+		static void pushBoolean(lua_State* L, bool value);
 
 		static LuaVariant popVariant(lua_State* L);
 		static void popPosition(lua_State* L, PositionEx& position);
@@ -300,6 +302,7 @@ class LuaInterface
 		static std::string popString(lua_State* L);
 		static int32_t popCallback(lua_State* L);
 		static Outfit_t popOutfit(lua_State* L);
+		static std::string getString(lua_State* L, int32_t arg);
 
 		static int64_t getField(lua_State* L, const char* key);
 		static uint64_t getFieldUnsigned(lua_State* L, const char* key);
@@ -335,7 +338,15 @@ class LuaInterface
 
 		virtual void registerFunctions();
 
+		void registerGlobalMethod(const std::string& functionName, lua_CFunction func);
+		void registerVariable(const std::string& tableName, const std::string& name, lua_Number value);
+		void registerGlobalVariable(const std::string& name, lua_Number value);
+		void registerGlobalBoolean(const std::string& name, bool value);
+
 		//lua functions
+		// _G
+		static int32_t luaRawGetMetatable(lua_State* L);
+
 		static int32_t luaDoRemoveItem(lua_State* L);
 		static int32_t luaDoPlayerFeed(lua_State* L);
 		static int32_t luaDoPlayerSendCancel(lua_State* L);

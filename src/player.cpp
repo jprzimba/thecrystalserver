@@ -151,10 +151,10 @@ void Player::setVocation(uint32_t id)
 	soulMax = vocation->getGain(GAIN_SOUL);
 	if(Condition* condition = getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT))
 	{
-		condition->setParam(CONDITIONPARAM_HEALTHGAIN, vocation->getGainAmount(GAIN_HEALTH));
-		condition->setParam(CONDITIONPARAM_HEALTHTICKS, (vocation->getGainTicks(GAIN_HEALTH) * 1000));
-		condition->setParam(CONDITIONPARAM_MANAGAIN, vocation->getGainAmount(GAIN_MANA));
-		condition->setParam(CONDITIONPARAM_MANATICKS, (vocation->getGainTicks(GAIN_MANA) * 1000));
+		condition->setParam(CONDITION_PARAM_HEALTHGAIN, vocation->getGainAmount(GAIN_HEALTH));
+		condition->setParam(CONDITION_PARAM_HEALTHTICKS, (vocation->getGainTicks(GAIN_HEALTH) * 1000));
+		condition->setParam(CONDITION_PARAM_MANAGAIN, vocation->getGainAmount(GAIN_MANA));
+		condition->setParam(CONDITION_PARAM_MANATICKS, (vocation->getGainTicks(GAIN_MANA) * 1000));
 	}
 }
 
@@ -245,11 +245,11 @@ std::string Player::getDescription(int32_t lookDistance) const
 
 Item* Player::getInventoryItem(slots_t slot) const
 {
-	if(slot > SLOT_PRE_FIRST && slot < SLOT_LAST)
+	if(slot > CONST_SLOT_PRE_FIRST && slot < CONST_SLOT_LAST)
 		return inventory[slot];
 
-	if(slot == SLOT_HAND)
-		return inventory[SLOT_LEFT] ? inventory[SLOT_LEFT] : inventory[SLOT_RIGHT];
+	if(slot == CONST_SLOT_HAND)
+		return inventory[CONST_SLOT_LEFT] ? inventory[CONST_SLOT_LEFT] : inventory[CONST_SLOT_RIGHT];
 
 	return NULL;
 }
@@ -262,9 +262,9 @@ Item* Player::getEquippedItem(slots_t slot) const
 
 	switch(slot)
 	{
-		case SLOT_LEFT:
-		case SLOT_RIGHT:
-			if(item->getWieldPosition() == SLOT_HAND)
+		case CONST_SLOT_LEFT:
+		case CONST_SLOT_RIGHT:
+			if(item->getWieldPosition() == CONST_SLOT_HAND)
 				return item;
 
 		default:
@@ -288,14 +288,14 @@ Item* Player::getWeapon(bool ignoreAmmo)
 		return weapon;
 
 	Item* item = NULL;
-	for(int32_t slot = SLOT_RIGHT; slot <= SLOT_LEFT; ++slot)
+	for(int32_t slot = CONST_SLOT_RIGHT; slot <= CONST_SLOT_LEFT; ++slot)
 	{
 		if(!(item = getEquippedItem((slots_t)slot)) || item->getWeaponType() != WEAPON_DIST)
 			continue;
 
 		if(!ignoreAmmo && item->getAmmoType() != AMMO_NONE)
 		{
-			Item* ammoItem = getInventoryItem(SLOT_AMMO);
+			Item* ammoItem = getInventoryItem(CONST_SLOT_AMMO);
 			if(ammoItem && ammoItem->getAmmoType() == item->getAmmoType())
 			{
 				if(g_weapons->getWeapon(ammoItem))
@@ -313,7 +313,7 @@ ItemVector Player::getWeapons() const
 {
 	Item* item = NULL;
 	ItemVector weapons;
-	for(int32_t slot = SLOT_RIGHT; slot <= SLOT_LEFT; ++slot)
+	for(int32_t slot = CONST_SLOT_RIGHT; slot <= CONST_SLOT_LEFT; ++slot)
 	{
 		if(!(item = getEquippedItem((slots_t)slot)))
 			continue;
@@ -327,7 +327,7 @@ ItemVector Player::getWeapons() const
 			{
 				if(item->getAmmoType() != AMMO_NONE)
 				{
-					Item* ammoItem = getInventoryItem(SLOT_AMMO);
+					Item* ammoItem = getInventoryItem(CONST_SLOT_AMMO);
 					if(ammoItem && ammoItem->getAmmoType() == item->getAmmoType())
 						item = ammoItem;
 					else
@@ -401,8 +401,8 @@ int32_t Player::getWeaponSkill(const Item* item) const
 
 int32_t Player::getArmor() const
 {
-	int32_t i = SLOT_FIRST, armor = 0;
-	for(; i < SLOT_LAST; ++i)
+	int32_t i = CONST_SLOT_FIRST, armor = 0;
+	for(; i < CONST_SLOT_LAST; ++i)
 	{
 		if(Item* item = getInventoryItem((slots_t)i))
 			armor += item->getArmor();
@@ -418,7 +418,7 @@ void Player::getShieldAndWeapon(const Item* &_shield, const Item* &_weapon) cons
 {
 	_shield = NULL;
 	Item* item = NULL;
-	for(uint32_t slot = SLOT_RIGHT; slot <= SLOT_LEFT; ++slot)
+	for(uint32_t slot = CONST_SLOT_RIGHT; slot <= CONST_SLOT_LEFT; ++slot)
 	{
 		if(!(item = getInventoryItem((slots_t)slot)) || item->getWeaponType() != WEAPON_SHIELD)
 			continue;
@@ -536,7 +536,7 @@ void Player::updateInventoryWeight()
 		|| !g_config.getBool(ConfigManager::USE_CAPACITY))
 		return;
 
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		if(Item* item = getInventoryItem((slots_t)i))
 			inventoryWeight += item->getWeight();
@@ -622,7 +622,7 @@ void Player::addSkillAdvance(skills_t skill, uint64_t count, bool useMultiplier/
 
 		s.str("");
 		s << "You advanced to " << getSkillName(skill) << " level " << skills[skill][SKILL_LEVEL] << ".";
-		sendTextMessage(MSG_EVENT_ADVANCE, s.str().c_str());
+		sendTextMessage(MESSAGE_EVENT_ADVANCE, s.str().c_str());
 
 		CreatureEventList advanceEvents = getCreatureEvents(CREATURE_EVENT_ADVANCE);
 		for(CreatureEventList::iterator it = advanceEvents.begin(); it != advanceEvents.end(); ++it)
@@ -781,7 +781,7 @@ void Player::dropLoot(Container* corpse)
 	}
 
 	uint32_t itemLoss = (uint32_t)std::floor((5. + loss) * lossPercent[LOSS_ITEMS] / 1000.);
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		Item* item = inventory[i];
 		if(!item)
@@ -1338,7 +1338,7 @@ void Player::onCreatureAppear(const Creature* creature)
 		return;
 
 	Item* item = NULL;
-	for(int32_t slot = SLOT_FIRST; slot < SLOT_LAST; ++slot)
+	for(int32_t slot = CONST_SLOT_FIRST; slot < CONST_SLOT_LAST; ++slot)
 	{
 		if(!(item = getInventoryItem((slots_t)slot)))
 			continue;
@@ -1411,14 +1411,14 @@ void Player::onTargetDisappear(bool isLogout)
 {
 	sendCancelTarget();
 	if(!isLogout)
-		sendTextMessage(MSG_STATUS_SMALL, "Target lost.");
+		sendTextMessage(MESSAGE_STATUS_SMALL, "Target lost.");
 }
 
 void Player::onFollowCreatureDisappear(bool isLogout)
 {
 	sendCancelTarget();
 	if(!isLogout)
-		sendTextMessage(MSG_STATUS_SMALL, "Target lost.");
+		sendTextMessage(MESSAGE_STATUS_SMALL, "Target lost.");
 }
 
 void Player::onChangeZone(ZoneType_t zone)
@@ -1470,7 +1470,7 @@ void Player::onCreatureDisappear(const Creature* creature, bool isLogout)
 	}
 
 	Item* item = NULL;
-	for(int32_t slot = SLOT_FIRST; slot < SLOT_LAST; ++slot)
+	for(int32_t slot = CONST_SLOT_FIRST; slot < CONST_SLOT_LAST; ++slot)
 	{
 		if(!(item = getInventoryItem((slots_t)slot)))
 			continue;
@@ -1855,7 +1855,7 @@ void Player::removeMessageBuffer()
 
 	char buffer[50];
 	sprintf(buffer, "You are muted for %d seconds.", muteTime);
-	sendTextMessage(MSG_STATUS_SMALL, buffer);
+	sendTextMessage(MESSAGE_STATUS_SMALL, buffer);
 }
 
 double Player::getFreeCapacity() const
@@ -1899,7 +1899,7 @@ void Player::addManaSpent(uint64_t amount, bool useMultiplier/* = true*/)
 
 		s.str("");
 		s << "You advanced to magic level " << ++magLevel << ".";
-		sendTextMessage(MSG_EVENT_ADVANCE, s.str());
+		sendTextMessage(MESSAGE_EVENT_ADVANCE, s.str());
 
 		CreatureEventList advanceEvents = getCreatureEvents(CREATURE_EVENT_ADVANCE);
 		for(CreatureEventList::iterator it = advanceEvents.begin(); it != advanceEvents.end(); ++it)
@@ -1978,7 +1978,7 @@ void Player::addExperience(uint64_t exp)
 		std::stringstream s;
 		s << "You advanced from Level " << prevLevel << " to Level " << level << ".";
 
-		sendTextMessage(MSG_EVENT_ADVANCE, s.str());
+		sendTextMessage(MESSAGE_EVENT_ADVANCE, s.str());
 		if(isProtected() != attackable)
 			g_game.updateCreatureWalkthrough(this);
 	}
@@ -2030,7 +2030,7 @@ void Player::removeExperience(uint64_t exp, bool updateStats/* = true*/)
 		std::stringstream s;
 		s << "You were downgraded from Level " << prevLevel << " to Level " << level << ".";
 
-		sendTextMessage(MSG_EVENT_ADVANCE, s.str());
+		sendTextMessage(MESSAGE_EVENT_ADVANCE, s.str());
 		if(!isProtected() != attackable)
 			g_game.updateCreatureWalkthrough(this);
 	}
@@ -2102,8 +2102,8 @@ void Player::onTargetBlockHit(Creature* target, BlockType_t blockType)
 
 bool Player::hasShield() const
 {
-	Item* item = getInventoryItem(SLOT_LEFT);
-	return (item && item->getWeaponType() == WEAPON_SHIELD) || ((item = getInventoryItem(SLOT_RIGHT)) && item->getWeaponType() == WEAPON_SHIELD);
+	Item* item = getInventoryItem(CONST_SLOT_LEFT);
+	return (item && item->getWeaponType() == WEAPON_SHIELD) || ((item = getInventoryItem(CONST_SLOT_RIGHT)) && item->getWeaponType() == WEAPON_SHIELD);
 }
 
 BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
@@ -2134,7 +2134,7 @@ BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_
 		reflect = attacker && !attacker->isRemoved() && attacker->getHealth() > 0;
 
 	Item* item = NULL;
-	for(int32_t slot = SLOT_FIRST; slot < SLOT_LAST; ++slot)
+	for(int32_t slot = CONST_SLOT_FIRST; slot < CONST_SLOT_LAST; ++slot)
 	{
 		if(!(item = getInventoryItem((slots_t)slot)) || item->isRemoved() ||
 			(g_moveEvents->hasEquipEvent(item) && !isItemAbilityEnabled((slots_t)slot)))
@@ -2229,7 +2229,7 @@ bool Player::onDeath()
 	else if(skull < SKULL_RED)
 	{
 		Item* item = NULL;
-		for(int32_t i = SLOT_FIRST; ((!preventDrop || !preventLoss) && i < SLOT_LAST); ++i)
+		for(int32_t i = CONST_SLOT_FIRST; ((!preventDrop || !preventLoss) && i < CONST_SLOT_LAST); ++i)
 		{
 			if(!(item = getInventoryItem((slots_t)i)) || item->isRemoved() ||
 				(g_moveEvents->hasEquipEvent(item) && !isItemAbilityEnabled((slots_t)i)))
@@ -2350,15 +2350,15 @@ bool Player::onDeath()
 					skills[i][SKILL_TRIES] = 0;
 				}
 
-				for(uint32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+				for(uint32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 				{
 					if(inventory[i])
 						g_game.internalRemoveItem(NULL, inventory[i]);
 				}
 			}
 		}
-		else if(!inventory[SLOT_BACKPACK]) // FIXME: you should receive the bag after you login back...
-			__internalAddThing(SLOT_BACKPACK, Item::CreateItem(g_config.getNumber(ConfigManager::DEATH_CONTAINER)));
+		else if(!inventory[CONST_SLOT_BACKPACK]) // FIXME: you should receive the bag after you login back...
+			__internalAddThing(CONST_SLOT_BACKPACK, Item::CreateItem(g_config.getNumber(ConfigManager::DEATH_CONTAINER)));
 
 		sendIcons();
 		sendStats();
@@ -2492,10 +2492,10 @@ void Player::addDefaultRegeneration(uint32_t addTicks)
 		condition->setTicks(condition->getTicks() + addTicks);
 	else if((condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_REGENERATION, addTicks)))
 	{
-		condition->setParam(CONDITIONPARAM_HEALTHGAIN, vocation->getGainAmount(GAIN_HEALTH));
-		condition->setParam(CONDITIONPARAM_HEALTHTICKS, vocation->getGainTicks(GAIN_HEALTH) * 1000);
-		condition->setParam(CONDITIONPARAM_MANAGAIN, vocation->getGainAmount(GAIN_MANA));
-		condition->setParam(CONDITIONPARAM_MANATICKS, vocation->getGainTicks(GAIN_MANA) * 1000);
+		condition->setParam(CONDITION_PARAM_HEALTHGAIN, vocation->getGainAmount(GAIN_HEALTH));
+		condition->setParam(CONDITION_PARAM_HEALTHTICKS, vocation->getGainTicks(GAIN_HEALTH) * 1000);
+		condition->setParam(CONDITION_PARAM_MANAGAIN, vocation->getGainAmount(GAIN_MANA));
+		condition->setParam(CONDITION_PARAM_MANATICKS, vocation->getGainTicks(GAIN_MANA) * 1000);
 		addCondition(condition);
 	}
 }
@@ -2571,14 +2571,14 @@ bool Player::addVIP(uint32_t _guid, const std::string& name, bool online, bool l
 	if(guid == _guid)
 	{
 		if(!loading)
-			sendTextMessage(MSG_STATUS_SMALL, "You cannot add yourself.");
+			sendTextMessage(MESSAGE_STATUS_SMALL, "You cannot add yourself.");
 
 		return false;
 	}
 
 	if(!loading && VIPList.size() > (size_t)(group ? group->getMaxVips(isPremium()) : g_config.getNumber(ConfigManager::VIPLIST_DEFAULT_LIMIT)))
 	{
-		sendTextMessage(MSG_STATUS_SMALL, "You cannot add more buddies.");
+		sendTextMessage(MESSAGE_STATUS_SMALL, "You cannot add more buddies.");
 		return false;
 	}
 
@@ -2586,7 +2586,7 @@ bool Player::addVIP(uint32_t _guid, const std::string& name, bool online, bool l
 	if(it != VIPList.end())
 	{
 		if(!loading)
-			sendTextMessage(MSG_STATUS_SMALL, "This player is already in your list.");
+			sendTextMessage(MESSAGE_STATUS_SMALL, "This player is already in your list.");
 
 		return false;
 	}
@@ -2673,44 +2673,44 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 
 	switch(index)
 	{
-		case SLOT_HEAD:
+		case CONST_SLOT_HEAD:
 			if(item->getSlotPosition() & SLOTP_HEAD)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_NECKLACE:
+		case CONST_SLOT_NECKLACE:
 			if(item->getSlotPosition() & SLOTP_NECKLACE)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_BACKPACK:
+		case CONST_SLOT_BACKPACK:
 			if(item->getSlotPosition() & SLOTP_BACKPACK)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_ARMOR:
+		case CONST_SLOT_ARMOR:
 			if(item->getSlotPosition() & SLOTP_ARMOR)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_RIGHT:
+		case CONST_SLOT_RIGHT:
 			if(item->getSlotPosition() & SLOTP_RIGHT)
 			{
 				if(!g_config.getBool(ConfigManager::TIBIA_SLOTS))
 				{
 					if(!item->isWeapon() || (item->getWeaponType() != WEAPON_SHIELD && !item->isDualWield()))
 						ret = RET_NOTPOSSIBLE;
-					else if(inventory[SLOT_LEFT] && inventory[SLOT_LEFT]->getSlotPosition() & SLOTP_TWO_HAND)
+					else if(inventory[CONST_SLOT_LEFT] && inventory[CONST_SLOT_LEFT]->getSlotPosition() & SLOTP_TWO_HAND)
 						ret = RET_DROPTWOHANDEDITEM;
 					else
 						ret = RET_NOERROR;
 				}
 				else if(item->getSlotPosition() & SLOTP_TWO_HAND)
 				{
-					if(inventory[SLOT_LEFT] && inventory[SLOT_LEFT] != item)
+					if(inventory[CONST_SLOT_LEFT] && inventory[CONST_SLOT_LEFT] != item)
 						ret = RET_BOTHHANDSNEEDTOBEFREE;
 					else
 						ret = RET_NOERROR;
 				}
-				else if(inventory[SLOT_LEFT])
+				else if(inventory[CONST_SLOT_LEFT])
 				{
-					const Item* leftItem = inventory[SLOT_LEFT];
+					const Item* leftItem = inventory[CONST_SLOT_LEFT];
 					WeaponType_t type = item->getWeaponType(), leftType = leftItem->getWeaponType();
 					if(leftItem->getSlotPosition() & SLOTP_TWO_HAND)
 						ret = RET_DROPTWOHANDEDITEM;
@@ -2730,28 +2730,28 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 					ret = RET_NOERROR;
 			}
 			break;
-		case SLOT_LEFT:
+		case CONST_SLOT_LEFT:
 			if(item->getSlotPosition() & SLOTP_LEFT)
 			{
 				if(!g_config.getBool(ConfigManager::TIBIA_SLOTS))
 				{
 					if(!item->isWeapon() || item->getWeaponType() == WEAPON_SHIELD)
 						ret = RET_NOTPOSSIBLE;
-					else if(inventory[SLOT_RIGHT] && item->getSlotPosition() & SLOTP_TWO_HAND)
+					else if(inventory[CONST_SLOT_RIGHT] && item->getSlotPosition() & SLOTP_TWO_HAND)
 						ret = RET_BOTHHANDSNEEDTOBEFREE;
 					else
 						ret = RET_NOERROR;
 				}
 				else if(item->getSlotPosition() & SLOTP_TWO_HAND)
 				{
-					if(inventory[SLOT_RIGHT] && inventory[SLOT_RIGHT] != item)
+					if(inventory[CONST_SLOT_RIGHT] && inventory[CONST_SLOT_RIGHT] != item)
 						ret = RET_BOTHHANDSNEEDTOBEFREE;
 					else
 						ret = RET_NOERROR;
 				}
-				else if(inventory[SLOT_RIGHT])
+				else if(inventory[CONST_SLOT_RIGHT])
 				{
-					const Item* rightItem = inventory[SLOT_RIGHT];
+					const Item* rightItem = inventory[CONST_SLOT_RIGHT];
 					WeaponType_t type = item->getWeaponType(), rightType = rightItem->getWeaponType();
 					if(rightItem->getSlotPosition() & SLOTP_TWO_HAND)
 						ret = RET_DROPTWOHANDEDITEM;
@@ -2771,23 +2771,23 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 					ret = RET_NOERROR;
 			}
 			break;
-		case SLOT_LEGS:
+		case CONST_SLOT_LEGS:
 			if(item->getSlotPosition() & SLOTP_LEGS)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_FEET:
+		case CONST_SLOT_FEET:
 			if(item->getSlotPosition() & SLOTP_FEET)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_RING:
+		case CONST_SLOT_RING:
 			if(item->getSlotPosition() & SLOTP_RING)
 				ret = RET_NOERROR;
 			break;
-		case SLOT_AMMO:
+		case CONST_SLOT_AMMO:
 			if(item->getSlotPosition() & SLOTP_AMMO || g_config.getBool(ConfigManager::TIBIA_SLOTS))
 				ret = RET_NOERROR;
 			break;
-		case SLOT_WHEREEVER:
+		case CONST_SLOT_WHEREEVER:
 		case -1:
 			ret = RET_NOTENOUGHROOM;
 			break;
@@ -2811,7 +2811,7 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 	if((ret == RET_NOERROR || ret == RET_NOTENOUGHROOM) && !hasCapacity(item, count)) //check if enough capacity
 		return RET_NOTENOUGHCAPACITY;
 
-	if(index == SLOT_LEFT || index == SLOT_RIGHT)
+	if(index == CONST_SLOT_LEFT || index == CONST_SLOT_RIGHT)
 	{
 		if(ret == RET_NOERROR && item->getWeaponType() != WEAPON_NONE)
 			self->setLastAttack(OTSYS_TIME());
@@ -2845,7 +2845,7 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 	if(index == INDEX_WHEREEVER)
 	{
 		uint32_t n = 0;
-		for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+		for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 		{
 			if(Item* inventoryItem = inventory[i])
 			{
@@ -2957,7 +2957,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 
 		std::list<std::pair<Container*, int32_t> > containers;
 		std::list<std::pair<Cylinder*, int32_t> > freeSlots;
-		for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+		for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 		{
 			if(Item* invItem = inventory[i])
 			{
@@ -3261,7 +3261,7 @@ void Player::__removeThing(Thing* thing, uint32_t count)
 
 Thing* Player::__getThing(uint32_t index) const
 {
-	if(index > SLOT_PRE_FIRST && index < SLOT_LAST)
+	if(index > CONST_SLOT_PRE_FIRST && index < CONST_SLOT_LAST)
 		return inventory[index];
 
 	return NULL;
@@ -3269,7 +3269,7 @@ Thing* Player::__getThing(uint32_t index) const
 
 int32_t Player::__getIndexOfThing(const Thing* thing) const
 {
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		if(inventory[i] == thing)
 			return i;
@@ -3280,12 +3280,12 @@ int32_t Player::__getIndexOfThing(const Thing* thing) const
 
 int32_t Player::__getFirstIndex() const
 {
-	return SLOT_FIRST;
+	return CONST_SLOT_FIRST;
 }
 
 int32_t Player::__getLastIndex() const
 {
-	return SLOT_LAST;
+	return CONST_SLOT_LAST;
 }
 
 uint32_t Player::__getItemTypeCount(uint16_t itemId, int32_t subType /*= -1*/) const
@@ -3294,7 +3294,7 @@ uint32_t Player::__getItemTypeCount(uint16_t itemId, int32_t subType /*= -1*/) c
 	Container* container = NULL;
 
 	uint32_t count = 0;
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		if(!(item = inventory[i]))
 			continue;
@@ -3320,7 +3320,7 @@ std::map<uint32_t, uint32_t>& Player::__getAllItemTypeCount(std::map<uint32_t, u
 {
 	Item* item = NULL;
 	Container* container = NULL;
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		if(!(item = inventory[i]))
 			continue;
@@ -3664,7 +3664,7 @@ void Player::updateItemsLight(bool internal/* = false*/)
 {
 	LightInfo maxLight, curLight;
 	Item* item = NULL;
-	for(int32_t i = SLOT_FIRST; i < SLOT_LAST; ++i)
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; ++i)
 	{
 		if(!(item = getInventoryItem((slots_t)i)))
 			continue;
@@ -3730,7 +3730,7 @@ void Player::onAddCombatCondition(ConditionType_t type, bool)
 	}
 
 	if(!tmp.empty())
-		sendTextMessage(MSG_STATUS_DEFAULT, "You are " + tmp + ".");
+		sendTextMessage(MESSAGE_STATUS_DEFAULT, "You are " + tmp + ".");
 }
 
 void Player::onEndCondition(ConditionType_t type)
@@ -3900,7 +3900,7 @@ void Player::onTargetGain(Creature* target, int32_t points)
 
 void Player::onUpdateQuest()
 {
-	sendTextMessage(MSG_EVENT_ADVANCE, "Your quest log has been updated.");
+	sendTextMessage(MESSAGE_EVENT_ADVANCE, "Your quest log has been updated.");
 }
 
 GuildEmblems_t Player::getGuildEmblem(const Creature* creature) const
@@ -4004,9 +4004,9 @@ bool Player::gainExperience(double& gainExp, Creature* target)
 		if(Condition* condition = Condition::createCondition(
 			CONDITIONID_DEFAULT, CONDITION_SOUL, 4 * 60 * 1000))
 		{
-			condition->setParam(CONDITIONPARAM_SOULGAIN,
+			condition->setParam(CONDITION_PARAM_SOULGAIN,
 				vocation->getGainAmount(GAIN_SOUL));
-			condition->setParam(CONDITIONPARAM_SOULTICKS,
+			condition->setParam(CONDITION_PARAM_SOULTICKS,
 				(vocation->getGainTicks(GAIN_SOUL) * 1000));
 			addCondition(condition);
 		}
@@ -4319,7 +4319,7 @@ bool Player::addUnjustifiedKill(const Player* attacked, bool countNow)
 	{
 		char buffer[90];
 		sprintf(buffer, "Warning! The murder of %s was not justified.", attacked->getName().c_str());
-		sendTextMessage(MSG_STATUS_WARNING, buffer);
+		sendTextMessage(MESSAGE_STATUS_WARNING, buffer);
 	}
 
 	time_t now = time(NULL), first = (now - g_config.getNumber(ConfigManager::FRAG_LIMIT)),
@@ -4357,8 +4357,8 @@ bool Player::addUnjustifiedKill(const Player* attacked, bool countNow)
 			ConfigManager::KILLS_BAN_LENGTH)), 20, ACTION_BANISHMENT, "Unjustified player killing.", 0, guid))
 			return true;
 
-		sendTextMessage(MSG_INFO_DESCR, "You have been banished.");
-		g_game.addMagicEffect(getPosition(), MAGIC_EFFECT_WRAPS_GREEN);
+		sendTextMessage(MESSAGE_INFO_DESCR, "You have been banished.");
+		g_game.addMagicEffect(getPosition(), CONST_ME_MAGIC_GREEN);
 		Scheduler::getInstance().addEvent(createSchedulerTask(1000, boost::bind(
 			&Game::kickPlayer, &g_game, getID(), false)));
 	}
@@ -5234,8 +5234,8 @@ void Player::increaseCombatValues(int32_t& min, int32_t& max, bool useCharges, b
 		max = (int32_t)(max * vocation->getMultiplier(MULTIPLIER_MAGIC));
 
 	Item* item = NULL;
-	int32_t minValue = 0, maxValue = 0, i = SLOT_FIRST;
-	for(; i < SLOT_LAST; ++i)
+	int32_t minValue = 0, maxValue = 0, i = CONST_SLOT_FIRST;
+	for(; i < CONST_SLOT_LAST; ++i)
 	{
 		if(!(item = getInventoryItem((slots_t)i)) || item->isRemoved() ||
 			(g_moveEvents->hasEquipEvent(item) && !isItemAbilityEnabled((slots_t)i)))

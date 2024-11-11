@@ -314,8 +314,8 @@ bool Monster::doTeleportToMaster()
 		master->getPosition(), true), true) != RET_NOERROR)
 		return false;
 
-	g_game.addMagicEffect(tmp, MAGIC_EFFECT_POFF);
-	g_game.addMagicEffect(getPosition(), MAGIC_EFFECT_TELEPORT);
+	g_game.addMagicEffect(tmp, CONST_ME_POFF);
+	g_game.addMagicEffect(getPosition(), CONST_ME_TELEPORT);
 	return true;
 }
 
@@ -813,8 +813,8 @@ void Monster::doHealing(uint32_t interval)
 						addSummon(summon);
 						if(g_game.placeCreature(summon, getPosition()))
 						{
-							g_game.addMagicEffect(getPosition(), MAGIC_EFFECT_WRAPS_BLUE);
-							g_game.addMagicEffect(summon->getPosition(), MAGIC_EFFECT_TELEPORT);
+							g_game.addMagicEffect(getPosition(), CONST_ME_MAGIC_BLUE);
+							g_game.addMagicEffect(summon->getPosition(), CONST_ME_TELEPORT);
 						}
 						else
 							removeSummon(summon);
@@ -909,7 +909,7 @@ void Monster::pushItems(Tile* tile)
 	}
 
 	if(removeCount > 0)
-		g_game.addMagicEffect(tile->getPosition(), MAGIC_EFFECT_POFF);
+		g_game.addMagicEffect(tile->getPosition(), CONST_ME_POFF);
 }
 
 bool Monster::pushCreature(Creature* creature)
@@ -957,7 +957,7 @@ void Monster::pushCreatures(Tile* tile)
 	}
 
 	if(effect)
-		g_game.addMagicEffect(tile->getPosition(), MAGIC_EFFECT_BLOCKHIT);
+		g_game.addMagicEffect(tile->getPosition(), CONST_ME_BLOCKHIT);
 }
 
 bool Monster::getNextStep(Direction& dir, uint32_t& flags)

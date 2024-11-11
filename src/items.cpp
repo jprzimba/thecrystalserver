@@ -59,11 +59,11 @@ ItemType::ItemType()
 	showCount = true;
 	weaponType = WEAPON_NONE;
 	slotPosition = SLOTP_HAND;
-	wieldPosition = SLOT_HAND;
+	wieldPosition = CONST_SLOT_HAND;
 	ammoType = AMMO_NONE;
 	ammoAction = AMMOACTION_NONE;
 	shootType = (ShootEffect_t)0;
-	magicEffect = MAGIC_EFFECT_NONE;
+	magicEffect = CONST_ME_NONE;
 	attack = extraAttack = 0;
 	defense = extraDefense = 0;
 	attackSpeed = 0;
@@ -935,60 +935,60 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 				if(tmpStrValue == "head")
 				{
 					it.slotPosition |= SLOTP_HEAD;
-					it.wieldPosition = SLOT_HEAD;
+					it.wieldPosition = CONST_SLOT_HEAD;
 				}
 				else if(tmpStrValue == "body")
 				{
 					it.slotPosition |= SLOTP_ARMOR;
-					it.wieldPosition = SLOT_ARMOR;
+					it.wieldPosition = CONST_SLOT_ARMOR;
 				}
 				else if(tmpStrValue == "legs")
 				{
 					it.slotPosition |= SLOTP_LEGS;
-					it.wieldPosition = SLOT_LEGS;
+					it.wieldPosition = CONST_SLOT_LEGS;
 				}
 				else if(tmpStrValue == "feet")
 				{
 					it.slotPosition |= SLOTP_FEET;
-					it.wieldPosition = SLOT_FEET;
+					it.wieldPosition = CONST_SLOT_FEET;
 				}
 				else if(tmpStrValue == "backpack")
 				{
 					it.slotPosition |= SLOTP_BACKPACK;
-					it.wieldPosition = SLOT_BACKPACK;
+					it.wieldPosition = CONST_SLOT_BACKPACK;
 				}
 				else if(tmpStrValue == "two-handed")
 				{
 					it.slotPosition |= SLOTP_TWO_HAND;
-					it.wieldPosition = SLOT_TWO_HAND;
+					it.wieldPosition = CONST_SLOT_TWO_HAND;
 				}
 				else if(tmpStrValue == "right-hand")
 				{
 					it.slotPosition &= ~SLOTP_LEFT;
-					it.wieldPosition = SLOT_RIGHT;
+					it.wieldPosition = CONST_SLOT_RIGHT;
 				}
 				else if(tmpStrValue == "left-hand")
 				{
 					it.slotPosition &= ~SLOTP_RIGHT;
-					it.wieldPosition = SLOT_LEFT;
+					it.wieldPosition = CONST_SLOT_LEFT;
 				}
 				else if(tmpStrValue == "necklace")
 				{
 					it.slotPosition |= SLOTP_NECKLACE;
-					it.wieldPosition = SLOT_NECKLACE;
+					it.wieldPosition = CONST_SLOT_NECKLACE;
 				}
 				else if(tmpStrValue == "ring")
 				{
 					it.slotPosition |= SLOTP_RING;
-					it.wieldPosition = SLOT_RING;
+					it.wieldPosition = CONST_SLOT_RING;
 				}
 				else if(tmpStrValue == "ammo")
 				{
 					it.slotPosition |= SLOTP_AMMO;
-					it.wieldPosition = SLOT_AMMO;
+					it.wieldPosition = CONST_SLOT_AMMO;
 				}
 				else if(tmpStrValue == "hand")
-					it.wieldPosition = SLOT_HAND;
+					it.wieldPosition = CONST_SLOT_HAND;
 				else
 					std::clog << "[Warning - Items::loadFromXml] Unknown slotType " << strValue << std::endl;
 			}
@@ -1007,7 +1007,7 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 			if(readXMLString(itemAttributesNode, "value", strValue))
 			{
 				ShootEffect_t shoot = getShootType(strValue);
-				if(shoot != SHOOT_EFFECT_UNKNOWN)
+				if(shoot != CONST_ANI_UNKNOWN)
 					it.shootType = shoot;
 				else
 					std::clog << "[Warning - Items::loadFromXml] Unknown shootType " << strValue << std::endl;
@@ -1018,7 +1018,7 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 			if(readXMLString(itemAttributesNode, "value", strValue))
 			{
 				MagicEffect_t effect = getMagicEffect(strValue);
-				if(effect != MAGIC_EFFECT_UNKNOWN)
+				if(effect != CONST_ME_UNKNOWN)
 					it.magicEffect = effect;
 				else
 					std::clog << "[Warning - Items::loadFromXml] Unknown effect " << strValue << std::endl;
@@ -1766,9 +1766,9 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 						}
 					}
 
-					conditionDamage->setParam(CONDITIONPARAM_FIELD, true);
+					conditionDamage->setParam(CONDITION_PARAM_FIELD, true);
 					if(conditionDamage->getTotalDamage() > 0)
-						conditionDamage->setParam(CONDITIONPARAM_FORCEUPDATE, true);
+						conditionDamage->setParam(CONDITION_PARAM_FORCEUPDATE, true);
 				}
 			}
 		}

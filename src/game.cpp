@@ -568,7 +568,7 @@ bool Game::isSwimmingPool(Item* item, const Tile* tile, bool checkProtection) co
 	else
 		trashHolder = item->getTrashHolder();
 
-	return trashHolder && trashHolder->getEffect() == MAGIC_EFFECT_LOSE_ENERGY && (!checkProtection
+	return trashHolder && trashHolder->getEffect() == CONST_ME_LOSEENERGY && (!checkProtection
 		|| tile->getZone() == ZONE_PROTECTION || tile->getZone() == ZONE_OPTIONAL);
 }
 
@@ -993,7 +993,7 @@ ReturnValue Game::placeSummon(Creature* creature, const std::string& name)
 	creature->addSummon(monster);
 	if(placeCreature(monster, creature->getPosition(), true))
 	{
-		addMagicEffect(monster->getPosition(), MAGIC_EFFECT_TELEPORT);
+		addMagicEffect(monster->getPosition(), CONST_ME_TELEPORT);
 		return RET_NOERROR;
 	}
 
@@ -2996,7 +2996,7 @@ bool Game::playerRequestTrade(uint32_t playerId, const Position& pos, int16_t st
 	{
 		std::stringstream ss;
 		ss << tradePartner->getName() << " tells you to move closer.";
-		player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+		player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 		return false;
 	}
 
@@ -3066,7 +3066,7 @@ bool Game::playerRequestTrade(uint32_t playerId, const Position& pos, int16_t st
 			((container = dynamic_cast<const Container*>(tradeItem)) && container->isHoldingItem(it->first)) ||
 			((container = dynamic_cast<const Container*>(it->first)) && container->isHoldingItem(tradeItem)))
 		{
-			player->sendTextMessage(MSG_INFO_DESCR, "This item is already being traded.");
+			player->sendTextMessage(MESSAGE_INFO_DESCR, "This item is already being traded.");
 			return false;
 		}
 	}
@@ -3076,7 +3076,7 @@ bool Game::playerRequestTrade(uint32_t playerId, const Position& pos, int16_t st
 	{
 		std::stringstream s;
 		s << "You cannot trade more than " << g_config.getNumber(ConfigManager::TRADE_LIMIT) << " items.";
-		player->sendTextMessage(MSG_INFO_DESCR, s.str());
+		player->sendTextMessage(MESSAGE_INFO_DESCR, s.str());
 		return false;
 	}
 
@@ -3119,7 +3119,7 @@ bool Game::internalStartTrade(Player* player, Player* tradePartner, Item* tradeI
 	{
 		char buffer[100];
 		sprintf(buffer, "%s wants to trade with you", player->getName().c_str());
-		tradePartner->sendTextMessage(MSG_INFO_DESCR, buffer);
+		tradePartner->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
 		tradePartner->tradeState = TRADE_ACKNOWLEDGE;
 		tradePartner->tradePartner = player;
@@ -3214,14 +3214,14 @@ bool Game::playerAcceptTrade(uint32_t playerId)
 		if(tradeItem2)
 		{
 			error = getTradeErrorDescription(ret1, tradeItem1);
-			tradePartner->sendTextMessage(MSG_INFO_DESCR, error);
+			tradePartner->sendTextMessage(MESSAGE_INFO_DESCR, error);
 			tradeItem2->onTradeEvent(ON_TRADE_CANCEL, tradePartner, player);
 		}
 
 		if(tradeItem1)
 		{
 			error = getTradeErrorDescription(ret2, tradeItem2);
-			player->sendTextMessage(MSG_INFO_DESCR, error);
+			player->sendTextMessage(MESSAGE_INFO_DESCR, error);
 			tradeItem1->onTradeEvent(ON_TRADE_CANCEL, player, tradePartner);
 		}
 	}
@@ -3315,7 +3315,7 @@ bool Game::playerLookInTrade(uint32_t playerId, bool lookAtCounterOffer, int32_t
 				ss << std::endl << "DecayTo: [" << it.decayTo << "]";
 		}
 
-		player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+		player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 		return false;
 	}
 
@@ -3361,7 +3361,7 @@ bool Game::playerLookInTrade(uint32_t playerId, bool lookAtCounterOffer, int32_t
 					ss << std::endl << "DecayTo: [" << iit.decayTo << "].";
 			}
 
-			player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+			player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 			return true;
 		}
 	}
@@ -3406,7 +3406,7 @@ bool Game::internalCloseTrade(Player* player)
 	player->setTradeState(TRADE_NONE);
 	player->tradePartner = NULL;
 
-	player->sendTextMessage(MSG_STATUS_SMALL, "Trade cancelled.");
+	player->sendTextMessage(MESSAGE_STATUS_SMALL, "Trade cancelled.");
 	player->sendTradeClose();
 	if(tradePartner)
 	{
@@ -3426,7 +3426,7 @@ bool Game::internalCloseTrade(Player* player)
 		tradePartner->setTradeState(TRADE_NONE);
 		tradePartner->tradePartner = NULL;
 
-		tradePartner->sendTextMessage(MSG_STATUS_SMALL, "Trade cancelled.");
+		tradePartner->sendTextMessage(MESSAGE_STATUS_SMALL, "Trade cancelled.");
 		tradePartner->sendTradeClose();
 	}
 
@@ -3524,7 +3524,7 @@ bool Game::playerLookInShop(uint32_t playerId, uint16_t spriteId, uint8_t count)
 	if(player->hasCustomFlag(PlayerCustomFlag_CanSeeItemDetails))
 		ss << std::endl << "ItemID: [" << it.id << "].";
 
-	player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 	return true;
 }
 
@@ -3634,7 +3634,7 @@ bool Game::playerLookAt(uint32_t playerId, const Position& pos, uint16_t spriteI
 		ss << ".";
 	}
 
-	player->sendTextMessage(MSG_INFO_DESCR, ss.str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 	return true;
 }
 
@@ -3765,13 +3765,13 @@ bool Game::playerRequestAddVip(uint32_t playerId, const std::string& vipName)
 	player->setNextExAction(OTSYS_TIME() + g_config.getNumber(ConfigManager::CUSTOM_ACTIONS_DELAY_INTERVAL) - 10);
 	if(!IOLoginData::getInstance()->getGuidByNameEx(guid, specialVip, name))
 	{
-		player->sendTextMessage(MSG_STATUS_SMALL, "A player with that name does not exist.");
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with that name does not exist.");
 		return false;
 	}
 
 	if(specialVip && !player->hasFlag(PlayerFlag_SpecialVIP))
 	{
-		player->sendTextMessage(MSG_STATUS_SMALL, "You cannot add this player.");
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, "You cannot add this player.");
 		return false;
 	}
 
@@ -3861,10 +3861,10 @@ bool Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, c
 		{
 			char buffer[75];
 			sprintf(buffer, "You are still muted for %d seconds.", muted);
-			player->sendTextMessage(MSG_STATUS_SMALL, buffer);
+			player->sendTextMessage(MESSAGE_STATUS_SMALL, buffer);
 		}
 		else
-			player->sendTextMessage(MSG_STATUS_SMALL, "You are muted permanently.");
+			player->sendTextMessage(MESSAGE_STATUS_SMALL, "You are muted permanently.");
 
 		return false;
 	}
@@ -3957,7 +3957,7 @@ bool Game::playerYell(Player* player, const std::string& text)
 {
 	if(player->getLevel() <= 1 && !player->hasFlag(PlayerFlag_CannotBeMuted))
 	{
-		player->sendTextMessage(MSG_STATUS_SMALL, "You may not yell as long as you are on level 1.");
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, "You may not yell as long as you are on level 1.");
 		return true;
 	}
 
@@ -3982,7 +3982,7 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 	Player* toPlayer = getPlayerByName(receiver);
 	if(!toPlayer || toPlayer->isRemoved())
 	{
-		player->sendTextMessage(MSG_STATUS_SMALL, "A player with this name is not online.");
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with this name is not online.");
 		return false;
 	}
 
@@ -3996,7 +3996,7 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 		else
 			sprintf(buffer, "Sorry, %s is currently ignoring private messages.", toPlayer->getName().c_str());
 
-		player->sendTextMessage(MSG_STATUS_SMALL, buffer);
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, buffer);
 		return false;
 	}
 
@@ -4007,13 +4007,13 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 	toPlayer->onCreatureSay(player, type, text);
 	if(!canSee)
 	{
-		player->sendTextMessage(MSG_STATUS_SMALL, "A player with this name is not online.");
+		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with this name is not online.");
 		return false;
 	}
 
 	char buffer[80];
 	sprintf(buffer, "Message sent to %s.", toPlayer->getName().c_str());
-	player->sendTextMessage(MSG_STATUS_SMALL, buffer);
+	player->sendTextMessage(MESSAGE_STATUS_SMALL, buffer);
 	return true;
 }
 
@@ -4408,7 +4408,7 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	if(Combat::canDoCombat(attacker, target, true) != RET_NOERROR)
 	{
 		if(!element)
-			addMagicEffect(list, targetPos, MAGIC_EFFECT_POFF, target->isGhost());
+			addMagicEffect(list, targetPos, CONST_ME_POFF, target->isGhost());
 
 		return true;
 	}
@@ -4421,7 +4421,7 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	if(blockType == BLOCK_DEFENSE)
 	{
 		if(!element)
-			addMagicEffect(list, targetPos, MAGIC_EFFECT_POFF);
+			addMagicEffect(list, targetPos, CONST_ME_POFF);
 
 		return true;
 	}
@@ -4429,7 +4429,7 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	if(blockType == BLOCK_ARMOR)
 	{
 		if(!element)
-			addMagicEffect(list, targetPos, MAGIC_EFFECT_BLOCKHIT);
+			addMagicEffect(list, targetPos, CONST_ME_BLOCKHIT);
 
 		return true;
 	}
@@ -4440,7 +4440,7 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 	if(element)
 		return true;
 
-	MagicEffect_t effect = MAGIC_EFFECT_NONE;
+	MagicEffect_t effect = CONST_ME_NONE;
 	switch(combatType)
 	{
 		case COMBAT_UNDEFINEDDAMAGE:
@@ -4454,13 +4454,13 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 		case COMBAT_EARTHDAMAGE:
 		case COMBAT_HOLYDAMAGE:
 		{
-			effect = MAGIC_EFFECT_BLOCKHIT;
+			effect = CONST_ME_BLOCKHIT;
 			break;
 		}
 
 		default:
 		{
-			effect = MAGIC_EFFECT_POFF;
+			effect = CONST_ME_POFF;
 			break;
 		}
 	}
@@ -4470,7 +4470,7 @@ bool Game::combatBlockHit(CombatType_t combatType, Creature* attacker, Creature*
 }
 
 bool Game::combatChangeHealth(CombatType_t combatType, Creature* attacker, Creature* target, int32_t healthChange,
-	MagicEffect_t hitEffect/* = MAGIC_EFFECT_UNKNOWN*/, Color_t hitColor/* = COLOR_UNKNOWN*/, bool force/* = false*/)
+	MagicEffect_t hitEffect/* = CONST_ME_UNKNOWN*/, Color_t hitColor/* = COLOR_UNKNOWN*/, bool force/* = false*/)
 {
 	CombatParams params;
 	params.effects.hit =  hitEffect;
@@ -4509,7 +4509,7 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 
 			const SpectatorVec& list = getSpectators(targetPos);
 			if(params.combatType != COMBAT_HEALING)
-				addMagicEffect(list, targetPos, MAGIC_EFFECT_WRAPS_BLUE);
+				addMagicEffect(list, targetPos, CONST_ME_MAGIC_BLUE);
 
 			addAnimatedText(list, targetPos, g_config.getNumber(ConfigManager::HEALTH_HEALING_COLOR), buffer);
 		}
@@ -4519,7 +4519,7 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 		const SpectatorVec& list = getSpectators(targetPos);
 		if(target->getHealth() < 1 || Combat::canDoCombat(attacker, target, true) != RET_NOERROR)
 		{
-			addMagicEffect(list, targetPos, MAGIC_EFFECT_POFF);
+			addMagicEffect(list, targetPos, CONST_ME_POFF);
 			return true;
 		}
 
@@ -4553,7 +4553,7 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 					char buffer[20];
 					sprintf(buffer, "%d", manaDamage);
 
-					addMagicEffect(list, targetPos, MAGIC_EFFECT_LOSE_ENERGY);
+					addMagicEffect(list, targetPos, CONST_ME_LOSEENERGY);
 					addAnimatedText(list, targetPos, COLOR_BLUE, buffer);
                 }
 			}
@@ -4577,7 +4577,7 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 					target->drainHealth(attacker, params.element.type, elementDamage);
 
 				Color_t textColor = COLOR_NONE;
-				MagicEffect_t magicEffect = MAGIC_EFFECT_NONE;
+				MagicEffect_t magicEffect = CONST_ME_NONE;
 
 				addCreatureHealth(list, target);
 				if(params.combatType == COMBAT_PHYSICALDAMAGE)
@@ -4587,29 +4587,29 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 					{
 						case RACE_VENOM:
 							textColor = COLOR_LIGHTGREEN;
-							magicEffect = MAGIC_EFFECT_POISON;
+							magicEffect = CONST_ME_HITBYPOISON;
 							splash = Item::CreateItem(ITEM_SMALLSPLASH, FLUID_GREEN);
 							break;
 
 						case RACE_BLOOD:
 							textColor = COLOR_RED;
-							magicEffect = MAGIC_EFFECT_DRAW_BLOOD;
+							magicEffect = CONST_ME_DRAWBLOOD;
 							splash = Item::CreateItem(ITEM_SMALLSPLASH, FLUID_BLOOD);
 							break;
 
 						case RACE_UNDEAD:
 							textColor = COLOR_GREY;
-							magicEffect = MAGIC_EFFECT_HIT_AREA;
+							magicEffect = CONST_ME_HITAREA;
 							break;
 
 						case RACE_FIRE:
 							textColor = COLOR_ORANGE;
-							magicEffect = MAGIC_EFFECT_DRAW_BLOOD;
+							magicEffect = CONST_ME_DRAWBLOOD;
 							break;
 
 						case RACE_ENERGY:
 							textColor = COLOR_PURPLE;
-							magicEffect = MAGIC_EFFECT_PURPLEENERGY;
+							magicEffect = CONST_ME_PURPLEENERGY;
 							break;
 
 						default:
@@ -4625,13 +4625,13 @@ bool Game::combatChangeHealth(const CombatParams& params, Creature* attacker, Cr
 				else
 					getCombatDetails(params.combatType, magicEffect, textColor);
 
-				if(params.effects.hit != MAGIC_EFFECT_UNKNOWN)
+				if(params.effects.hit != CONST_ME_UNKNOWN)
 					magicEffect = params.effects.hit;
 
 				if(params.effects.color != COLOR_UNKNOWN)
 					textColor = params.effects.color;
 
-				if(textColor < COLOR_NONE && magicEffect < MAGIC_EFFECT_NONE)
+				if(textColor < COLOR_NONE && magicEffect < CONST_ME_NONE)
 				{
 					char buffer[20];
 					sprintf(buffer, "%d", damage);
@@ -4677,7 +4677,7 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 	else if(!inherited && Combat::canDoCombat(attacker, target, true) != RET_NOERROR)
 	{
 		const SpectatorVec& list = getSpectators(targetPos);
-		addMagicEffect(list, targetPos, MAGIC_EFFECT_POFF);
+		addMagicEffect(list, targetPos, CONST_ME_POFF);
 		return false;
 	}
 	else
@@ -5017,7 +5017,7 @@ bool Game::playerInviteToParty(uint32_t playerId, uint32_t invitedId)
 	{
 		char buffer[90];
 		sprintf(buffer, "%s is already in a party.", invitedPlayer->getName().c_str());
-		player->sendTextMessage(MSG_INFO_DESCR, buffer);
+		player->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 		return false;
 	}
 
@@ -5041,7 +5041,7 @@ bool Game::playerJoinParty(uint32_t playerId, uint32_t leaderId)
 	if(!player->getParty())
 		return leader->getParty()->join(player);
 
-	player->sendTextMessage(MSG_INFO_DESCR, "You are already in a party.");
+	player->sendTextMessage(MESSAGE_INFO_DESCR, "You are already in a party.");
 	return false;
 }
 
@@ -5419,9 +5419,9 @@ bool Game::playerViolationWindow(uint32_t playerId, std::string name, uint8_t re
 	ss << " against: " << name << " (Warnings: " << account.warnings << "), with reason: \"" << getReason(
 		reason) << "\", and comment: \"" << comment << "\".";
 	if(g_config.getBool(ConfigManager::BROADCAST_BANISHMENTS))
-		broadcastMessage(ss.str(), MSG_STATUS_WARNING);
+		broadcastMessage(ss.str(), MESSAGE_STATUS_WARNING);
 	else
-		player->sendTextMessage(MSG_STATUS_CONSOLE_RED, ss.str());
+		player->sendTextMessage(MESSAGE_STATUS_CONSOLE_RED, ss.str());
 
 	if(target->isVirtual())
 	{
@@ -5432,9 +5432,9 @@ bool Game::playerViolationWindow(uint32_t playerId, std::string name, uint8_t re
 	{
 		char buffer[30];
 		sprintf(buffer, "You have been %s.", (kickAction > KICK ? "banished" : "namelocked"));
-		target->sendTextMessage(MSG_INFO_DESCR, buffer);
+		target->sendTextMessage(MESSAGE_INFO_DESCR, buffer);
 
-		addMagicEffect(target->getPosition(), MAGIC_EFFECT_WRAPS_GREEN);
+		addMagicEffect(target->getPosition(), CONST_ME_MAGIC_GREEN);
 		Scheduler::getInstance().addEvent(createSchedulerTask(1000, boost::bind(
 			&Game::kickPlayer, this, target->getID(), false)));
 	}
@@ -6240,14 +6240,14 @@ bool Game::reloadInfo(ReloadInfo_t reload, uint32_t playerId/* = 0*/)
 
 	if(done)
 	{
-		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Reloaded successfully.");
+		player->sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Reloaded successfully.");
 		return true;
 	}
 
 	if(reload == RELOAD_ALL)
-		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Failed to reload some parts.");
+		player->sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Failed to reload some parts.");
 	else
-		player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, "Failed to reload.");
+		player->sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Failed to reload.");
 
 	return false;
 }
@@ -6259,17 +6259,17 @@ void Game::prepareGlobalSave(uint8_t minutes)
 	{
 		case 5:
 			setGameState(GAMESTATE_CLOSING);
-			broadcastMessage("Server is going down for a global save within 5 minutes. Please logout.", MSG_STATUS_WARNING);
+			broadcastMessage("Server is going down for a global save within 5 minutes. Please logout.", MESSAGE_STATUS_WARNING);
 			Scheduler::getInstance().addEvent(createSchedulerTask(2 * 60000, boost::bind(&Game::prepareGlobalSave, this, 3)));
 			break;
 
 		case 3:
-			broadcastMessage("Server is going down for a global save within 3 minutes. Please logout.", MSG_STATUS_WARNING);
+			broadcastMessage("Server is going down for a global save within 3 minutes. Please logout.", MESSAGE_STATUS_WARNING);
 			Scheduler::getInstance().addEvent(createSchedulerTask(2 * 60000, boost::bind(&Game::prepareGlobalSave, this, 1)));
 			break;
 
 		case 1:
-			broadcastMessage("Server is going down for a global save in one minute, please logout!", MSG_STATUS_WARNING);
+			broadcastMessage("Server is going down for a global save in one minute, please logout!", MESSAGE_STATUS_WARNING);
 			Scheduler::getInstance().addEvent(createSchedulerTask(60000, boost::bind(&Game::prepareGlobalSave, this, 0)));
 			break;
 
@@ -6371,7 +6371,7 @@ void Game::showHotkeyUseMessage(Player* player, Item* item)
 	else
 		stream << "Using one of " << count << " " << it.pluralName.c_str() << "...";
 
-	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
+	player->sendTextMessage(MESSAGE_INFO_DESCR, stream.str().c_str());
 }
 
 uint16_t Game::wallType(uint16_t id)

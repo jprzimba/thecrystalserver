@@ -510,7 +510,7 @@ void IOGuild::finishWar(War_t war, bool finished)
 	{
 		std::stringstream s;
 		s << war.names[war.type] << " has just won the war against " << war.names[war.type == WAR_GUILD] << ".";
-		g_game.broadcastMessage(s.str().c_str(), MSG_EVENT_ADVANCE);
+		g_game.broadcastMessage(s.str().c_str(), MESSAGE_EVENT_ADVANCE);
 	}
 }
 

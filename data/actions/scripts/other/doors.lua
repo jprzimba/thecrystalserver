@@ -31,7 +31,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		end
 
 		local gender = item.actionid - 186
-		if(isInArray({PLAYERSEX_FEMALE,  PLAYERSEX_MALE, PLAYERSEX_GAMEMASTER}, gender)) then
+		if(isInArray({PLAYERSEX_FEMALE,  PLAYERSEX_MALE}, gender)) then
 			if(gender ~= getPlayerSex(cid)) then
 				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Only the worthy may pass.")
 				return true

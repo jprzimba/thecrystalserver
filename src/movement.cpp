@@ -442,34 +442,34 @@ MoveEvent* MoveEvents::getEvent(Item* item, MoveEvent_t eventType, slots_t slot)
 	uint32_t slotp = 0;
 	switch(slot)
 	{
-		case SLOT_HEAD:
+		case CONST_SLOT_HEAD:
 			slotp = SLOTP_HEAD;
 			break;
-		case SLOT_NECKLACE:
+		case CONST_SLOT_NECKLACE:
 			slotp = SLOTP_NECKLACE;
 			break;
-		case SLOT_BACKPACK:
+		case CONST_SLOT_BACKPACK:
 			slotp = SLOTP_BACKPACK;
 			break;
-		case SLOT_ARMOR:
+		case CONST_SLOT_ARMOR:
 			slotp = SLOTP_ARMOR;
 			break;
-		case SLOT_RIGHT:
+		case CONST_SLOT_RIGHT:
 			slotp = SLOTP_RIGHT;
 			break;
-		case SLOT_LEFT:
+		case CONST_SLOT_LEFT:
 			slotp = SLOTP_LEFT;
 			break;
-		case SLOT_LEGS:
+		case CONST_SLOT_LEGS:
 			slotp = SLOTP_LEGS;
 			break;
-		case SLOT_FEET:
+		case CONST_SLOT_FEET:
 			slotp = SLOTP_FEET;
 			break;
-		case SLOT_AMMO:
+		case CONST_SLOT_AMMO:
 			slotp = SLOTP_AMMO;
 			break;
-		case SLOT_RING:
+		case CONST_SLOT_RING:
 			slotp = SLOTP_RING;
 			break;
 		default:
@@ -926,7 +926,7 @@ bool MoveEvent::loadFunction(const std::string& functionName)
 		return false;
 	}
 
-	m_scripted = EVENT_SCRIPT_FALSE;
+	m_scripted = false;
 	return true;
 }
 
@@ -1029,16 +1029,16 @@ bool MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, slot
 	{
 		Condition* condition = Condition::createCondition((ConditionId_t)slot, CONDITION_REGENERATION, -1, 0);
 		if(it.abilities->healthGain)
-			condition->setParam(CONDITIONPARAM_HEALTHGAIN, it.abilities->healthGain);
+			condition->setParam(CONDITION_PARAM_HEALTHGAIN, it.abilities->healthGain);
 
 		if(it.abilities->healthTicks)
-			condition->setParam(CONDITIONPARAM_HEALTHTICKS, it.abilities->healthTicks);
+			condition->setParam(CONDITION_PARAM_HEALTHTICKS, it.abilities->healthTicks);
 
 		if(it.abilities->manaGain)
-			condition->setParam(CONDITIONPARAM_MANAGAIN, it.abilities->manaGain);
+			condition->setParam(CONDITION_PARAM_MANAGAIN, it.abilities->manaGain);
 
 		if(it.abilities->manaTicks)
-			condition->setParam(CONDITIONPARAM_MANATICKS, it.abilities->manaTicks);
+			condition->setParam(CONDITION_PARAM_MANATICKS, it.abilities->manaTicks);
 
 		player->addCondition(condition);
 	}
@@ -1179,59 +1179,24 @@ uint32_t MoveEvent::executeStep(Creature* actor, Creature* creature, Item* item,
 	{
 		MoveEventScript::event = this;
 		ScriptEnviroment* env = m_interface->getEnv();
-		if(m_scripted == EVENT_SCRIPT_BUFFER)
-		{
-			env->setRealPos(creature->getPosition());
-			std::stringstream scriptstream;
-			scriptstream << "local cid = " << env->addThing(creature) << std::endl;
+		env->setScriptId(m_scriptId, m_interface);
+		env->setRealPos(creature->getPosition());
 
-			env->streamThing(scriptstream, "item", item, env->addThing(item));
-			env->streamPosition(scriptstream, "position", pos, 0);
-			env->streamPosition(scriptstream, "lastPosition", creature->getLastPosition(), 0);
-			env->streamPosition(scriptstream, "fromPosition", fromPos, 0);
-			env->streamPosition(scriptstream, "toPosition", toPos, 0);
-			scriptstream << "local actor = " << env->addThing(actor) << std::endl;
+		lua_State* L = m_interface->getState();
+		m_interface->pushFunction(m_scriptId);
+		lua_pushnumber(L, env->addThing(creature));
 
-			if(m_scriptData)
-				scriptstream << *m_scriptData;
+		LuaInterface::pushThing(L, item, env->addThing(item));
+		LuaInterface::pushPosition(L, pos, 0);
+		LuaInterface::pushPosition(L, creature->getLastPosition(), 0);
+		LuaInterface::pushPosition(L, fromPos, 0);
+		LuaInterface::pushPosition(L, toPos, 0);
 
-			bool result = true;
-			if(m_interface->loadBuffer(scriptstream.str()))
-			{
-				lua_State* L = m_interface->getState();
-				result = m_interface->getGlobalBool(L, "_result", true);
-			}
+		lua_pushnumber(L, env->addThing(actor));
+		bool result = m_interface->callFunction(7);
 
-			m_interface->releaseEnv();
-			return result;
-		}
-		else
-		{
-			#ifdef __DEBUG_LUASCRIPTS__
-			std::stringstream desc;
-			desc << creature->getName() << " itemid: " << item->getID() << " - " << pos;
-			env->setEvent(desc.str());
-			#endif
-
-			env->setScriptId(m_scriptId, m_interface);
-			env->setRealPos(creature->getPosition());
-
-			lua_State* L = m_interface->getState();
-			m_interface->pushFunction(m_scriptId);
-			lua_pushnumber(L, env->addThing(creature));
-
-			LuaInterface::pushThing(L, item, env->addThing(item));
-			LuaInterface::pushPosition(L, pos, 0);
-			LuaInterface::pushPosition(L, creature->getLastPosition(), 0);
-			LuaInterface::pushPosition(L, fromPos, 0);
-			LuaInterface::pushPosition(L, toPos, 0);
-
-			lua_pushnumber(L, env->addThing(actor));
-			bool result = m_interface->callFunction(7);
-
-			m_interface->releaseEnv();
-			return result;
-		}
+		m_interface->releaseEnv();
+		return result;
 	}
 	else
 	{
@@ -1256,52 +1221,20 @@ bool MoveEvent::executeEquip(Player* player, Item* item, slots_t slot, bool bool
 	{
 		MoveEventScript::event = this;
 		ScriptEnviroment* env = m_interface->getEnv();
-		if(m_scripted == EVENT_SCRIPT_BUFFER)
-		{
-			env->setRealPos(player->getPosition());
-			std::stringstream scriptstream;
+		env->setScriptId(m_scriptId, m_interface);
+		env->setRealPos(player->getPosition());
 
-			scriptstream << "local cid = " << env->addThing(player) << std::endl;
-			env->streamThing(scriptstream, "item", item, env->addThing(item));
-			scriptstream << "local slot = " << slot << std::endl;
-			scriptstream << "local boolean = " << (boolean ? "true" : "false") << std::endl;
+		lua_State* L = m_interface->getState();
+		m_interface->pushFunction(m_scriptId);
 
-			if(m_scriptData)
-				scriptstream << *m_scriptData;
+		lua_pushnumber(L, env->addThing(player));
+		LuaInterface::pushThing(L, item, env->addThing(item));
+		lua_pushnumber(L, slot);
+		lua_pushboolean(L, boolean);
 
-			bool result = true;
-			if(m_interface->loadBuffer(scriptstream.str()))
-			{
-				lua_State* L = m_interface->getState();
-				result = m_interface->getGlobalBool(L, "_result", true);
-			}
-
-			m_interface->releaseEnv();
-			return result;
-		}
-		else
-		{
-			#ifdef __DEBUG_LUASCRIPTS__
-			std::stringstream desc;
-			desc << player->getName() << " itemid: " << item->getID() << " slot: " << slot;
-			env->setEvent(desc.str());
-			#endif
-
-			env->setScriptId(m_scriptId, m_interface);
-			env->setRealPos(player->getPosition());
-
-			lua_State* L = m_interface->getState();
-			m_interface->pushFunction(m_scriptId);
-
-			lua_pushnumber(L, env->addThing(player));
-			LuaInterface::pushThing(L, item, env->addThing(item));
-			lua_pushnumber(L, slot);
-			lua_pushboolean(L, boolean);
-
-			bool result = m_interface->callFunction(4);
-			m_interface->releaseEnv();
-			return result;
-		}
+		bool result = m_interface->callFunction(4);
+		m_interface->releaseEnv();
+		return result;
 	}
 	else
 	{
@@ -1326,57 +1259,21 @@ uint32_t MoveEvent::executeAddRemItem(Creature* actor, Item* item, Item* tileIte
 	{
 		MoveEventScript::event = this;
 		ScriptEnviroment* env = m_interface->getEnv();
-		if(m_scripted == EVENT_SCRIPT_BUFFER)
-		{
-			env->setRealPos(pos);
-			std::stringstream scriptstream;
+		env->setScriptId(m_scriptId, m_interface);
+		env->setRealPos(pos);
 
-			env->streamThing(scriptstream, "moveItem", item, env->addThing(item));
-			env->streamThing(scriptstream, "tileItem", tileItem, env->addThing(tileItem));
+		lua_State* L = m_interface->getState();
+		m_interface->pushFunction(m_scriptId);
 
-			env->streamPosition(scriptstream, "position", pos, 0);
-			scriptstream << "local cid = " << env->addThing(actor) << std::endl;
+		LuaInterface::pushThing(L, item, env->addThing(item));
+		LuaInterface::pushThing(L, tileItem, env->addThing(tileItem));
+		LuaInterface::pushPosition(L, pos, 0);
 
-			if(m_scriptData)
-				scriptstream << *m_scriptData;
-
-			bool result = true;
-			if(m_interface->loadBuffer(scriptstream.str()))
-			{
-				lua_State* L = m_interface->getState();
-				result = m_interface->getGlobalBool(L, "_result", true);
-			}
-
-			m_interface->releaseEnv();
-			return result;
-		}
-		else
-		{
-			#ifdef __DEBUG_LUASCRIPTS__
-			std::stringstream desc;
-			if(tileItem)
-				desc << "tileid: " << tileItem->getID();
-
-			desc << " itemid: " << item->getID() << " - " << pos;
-			env->setEvent(desc.str());
-			#endif
-
-			env->setScriptId(m_scriptId, m_interface);
-			env->setRealPos(pos);
-
-			lua_State* L = m_interface->getState();
-			m_interface->pushFunction(m_scriptId);
-
-			LuaInterface::pushThing(L, item, env->addThing(item));
-			LuaInterface::pushThing(L, tileItem, env->addThing(tileItem));
-			LuaInterface::pushPosition(L, pos, 0);
-
-			lua_pushnumber(L, env->addThing(actor));
-			bool result = m_interface->callFunction(4);
-
-			m_interface->releaseEnv();
-			return result;
-		}
+		lua_pushnumber(L, env->addThing(actor));
+		
+		bool result = m_interface->callFunction(4);
+		m_interface->releaseEnv();
+		return result;
 	}
 	else
 	{
