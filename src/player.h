@@ -691,6 +691,15 @@ class Player : public Creature, public Cylinder
 		void sendCritical() const;
 		void sendPlayerIcons(Player* player);
 
+		void sendRuleViolationsChannel(uint16_t channelId)
+			{if(client) client->sendRuleViolationsChannel(channelId);}
+		void sendRemoveReport(const std::string& name)
+			{if(client) client->sendRemoveReport(name);}
+		void sendLockRuleViolation()
+			{if(client) client->sendLockRuleViolation();}
+		void sendRuleViolationCancel(const std::string& name)
+			{if(client) client->sendRuleViolationCancel(name);}
+
 		void receivePing() {lastPong = OTSYS_TIME();}
 		virtual void onThink(uint32_t interval);
 		uint32_t getAttackSpeed() const;

@@ -148,6 +148,9 @@ class ProtocolGame : public Protocol
 		void parseOpenPrivate(NetworkMessage& msg);
 		void parseCloseChannel(NetworkMessage& msg);
 		void parseCloseNpc(NetworkMessage& msg);
+		void parseProcessRuleViolation(NetworkMessage& msg);
+		void parseCloseRuleViolation(NetworkMessage& msg);
+		void parseCancelRuleViolation(NetworkMessage& msg);
 
 		//rule violation
 		void parseViolationWindow(NetworkMessage& msg);
@@ -162,6 +165,11 @@ class ProtocolGame : public Protocol
 		void sendToChannel(const Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0);
 		void sendIcons(int32_t icons);
 		void sendFYIBox(const std::string& message);
+		void sendRuleViolationsChannel(uint16_t channelId);
+
+		void sendRemoveReport(const std::string& name);
+		void sendLockRuleViolation();
+		void sendRuleViolationCancel(const std::string& name);
 
 		void sendDistanceShoot(const Position& from, const Position& to, uint8_t type);
 		void sendMagicEffect(const Position& pos, uint8_t type);

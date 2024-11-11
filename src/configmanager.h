@@ -320,6 +320,7 @@ class ConfigManager
 			ENABLE_FREE_TRAVEL,
 			SHOW_ITEM_DESCRIPTION,
 			SHOW_PARTY_RANGE_LEVEL,
+			ENABLE_RVR,
 			LAST_BOOL_CONFIG /* this must be the last one */
 		};
 

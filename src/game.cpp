@@ -2296,7 +2296,7 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 
 bool Game::playerBroadcastMessage(Player* player, SpeakClasses type, const std::string& text)
 {
-	if(!player->hasFlag(PlayerFlag_CanBroadcast) || type < SPEAK_CLASS_FIRST || type > SPEAK_CLASS_LAST)
+	if(!player->hasFlag(PlayerFlag_CanBroadcast) || type < TALKTYPE_FIRST || type > TALKTYPE_LAST)
 		return false;
 
 	Logger::getInstance()->eFile("talkactions/" + player->getName() + ".log", "#b " + text, true);
@@ -2396,7 +2396,11 @@ bool Game::playerOpenChannel(uint32_t playerId, uint16_t channelId)
 		return false;
 	}
 
-	player->sendChannel(channel->getId(), channel->getName());
+	if(channel->getId() != CHANNEL_RVR)
+		player->sendChannel(channel->getId(), channel->getName());
+	else
+		player->sendRuleViolationsChannel(channel->getId());
+
 	return true;
 }
 
@@ -3874,10 +3878,10 @@ bool Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, c
 		if(mute)
 			player->removeMessageBuffer();
 
-		return internalCreatureSay(player, SPEAK_SAY, text, false);
+		return internalCreatureSay(player, TALKTYPE_SAY, text, false);
 	}
 
-	if(g_talkActions->onPlayerSay(player, type == SPEAK_SAY ? (unsigned)CHANNEL_DEFAULT : channelId, text, false))
+	if(g_talkActions->onPlayerSay(player, type == TALKTYPE_SAY ? (unsigned)CHANNEL_DEFAULT : channelId, text, false))
 		return true;
 
 	ReturnValue ret = RET_NOERROR;
@@ -3897,31 +3901,35 @@ bool Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, c
 
 	switch(type)
 	{
-		case SPEAK_SAY:
-			return internalCreatureSay(player, SPEAK_SAY, text, false);
-		case SPEAK_WHISPER:
+		case TALKTYPE_SAY:
+			return internalCreatureSay(player, TALKTYPE_SAY, text, false);
+		case TALKTYPE_WHISPER:
 			return playerWhisper(player, text);
-		case SPEAK_YELL:
+		case TALKTYPE_YELL:
 			return playerYell(player, text);
-		case SPEAK_PRIVATE:
-		case SPEAK_PRIVATE_RED:
-		case SPEAK_RVR_ANSWER:
+		case TALKTYPE_PRIVATE:
+		case TALKTYPE_PRIVATE_RED:
+		case TALKTYPE_RVR_ANSWER:
 			return playerSpeakTo(player, type, receiver, text);
-		case SPEAK_CHANNEL_O:
-		case SPEAK_CHANNEL_Y:
-		case SPEAK_CHANNEL_RN:
-		case SPEAK_CHANNEL_RA:
-		case SPEAK_CHANNEL_W:
+		case TALKTYPE_CHANNEL_O:
+		case TALKTYPE_CHANNEL_Y:
+		case TALKTYPE_CHANNEL_RN:
+		case TALKTYPE_CHANNEL_RA:
+		case TALKTYPE_CHANNEL_W:
 		{
 			if(playerTalkToChannel(player, type, text, channelId))
 				return true;
 
-			return playerSay(playerId, 0, SPEAK_SAY, receiver, text);
+			return playerSay(playerId, 0, TALKTYPE_SAY, receiver, text);
 		}
-		case SPEAK_PRIVATE_PN:
+		case TALKTYPE_PRIVATE_PN:
 			return playerSpeakToNpc(player, text);
-		case SPEAK_BROADCAST:
-			return playerBroadcastMessage(player, SPEAK_BROADCAST, text);
+		case TALKTYPE_BROADCAST:
+			return playerBroadcastMessage(player, TALKTYPE_BROADCAST, text);
+		case TALKTYPE_RVR_CHANNEL:
+			return playerReportRuleViolation(player, text);
+		case TALKTYPE_RVR_CONTINUE:
+			return playerContinueReport(player, text);
 
 		default:
 			break;
@@ -3943,12 +3951,12 @@ bool Game::playerWhisper(Player* player, const std::string& text)
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((tmpPlayer = (*it)->getPlayer()))
-			tmpPlayer->sendCreatureSay(player, SPEAK_WHISPER, text);
+			tmpPlayer->sendCreatureSay(player, TALKTYPE_WHISPER, text);
 	}
 
 	//event method
 	for(it = list.begin(); it != list.end(); ++it)
-		(*it)->onCreatureSay(player, SPEAK_WHISPER, text);
+		(*it)->onCreatureSay(player, TALKTYPE_WHISPER, text);
 
 	return true;
 }
@@ -3973,7 +3981,7 @@ bool Game::playerYell(Player* player, const std::string& text)
 			player->addCondition(condition);
 	}
 
-	internalCreatureSay(player, SPEAK_YELL, asUpperCaseString(text), false);
+	internalCreatureSay(player, TALKTYPE_YELL, asUpperCaseString(text), false);
 	return true;
 }
 
@@ -4000,8 +4008,8 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 		return false;
 	}
 
-	if(type == SPEAK_PRIVATE_RED && !player->hasFlag(PlayerFlag_CanTalkRedPrivate))
-		type = SPEAK_PRIVATE;
+	if(type == TALKTYPE_PRIVATE_RED && !player->hasFlag(PlayerFlag_CanTalkRedPrivate))
+		type = TALKTYPE_PRIVATE;
 
 	toPlayer->sendCreatureSay(player, type, text);
 	toPlayer->onCreatureSay(player, type, text);
@@ -4021,35 +4029,35 @@ bool Game::playerTalkToChannel(Player* player, SpeakClasses type, const std::str
 {
 	switch(type)
 	{
-		case SPEAK_CHANNEL_Y:
+		case TALKTYPE_CHANNEL_Y:
 		{
 			if(channelId == CHANNEL_HELP && player->hasFlag(PlayerFlag_TalkOrangeHelpChannel))
-				type = SPEAK_CHANNEL_O;
+				type = TALKTYPE_CHANNEL_O;
 				
 			if(g_chat.getPrivateChannel(player) != NULL && channelId == g_chat.getPrivateChannel(player)->getId())
-				type = SPEAK_CHANNEL_O;
+				type = TALKTYPE_CHANNEL_O;
 				
 			break;
 		}
 
-		case SPEAK_CHANNEL_O:
+		case TALKTYPE_CHANNEL_O:
 		{
 			if(channelId != CHANNEL_HELP || !player->hasFlag(PlayerFlag_TalkOrangeHelpChannel))
-				type = SPEAK_CHANNEL_Y;
+				type = TALKTYPE_CHANNEL_Y;
 			break;
 		}
 
-		case SPEAK_CHANNEL_RN:
+		case TALKTYPE_CHANNEL_RN:
 		{
 			if(!player->hasFlag(PlayerFlag_CanTalkRedChannel))
-				type = SPEAK_CHANNEL_Y;
+				type = TALKTYPE_CHANNEL_Y;
 			break;
 		}
 
-		case SPEAK_CHANNEL_RA:
+		case TALKTYPE_CHANNEL_RA:
 		{
 			if(!player->hasFlag(PlayerFlag_CanTalkRedChannelAnonymous))
-				type = SPEAK_CHANNEL_Y;
+				type = TALKTYPE_CHANNEL_Y;
 			break;
 		}
 
@@ -4075,7 +4083,7 @@ bool Game::playerSpeakToNpc(Player* player, const std::string& text)
 	for(it = list.begin(); it != list.end(); ++it)
 	{
 		if((tmpNpc = (*it)->getNpc()))
-			(*it)->onCreatureSay(player, SPEAK_PRIVATE_PN, text);
+			(*it)->onCreatureSay(player, TALKTYPE_PRIVATE_PN, text);
 	}
 	return true;
 }
@@ -4145,7 +4153,7 @@ bool Game::internalCreatureSay(Creature* creature, SpeakClasses type, const std:
 		// is used if available and if it can be used, else a local vector is
 		// used (hopefully the compiler will optimize away the construction of
 		// the temporary when it's not used).
-		if(type != SPEAK_YELL && type != SPEAK_MONSTER_YELL)
+		if(type != TALKTYPE_YELL && type != TALKTYPE_MONSTER_YELL)
 			getSpectators(list, destPos, false, false,
 				Map::maxClientViewportX, Map::maxClientViewportX,
 				Map::maxClientViewportY, Map::maxClientViewportY);
@@ -6383,4 +6391,137 @@ uint16_t Game::wallType(uint16_t id)
 		return 2;
 
 	return 0;
+}
+
+bool Game::playerProcessRuleViolation(uint32_t playerId, const std::string& name)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	if(!player->hasFlag(PlayerFlag_CanAnswerRuleViolations))
+		return false;
+
+	Player* reporter = getPlayerByName(name);
+	if(!reporter)
+		return false;
+
+	RuleViolationsMap::iterator it = ruleViolations.find(reporter->getID());
+	if(it == ruleViolations.end())
+		return false;
+
+	RuleViolation& rvr = *it->second;
+	if(!rvr.isOpen)
+		return false;
+
+	rvr.isOpen = false;
+	rvr.gamemaster = player;
+	if(ChatChannel* channel = g_chat.getChannelById(CHANNEL_RVR))
+	{
+		UsersMap tmpMap = channel->getUsers();
+		for(UsersMap::iterator tit = tmpMap.begin(); tit != tmpMap.end(); ++tit)
+			tit->second->sendRemoveReport(reporter->getName());
+	}
+
+	return true;
+}
+
+bool Game::playerCloseRuleViolation(uint32_t playerId, const std::string& name)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	Player* reporter = getPlayerByName(name);
+	if(!reporter)
+		return false;
+
+	return closeRuleViolation(reporter);
+}
+
+bool Game::closeRuleViolation(Player* player)
+{
+	RuleViolationsMap::iterator it = ruleViolations.find(player->getID());
+	if(it == ruleViolations.end())
+		return false;
+
+	ruleViolations.erase(it);
+	player->sendLockRuleViolation();
+	if(ChatChannel* channel = g_chat.getChannelById(CHANNEL_RVR))
+	{
+		UsersMap tmpMap = channel->getUsers();
+		for(UsersMap::iterator tit = tmpMap.begin(); tit != tmpMap.end(); ++tit)
+			tit->second->sendRemoveReport(player->getName());
+	}
+
+	return true;
+}
+
+bool Game::playerCancelRuleViolation(uint32_t playerId)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	return cancelRuleViolation(player);
+}
+
+bool Game::cancelRuleViolation(Player* player)
+{
+	RuleViolationsMap::iterator it = ruleViolations.find(player->getID());
+	if(it == ruleViolations.end())
+		return false;
+
+	Player* gamemaster = it->second->gamemaster;
+	if(!it->second->isOpen && gamemaster) //Send to the responser
+		gamemaster->sendRuleViolationCancel(player->getName());
+	else if(ChatChannel* channel = g_chat.getChannelById(CHANNEL_RVR))
+	{
+		UsersMap tmpMap = channel->getUsers();
+		for(UsersMap::iterator tit = tmpMap.begin(); tit != tmpMap.end(); ++tit)
+			tit->second->sendRemoveReport(player->getName());
+	}
+
+	//Now erase it
+	ruleViolations.erase(it);
+	return true;
+}
+
+bool Game::playerReportRuleViolation(Player* player, const std::string& text)
+{
+	//Do not allow reports on multiclones worlds since reports are name-based
+	if(!g_config.getBool(ConfigManager::ENABLE_RVR))
+	{
+		player->sendTextMessage(MESSAGE_INFO_DESCR, "Rule violation reports are disabled.");
+		return false;
+	}
+
+	cancelRuleViolation(player);
+	boost::shared_ptr<RuleViolation> rvr(new RuleViolation(player, text, time(NULL)));
+	ruleViolations[player->getID()] = rvr;
+
+	ChatChannel* channel = g_chat.getChannelById(CHANNEL_RVR);
+	if(!channel)
+		return false;
+
+	for(UsersMap::const_iterator it = channel->getUsers().begin(); it != channel->getUsers().end(); ++it)
+		it->second->sendToChannel(player, TALKTYPE_RVR_CHANNEL, text, CHANNEL_RVR, rvr->time);
+
+	return true;
+}
+
+bool Game::playerContinueReport(Player* player, const std::string& text)
+{
+	RuleViolationsMap::iterator it = ruleViolations.find(player->getID());
+	if(it == ruleViolations.end())
+		return false;
+
+	RuleViolation& rvr = *it->second;
+	Player* toPlayer = rvr.gamemaster;
+	if(!toPlayer)
+		return false;
+
+	toPlayer->sendCreatureSay(player, TALKTYPE_RVR_CONTINUE, text);
+	player->sendTextMessage(MESSAGE_STATUS_SMALL, "Message sent to Gamemaster.");
+	return true;
 }

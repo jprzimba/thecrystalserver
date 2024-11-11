@@ -24,6 +24,9 @@
 
 		[ M...
 			crsyatalserver.exe
+			config.lua
+
+			data/XML/channels.xml
 
 			data/actions/scripts/other/doors.lua
 			data/lib/000-constant.lua
@@ -57,6 +60,9 @@
 [ Charges made
 	[3.1
 		[ DISTRO
+			Add Rule Violation Report and configuration in `config.lua` with the option `enableRuleViolationReport`. (Tryller)
+			Add a new player flag: `PlayerFlag_CanAnswerRuleViolations`. (Tryller)
+			Updated chat channels to support protocol 8.6. (Tryller)
 			Register enums from lua scripts. (Tryller)
 			Fixed a guilds issue. (Tryller)
 			Updated some scirpts to correct enums. (Tryller)

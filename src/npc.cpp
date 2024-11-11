@@ -447,11 +447,11 @@ bool Npc::loadFromXml()
 					else
 						voice.margin = 0;
 
-					voice.type = SPEAK_SAY;
+					voice.type = TALKTYPE_SAY;
 					if(readXMLInteger(q, "type", intValue))
 						voice.type = (SpeakClasses)intValue;
 					else if(readXMLString(q, "yell", strValue) && booleanString(strValue))
-						voice.type = SPEAK_YELL;
+						voice.type = TALKTYPE_YELL;
 
 					if(readXMLString(q, "randomspectator", strValue) || readXMLString(q, "randomSpectator", strValue))
 						voice.randomSpectator = booleanString(strValue);
@@ -1258,7 +1258,7 @@ void Npc::onCreatureSay(const Creature* creature, SpeakClasses type, const std::
 	if(!player)
 		return;
 
-	if(type == SPEAK_SAY || type == SPEAK_PRIVATE_PN)
+	if(type == TALKTYPE_SAY || type == TALKTYPE_PRIVATE_PN)
 	{
 		Position destPos = creature->getPosition();
 		if(pos)
@@ -1835,9 +1835,9 @@ void Npc::executeResponse(Player* player, NpcState* npcState, const NpcResponse*
 			if(!responseString.empty())
 			{
 				if(!response->publicize())
-					doSay(responseString, SPEAK_PRIVATE_NP, player);
+					doSay(responseString, TALKTYPE_PRIVATE_NP, player);
 				else
-					doSay(responseString, SPEAK_SAY, NULL);
+					doSay(responseString, TALKTYPE_SAY, NULL);
 			}
 		}
 		else
@@ -2628,7 +2628,7 @@ int32_t NpcScript::luaActionSay(lua_State* L)
 {
 	//selfSay(words[, target[, type]])
 	int32_t params = lua_gettop(L), target = 0;
-	SpeakClasses type = SPEAK_CLASS_NONE;
+	SpeakClasses type = TALKTYPE_NONE;
 	if(params > 2)
 		type = (SpeakClasses)popNumber(L);
 
@@ -2641,12 +2641,12 @@ int32_t NpcScript::luaActionSay(lua_State* L)
 		return 0;
 
 	Player* player = env->getPlayerByUID(target);
-	if(type == SPEAK_CLASS_NONE)
+	if(type == TALKTYPE_NONE)
 	{
 		if(player)
-			type = SPEAK_PRIVATE_NP;
+			type = TALKTYPE_PRIVATE_NP;
 		else
-			type = SPEAK_SAY;
+			type = TALKTYPE_SAY;
 	}
 
 	npc->doSay(popString(L), (SpeakClasses)type, player);

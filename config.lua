@@ -65,6 +65,7 @@
 	-- Banishments
 	-- violationNameReportActionType 1 = just a report, 2 = name lock, 3 = player banishment
 	-- killsBanLength works only if useBlackSkull option is disabled.
+	-- set `enableRuleViolationReport` to true to enable RVR.
 	notationsToBan = 3
 	warningsToFinalBan = 4
 	warningsToDeletion = 5
@@ -76,6 +77,7 @@
 	broadcastBanishments = true
 	maxViolationCommentSize = 200
 	violationNameReportActionType = 2
+	enableRuleViolationReport = true
 
 	-- Battle
 	-- NOTE: showHealth/ManaChangeForMonsters inherites from showHealth/ManaChange.

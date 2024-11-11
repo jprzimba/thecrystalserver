@@ -49,7 +49,7 @@ Creature::Creature()
 	lootDrop = LOOT_DROP_FULL;
 	skillLoss = true;
 	hideName = hideHealth = cannotMove = false;
-	speakType = SPEAK_CLASS_NONE;
+	speakType = TALKTYPE_NONE;
 	skull = SKULL_NONE;
 	partyShield = SHIELD_NONE;
 	guildEmblem = EMBLEM_NONE;
@@ -317,7 +317,7 @@ void Creature::onWalk(Direction& dir)
 	else if(r <= (tmp * 4))
 		dir = EAST;
 
-	g_game.internalCreatureSay(this, SPEAK_MONSTER_SAY, "Hicks!", isGhost());
+	g_game.internalCreatureSay(this, TALKTYPE_MONSTER, "Hicks!", isGhost());
 }
 
 bool Creature::getNextStep(Direction& dir, uint32_t&)

@@ -1489,6 +1489,20 @@ void Player::onCreatureDisappear(const Creature* creature, bool isLogout)
 	if(party)
 		party->leave(this);
 
+	g_game.cancelRuleViolation(this);
+	if(hasFlag(PlayerFlag_CanAnswerRuleViolations))
+	{
+		PlayerVector closeReportList;
+		for(RuleViolationsMap::const_iterator it = g_game.getRuleViolations().begin(); it != g_game.getRuleViolations().end(); ++it)
+		{
+			if(it->second->gamemaster == this)
+				closeReportList.push_back(it->second->reporter);
+		}
+
+		for(PlayerVector::iterator it = closeReportList.begin(); it != closeReportList.end(); ++it)
+			g_game.closeRuleViolation(*it);
+	}
+
 	g_chat.removeUserFromChannels(this);
 	if(!isGhost())
 		IOLoginData::getInstance()->updateOnlineStatus(guid, false);
@@ -1825,7 +1839,7 @@ bool Player::isMuted(uint16_t channelId, SpeakClasses type, int32_t& time)
 	if(muteTicks)
 		time = (uint32_t)muteTicks / 1000;
 
-	return type != SPEAK_PRIVATE_PN && (type != SPEAK_CHANNEL_Y || (channelId != CHANNEL_GUILD && !g_chat.isPrivateChannel(channelId)));
+	return type != TALKTYPE_PRIVATE_PN && (type != TALKTYPE_CHANNEL_Y || (channelId != CHANNEL_GUILD && !g_chat.isPrivateChannel(channelId)));
 }
 
 void Player::addMessageBuffer()
@@ -5042,9 +5056,9 @@ void Player::manageAccount(const std::string &text)
 			break;
 	}
 
-	sendCreatureSay(this, SPEAK_PRIVATE_NP, msg.str());
+	sendCreatureSay(this, TALKTYPE_PRIVATE_NP, msg.str());
 	if(!noSwap)
-		sendCreatureSay(this, SPEAK_PRIVATE_NP, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
+		sendCreatureSay(this, TALKTYPE_PRIVATE_NP, "Hint: Type {account} to manage your account and if you want to start over then type {cancel}.");
 }
 
 bool Player::isGuildInvited(uint32_t guildId) const

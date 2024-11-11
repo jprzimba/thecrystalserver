@@ -1730,7 +1730,7 @@ void LuaInterface::registerFunctions()
 	//doTransformItem(uid, newId[, count/subType])
 	lua_register(m_luaState, "doTransformItem", LuaInterface::luaDoTransformItem);
 
-	//doCreatureSay(uid, text[, type = SPEAK_SAY[, ghost = false[, cid = 0[, pos]]]])
+	//doCreatureSay(uid, text[, type = TALKTYPE_SAY[, ghost = false[, cid = 0[, pos]]]])
 	lua_register(m_luaState, "doCreatureSay", LuaInterface::luaDoCreatureSay);
 
 	//doSendCreatureSquare(cid, color[, player])
@@ -2571,6 +2571,7 @@ void LuaInterface::registerFunctions()
 	//channels
 	registerEnum(CHANNEL_GUILD)
 	registerEnum(CHANNEL_PARTY)
+	registerEnum(CHANNEL_RVR)
 	registerEnum(CHANNEL_HELP)
 	registerEnum(CHANNEL_DEFAULT)
 	registerEnum(CHANNEL_PRIVATE)
@@ -2946,6 +2947,27 @@ void LuaInterface::registerFunctions()
 	registerEnum(MESSAGE_STATUS_SMALL)
 	registerEnum(MESSAGE_STATUS_CONSOLE_BLUE)
 	registerEnum(MESSAGE_LAST)
+
+	registerEnum(TALKTYPE_NONE)
+	registerEnum(TALKTYPE_FIRST)
+	registerEnum(TALKTYPE_SAY)
+	registerEnum(TALKTYPE_WHISPER)
+	registerEnum(TALKTYPE_YELL)
+	registerEnum(TALKTYPE_PRIVATE_PN)
+	registerEnum(TALKTYPE_PRIVATE_NP)
+	registerEnum(TALKTYPE_PRIVATE)
+	registerEnum(TALKTYPE_CHANNEL_Y)
+	registerEnum(TALKTYPE_CHANNEL_W)
+	registerEnum(TALKTYPE_RVR_ANSWER)
+	registerEnum(TALKTYPE_RVR_CONTINUE)
+	registerEnum(TALKTYPE_RVR_CHANNEL)
+	registerEnum(TALKTYPE_BROADCAST)
+	registerEnum(TALKTYPE_CHANNEL_RN)
+	registerEnum(TALKTYPE_CHANNEL_O)
+	registerEnum(TALKTYPE_CHANNEL_RA)
+	registerEnum(TALKTYPE_MONSTER)
+	registerEnum(TALKTYPE_MONSTER_YELL)
+	registerEnum(TALKTYPE_LAST)
 
 	//_G
 	registerGlobalVariable("INDEX_WHEREEVER", INDEX_WHEREEVER);
@@ -4057,7 +4079,7 @@ int32_t LuaInterface::luaDoTransformItem(lua_State* L)
 
 int32_t LuaInterface::luaDoCreatureSay(lua_State* L)
 {
-	//doCreatureSay(uid, text[, type = SPEAK_SAY[, ghost = false[, cid = 0[, pos]]]])
+	//doCreatureSay(uid, text[, type = TALKTYPE_SAY[, ghost = false[, cid = 0[, pos]]]])
 	uint32_t params = lua_gettop(L), cid = 0, uid = 0;
 	PositionEx pos;
 	if(params > 5)
@@ -4070,7 +4092,7 @@ int32_t LuaInterface::luaDoCreatureSay(lua_State* L)
 	if(params > 3)
 		ghost = popBoolean(L);
 
-	SpeakClasses type = SPEAK_SAY;
+	SpeakClasses type = TALKTYPE_SAY;
 	if(params > 2)
 		type = (SpeakClasses)popNumber(L);
 
@@ -4249,7 +4271,7 @@ int32_t LuaInterface::luaDoCreatureSetSpeakType(lua_State* L)
 	ScriptEnviroment* env = getEnv();
 	if(Creature* creature = env->getCreatureByUID(popNumber(L)))
 	{
-		if(type < SPEAK_CLASS_FIRST || type > SPEAK_CLASS_LAST)
+		if(type < TALKTYPE_FIRST || type > TALKTYPE_LAST)
 		{
 			errorEx("Invalid speak type");
 			lua_pushboolean(L, false);
