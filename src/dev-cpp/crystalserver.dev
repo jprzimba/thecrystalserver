@@ -31,20 +31,20 @@ CompilerSettings=0000000001100000000000
 
 [VersionInfo]
 Major=3
-Minor=0
+Minor=1
 Release=0
 Build=0
 LanguageID=1033
 CharsetID=1250
 CompanyName=
-FileVersion=3.0
+FileVersion=3.1
 FileDescription=Crystal Server
 InternalName=Infinity Crystal
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=crystalserver.exe
 ProductName=Crystal Server
-ProductVersion=3.0
+ProductVersion=3.1
 AutoIncBuildNr=0
 
 [Unit1]
