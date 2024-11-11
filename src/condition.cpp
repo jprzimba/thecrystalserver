@@ -548,7 +548,7 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			return true;
 
 		case CONDITION_PARAM_SKILL_DISTANCE:
-			skills[SKILL_DIST] = value;
+			skills[SKILL_DISTANCE] = value;
 			return true;
 
 		case CONDITION_PARAM_SKILL_SHIELD:
@@ -556,7 +556,7 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			return true;
 
 		case CONDITION_PARAM_SKILL_FISHING:
-			skills[SKILL_FISH] = value;
+			skills[SKILL_FISHING] = value;
 			return true;
 
 		case CONDITION_PARAM_STAT_MAXHEALTH:
@@ -612,7 +612,7 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			return true;
 
 		case CONDITION_PARAM_SKILL_DISTANCEPERCENT:
-			skillsPercent[SKILL_DIST] = std::max((int32_t)0, value);
+			skillsPercent[SKILL_DISTANCE] = std::max((int32_t)0, value);
 			return true;
 
 		case CONDITION_PARAM_SKILL_SHIELDPERCENT:
@@ -620,7 +620,7 @@ bool ConditionAttributes::setParam(ConditionParam_t param, int32_t value)
 			return true;
 
 		case CONDITION_PARAM_SKILL_FISHINGPERCENT:
-			skillsPercent[SKILL_FISH] = std::max((int32_t)0, value);
+			skillsPercent[SKILL_FISHING] = std::max((int32_t)0, value);
 			return true;
 
 		default:

@@ -916,7 +916,7 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 				else if(tmpStrValue == "shield")
 					it.weaponType = WEAPON_SHIELD;
 				else if(tmpStrValue == "distance" || tmpStrValue == "dist")
-					it.weaponType = WEAPON_DIST;
+					it.weaponType = WEAPON_DISTANCE;
 				else if(tmpStrValue == "wand" || tmpStrValue == "rod")
 					it.weaponType = WEAPON_WAND;
 				else if(tmpStrValue == "ammunition" || tmpStrValue == "ammo")
@@ -1180,12 +1180,12 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 		else if(tmpStrValue == "skilldist")
 		{
 			if(readXMLInteger(itemAttributesNode, "value", intValue))
-				it.getAbilities()->skills[SKILL_DIST] = intValue;
+				it.getAbilities()->skills[SKILL_DISTANCE] = intValue;
 		}
 		else if(tmpStrValue == "skillfish")
 		{
 			if(readXMLInteger(itemAttributesNode, "value", intValue))
-				it.getAbilities()->skills[SKILL_FISH] = intValue;
+				it.getAbilities()->skills[SKILL_FISHING] = intValue;
 		}
 		else if(tmpStrValue == "skillshield")
 		{

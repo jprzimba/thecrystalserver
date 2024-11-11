@@ -832,7 +832,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 	else if(it.weaponType != WEAPON_NONE)
 	{
 		bool begin = true;
-		if(it.weaponType == WEAPON_DIST && it.ammoType != AMMO_NONE)
+		if(it.weaponType == WEAPON_DISTANCE && it.ammoType != AMMO_NONE)
 		{
 			begin = false;
 			s << " (Range:" << int32_t(item ? item->getShootRange() : it.shootRange);

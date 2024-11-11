@@ -1230,12 +1230,12 @@ SkillIdNames skillIdNames[] =
 	{"club",		SKILL_CLUB},
 	{"sword",		SKILL_SWORD},
 	{"axe",			SKILL_AXE},
-	{"distance",	SKILL_DIST},
-	{"dist",		SKILL_DIST},
+	{"distance",	SKILL_DISTANCE},
+	{"dist",		SKILL_DISTANCE},
 	{"shielding",	SKILL_SHIELD},
 	{"shield",		SKILL_SHIELD},
-	{"fishing",		SKILL_FISH},
-	{"fish",		SKILL_FISH},
+	{"fishing",		SKILL_FISHING},
+	{"fish",		SKILL_FISHING},
 	{"level",		SKILL__LEVEL},
 	{"magiclevel",	SKILL__MAGLEVEL},
 	{"magic level",	SKILL__MAGLEVEL},
@@ -1247,7 +1247,7 @@ WeaponTypeNames weaponTypeNames[] = {
 	{"sword",		WEAPON_SWORD},
 	{"club",		WEAPON_CLUB},
 	{"axe",			WEAPON_AXE},
-	{"distance",	WEAPON_DIST},
+	{"distance",	WEAPON_DISTANCE},
 	{"shield",		WEAPON_SHIELD},
 	{"fist",		WEAPON_FIST},
 	{"wand",		WEAPON_WAND},
@@ -1491,7 +1491,7 @@ std::string getSkillName(uint16_t skillId, bool suffix/* = true*/)
 
 			return tmp;
 		}
-		case SKILL_DIST:
+		case SKILL_DISTANCE:
 		{
 			std::string tmp = "distance";
 			if(suffix)
@@ -1501,7 +1501,7 @@ std::string getSkillName(uint16_t skillId, bool suffix/* = true*/)
 		}
 		case SKILL_SHIELD:
 			return "shielding";
-		case SKILL_FISH:
+		case SKILL_FISHING:
 			return "fishing";
 		case SKILL__MAGLEVEL:
 			return "magic level";
@@ -1524,7 +1524,7 @@ std::string getWeaponName(WeaponType_t weaponType)
 			return "club";
 		case WEAPON_AXE:
 			return "axe";
-		case WEAPON_DIST:
+		case WEAPON_DISTANCE:
 			return "distance";
 		case WEAPON_SHIELD:
 			return "shield";

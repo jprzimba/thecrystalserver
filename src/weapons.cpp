@@ -81,7 +81,7 @@ bool Weapons::loadDefaults()
 					break;
 				}
 
-				case WEAPON_DIST:
+				case WEAPON_DISTANCE:
 					if(it->ammoType != AMMO_NONE)
 						break;
 
@@ -685,7 +685,7 @@ bool WeaponDistance::useWeapon(Player* player, Item* item, Creature* target) con
 		const Position& targetPos = target->getPosition();
 
 		uint32_t distance = std::max(std::abs(playerPos.x - targetPos.x), std::abs(
-			playerPos.y - targetPos.y)), skill = player->getSkill(SKILL_DIST, SKILL_LEVEL);
+			playerPos.y - targetPos.y)), skill = player->getSkill(SKILL_DISTANCE, SKILL_LEVEL);
 		if(maxHitChance == 75)
 		{
 			//chance for one-handed weapons
@@ -849,7 +849,7 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 			attackValue += bow->getAttack() + bow->getExtraAttack();
 	}
 
-	int32_t attackSkill = player->getSkill(SKILL_DIST, SKILL_LEVEL);
+	int32_t attackSkill = player->getSkill(SKILL_DISTANCE, SKILL_LEVEL);
 	float attackFactor = player->getAttackFactor();
 
 	double maxValue = Weapons::getMaxWeaponDamage(player->getLevel(), attackSkill, attackValue, attackFactor);
@@ -882,7 +882,7 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 bool WeaponDistance::getSkillType(const Player* player, const Item*,
 	skills_t& skill, uint64_t& skillPoint) const
 {
-	skill = SKILL_DIST;
+	skill = SKILL_DISTANCE;
 	skillPoint = 0;
 	if(player->getAddAttackSkill())
 	{

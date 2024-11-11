@@ -375,13 +375,13 @@ bool Outfits::parseOutfitNode(xmlNodePtr p)
 					outfit.skills[SKILL_SWORD] += intValue;
 
 				if(readXMLInteger(configNode, "distance", intValue) || readXMLInteger(configNode, "dist", intValue))
-					outfit.skills[SKILL_DIST] += intValue;
+					outfit.skills[SKILL_DISTANCE] += intValue;
 
 				if(readXMLInteger(configNode, "shielding", intValue) || readXMLInteger(configNode, "shield", intValue))
 					outfit.skills[SKILL_SHIELD] = intValue;
 
 				if(readXMLInteger(configNode, "fishing", intValue) || readXMLInteger(configNode, "fish", intValue))
-					outfit.skills[SKILL_FISH] = intValue;
+					outfit.skills[SKILL_FISHING] = intValue;
 
 				if(readXMLInteger(configNode, "melee", intValue))
 				{
@@ -396,7 +396,7 @@ bool Outfits::parseOutfitNode(xmlNodePtr p)
 					outfit.skills[SKILL_CLUB] += intValue;
 					outfit.skills[SKILL_SWORD] += intValue;
 					outfit.skills[SKILL_AXE] += intValue;
-					outfit.skills[SKILL_DIST] += intValue;
+					outfit.skills[SKILL_DISTANCE] += intValue;
 				}
 
 				if(readXMLInteger(configNode, "fistPercent", intValue))
@@ -412,13 +412,13 @@ bool Outfits::parseOutfitNode(xmlNodePtr p)
 					outfit.skillsPercent[SKILL_AXE] += intValue;
 
 				if(readXMLInteger(configNode, "distancePercent", intValue) || readXMLInteger(configNode, "distPercent", intValue))
-					outfit.skillsPercent[SKILL_DIST] += intValue;
+					outfit.skillsPercent[SKILL_DISTANCE] += intValue;
 
 				if(readXMLInteger(configNode, "shieldingPercent", intValue) || readXMLInteger(configNode, "shieldPercent", intValue))
 					outfit.skillsPercent[SKILL_SHIELD] = intValue;
 
 				if(readXMLInteger(configNode, "fishingPercent", intValue) || readXMLInteger(configNode, "fishPercent", intValue))
-					outfit.skillsPercent[SKILL_FISH] = intValue;
+					outfit.skillsPercent[SKILL_FISHING] = intValue;
 
 				if(readXMLInteger(configNode, "meleePercent", intValue))
 				{
@@ -433,7 +433,7 @@ bool Outfits::parseOutfitNode(xmlNodePtr p)
 					outfit.skillsPercent[SKILL_CLUB] += intValue;
 					outfit.skillsPercent[SKILL_SWORD] += intValue;
 					outfit.skillsPercent[SKILL_AXE] += intValue;
-					outfit.skillsPercent[SKILL_DIST] += intValue;
+					outfit.skillsPercent[SKILL_DISTANCE] += intValue;
 				}
 			}
 			else if(!xmlStrcmp(configNode->name, (const xmlChar*)"stats"))

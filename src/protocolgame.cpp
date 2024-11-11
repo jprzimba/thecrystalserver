@@ -2730,12 +2730,12 @@ void ProtocolGame::AddPlayerSkills(NetworkMessage_ptr msg)
 	msg->put<char>(player->getSkill(SKILL_SWORD, SKILL_PERCENT));
 	msg->put<char>(player->getSkill(SKILL_AXE, SKILL_LEVEL));
 	msg->put<char>(player->getSkill(SKILL_AXE, SKILL_PERCENT));
-	msg->put<char>(player->getSkill(SKILL_DIST, SKILL_LEVEL));
-	msg->put<char>(player->getSkill(SKILL_DIST, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_DISTANCE, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_DISTANCE, SKILL_PERCENT));
 	msg->put<char>(player->getSkill(SKILL_SHIELD, SKILL_LEVEL));
 	msg->put<char>(player->getSkill(SKILL_SHIELD, SKILL_PERCENT));
-	msg->put<char>(player->getSkill(SKILL_FISH, SKILL_LEVEL));
-	msg->put<char>(player->getSkill(SKILL_FISH, SKILL_PERCENT));
+	msg->put<char>(player->getSkill(SKILL_FISHING, SKILL_LEVEL));
+	msg->put<char>(player->getSkill(SKILL_FISHING, SKILL_PERCENT));
 }
 
 void ProtocolGame::AddCreatureSpeak(NetworkMessage_ptr msg, const Creature* creature, SpeakClasses type,

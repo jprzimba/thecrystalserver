@@ -290,7 +290,7 @@ Item* Player::getWeapon(bool ignoreAmmo)
 	Item* item = NULL;
 	for(int32_t slot = CONST_SLOT_RIGHT; slot <= CONST_SLOT_LEFT; ++slot)
 	{
-		if(!(item = getEquippedItem((slots_t)slot)) || item->getWeaponType() != WEAPON_DIST)
+		if(!(item = getEquippedItem((slots_t)slot)) || item->getWeaponType() != WEAPON_DISTANCE)
 			continue;
 
 		if(!ignoreAmmo && item->getAmmoType() != AMMO_NONE)
@@ -323,7 +323,7 @@ ItemVector Player::getWeapons() const
 			case WEAPON_SHIELD:
 				break;
 
-			case WEAPON_DIST:
+			case WEAPON_DISTANCE:
 			{
 				if(item->getAmmoType() != AMMO_NONE)
 				{
@@ -388,9 +388,9 @@ int32_t Player::getWeaponSkill(const Item* item) const
 		case WEAPON_FIST:
 			return getSkill(SKILL_FIST, SKILL_LEVEL);
 
-		case WEAPON_DIST:
+		case WEAPON_DISTANCE:
 		case WEAPON_AMMO:
-			return getSkill(SKILL_DIST, SKILL_LEVEL);
+			return getSkill(SKILL_DISTANCE, SKILL_LEVEL);
 
 		default:
 			break;

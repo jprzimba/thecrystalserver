@@ -149,10 +149,10 @@ bool Vocations::parseVocationNode(xmlNodePtr p)
 				voc->setSkillBase(SKILL_SWORD, intValue);
 
 			if(readXMLFloat(configNode, "distance", floatValue) || readXMLFloat(configNode, "dist", floatValue))
-				voc->setSkillMultiplier(SKILL_DIST, floatValue);
+				voc->setSkillMultiplier(SKILL_DISTANCE, floatValue);
 
 			if(readXMLInteger(configNode, "distanceBase", intValue) || readXMLInteger(configNode, "distBase", intValue))
-				voc->setSkillBase(SKILL_DIST, intValue);
+				voc->setSkillBase(SKILL_DISTANCE, intValue);
 
 			if(readXMLFloat(configNode, "shielding", floatValue) || readXMLFloat(configNode, "shield", floatValue))
 				voc->setSkillMultiplier(SKILL_SHIELD, floatValue);
@@ -161,10 +161,10 @@ bool Vocations::parseVocationNode(xmlNodePtr p)
 				voc->setSkillBase(SKILL_SHIELD, intValue);
 
 			if(readXMLFloat(configNode, "fishing", floatValue) || readXMLFloat(configNode, "fish", floatValue))
-				voc->setSkillMultiplier(SKILL_FISH, floatValue);
+				voc->setSkillMultiplier(SKILL_FISHING, floatValue);
 
 			if(readXMLInteger(configNode, "fishingBase", intValue) || readXMLInteger(configNode, "fishBase", intValue))
-				voc->setSkillBase(SKILL_FISH, intValue);
+				voc->setSkillBase(SKILL_FISHING, intValue);
 
 			if(readXMLFloat(configNode, "experience", floatValue) || readXMLFloat(configNode, "exp", floatValue))
 				voc->setSkillMultiplier(SKILL__LEVEL, floatValue);
@@ -486,15 +486,15 @@ void Vocation::reset()
 	gainTicks[GAIN_HEALTH] = gainTicks[GAIN_MANA] = 6;
 
 	skillBase[SKILL_SHIELD] = 100;
-	skillBase[SKILL_DIST] = 30;
-	skillBase[SKILL_FISH] = 20;
-	for(int32_t i = SKILL_FIST; i < SKILL_DIST; ++i)
+	skillBase[SKILL_DISTANCE] = 30;
+	skillBase[SKILL_FISHING] = 20;
+	for(int32_t i = SKILL_FIST; i < SKILL_DISTANCE; ++i)
 		skillBase[i] = 50;
 
 	skillMultipliers[SKILL_FIST] = 1.5f;
-	skillMultipliers[SKILL_FISH] = 1.1f;
+	skillMultipliers[SKILL_FISHING] = 1.1f;
 	skillMultipliers[SKILL__LEVEL] = 1.0f;
-	for(int32_t i = SKILL_CLUB; i < SKILL_FISH; ++i)
+	for(int32_t i = SKILL_CLUB; i < SKILL_FISHING; ++i)
 		skillMultipliers[i] = 2.0f;
 
 	formulaMultipliers[MULTIPLIER_MANA] = 4.0f;
