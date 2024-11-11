@@ -60,7 +60,7 @@
 [ Charges made
 	[3.1
 		[ DISTRO
-			Add Rule Violation Report and configuration in `config.lua` with the option `enableRuleViolationReport`. (Tryller)
+			Add Rule Violation Report (CTRL + R) and configuration in `config.lua` with the option `enableRuleViolationReport`. (Tryller)
 			Add a new player flag: `PlayerFlag_CanAnswerRuleViolations`. (Tryller)
 			Updated chat channels to support protocol 8.6. (Tryller)
 			Register enums from lua scripts. (Tryller)
