@@ -338,6 +338,9 @@ class LuaInterface
 
 		virtual void registerFunctions();
 
+		void registerTable(const std::string& tableName);
+		void registerMethod(const std::string& className, const std::string& methodName, lua_CFunction func);
+
 		void registerGlobalMethod(const std::string& functionName, lua_CFunction func);
 		void registerVariable(const std::string& tableName, const std::string& name, lua_Number value);
 		void registerGlobalVariable(const std::string& name, lua_Number value);

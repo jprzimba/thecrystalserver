@@ -3434,6 +3434,25 @@ void LuaInterface::pushBoolean(lua_State* L, bool value)
 	lua_pushboolean(L, value ? 1 : 0);
 }
 
+void LuaInterface::registerTable(const std::string& tableName)
+{
+	// _G[tableName] = {}
+	lua_newtable(m_luaState);
+	lua_setglobal(m_luaState, tableName.c_str());
+}
+
+
+void LuaInterface::registerMethod(const std::string& globalName, const std::string& methodName, lua_CFunction func)
+{
+	// globalName.methodName = func
+	lua_getglobal(m_luaState, globalName.c_str());
+	lua_pushcfunction(m_luaState, func);
+	lua_setfield(m_luaState, -2, methodName.c_str());
+
+	// pop globalName
+	lua_pop(m_luaState, 1);
+}
+
 void LuaInterface::registerGlobalMethod(const std::string& functionName, lua_CFunction func)
 {
 	// _G[functionName] = func
