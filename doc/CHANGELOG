@@ -29,11 +29,26 @@
 			data/XML/channels.xml
 
 			data/actions/scripts/other/doors.lua
+			data/actions/scripts/other/changegold.lua
+			data/actions/scripts/liquids/potions.lua
+			data/actions/scripts/other/windows.lua
+			data/actions/scripts/quests/system.lua
+			data/actions/scripts/tools/fishing.lua
+
 			data/lib/000-constant.lua
+			data/lib/034-exhaustion.lua
+			data/lib/050-function.lua
 			data/lib/101-compat.lua
+
 			data/creaturescripts/scripts/guild.lua
+			data/actions/scripts/tools/fishing.lua
+
 			data/movements/scripts/junglemaw.lua
 			data/movements/scripts/tiles.lua
+
+			data/talkactions/scripts/gamemasters/mute.lua
+			data/talkactions/scripts/player/online.lua
+
 			data/weapons/scripts/poison_arrow.lua
 		]
 
@@ -66,6 +81,7 @@
 			Register enums from lua scripts. (Tryller)
 			Fixed a guilds issue. (Tryller)
 			Updated some scirpts to correct enums. (Tryller)
+			Updated player flags in several scripts. (Tryller)
 			Remove buffer from scripts. (Tryller)
 			Remove Gamemaster sex type. (Tryller)
 		]

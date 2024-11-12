@@ -185,7 +185,7 @@ function isPlayer(cid)
 end
 
 function isPlayerGhost(cid)
-	return isPlayer(cid) and (getCreatureCondition(cid, CONDITION_GAMEMASTER, GAMEMASTER_INVISIBLE, CONDITIONID_DEFAULT) or getPlayerFlagValue(cid, PLAYERFLAG_CANNOTBESEEN))
+	return isPlayer(cid) and (getCreatureCondition(cid, CONDITION_GAMEMASTER, GAMEMASTER_INVISIBLE, CONDITIONID_DEFAULT) or getPlayerFlagValue(cid, PlayerFlag_CannotBeSeen))
 end
 
 function isMonster(cid)
@@ -264,7 +264,7 @@ end
 
 function doPlayerBroadcastMessage(cid, text, class, checkFlag, ghost)
 	local checkFlag, ghost, class = checkFlag or true, ghost or false, class or TALKTYPE_BROADCAST
-	if(checkFlag and not getPlayerFlagValue(cid, PLAYERFLAG_CANBROADCAST)) then
+	if(checkFlag and not getPlayerFlagValue(cid, PlayerFlag_CanBroadcast)) then
 		return false
 	end
 

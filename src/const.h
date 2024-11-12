@@ -513,6 +513,14 @@ enum item_food_t
 	ITEM_FOOD_CHEESE = 2696
 };
 
+enum stackpos_t
+{
+	STACKPOS_GROUND = 0,
+	STACKPOS_TOP_CREATURE = 253,
+	STACKPOS_TOP_FIELD = 254,
+	STACKPOS_TOP_MOVABLE_ITEM_OR_CREATURE = 255
+};
+
 enum PlayerFlags
 {
 	PlayerFlag_CannotUseCombat = 0,			//2^0 = 1

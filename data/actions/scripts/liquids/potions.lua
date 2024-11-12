@@ -95,13 +95,13 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	end
 
 	if(((potion.level and getPlayerLevel(itemEx.uid) < potion.level) or (potion.vocations and not isInArray(potion.vocations, getPlayerVocation(itemEx.uid)))) and
-		not getPlayerCustomFlagValue(cid, PLAYERCUSTOMFLAG_GAMEMASTERPRIVILEGES))
+		not getPlayerCustomFlagValue(cid, PlayerCustomFlag_GamemasterPrivileges))
 	then
 		doCreatureSay(itemEx.uid, "Only " .. potion.vocStr .. (potion.level and (" of level " .. potion.level) or "") .. " or above may drink this fluid.", TALKTYPE_MONSTER, false, cid)
 		return true
 	end
 
-	if(potion.range > 0 and cid ~= itemEx.uid and getDistanceBetween(getThingPosition(cid), getThingPosition(itemEx.uid)) > potion.range and not getPlayerCustomFlagValue(cid, PLAYERCUSTOMFLAG_CANUSEFAR)) then
+	if(potion.range > 0 and cid ~= itemEx.uid and getDistanceBetween(getThingPosition(cid), getThingPosition(itemEx.uid)) > potion.range and not getPlayerCustomFlagValue(cid, PlayerCustomFlag_CanUseFar)) then
 		doPlayerSendDefaultCancel(cid, RETURNVALUE_TOOFARAWAY)
 		return true
 	end

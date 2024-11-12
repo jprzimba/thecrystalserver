@@ -80,7 +80,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 	if(corpse ~= nil and corpse ~= 0) then
 		corpse = corpse[itemEx.actionid]
 		if(corpse ~= nil and corpse ~= 0) then
-			if(config.checkCorpseOwner and not getPlayerCustomFlagValue(cid, PLAYERCUSTOMFLAG_GAMEMASTERPRIVILEGES)) then
+			if(config.checkCorpseOwner and not getPlayerCustomFlagValue(cid, PlayerCustomFlag_GamemasterPrivileges)) then
 				local owner = getItemAttribute(itemEx.uid, "corpseowner")
 				if(owner ~= 0 and owner ~= nil and owner ~= getPlayerGUID(cid)) then
 					doPlayerSendDefaultCancel(cid, RETURNVALUE_YOUARENOTTHEOWNER)

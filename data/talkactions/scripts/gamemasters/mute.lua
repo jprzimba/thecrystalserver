@@ -11,7 +11,7 @@ function onSay(cid, words, param, channel)
 		return true
 	end
 
-	if(getPlayerAccess(cid) <= getPlayerAccess(pid) or getPlayerFlagValue(pid, PLAYERFLAG_CANNOTBEMUTED)) then
+	if(getPlayerAccess(cid) <= getPlayerAccess(pid) or getPlayerFlagValue(pid, PlayerFlag_CannotBeMuted)) then
 		doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Cannot perform action.")
 		return true
 	end

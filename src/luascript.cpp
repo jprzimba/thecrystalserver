@@ -288,7 +288,7 @@ Thing* ScriptEnviroment::getThingByUID(uint32_t uid)
 	if(tmp && !tmp->isRemoved())
 		return tmp;
 
-	if(uid < PLAYER_ID_RANGE)
+	if(uid < AUTOID_PLAYERS)
 		return NULL;
 
 	if(!(tmp = g_game.getCreatureByID(uid)) || tmp->isRemoved())
@@ -3310,6 +3310,114 @@ void LuaInterface::registerFunctions()
 	registerEnum(RELOAD_ALL)
 	registerEnum(RELOAD_LAST)
 
+	//bans
+	registerEnum(BAN_NONE)
+	registerEnum(BAN_IP)
+	registerEnum(BAN_PLAYER)
+	registerEnum(BAN_ACCOUNT)
+	registerEnum(BAN_NOTATION)
+
+	//player bans
+	registerEnum(PLAYERBAN_NONE)
+	registerEnum(PLAYERBAN_REPORT)
+	registerEnum(PLAYERBAN_LOCK)
+	registerEnum(PLAYERBAN_BANISHMENT)
+
+	//stack position
+	registerEnum(STACKPOS_GROUND)
+	registerEnum(STACKPOS_TOP_CREATURE)
+	registerEnum(STACKPOS_TOP_FIELD)
+	registerEnum(STACKPOS_TOP_MOVABLE_ITEM_OR_CREATURE)
+
+	//recursive
+	registerEnum(RECURSE_FIRST)
+	registerEnum(RECURSE_NONE)
+	registerEnum(RECURSE_ALL)
+
+	//range ids
+	registerEnum(AUTOID_PLAYERS)
+	registerEnum(AUTOID_MONSTERS)
+	registerEnum(AUTOID_NPCS)
+
+	//flags
+	registerEnum(PlayerFlag_CannotUseCombat)
+	registerEnum(PlayerFlag_CannotAttackPlayer)
+	registerEnum(PlayerFlag_CannotAttackMonster)
+	registerEnum(PlayerFlag_CannotBeAttacked)
+	registerEnum(PlayerFlag_CanConvinceAll)
+	registerEnum(PlayerFlag_CanSummonAll)
+	registerEnum(PlayerFlag_CanIllusionAll)
+	registerEnum(PlayerFlag_CanSenseInvisibility)
+	registerEnum(PlayerFlag_IgnoredByMonsters)
+	registerEnum(PlayerFlag_NotGainInFight)
+	registerEnum(PlayerFlag_HasInfiniteMana)
+	registerEnum(PlayerFlag_HasInfiniteSoul)
+	registerEnum(PlayerFlag_HasNoExhaustion)
+	registerEnum(PlayerFlag_CannotUseSpells)
+	registerEnum(PlayerFlag_CannotPickupItem)
+	registerEnum(PlayerFlag_CanAlwaysLogin)
+	registerEnum(PlayerFlag_CanBroadcast)
+	registerEnum(PlayerFlag_CanEditHouses)
+	registerEnum(PlayerFlag_CannotBeBanned)
+	registerEnum(PlayerFlag_CannotBePushed)
+	registerEnum(PlayerFlag_HasInfiniteCapacity)
+	registerEnum(PlayerFlag_CanPushAllCreatures)
+	registerEnum(PlayerFlag_CanTalkRedPrivate)
+	registerEnum(PlayerFlag_CanTalkRedChannel)
+	registerEnum(PlayerFlag_TalkOrangeHelpChannel)
+	registerEnum(PlayerFlag_NotGainExperience)
+	registerEnum(PlayerFlag_NotGainMana)
+	registerEnum(PlayerFlag_NotGainHealth)
+	registerEnum(PlayerFlag_NotGainSkill)
+	registerEnum(PlayerFlag_SetMaxSpeed)
+	registerEnum(PlayerFlag_SpecialVIP)
+	registerEnum(PlayerFlag_NotGenerateLoot)
+	registerEnum(PlayerFlag_CanTalkRedChannelAnonymous)
+	registerEnum(PlayerFlag_IgnoreProtectionZone)
+	registerEnum(PlayerFlag_IgnoreSpellCheck)
+	registerEnum(PlayerFlag_IgnoreEquipCheck)
+	registerEnum(PlayerFlag_CannotBeMuted)
+	registerEnum(PlayerFlag_IsAlwaysPremium)
+	registerEnum(PlayerFlag_CanAnswerRuleViolations)
+	registerEnum(PlayerFlag_39)
+	registerEnum(PlayerFlag_ShowGroupNameInsteadOfVocation)
+	registerEnum(PlayerFlag_HasInfiniteStamina)
+	registerEnum(PlayerFlag_CannotMoveItems)
+	registerEnum(PlayerFlag_CannotMoveCreatures)
+	registerEnum(PlayerFlag_CanReportBugs)
+	registerEnum(PlayerFlag_45)
+	registerEnum(PlayerFlag_CannotBeSeen)
+	registerEnum(PlayerFlag_HideHealth)
+	registerEnum(PlayerFlag_CanPassThroughAllCreatures)
+
+	//custom flags
+	registerEnum(PlayerCustomFlag_AllowIdle)
+	registerEnum(PlayerCustomFlag_CanSeePosition)
+	registerEnum(PlayerCustomFlag_CanSeeItemDetails)
+	registerEnum(PlayerCustomFlag_CanSeeCreatureDetails)
+	registerEnum(PlayerCustomFlag_NotSearchable)
+	registerEnum(PlayerCustomFlag_GamemasterPrivileges)
+	registerEnum(PlayerCustomFlag_CanThrowAnywhere)
+	registerEnum(PlayerCustomFlag_CanPushAllItems)
+	registerEnum(PlayerCustomFlag_CanMoveAnywhere)
+	registerEnum(PlayerCustomFlag_CanMoveFromFar)
+	registerEnum(PlayerCustomFlag_CanUseFar)
+	registerEnum(PlayerCustomFlag_CanLoginMultipleCharacters)
+	registerEnum(PlayerCustomFlag_CanLogoutAnytime)
+	registerEnum(PlayerCustomFlag_HideLevel)
+	registerEnum(PlayerCustomFlag_IsProtected)
+	registerEnum(PlayerCustomFlag_IsImmune)
+	registerEnum(PlayerCustomFlag_NotGainSkull)
+	registerEnum(PlayerCustomFlag_NotGainUnjustified)
+	registerEnum(PlayerCustomFlag_IgnorePacification)
+	registerEnum(PlayerCustomFlag_IgnoreLoginDelay)
+	registerEnum(PlayerCustomFlag_CanStairhop)
+	registerEnum(PlayerCustomFlag_CanTurnhop)
+	registerEnum(PlayerCustomFlag_IgnoreHouseRent)
+	registerEnum(PlayerCustomFlag_CanWearAllAddons)
+	registerEnum(PlayerCustomFlag_IsWalkable)
+	registerEnum(PlayerCustomFlag_HasFullLight)
+
 	//_G
 	registerGlobalVariable("INDEX_WHEREEVER", INDEX_WHEREEVER);
 	registerGlobalBoolean("VIRTUAL_PARENT", true);
@@ -5414,7 +5522,7 @@ int32_t LuaInterface::luaGetThingFromPosition(lua_State* L)
 	Thing* thing = NULL;
 	if(Tile* tile = g_game.getMap()->getTile(pos))
 	{
-		if(pos.stackpos == 255)
+		if(pos.stackpos == STACKPOS_TOP_MOVABLE_ITEM_OR_CREATURE)
 		{
 			if(!(thing = tile->getTopCreature()))
 			{
@@ -5423,9 +5531,9 @@ int32_t LuaInterface::luaGetThingFromPosition(lua_State* L)
 					thing = item;
 			}
 		}
-		else if(pos.stackpos == 254)
+		else if(pos.stackpos == STACKPOS_TOP_FIELD)
 			thing = tile->getFieldItem();
-		else if(pos.stackpos == 253)
+		else if(pos.stackpos == STACKPOS_TOP_CREATURE)
 			thing = tile->getTopCreature();
 		else
 			thing = tile->__getThing(pos.stackpos);
@@ -10611,7 +10719,7 @@ int32_t LuaInterface::luaGetTownTemplePosition(lua_State* L)
 	//getTownTemplePosition(townId)
 	uint32_t townId = popNumber(L);
 	if(Town* town = Towns::getInstance()->getTown(townId))
-		pushPosition(L, town->getPosition(), 255);
+		pushPosition(L, town->getPosition(), STACKPOS_TOP_MOVABLE_ITEM_OR_CREATURE);
 	else
 		lua_pushboolean(L, false);
 

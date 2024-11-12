@@ -12,7 +12,7 @@ function onSay(cid, words, param, channel)
 		end
 
 		added = false
-		if((showGamemasters or getPlayerCustomFlagValue(cid, PLAYERCUSTOMFLAG_GAMEMASTERPRIVILEGES) or not getPlayerCustomFlagValue(pid, PLAYERCUSTOMFLAG_GAMEMASTERPRIVILEGES)) and (not isPlayerGhost(pid) or getPlayerGhostAccess(cid) >= getPlayerGhostAccess(pid))) then
+		if((showGamemasters or getPlayerCustomFlagValue(cid, PlayerCustomFlag_GamemasterPrivileges) or not getPlayerCustomFlagValue(pid, PlayerCustomFlag_GamemasterPrivileges)) and (not isPlayerGhost(pid) or getPlayerGhostAccess(cid) >= getPlayerGhostAccess(pid))) then
 			strings[position] = strings[position] .. getCreatureName(pid) .. " [" .. getPlayerLevel(pid) .. "]"
 			i = i + 1
 			added = true

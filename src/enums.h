@@ -21,9 +21,9 @@
 #include <string>
 #include <list>
 
-#define PLAYER_ID_RANGE 0x10000000
-#define MONSTER_ID_RANGE 0x40000000
-#define NPC_ID_RANGE 0x80000000
+#define AUTOID_PLAYERS 0x10000000
+#define AUTOID_MONSTERS 0x40000000
+#define AUTOID_NPCS 0x80000000
 
 enum CreatureType_t
 {

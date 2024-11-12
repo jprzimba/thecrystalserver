@@ -48,7 +48,7 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		end
 	end
 
-	if(house and getHouseFromPos(getThingPosition(cid)) ~= house and not getPlayerCustomFlagValue(cid, PLAYERCUSTOMFLAG_GAMEMASTERPRIVILEGES)) then
+	if(house and getHouseFromPos(getThingPosition(cid)) ~= house and not getPlayerCustomFlagValue(cid, PlayerCustomFlag_GamemasterPrivileges)) then
 		return false
 	end
 
