@@ -34,7 +34,6 @@ class Spell;
 
 typedef std::map<uint32_t, RuneSpell*> RunesMap;
 typedef std::map<std::string, InstantSpell*> InstantsMap;
-typedef std::map<SpellGroup_t, uint32_t> SpellGroup;
 
 class Spells : public BaseEvents
 {

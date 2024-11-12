@@ -136,7 +136,7 @@ void BedItem::sleep(Player* player)
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 	}
 	else
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 }
 
 void BedItem::wakeUp()

@@ -264,7 +264,7 @@ void Creature::onWalk()
 
 			stopEventWalk();
 		}
-		else if(g_game.internalMoveCreature(this, dir, flags) != RET_NOERROR)
+		else if(g_game.internalMoveCreature(this, dir, flags) != RETURNVALUE_NOERROR)
 			forceUpdateFollowPath = true;
 	}
 
@@ -400,7 +400,7 @@ void Creature::updateTileCache(const Tile* tile, int32_t dx, int32_t dy)
 	{
 		int32_t x = (mapWalkWidth - 1) / 2 + dx, y = (mapWalkHeight - 1) / 2 + dy;
 		localMapCache[y][x] = (tile && tile->__queryAdd(0, this, 1,
-			FLAG_PATHFINDING | FLAG_IGNOREFIELDDAMAGE) == RET_NOERROR);
+			FLAG_PATHFINDING | FLAG_IGNOREFIELDDAMAGE) == RETURNVALUE_NOERROR);
 	}
 #ifdef __DEBUG__
 	else
@@ -440,7 +440,7 @@ int32_t Creature::getWalkCache(const Position& pos) const
 #ifdef __DEBUG__
 		//testing
 		Tile* tile = g_game.getTile(pos);
-		if(tile && (tile->__queryAdd(0, this, 1, FLAG_PATHFINDING | FLAG_IGNOREFIELDDAMAGE) == RET_NOERROR))
+		if(tile && (tile->__queryAdd(0, this, 1, FLAG_PATHFINDING | FLAG_IGNOREFIELDDAMAGE) == RETURNVALUE_NOERROR))
 		{
 			if(!localMapCache[y][x])
 				std::clog << "Wrong cache value" << std::endl;

@@ -275,7 +275,7 @@ void Status::getInfo(uint32_t requestedInfo, OutputMessage_ptr output, NetworkMe
 		const std::string name = msg.getString();
 
 		Player* p = NULL;
-		if(g_game.getPlayerByNameWildcard(name, p) == RET_NOERROR && !p->isGhost())
+		if(g_game.getPlayerByNameWildcard(name, p) == RETURNVALUE_NOERROR && !p->isGhost())
 			output->put<char>(0x01);
 		else
 			output->put<char>(0x00);

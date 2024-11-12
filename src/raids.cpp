@@ -570,7 +570,7 @@ bool ItemSpawnEvent::executeEvent(const std::string&) const
 			}
 
 			ReturnValue ret = g_game.internalAddItem(NULL, tile, newItem, INDEX_WHEREEVER, FLAG_NOLIMIT);
-			if(ret != RET_NOERROR)
+			if(ret != RETURNVALUE_NOERROR)
 			{
 				std::clog << "[Error - ItemSpawnEvent::executeEvent] Cannot spawn item with id " << m_itemId << std::endl;
 				return false;
@@ -593,7 +593,7 @@ bool ItemSpawnEvent::executeEvent(const std::string&) const
 		}
 
 		ReturnValue ret = g_game.internalAddItem(NULL, tile, newItem, INDEX_WHEREEVER, FLAG_NOLIMIT);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 		{
 			std::clog << "[Error - ItemSpawnEvent::executeEvent] Cannot spawn item with id " << m_itemId << std::endl;
 			return false;

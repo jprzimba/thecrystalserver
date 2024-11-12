@@ -332,25 +332,25 @@ ReturnValue Actions::canUse(const Player* player, const Position& pos)
 {
 	const Position& playerPos = player->getPosition();
 	if(pos.x == 0xFFFF)
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 
 	if(playerPos.z > pos.z)
-		return RET_FIRSTGOUPSTAIRS;
+		return RETURNVALUE_FIRSTGOUPSTAIRS;
 
 	if(playerPos.z < pos.z)
-		return RET_FIRSTGODOWNSTAIRS;
+		return RETURNVALUE_FIRSTGODOWNSTAIRS;
 
 	if(!Position::areInRange<1,1,0>(playerPos, pos))
-		return RET_TOOFARAWAY;
+		return RETURNVALUE_TOOFARAWAY;
 
 	Tile* tile = g_game.getTile(pos);
 	if(tile)
 	{
 		HouseTile* houseTile = tile->getHouseTile();
 		if(houseTile && houseTile->getHouse() && !houseTile->getHouse()->isInvited(player))
-			return RET_PLAYERISNOTINVITED;
+			return RETURNVALUE_PLAYERISNOTINVITED;
 	}
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Actions::canUseEx(const Player* player, const Position& pos, const Item* item)
@@ -371,28 +371,28 @@ ReturnValue Actions::canUseEx(const Player* player, const Position& pos, const I
 	if(defaultAction)
 		return defaultAction->canExecuteAction(player, pos);
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Actions::canUseFar(const Creature* creature, const Position& toPos, bool checkLineOfSight)
 {
 	if(toPos.x == 0xFFFF)
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 
 	const Position& creaturePos = creature->getPosition();
 	if(creaturePos.z > toPos.z)
-		return RET_FIRSTGOUPSTAIRS;
+		return RETURNVALUE_FIRSTGOUPSTAIRS;
 
 	if(creaturePos.z < toPos.z)
-		return RET_FIRSTGODOWNSTAIRS;
+		return RETURNVALUE_FIRSTGODOWNSTAIRS;
 
 	if(!Position::areInRange<7,5,0>(toPos, creaturePos))
-		return RET_TOOFARAWAY;
+		return RETURNVALUE_TOOFARAWAY;
 
 	if(checkLineOfSight && !g_game.canThrowObjectTo(creaturePos, toPos))
-		return RET_CANNOTTHROW;
+		return RETURNVALUE_CANNOTTHROW;
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 Action* Actions::getAction(const Item* item, ActionType_t type) const
@@ -438,7 +438,7 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 	if(Door* door = item->getDoor())
 	{
 		if(!door->canUse(player))
-			return RET_CANNOTUSETHISOBJECT;
+			return RETURNVALUE_CANNOTUSETHISOBJECT;
 	}
 
 	int32_t tmp = 0;
@@ -450,53 +450,53 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 	if((action = getAction(item, ACTION_UNIQUEID)))
 	{
 		if(executeUse(action, player, item, posEx, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if((action = getAction(item, ACTION_ACTIONID)))
 	{
 		if(executeUse(action, player, item, posEx, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if((action = getAction(item, ACTION_ITEMID)))
 	{
 		if(executeUse(action, player, item, posEx, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if((action = getAction(item, ACTION_RUNEID)))
 	{
 		if(executeUse(action, player, item, posEx, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if(defaultAction)
 	{
 		if(executeUse(defaultAction, player, item, posEx, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if(BedItem* bed = item->getBed())
 	{
 		if(!bed->canUse(player))
-			return RET_CANNOTUSETHISOBJECT;
+			return RETURNVALUE_CANNOTUSETHISOBJECT;
 
 		bed->sleep(player);
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
 	if(Container* container = item->getContainer())
 	{
 		if(container->getCorpseOwner() && !player->canOpenCorpse(container->getCorpseOwner())
 			&& g_config.getBool(ConfigManager::CHECK_CORPSE_OWNER))
-			return RET_YOUARENOTTHEOWNER;
+			return RETURNVALUE_YOUARENOTTHEOWNER;
 
 		Container* tmpContainer = NULL;
 		if(Depot* depot = container->getDepot())
 		{
 			if(player->hasFlag(PlayerFlag_CannotPickupItem))
-				return RET_CANNOTUSETHISOBJECT;
+				return RETURNVALUE_CANNOTUSETHISOBJECT;
 
 			if(Depot* playerDepot = player->getDepot(depot->getDepotId(), true))
 			{
@@ -521,7 +521,7 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 			player->onSendContainer(tmpContainer);
 		}
 
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
 	if(item->isReadable())
@@ -537,7 +537,7 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 			player->sendTextWindow(item, 0, false);
 		}
 
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
 	const ItemType& it = Item::items[item->getID()];
@@ -545,10 +545,10 @@ ReturnValue Actions::internalUseItem(Player* player, const Position& pos, uint8_
 	{
 		g_game.transformItem(item, it.transformUseTo);
 		g_game.startDecay(item);
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
-	return RET_CANNOTUSETHISOBJECT;
+	return RETURNVALUE_CANNOTUSETHISOBJECT;
 }
 
 bool Actions::useItem(Player* player, const Position& pos, uint8_t index, Item* item)
@@ -561,7 +561,7 @@ bool Actions::useItem(Player* player, const Position& pos, uint8_t index, Item* 
 	player->setNextAction(OTSYS_TIME() + g_config.getNumber(ConfigManager::ACTIONS_DELAY_INTERVAL) - 10);
 
 	ReturnValue ret = internalUseItem(player, pos, index, item, 0);
-	if(ret == RET_NOERROR)
+	if(ret == RETURNVALUE_NOERROR)
 		return true;
 
 	player->sendCancelMessage(ret);
@@ -582,60 +582,60 @@ ReturnValue Actions::internalUseItemEx(Player* player, const PositionEx& fromPos
 	if((action = getAction(item, ACTION_UNIQUEID)))
 	{
 		ReturnValue ret = action->canExecuteAction(player, toPosEx);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 			return ret;
 
 		//only continue with next action in the list if the previous returns false
 		if(executeUseEx(action, player, item, fromPosEx, toPosEx, isHotkey, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if((action = getAction(item, ACTION_ACTIONID)))
 	{
 		ReturnValue ret = action->canExecuteAction(player, toPosEx);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 			return ret;
 
 		//only continue with next action in the list if the previous returns false
 		if(executeUseEx(action, player, item, fromPosEx, toPosEx, isHotkey, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 
 	}
 
 	if((action = getAction(item, ACTION_ITEMID)))
 	{
 		ReturnValue ret = action->canExecuteAction(player, toPosEx);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 			return ret;
 
 		//only continue with next action in the list if the previous returns false
 		if(executeUseEx(action, player, item, fromPosEx, toPosEx, isHotkey, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if((action = getAction(item, ACTION_RUNEID)))
 	{
 		ReturnValue ret = action->canExecuteAction(player, toPosEx);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 			return ret;
 
 		//only continue with next action in the list if the previous returns false
 		if(executeUseEx(action, player, item, fromPosEx, toPosEx, isHotkey, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	if(defaultAction)
 	{
 		ReturnValue ret = defaultAction->canExecuteAction(player, toPosEx);
-		if(ret != RET_NOERROR)
+		if(ret != RETURNVALUE_NOERROR)
 			return ret;
 
 		//only continue with next action in the list if the previous returns false
 		if(executeUseEx(defaultAction, player, item, fromPosEx, toPosEx, isHotkey, creatureId))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
-	return RET_CANNOTUSETHISOBJECT;
+	return RETURNVALUE_CANNOTUSETHISOBJECT;
 }
 
 bool Actions::useItemEx(Player* player, const Position& fromPos, const Position& toPos,
@@ -656,7 +656,7 @@ bool Actions::useItemEx(Player* player, const Position& fromPos, const Position&
 	PositionEx toPosEx(toPos, toStackPos);
 
 	ReturnValue ret = internalUseItemEx(player, fromPosEx, toPosEx, item, isHotkey, creatureId);
-	if(ret == RET_NOERROR)
+	if(ret == RETURNVALUE_NOERROR)
 		return true;
 
 	player->sendCancelMessage(ret);
@@ -692,7 +692,7 @@ bool Action::configureEvent(xmlNodePtr p)
 ReturnValue Action::canExecuteAction(const Player* player, const Position& pos)
 {
 	if(player->hasCustomFlag(PlayerCustomFlag_CanUseFar))
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 
 	if(!getAllowFarUse())
 		return g_actions->canUse(player, pos);

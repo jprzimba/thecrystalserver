@@ -40,7 +40,7 @@ ReturnValue Depot::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 {
 	const Item* item = thing->getItem();
 	if(!item)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if((flags & FLAG_NOLIMIT) == FLAG_NOLIMIT)
 		return Container::__queryAdd(index, thing, count, flags, actor);
@@ -58,7 +58,7 @@ ReturnValue Depot::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 	}
 
 	if(getItemHoldingCount() + addCount > depotLimit)
-		return RET_DEPOTISFULL;
+		return RETURNVALUE_DEPOTISFULL;
 
 	return Container::__queryAdd(index, thing, count, flags, actor);
 }

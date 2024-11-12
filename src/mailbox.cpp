@@ -30,14 +30,14 @@ extern Game g_game;
 ReturnValue Mailbox::canSend(const Item* item, Creature* actor) const
 {
 	if(item->getID() != ITEM_PARCEL && item->getID() != ITEM_LETTER)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(actor)
 	{
 		if(Player* player = actor->getPlayer())
 		{
 			if(player->hasCondition(CONDITION_MUTED, 2))
-				return RET_YOUAREEXHAUSTED;
+				return RETURNVALUE_YOUAREEXHAUSTED;
 
 			if(player->getMailAttempts() >= g_config.getNumber(ConfigManager::MAIL_ATTEMPTS))
 			{
@@ -48,7 +48,7 @@ ReturnValue Mailbox::canSend(const Item* item, Creature* actor) const
 					player->setLastMail(1); // auto erase
 				}
 
-				return RET_YOUAREEXHAUSTED;
+				return RETURNVALUE_YOUAREEXHAUSTED;
 			}
 
 			player->setLastMail(OTSYS_TIME());
@@ -56,7 +56,7 @@ ReturnValue Mailbox::canSend(const Item* item, Creature* actor) const
 		}
 	}
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Mailbox::__queryAdd(int32_t, const Thing* thing, uint32_t,
@@ -65,14 +65,14 @@ ReturnValue Mailbox::__queryAdd(int32_t, const Thing* thing, uint32_t,
 	if(const Item* item = thing->getItem())
 		return canSend(item, actor);
 
-	return RET_NOTPOSSIBLE;
+	return RETURNVALUE_NOTPOSSIBLE;
 }
 
 ReturnValue Mailbox::__queryMaxCount(int32_t, const Thing*, uint32_t count, uint32_t& maxQueryCount,
 	uint32_t) const
 {
 	maxQueryCount = std::max((uint32_t)1, count);
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 void Mailbox::__addThing(Creature* actor, int32_t, Thing* thing)
@@ -81,7 +81,7 @@ void Mailbox::__addThing(Creature* actor, int32_t, Thing* thing)
 	if(!item)
 		return;
 
-	if(canSend(item, actor) == RET_NOERROR)
+	if(canSend(item, actor) == RETURNVALUE_NOERROR)
 		sendItem(actor, item);
 }
 

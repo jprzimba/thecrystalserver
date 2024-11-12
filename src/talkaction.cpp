@@ -423,7 +423,7 @@ bool TalkAction::houseBuy(Creature* creature, const std::string&, const std::str
 
 		if(g_config.getBool(ConfigManager::HOUSE_NEED_PREMIUM) && !player->isPremium())
 		{
-			player->sendCancelMessage(RET_YOUNEEDPREMIUMACCOUNT);
+			player->sendCancelMessage(RETURNVALUE_YOUNEEDPREMIUMACCOUNT);
 			g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 			return false;
 		}
@@ -605,7 +605,7 @@ bool TalkAction::houseSell(Creature* creature, const std::string&, const std::st
 
 	Player* tradePartner = NULL;
 	ReturnValue ret = g_game.getPlayerByNameWildcard(param, tradePartner);
-	if(ret != RET_NOERROR)
+	if(ret != RETURNVALUE_NOERROR)
 	{
 		player->sendCancelMessage(ret);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
@@ -706,14 +706,14 @@ bool TalkAction::houseKick(Creature* creature, const std::string&, const std::st
 		return false;
 
 	Player* targetPlayer = NULL;
-	if(g_game.getPlayerByNameWildcard(param, targetPlayer) != RET_NOERROR)
+	if(g_game.getPlayerByNameWildcard(param, targetPlayer) != RETURNVALUE_NOERROR)
 		targetPlayer = player;
 
 	House* house = Houses::getInstance()->getHouseByPlayer(targetPlayer);
 	if(!house || !house->kickPlayer(player, targetPlayer))
 	{
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 	}
 	else
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_MAGIC_BLUE);
@@ -730,7 +730,7 @@ bool TalkAction::houseDoorList(Creature* creature, const std::string&, const std
 	House* house = Houses::getInstance()->getHouseByPlayer(player);
 	if(!house)
 	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 		return false;
 	}
@@ -744,7 +744,7 @@ bool TalkAction::houseDoorList(Creature* creature, const std::string&, const std
 	}
 	else
 	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 	}
 
@@ -766,7 +766,7 @@ bool TalkAction::houseGuestList(Creature* creature, const std::string&, const st
 	}
 	else
 	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 	}
 
@@ -788,7 +788,7 @@ bool TalkAction::houseSubOwnerList(Creature* creature, const std::string&, const
 	}
 	else
 	{
-		player->sendCancelMessage(RET_NOTPOSSIBLE);
+		player->sendCancelMessage(RETURNVALUE_NOTPOSSIBLE);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 	}
 

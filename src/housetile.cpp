@@ -72,23 +72,23 @@ ReturnValue HouseTile::__queryAdd(int32_t index, const Thing* thing, uint32_t co
 		if(const Player* player = creature->getPlayer())
 		{
 			if(!house->isInvited(player) && !player->hasCustomFlag(PlayerCustomFlag_CanMoveAnywhere))
-				return RET_PLAYERISNOTINVITED;
+				return RETURNVALUE_PLAYERISNOTINVITED;
 		}
 		else
-			return RET_NOTPOSSIBLE;
+			return RETURNVALUE_NOTPOSSIBLE;
 	}
 	else if(thing->getItem())
 	{
 		const uint32_t itemLimit = g_config.getNumber(ConfigManager::HOUSE_TILE_LIMIT);
 		if(itemLimit && getItemCount() > itemLimit)
-			return RET_TILEISFULL;
+			return RETURNVALUE_TILEISFULL;
 
 		if(actor && g_config.getBool(ConfigManager::HOUSE_PROTECTION))
 		{
 			if(const Player* player = actor->getPlayer())
 			{
 				if(!house->isInvited(player) && !player->hasCustomFlag(PlayerCustomFlag_CanThrowAnywhere))
-					return RET_PLAYERISNOTINVITED;
+					return RETURNVALUE_PLAYERISNOTINVITED;
 			}
 		}
 	}
@@ -103,7 +103,7 @@ ReturnValue HouseTile::__queryRemove(const Thing* thing, uint32_t count, uint32_
 		if(const Player* player = actor->getPlayer())
 		{
 			if(!house->isInvited(player) && !player->hasCustomFlag(PlayerCustomFlag_CanThrowAnywhere))
-				return RET_PLAYERISNOTINVITED;
+				return RETURNVALUE_PLAYERISNOTINVITED;
 		}
 	}
 

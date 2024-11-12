@@ -212,13 +212,13 @@ void MonsterType::dropLoot(Container* corpse)
 					if(openContainer)
 					{
 					    ReturnValue ret = g_game.internalAddItem(NULL, openContainer, tmpItem, false);
-					    if(ret != RET_NOERROR)
+					    if(ret != RETURNVALUE_NOERROR)
 					        delete tmpItem;
 					}
 					else
 					{
 					    ReturnValue ret = g_game.internalPlayerAddItem(NULL, owner, tmpItem, false);
-					    if(ret != RET_NOERROR)
+					    if(ret != RETURNVALUE_NOERROR)
 					        delete tmpItem;
 					}
 				}
@@ -297,7 +297,7 @@ void MonsterType::dropLoot(Container* corpse)
 								newItem = Item::CreateItem(chosenBagId, dropAmount);
 								if(newItem)
 								{
-									if(g_game.internalAddItem(NULL, corpse, newItem) != RET_NOERROR)
+									if(g_game.internalAddItem(NULL, corpse, newItem) != RETURNVALUE_NOERROR)
 										corpse->__internalAddThing(newItem);
 								}
 							}
@@ -306,7 +306,7 @@ void MonsterType::dropLoot(Container* corpse)
 								newItem = Item::CreateItem(chosenBagId, 1);
 								if(newItem)
 								{
-									if(g_game.internalAddItem(NULL, corpse, newItem) != RET_NOERROR)
+									if(g_game.internalAddItem(NULL, corpse, newItem) != RETURNVALUE_NOERROR)
 										corpse->__internalAddThing(newItem);
 								}
 							}

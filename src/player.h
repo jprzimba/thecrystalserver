@@ -71,26 +71,26 @@ enum freeslot_t
 
 enum chaseMode_t
 {
-	CHASEMODE_STANDSTILL,
+	CHASEMODE_STANDSTILL = 0,
 	CHASEMODE_FOLLOW,
 };
 
 enum fightMode_t
 {
-	FIGHTMODE_ATTACK,
+	FIGHTMODE_ATTACK = 0,
 	FIGHTMODE_BALANCED,
 	FIGHTMODE_DEFENSE
 };
 
 enum secureMode_t
 {
-	SECUREMODE_ON,
+	SECUREMODE_ON = 0,
 	SECUREMODE_OFF
 };
 
 enum tradestate_t
 {
-	TRADE_NONE,
+	TRADE_NONE = 0,
 	TRADE_INITIATED,
 	TRADE_ACCEPT,
 	TRADE_ACKNOWLEDGE,
@@ -99,7 +99,7 @@ enum tradestate_t
 
 enum AccountManager_t
 {
-	MANAGER_NONE,
+	MANAGER_NONE = 0,
 	MANAGER_NEW,
 	MANAGER_ACCOUNT,
 	MANAGER_NAMELOCK

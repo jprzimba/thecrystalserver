@@ -194,7 +194,7 @@ void House::removePlayer(Player* player, bool ignoreRights)
 		return;
 
 	Position curPos = player->getPosition(), newPos = g_game.getClosestFreeTile(player, entry, false, false);
-	if(g_game.internalTeleport(player, newPos, false) == RET_NOERROR && !player->isGhost())
+	if(g_game.internalTeleport(player, newPos, false) == RETURNVALUE_NOERROR && !player->isGhost())
 	{
 		g_game.addMagicEffect(curPos, CONST_ME_POFF);
 		g_game.addMagicEffect(newPos, CONST_ME_TELEPORT);
@@ -950,7 +950,7 @@ bool Houses::payHouse(House* house, time_t _time, uint32_t bid)
 	{
 		if(Item* letter = Item::CreateItem(ITEM_LETTER_STAMPED))
 		{
-			if(g_game.internalAddItem(NULL, depot, letter, INDEX_WHEREEVER, FLAG_NOLIMIT) == RET_NOERROR)
+			if(g_game.internalAddItem(NULL, depot, letter, INDEX_WHEREEVER, FLAG_NOLIMIT) == RETURNVALUE_NOERROR)
 			{
 				letter->setWriter(g_config.getString(ConfigManager::SERVER_NAME));
 				letter->setDate(std::time(NULL));

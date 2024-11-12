@@ -954,248 +954,240 @@ void Player::sendCancelMessage(ReturnValue message) const
 {
 	switch(message)
 	{
-		case RET_DESTINATIONOUTOFREACH:
+		case RETURNVALUE_DESTINATIONOUTOFREACH:
 			sendCancel("Destination is out of reach.");
 			break;
 
-		case RET_NOTMOVABLE:
+		case RETURNVALUE_NOTMOVABLE:
 			sendCancel("You cannot move this object.");
 			break;
 
-		case RET_DROPTWOHANDEDITEM:
+		case RETURNVALUE_DROPTWOHANDEDITEM:
 			sendCancel("Drop the double-handed object first.");
 			break;
 
-		case RET_BOTHHANDSNEEDTOBEFREE:
+		case RETURNVALUE_BOTHHANDSNEEDTOBEFREE:
 			sendCancel("Both hands need to be free.");
 			break;
 
-		case RET_CANNOTBEDRESSED:
+		case RETURNVALUE_CANNOTBEDRESSED:
 			sendCancel("You cannot dress this object there.");
 			break;
 
-		case RET_PUTTHISOBJECTINYOURHAND:
+		case RETURNVALUE_PUTTHISOBJECTINYOURHAND:
 			sendCancel("Put this object in your hand.");
 			break;
 
-		case RET_PUTTHISOBJECTINBOTHHANDS:
+		case RETURNVALUE_PUTTHISOBJECTINBOTHHANDS:
 			sendCancel("Put this object in both hands.");
 			break;
 
-		case RET_CANONLYUSEONEWEAPON:
+		case RETURNVALUE_CANONLYUSEONEWEAPON:
 			sendCancel("You may use only one weapon.");
 			break;
 
-		case RET_TOOFARAWAY:
+		case RETURNVALUE_TOOFARAWAY:
 			sendCancel("Too far away.");
 			break;
 
-		case RET_FIRSTGODOWNSTAIRS:
+		case RETURNVALUE_FIRSTGODOWNSTAIRS:
 			sendCancel("First go downstairs.");
 			break;
 
-		case RET_FIRSTGOUPSTAIRS:
+		case RETURNVALUE_FIRSTGOUPSTAIRS:
 			sendCancel("First go upstairs.");
 			break;
 
-		case RET_NOTENOUGHCAPACITY:
+		case RETURNVALUE_NOTENOUGHCAPACITY:
 			sendCancel("This object is too heavy for you to carry.");
 			break;
 
-		case RET_CONTAINERNOTENOUGHROOM:
+		case RETURNVALUE_CONTAINERNOTENOUGHROOM:
 			sendCancel("You cannot put more objects in this container.");
 			break;
 
-		case RET_NEEDEXCHANGE:
-		case RET_NOTENOUGHROOM:
+		case RETURNVALUE_NEEDEXCHANGE:
+		case RETURNVALUE_NOTENOUGHROOM:
 			sendCancel("There is not enough room.");
 			break;
 
-		case RET_CANNOTPICKUP:
+		case RETURNVALUE_CANNOTPICKUP:
 			sendCancel("You cannot take this object.");
 			break;
 
-		case RET_CANNOTTHROW:
+		case RETURNVALUE_CANNOTTHROW:
 			sendCancel("You cannot throw there.");
 			break;
 
-		case RET_THEREISNOWAY:
+		case RETURNVALUE_THEREISNOWAY:
 			sendCancel("There is no way.");
 			break;
 
-		case RET_THISISIMPOSSIBLE:
+		case RETURNVALUE_THISISIMPOSSIBLE:
 			sendCancel("This is impossible.");
 			break;
 
-		case RET_PLAYERISPZLOCKED:
+		case RETURNVALUE_PLAYERISPZLOCKED:
 			sendCancel("You cannot enter a protection zone after attacking another player.");
 			break;
 
-		case RET_PLAYERISNOTINVITED:
+		case RETURNVALUE_PLAYERISNOTINVITED:
 			sendCancel("You are not invited.");
 			break;
 
-		case RET_CREATUREDOESNOTEXIST:
+		case RETURNVALUE_CREATUREDOESNOTEXIST:
 			sendCancel("Creature does not exist.");
 			break;
 
-		case RET_DEPOTISFULL:
+		case RETURNVALUE_DEPOTISFULL:
 			sendCancel("Your depot is full. Remove surplus items before storing new ones.");
 			break;
 
-		case RET_CANNOTUSETHISOBJECT:
+		case RETURNVALUE_CANNOTUSETHISOBJECT:
 			sendCancel("You cannot use this object.");
 			break;
 
-		case RET_PLAYERWITHTHISNAMEISNOTONLINE:
+		case RETURNVALUE_PLAYERWITHTHISNAMEISNOTONLINE:
 			sendCancel("A player with this name is not online.");
 			break;
 
-		case RET_NOTREQUIREDLEVELTOUSERUNE:
-			sendCancel("You do not have the required magic level to use this rune.");
-			break;
-
-		case RET_YOUAREALREADYTRADING:
+		case RETURNVALUE_YOUAREALREADYTRADING:
 			sendCancel("You are already trading.");
 			break;
 
-		case RET_THISPLAYERISALREADYTRADING:
+		case RETURNVALUE_THISPLAYERISALREADYTRADING:
 			sendCancel("This player is already trading.");
 			break;
 
-		case RET_YOUMAYNOTLOGOUTDURINGAFIGHT:
+		case RETURNVALUE_YOUMAYNOTLOGOUTDURINGAFIGHT:
 			sendCancel("You may not logout during or immediately after a fight.");
 			break;
 
-		case RET_DIRECTPLAYERSHOOT:
+		case RETURNVALUE_DIRECTPLAYERSHOOT:
 			sendCancel("You are not allowed to shoot directly on players.");
 			break;
 
-		case RET_NOTENOUGHLEVEL:
+		case RETURNVALUE_NOTENOUGHLEVEL:
 			sendCancel("You do not have enough level.");
 			break;
 
-		case RET_NOTENOUGHMAGICLEVEL:
+		case RETURNVALUE_NOTENOUGHMAGICLEVEL:
 			sendCancel("You do not have enough magic level.");
 			break;
 
-		case RET_NOTENOUGHMANA:
+		case RETURNVALUE_NOTENOUGHMANA:
 			sendCancel("You do not have enough mana.");
 			break;
 
-		case RET_NOTENOUGHSOUL:
+		case RETURNVALUE_NOTENOUGHSOUL:
 			sendCancel("You do not have enough soul.");
 			break;
 
-		case RET_YOUAREEXHAUSTED:
+		case RETURNVALUE_YOUAREEXHAUSTED:
 			sendCancel("You are exhausted.");
 			break;
 
-		case RET_CANONLYUSETHISRUNEONCREATURES:
+		case RETURNVALUE_CANONLYUSETHISRUNEONCREATURES:
 			sendCancel("You can only use this rune on creatures.");
 			break;
 
-		case RET_PLAYERISNOTREACHABLE:
-			sendCancel("Player is not reachable.");
-			break;
-
-		case RET_CREATUREISNOTREACHABLE:
+		case RETURNVALUE_CREATUREISNOTREACHABLE:
 			sendCancel("Creature is not reachable.");
 			break;
 
-		case RET_ACTIONNOTPERMITTEDINPROTECTIONZONE:
+		case RETURNVALUE_ACTIONNOTPERMITTEDINPROTECTIONZONE:
 			sendCancel("This action is not permitted in a protection zone.");
 			break;
 
-		case RET_YOUMAYNOTATTACKTHISPLAYER:
+		case RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER:
 			sendCancel("You may not attack this player.");
 			break;
 
-		case RET_YOUMAYNOTATTACKTHISCREATURE:
+		case RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE:
 			sendCancel("You may not attack this creature.");
 			break;
 
-		case RET_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE:
+		case RETURNVALUE_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE:
 			sendCancel("You may not attack a person in a protection zone.");
 			break;
 
-		case RET_YOUMAYNOTATTACKAPERSONWHILEINPROTECTIONZONE:
+		case RETURNVALUE_YOUMAYNOTATTACKAPERSONWHILEINPROTECTIONZONE:
 			sendCancel("You may not attack a person while you are in a protection zone.");
 			break;
 
-		case RET_YOUCANONLYUSEITONCREATURES:
+		case RETURNVALUE_YOUCANONLYUSEITONCREATURES:
 			sendCancel("You can only use it on creatures.");
 			break;
 
-		case RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS:
+		case RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS:
 			sendCancel("Turn secure mode off if you really want to attack unmarked players.");
 			break;
 
-		case RET_YOUNEEDPREMIUMACCOUNT:
+		case RETURNVALUE_YOUNEEDPREMIUMACCOUNT:
 			sendCancel("You need a premium account.");
 			break;
 
-		case RET_YOUNEEDTOLEARNTHISSPELL:
+		case RETURNVALUE_YOUNEEDTOLEARNTHISSPELL:
 			sendCancel("You need to learn this spell first.");
 			break;
 
-		case RET_YOURVOCATIONCANNOTUSETHISSPELL:
+		case RETURNVALUE_YOURVOCATIONCANNOTUSETHISSPELL:
 			sendCancel("Your vocation cannot use this spell.");
 			break;
 
-		case RET_YOUNEEDAWEAPONTOUSETHISSPELL:
+		case RETURNVALUE_YOUNEEDAWEAPONTOUSETHISSPELL:
 			sendCancel("You need to equip a weapon to use this spell.");
 			break;
 
-		case RET_PLAYERISPZLOCKEDLEAVEPVPZONE:
+		case RETURNVALUE_PLAYERISPZLOCKEDLEAVEPVPZONE:
 			sendCancel("You cannot leave a pvp zone after attacking another player.");
 			break;
 
-		case RET_PLAYERISPZLOCKEDENTERPVPZONE:
+		case RETURNVALUE_PLAYERISPZLOCKEDENTERPVPZONE:
 			sendCancel("You cannot enter a pvp zone after attacking another player.");
 			break;
 
-		case RET_ACTIONNOTPERMITTEDINANOPVPZONE:
+		case RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE:
 			sendCancel("This action is not permitted in a safe zone.");
 			break;
 
-		case RET_YOUCANNOTLOGOUTHERE:
+		case RETURNVALUE_YOUCANNOTLOGOUTHERE:
 			sendCancel("You cannot logout here.");
 			break;
 
-		case RET_YOUNEEDAMAGICITEMTOCASTSPELL:
+		case RETURNVALUE_YOUNEEDAMAGICITEMTOCASTSPELL:
 			sendCancel("You need a magic item to cast this spell.");
 			break;
 
-		case RET_CANNOTCONJUREITEMHERE:
+		case RETURNVALUE_CANNOTCONJUREITEMHERE:
 			sendCancel("You cannot conjure items here.");
 			break;
 
-		case RET_NAMEISTOOAMBIGUOUS:
+		case RETURNVALUE_NAMEISTOOAMBIGUOUS:
 			sendCancel("Name is too ambiguous.");
 			break;
 
-		case RET_CANONLYUSEONESHIELD:
+		case RETURNVALUE_CANONLYUSEONESHIELD:
 			sendCancel("You may use only one shield.");
 			break;
 
-		case RET_YOUARENOTTHEOWNER:
+		case RETURNVALUE_YOUARENOTTHEOWNER:
 			sendCancel("You are not the owner.");
 			break;
 
-		case RET_YOUMAYNOTCASTAREAONBLACKSKULL:
+		case RETURNVALUE_YOUMAYNOTCASTAREAONBLACKSKULL:
 			sendCancel("You may not cast area spells while you have a black skull.");
 			break;
 
-		case RET_TILEISFULL:
+		case RETURNVALUE_TILEISFULL:
 			sendCancel("You cannot add more items on this tile.");
 			break;
 
-		case RET_NOTENOUGHSKILL:
+		case RETURNVALUE_NOTENOUGHSKILL:
 			sendCancel("You do not have enough skill.");
 			break;
 
-		case RET_NOTPOSSIBLE:
+		case RETURNVALUE_NOTPOSSIBLE:
 			sendCancel("Sorry, not possible.");
 			break;
 
@@ -2658,50 +2650,50 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 {
 	const Item* item = thing->getItem();
 	if(!item)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(!item->isPickupable() || (hasFlag(PlayerFlag_CannotPickupItem) &&
 		item->getParent() && item->getParent() != VirtualCylinder::virtualCylinder))
-		return RET_CANNOTPICKUP;
+		return RETURNVALUE_CANNOTPICKUP;
 
 	bool childOwner = ((flags & FLAG_CHILDISOWNER) == FLAG_CHILDISOWNER), skipLimit = ((flags & FLAG_NOLIMIT) == FLAG_NOLIMIT);
 	if(childOwner)
 	{
 		//a child container is querying the player, just check if enough capacity
 		if(skipLimit || hasCapacity(item, count))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 
-		return RET_NOTENOUGHCAPACITY;
+		return RETURNVALUE_NOTENOUGHCAPACITY;
 	}
 
-	ReturnValue ret = RET_NOERROR;
+	ReturnValue ret = RETURNVALUE_NOERROR;
 	if((item->getSlotPosition() & SLOTP_HEAD) || (item->getSlotPosition() & SLOTP_NECKLACE) ||
 		(item->getSlotPosition() & SLOTP_BACKPACK) || (item->getSlotPosition() & SLOTP_ARMOR) ||
 		(item->getSlotPosition() & SLOTP_LEGS) || (item->getSlotPosition() & SLOTP_FEET) ||
 		(item->getSlotPosition() & SLOTP_RING) || (item->getSlotPosition() & SLOTP_AMMO))
-		ret = RET_CANNOTBEDRESSED;
+		ret = RETURNVALUE_CANNOTBEDRESSED;
 	else if(item->getSlotPosition() & SLOTP_TWO_HAND)
-		ret = RET_PUTTHISOBJECTINBOTHHANDS;
+		ret = RETURNVALUE_PUTTHISOBJECTINBOTHHANDS;
 	else if((item->getSlotPosition() & SLOTP_RIGHT) || (item->getSlotPosition() & SLOTP_LEFT))
-		ret = RET_PUTTHISOBJECTINYOURHAND;
+		ret = RETURNVALUE_PUTTHISOBJECTINYOURHAND;
 
 	switch(index)
 	{
 		case CONST_SLOT_HEAD:
 			if(item->getSlotPosition() & SLOTP_HEAD)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_NECKLACE:
 			if(item->getSlotPosition() & SLOTP_NECKLACE)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_BACKPACK:
 			if(item->getSlotPosition() & SLOTP_BACKPACK)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_ARMOR:
 			if(item->getSlotPosition() & SLOTP_ARMOR)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_RIGHT:
 			if(item->getSlotPosition() & SLOTP_RIGHT)
@@ -2709,39 +2701,39 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 				if(!g_config.getBool(ConfigManager::TIBIA_SLOTS))
 				{
 					if(!item->isWeapon() || (item->getWeaponType() != WEAPON_SHIELD && !item->isDualWield()))
-						ret = RET_NOTPOSSIBLE;
+						ret = RETURNVALUE_NOTPOSSIBLE;
 					else if(inventory[CONST_SLOT_LEFT] && inventory[CONST_SLOT_LEFT]->getSlotPosition() & SLOTP_TWO_HAND)
-						ret = RET_DROPTWOHANDEDITEM;
+						ret = RETURNVALUE_DROPTWOHANDEDITEM;
 					else
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 				}
 				else if(item->getSlotPosition() & SLOTP_TWO_HAND)
 				{
 					if(inventory[CONST_SLOT_LEFT] && inventory[CONST_SLOT_LEFT] != item)
-						ret = RET_BOTHHANDSNEEDTOBEFREE;
+						ret = RETURNVALUE_BOTHHANDSNEEDTOBEFREE;
 					else
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 				}
 				else if(inventory[CONST_SLOT_LEFT])
 				{
 					const Item* leftItem = inventory[CONST_SLOT_LEFT];
 					WeaponType_t type = item->getWeaponType(), leftType = leftItem->getWeaponType();
 					if(leftItem->getSlotPosition() & SLOTP_TWO_HAND)
-						ret = RET_DROPTWOHANDEDITEM;
+						ret = RETURNVALUE_DROPTWOHANDEDITEM;
 					else if(item == leftItem && item->getItemCount() == count)
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 					else if(leftType == WEAPON_SHIELD && type == WEAPON_SHIELD)
-						ret = RET_CANONLYUSEONESHIELD;
+						ret = RETURNVALUE_CANONLYUSEONESHIELD;
 					else if(!leftItem->isWeapon() || !item->isWeapon() ||
 						leftType == WEAPON_AMMO || type == WEAPON_AMMO ||
 						leftType == WEAPON_SHIELD || type == WEAPON_SHIELD ||
 						(leftItem->isDualWield() && item->isDualWield()))
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 					else
-						ret = RET_CANONLYUSEONEWEAPON;
+						ret = RETURNVALUE_CANONLYUSEONEWEAPON;
 				}
 				else
-					ret = RET_NOERROR;
+					ret = RETURNVALUE_NOERROR;
 			}
 			break;
 		case CONST_SLOT_LEFT:
@@ -2750,89 +2742,89 @@ ReturnValue Player::__queryAdd(int32_t index, const Thing* thing, uint32_t count
 				if(!g_config.getBool(ConfigManager::TIBIA_SLOTS))
 				{
 					if(!item->isWeapon() || item->getWeaponType() == WEAPON_SHIELD)
-						ret = RET_NOTPOSSIBLE;
+						ret = RETURNVALUE_NOTPOSSIBLE;
 					else if(inventory[CONST_SLOT_RIGHT] && item->getSlotPosition() & SLOTP_TWO_HAND)
-						ret = RET_BOTHHANDSNEEDTOBEFREE;
+						ret = RETURNVALUE_BOTHHANDSNEEDTOBEFREE;
 					else
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 				}
 				else if(item->getSlotPosition() & SLOTP_TWO_HAND)
 				{
 					if(inventory[CONST_SLOT_RIGHT] && inventory[CONST_SLOT_RIGHT] != item)
-						ret = RET_BOTHHANDSNEEDTOBEFREE;
+						ret = RETURNVALUE_BOTHHANDSNEEDTOBEFREE;
 					else
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 				}
 				else if(inventory[CONST_SLOT_RIGHT])
 				{
 					const Item* rightItem = inventory[CONST_SLOT_RIGHT];
 					WeaponType_t type = item->getWeaponType(), rightType = rightItem->getWeaponType();
 					if(rightItem->getSlotPosition() & SLOTP_TWO_HAND)
-						ret = RET_DROPTWOHANDEDITEM;
+						ret = RETURNVALUE_DROPTWOHANDEDITEM;
 					else if(item == rightItem && item->getItemCount() == count)
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 					else if(rightType == WEAPON_SHIELD && type == WEAPON_SHIELD)
-						ret = RET_CANONLYUSEONESHIELD;
+						ret = RETURNVALUE_CANONLYUSEONESHIELD;
 					else if(!rightItem->isWeapon() || !item->isWeapon() ||
 						rightType == WEAPON_AMMO || type == WEAPON_AMMO ||
 						rightType == WEAPON_SHIELD || type == WEAPON_SHIELD ||
 						(rightItem->isDualWield() && item->isDualWield()))
-						ret = RET_NOERROR;
+						ret = RETURNVALUE_NOERROR;
 					else
-						ret = RET_CANONLYUSEONEWEAPON;
+						ret = RETURNVALUE_CANONLYUSEONEWEAPON;
 				}
 				else
-					ret = RET_NOERROR;
+					ret = RETURNVALUE_NOERROR;
 			}
 			break;
 		case CONST_SLOT_LEGS:
 			if(item->getSlotPosition() & SLOTP_LEGS)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_FEET:
 			if(item->getSlotPosition() & SLOTP_FEET)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_RING:
 			if(item->getSlotPosition() & SLOTP_RING)
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_AMMO:
 			if(item->getSlotPosition() & SLOTP_AMMO || g_config.getBool(ConfigManager::TIBIA_SLOTS))
-				ret = RET_NOERROR;
+				ret = RETURNVALUE_NOERROR;
 			break;
 		case CONST_SLOT_WHEREEVER:
 		case -1:
-			ret = RET_NOTENOUGHROOM;
+			ret = RETURNVALUE_NOTENOUGHROOM;
 			break;
 		default:
-			ret = RET_NOTPOSSIBLE;
+			ret = RETURNVALUE_NOTPOSSIBLE;
 			break;
 	}
 
 	Player* self = const_cast<Player*>(this);
-	if(ret == RET_NOERROR)
+	if(ret == RETURNVALUE_NOERROR)
 	{
 		//need an exchange with source?
 		Item* tmpItem = NULL;
 		if((tmpItem = getInventoryItem((slots_t)index)) && (!tmpItem->isStackable() || tmpItem->getID() != item->getID()))
-			return RET_NEEDEXCHANGE;
+			return RETURNVALUE_NEEDEXCHANGE;
 
 		if(!g_moveEvents->onPlayerEquip(self, const_cast<Item*>(item), (slots_t)index, true))
-			return RET_CANNOTBEDRESSED;
+			return RETURNVALUE_CANNOTBEDRESSED;
 	}
 
-	if((ret == RET_NOERROR || ret == RET_NOTENOUGHROOM) && !hasCapacity(item, count)) //check if enough capacity
-		return RET_NOTENOUGHCAPACITY;
+	if((ret == RETURNVALUE_NOERROR || ret == RETURNVALUE_NOTENOUGHROOM) && !hasCapacity(item, count)) //check if enough capacity
+		return RETURNVALUE_NOTENOUGHCAPACITY;
 
 	if(index == CONST_SLOT_LEFT || index == CONST_SLOT_RIGHT)
 	{
-		if(ret == RET_NOERROR && item->getWeaponType() != WEAPON_NONE)
+		if(ret == RETURNVALUE_NOERROR && item->getWeaponType() != WEAPON_NONE)
 			self->setLastAttack(OTSYS_TIME());
 
 		Item* tmpItem = inventory[(slots_t)index];
-		if(ret == RET_BOTHHANDSNEEDTOBEFREE && g_game.internalAddItem(
-			NULL, self, tmpItem, INDEX_WHEREEVER) == RET_NOERROR)
+		if(ret == RETURNVALUE_BOTHHANDSNEEDTOBEFREE && g_game.internalAddItem(
+			NULL, self, tmpItem, INDEX_WHEREEVER) == RETURNVALUE_NOERROR)
 		{
 			self->sendRemoveInventoryItem((slots_t)index, tmpItem);
 			self->onRemoveInventoryItem((slots_t)index, tmpItem);
@@ -2853,7 +2845,7 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 	if(!item)
 	{
 		maxQueryCount = 0;
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 	}
 
 	if(index == INDEX_WHEREEVER)
@@ -2883,11 +2875,11 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 				else if(inventoryItem->isStackable() && item->getID() == inventoryItem->getID() && inventoryItem->getItemCount() < 100)
 				{
 					uint32_t remainder = (100 - inventoryItem->getItemCount());
-					if(__queryAdd(i, item, remainder, flags) == RET_NOERROR)
+					if(__queryAdd(i, item, remainder, flags) == RETURNVALUE_NOERROR)
 						n += remainder;
 				}
 			}
-			else if(__queryAdd(i, item, item->getItemCount(), flags) == RET_NOERROR)
+			else if(__queryAdd(i, item, item->getItemCount(), flags) == RETURNVALUE_NOERROR)
 			{
 				if(item->isStackable())
 					n += 100;
@@ -2912,40 +2904,40 @@ ReturnValue Player::__queryMaxCount(int32_t index, const Thing* thing, uint32_t 
 			else
 				maxQueryCount = 0;
 		}
-		else if(__queryAdd(index, item, count, flags) == RET_NOERROR)
+		else if(__queryAdd(index, item, count, flags) == RETURNVALUE_NOERROR)
 		{
 			if(item->isStackable())
 				maxQueryCount = 100;
 			else
 				maxQueryCount = 1;
 
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 		}
 	}
 
 	if(maxQueryCount < count)
-		return RET_NOTENOUGHROOM;
+		return RETURNVALUE_NOTENOUGHROOM;
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Player::__queryRemove(const Thing* thing, uint32_t count, uint32_t flags, Creature*) const
 {
 	int32_t index = __getIndexOfThing(thing);
 	if(index == -1)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	const Item* item = thing->getItem();
 	if(!item)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(!count || (item->isStackable() && count > item->getItemCount()))
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	 if(!item->isMovable() && !hasBitSet(FLAG_IGNORENOTMOVABLE, flags))
-		return RET_NOTMOVABLE;
+		return RETURNVALUE_NOTMOVABLE;
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** destItem,
@@ -2979,7 +2971,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 					continue;
 
 				if(autoStack && item->isStackable() && __queryAdd(i, item, item->getItemCount(), 0)
-					== RET_NOERROR && invItem->getID() == item->getID() && invItem->getItemCount() < 100)
+					== RETURNVALUE_NOERROR && invItem->getID() == item->getID() && invItem->getItemCount() < 100)
 				{
 					*destItem = invItem;
 					index = i;
@@ -2989,7 +2981,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 				if(Container* container = invItem->getContainer())
 				{
 					if(!autoStack && container->__queryAdd(
-						INDEX_WHEREEVER, item, item->getItemCount(), flags) == RET_NOERROR)
+						INDEX_WHEREEVER, item, item->getItemCount(), flags) == RETURNVALUE_NOERROR)
 					{
 						index = INDEX_WHEREEVER;
 						backpack = std::make_pair(container, index + 1);
@@ -3001,7 +2993,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 			}
 			else if(!autoStack)
 			{
-				if(__queryAdd(i, item, item->getItemCount(), 0) == RET_NOERROR)
+				if(__queryAdd(i, item, item->getItemCount(), 0) == RETURNVALUE_NOERROR)
 				{
 					index = i;
 					return this;
@@ -3029,7 +3021,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 						continue;
 
 					if(autoStack && item->isStackable() && tmpContainer->__queryAdd(n, item, item->getItemCount(),
-						0) == RET_NOERROR && tmpItem->getID() == item->getID() && tmpItem->getItemCount() < 100)
+						0) == RETURNVALUE_NOERROR && tmpItem->getID() == item->getID() && tmpItem->getItemCount() < 100)
 					{
 						index = n;
 						*destItem = tmpItem;
@@ -3039,7 +3031,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 					if(Container* container = tmpItem->getContainer())
 					{
 						if(!autoStack && container->__queryAdd(INDEX_WHEREEVER,
-							item, item->getItemCount(), flags) == RET_NOERROR)
+							item, item->getItemCount(), flags) == RETURNVALUE_NOERROR)
 						{
 							index = INDEX_WHEREEVER;
 							backpack = std::make_pair(container, index + 1);
@@ -3054,7 +3046,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 				{
 					if(!autoStack)
 					{
-						if(tmpContainer->__queryAdd(n, item, item->getItemCount(), 0) == RET_NOERROR)
+						if(tmpContainer->__queryAdd(n, item, item->getItemCount(), 0) == RETURNVALUE_NOERROR)
 						{
 							index = n;
 							backpack = std::make_pair(tmpContainer, index + 1);
@@ -3080,7 +3072,7 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 				if(!tmpCylinder)
 					continue;
 
-				if(tmpCylinder->__queryAdd(i, item, item->getItemCount(), flags) == RET_NOERROR)
+				if(tmpCylinder->__queryAdd(i, item, item->getItemCount(), flags) == RETURNVALUE_NOERROR)
 				{
 					index = i;
 					return tmpCylinder;
@@ -3117,7 +3109,7 @@ void Player::__addThing(Creature*, int32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__addThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index > 11" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	if(!index)
@@ -3125,7 +3117,7 @@ void Player::__addThing(Creature*, int32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__addThing], " << "player: " << getName() << ", index == 0" << std::endl;
 #endif
-		return /*RET_NOTENOUGHROOM*/;
+		return /*RETURNVALUE_NOTENOUGHROOM*/;
 	}
 
 	Item* item = thing->getItem();
@@ -3134,7 +3126,7 @@ void Player::__addThing(Creature*, int32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__addThing], " << "player: " << getName() << ", item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	item->setParent(this);
@@ -3154,7 +3146,7 @@ void Player::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__updateThing], " << "player: " << getName() << ", index == -1" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	Item* item = thing->getItem();
@@ -3163,7 +3155,7 @@ void Player::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__updateThing], " << "player: " << getName() << ", item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	const ItemType& oldType = Item::items[item->getID()];
@@ -3185,7 +3177,7 @@ void Player::__replaceThing(uint32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__replaceThing], " << "player: " << getName() << ", index: " << index << ", index < 0 || index > 11" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	Item* oldItem = getInventoryItem((slots_t)index);
@@ -3194,7 +3186,7 @@ void Player::__replaceThing(uint32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__updateThing], " << "player: " << getName() << ", oldItem == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	Item* item = thing->getItem();
@@ -3203,7 +3195,7 @@ void Player::__replaceThing(uint32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__updateThing], " << "player: " << getName() << ", item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	const ItemType& oldType = Item::items[oldItem->getID()];
@@ -3226,7 +3218,7 @@ void Player::__removeThing(Thing* thing, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__removeThing], " << "player: " << getName() << ", item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	int32_t index = __getIndexOfThing(thing);
@@ -3235,7 +3227,7 @@ void Player::__removeThing(Thing* thing, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Player::__removeThing], " << "player: " << getName() << ", index == -1" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	if(item->isStackable())
@@ -3514,7 +3506,7 @@ bool Player::setFollowCreature(Creature* creature, bool fullPathSearch /*= false
 	setFollowCreature(NULL);
 	setAttackedCreature(NULL);
 	if(!deny)
-		sendCancelMessage(RET_THEREISNOWAY);
+		sendCancelMessage(RETURNVALUE_THEREISNOWAY);
 
 	sendCancelTarget();
 	cancelNextWalk = true;

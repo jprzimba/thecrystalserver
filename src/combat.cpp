@@ -223,7 +223,7 @@ ConditionType_t Combat::DamageToConditionType(CombatType_t type)
 ReturnValue Combat::canDoCombat(const Creature* caster, const Tile* tile, bool isAggressive, bool createItem)
 {
 	if(tile->hasProperty(CONST_PROP_BLOCKPROJECTILE) || tile->floorChange() || tile->getTeleportItem())
-		return RET_NOTENOUGHROOM;
+		return RETURNVALUE_NOTENOUGHROOM;
 
 	if(caster)
 	{
@@ -236,33 +236,33 @@ ReturnValue Combat::canDoCombat(const Creature* caster, const Tile* tile, bool i
 		}
 
 		if(!success)
-			return RET_NOTPOSSIBLE;
+			return RETURNVALUE_NOTPOSSIBLE;
 
 		if(caster->getPosition().z < tile->getPosition().z)
-			return RET_FIRSTGODOWNSTAIRS;
+			return RETURNVALUE_FIRSTGODOWNSTAIRS;
 
 		if(caster->getPosition().z > tile->getPosition().z)
-			return RET_FIRSTGOUPSTAIRS;
+			return RETURNVALUE_FIRSTGOUPSTAIRS;
 
 		if(createItem && tile->isFull())
-			return RET_TILEISFULL;
+			return RETURNVALUE_TILEISFULL;
 
 		if(!isAggressive)
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 
 		const Player* player = caster->getPlayer();
 		if(player && player->hasFlag(PlayerFlag_IgnoreProtectionZone))
-			return RET_NOERROR;
+			return RETURNVALUE_NOERROR;
 	}
 
 	return isAggressive && tile->hasFlag(TILESTATE_PROTECTIONZONE) ?
-		RET_ACTIONNOTPERMITTEDINPROTECTIONZONE : RET_NOERROR;
+		RETURNVALUE_ACTIONNOTPERMITTEDINPROTECTIONZONE : RETURNVALUE_NOERROR;
 }
 
 ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target, bool isAggressive)
 {
 	if(!attacker)
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 
 	bool success = true;
 	CreatureEventList combatEvents = const_cast<Creature*>(attacker)->getCreatureEvents(CREATURE_EVENT_COMBAT);
@@ -273,13 +273,13 @@ ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target
 	}
 
 	if(!success)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	bool checkZones = false;
 	if(const Player* targetPlayer = target->getPlayer())
 	{
 		if(!targetPlayer->isAttackable())
-			return RET_YOUMAYNOTATTACKTHISPLAYER;
+			return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 
 		const Player* attackerPlayer = NULL;
 		if((attackerPlayer = attacker->getPlayer()) || (attackerPlayer = attacker->getPlayerMaster()))
@@ -290,43 +290,43 @@ ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target
 				const_cast<Player*>(targetPlayer)) || (g_config.getBool(ConfigManager::CANNOT_ATTACK_SAME_LOOKFEET)
 				&& attackerPlayer->getDefaultOutfit().lookFeet == targetPlayer->getDefaultOutfit().lookFeet)
 				|| !attackerPlayer->canSeeCreature(targetPlayer))
-				return RET_YOUMAYNOTATTACKTHISPLAYER;
+				return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 		}
 	}
 	else if(target->getMonster())
 	{
 		if(!target->isAttackable())
-			return RET_YOUMAYNOTATTACKTHISCREATURE;
+			return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 
 		const Player* attackerPlayer = NULL;
 		if((attackerPlayer = attacker->getPlayer()) || (attackerPlayer = attacker->getPlayerMaster()))
 		{
 			if(attackerPlayer->hasFlag(PlayerFlag_CannotAttackMonster))
-				return RET_YOUMAYNOTATTACKTHISCREATURE;
+				return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 
 			if(target->isPlayerSummon())
 			{
 				checkZones = true;
 				if(g_game.getWorldType() == WORLDTYPE_OPTIONAL && !Combat::isInPvpZone(attacker, target)
 					&& !attackerPlayer->isEnemy(target->getPlayerMaster(), true))
-					return RET_YOUMAYNOTATTACKTHISCREATURE;
+					return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 			}
 		}
 	}
 	else if(target->getNpc() && !target->isAttackable())
-		return RET_YOUMAYNOTATTACKTHISCREATURE;
+		return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 
 	return checkZones && (target->getTile()->hasFlag(TILESTATE_OPTIONALZONE) ||
 		(attacker->getTile()->hasFlag(TILESTATE_OPTIONALZONE)
 		&& !target->getTile()->hasFlag(TILESTATE_OPTIONALZONE) &&
 		!target->getTile()->hasFlag(TILESTATE_PROTECTIONZONE))) ?
-		RET_ACTIONNOTPERMITTEDINANOPVPZONE : RET_NOERROR;
+		RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE : RETURNVALUE_NOERROR;
 }
 
 ReturnValue Combat::canTargetCreature(const Player* player, const Creature* target)
 {
 	if(player == target)
-		return RET_YOUMAYNOTATTACKTHISPLAYER;
+		return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 
 	Player* tmpPlayer = const_cast<Player*>(player);
 	bool deny = false;
@@ -339,36 +339,36 @@ ReturnValue Combat::canTargetCreature(const Player* player, const Creature* targ
 	}
 
 	if(deny)
-		return RET_NEEDEXCHANGE;
+		return RETURNVALUE_NEEDEXCHANGE;
 
 	if(!player->hasFlag(PlayerFlag_IgnoreProtectionZone))
 	{
 		if(player->getZone() == ZONE_PROTECTION)
-			return RET_YOUMAYNOTATTACKAPERSONWHILEINPROTECTIONZONE;
+			return RETURNVALUE_YOUMAYNOTATTACKAPERSONWHILEINPROTECTIONZONE;
 
 		if(target->getZone() == ZONE_PROTECTION)
-			return RET_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE;
+			return RETURNVALUE_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE;
 
 		if(target->getPlayer() || target->isPlayerSummon())
 		{
 			if(player->getZone() == ZONE_OPTIONAL)
-				return RET_ACTIONNOTPERMITTEDINANOPVPZONE;
+				return RETURNVALUE_ACTIONNOTPERMITTEDINANOPVPZONE;
 
 			if(target->getZone() == ZONE_OPTIONAL)
-				return RET_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE;
+				return RETURNVALUE_YOUMAYNOTATTACKAPERSONINPROTECTIONZONE;
 		}
 	}
 
 	if(player->hasFlag(PlayerFlag_CannotUseCombat))
-		return target->getPlayer() ? RET_YOUMAYNOTATTACKTHISPLAYER : RET_YOUMAYNOTATTACKTHISCREATURE;
+		return target->getPlayer() ? RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER : RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 
 	if(target->getPlayer() && !Combat::isInPvpZone(player, target) && player->getSkullType(target->getPlayer()) == SKULL_NONE)
 	{
 		if(player->getSecureMode() == SECUREMODE_ON)
-			return RET_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
+			return RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
 
 		if(player->getSkull() == SKULL_BLACK)
-			return RET_YOUMAYNOTATTACKTHISPLAYER;
+			return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 	}
 
 	return Combat::canDoCombat(player, target, true);
@@ -699,7 +699,7 @@ void Combat::combatTileEffects(const SpectatorVec& list, Creature* caster, Tile*
 			if(caster)
 				item->setOwner(caster->getID());
 
-			if(g_game.internalAddItem(caster, tile, item) == RET_NOERROR)
+			if(g_game.internalAddItem(caster, tile, item) == RETURNVALUE_NOERROR)
 				g_game.startDecay(item);
 			else
 				delete item;
@@ -785,7 +785,7 @@ void Combat::CombatFunc(Creature* caster, const Position& pos, const CombatArea*
 	Tile* tile = NULL;
 	for(std::list<Tile*>::iterator it = tileList.begin(); it != tileList.end(); ++it)
 	{
-		if(!(tile = (*it)) || canDoCombat(caster, (*it), params.isAggressive, params.itemId != 0) != RET_NOERROR)
+		if(!(tile = (*it)) || canDoCombat(caster, (*it), params.isAggressive, params.itemId != 0) != RETURNVALUE_NOERROR)
 			continue;
 
 		bool skip = true;
@@ -810,7 +810,7 @@ void Combat::CombatFunc(Creature* caster, const Position& pos, const CombatArea*
 						continue;
 				}
 
-				if(!params.isAggressive || (caster != (*cit) && Combat::canDoCombat(caster, (*cit), true) == RET_NOERROR))
+				if(!params.isAggressive || (caster != (*cit) && Combat::canDoCombat(caster, (*cit), true) == RETURNVALUE_NOERROR))
 				{
 					func(caster, (*cit), params, (void*)var);
 					if(params.targetCallback)
@@ -830,7 +830,7 @@ void Combat::doCombat(Creature* caster, Creature* target) const
 	//target combat callback function
 	if(params.combatType != COMBAT_NONE)
 	{
-		if(params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+		if(params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 			return;
 
 		int32_t minChange = 0, maxChange = 0;
@@ -866,7 +866,7 @@ void Combat::doCombat(Creature* caster, const Position& pos) const
 
 void Combat::doCombatHealth(Creature* caster, Creature* target, int32_t minChange, int32_t maxChange, const CombatParams& params, bool check/* = true*/)
 {
-	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 		return;
 
 	Combat2Var var;
@@ -896,7 +896,7 @@ void Combat::doCombatHealth(Creature* caster, const Position& pos, const CombatA
 
 void Combat::doCombatMana(Creature* caster, Creature* target, int32_t minChange, int32_t maxChange, const CombatParams& params, bool check/* = true*/)
 {
-	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 		return;
 
 	Combat2Var var;
@@ -932,7 +932,7 @@ void Combat::doCombatCondition(Creature* caster, const Position& pos, const Comb
 
 void Combat::doCombatCondition(Creature* caster, Creature* target, const CombatParams& params, bool check/* = true*/)
 {
-	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 		return;
 
 	CombatConditionFunc(caster, target, params, NULL);
@@ -955,7 +955,7 @@ void Combat::doCombatDispel(Creature* caster, const Position& pos, const CombatA
 
 void Combat::doCombatDispel(Creature* caster, Creature* target, const CombatParams& params, bool check/* = true*/)
 {
-	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+	if(check && params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 		return;
 
 	CombatDispelFunc(caster, target, params, NULL);
@@ -972,7 +972,7 @@ void Combat::doCombatDispel(Creature* caster, Creature* target, const CombatPara
 
 void Combat::doCombatDefault(Creature* caster, Creature* target, const CombatParams& params)
 {
-	if(params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RET_NOERROR))
+	if(params.isAggressive && (caster == target || Combat::canDoCombat(caster, target, true) != RETURNVALUE_NOERROR))
 		return;
 
 	const SpectatorVec& list = g_game.getSpectators(target->getTile()->getPosition());

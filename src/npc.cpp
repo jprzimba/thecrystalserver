@@ -1650,7 +1650,7 @@ void Npc::executeResponse(Player* player, NpcState* npcState, const NpcResponse*
 								{
 									int32_t stack = std::min(100, amount);
 									Item* item = Item::CreateItem(iit.id, stack);
-									if(g_game.internalPlayerAddItem(this, player, item) != RET_NOERROR)
+									if(g_game.internalPlayerAddItem(this, player, item) != RETURNVALUE_NOERROR)
 									{
 										delete item;
 										amount = npcState->amount - amount;
@@ -1665,7 +1665,7 @@ void Npc::executeResponse(Player* player, NpcState* npcState, const NpcResponse*
 								for(int32_t i = 0; i < amount; ++i)
 								{
 									Item* item = Item::CreateItem(iit.id, subType);
-									if(g_game.internalPlayerAddItem(this, player, item) != RET_NOERROR)
+									if(g_game.internalPlayerAddItem(this, player, item) != RETURNVALUE_NOERROR)
 									{
 										delete item;
 										amount = i + 1;
@@ -1719,7 +1719,7 @@ void Npc::executeResponse(Player* player, NpcState* npcState, const NpcResponse*
 						for(int32_t i = 0; i < npcState->amount; ++i)
 						{
 							Item* item = Item::CreateItem(iit.id, subType);
-							if(g_game.internalPlayerAddItem(this, player, item) != RET_NOERROR)
+							if(g_game.internalPlayerAddItem(this, player, item) != RETURNVALUE_NOERROR)
 								delete item;
 						}
 					}
@@ -2038,7 +2038,7 @@ bool Npc::canWalkTo(const Position& fromPos, Direction dir)
 		false) || (!floorChange && (tile->floorChange() || tile->positionChange())))
 		return false;
 
-	return tile->__queryAdd(0, this, 1, FLAG_PATHFINDING) == RET_NOERROR;
+	return tile->__queryAdd(0, this, 1, FLAG_PATHFINDING) == RETURNVALUE_NOERROR;
 }
 
 bool Npc::getRandomStep(Direction& dir)

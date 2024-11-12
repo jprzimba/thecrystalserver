@@ -50,11 +50,9 @@ enum stackposType_t
 
 enum WorldType_t
 {
-	WORLDTYPE_FIRST = 1,
-	WORLDTYPE_OPTIONAL = WORLDTYPE_FIRST,
+	WORLDTYPE_OPTIONAL = 1,
 	WORLDTYPE_OPEN = 2,
-	WORLDTYPE_HARDCORE = 3,
-	WORLDTYPE_LAST = WORLDTYPE_HARDCORE
+	WORLDTYPE_HARDCORE = 3
 };
 
 enum GameState_t
@@ -89,20 +87,19 @@ enum ReloadInfo_t
 	RELOAD_GLOBALEVENTS = 6,
 	RELOAD_GROUPS = 7,
 	RELOAD_HIGHSCORES = 8,
-	//RELOAD_UNUSED = 9,
-	RELOAD_ITEMS = 10,
-	RELOAD_MONSTERS = 11,
-	RELOAD_MOVEEVENTS = 12,
-	RELOAD_NPCS = 13,
-	RELOAD_OUTFITS = 14,
-	RELOAD_QUESTS = 15,
-	RELOAD_RAIDS = 16,
-	RELOAD_SPELLS = 17,
-	RELOAD_STAGES = 18,
-	RELOAD_TALKACTIONS = 19,
-	RELOAD_VOCATIONS = 20,
-	RELOAD_WEAPONS = 21,
-	RELOAD_ALL = 22,
+	RELOAD_ITEMS = 9,
+	RELOAD_MONSTERS = 10,
+	RELOAD_MOVEEVENTS = 11,
+	RELOAD_NPCS = 12,
+	RELOAD_OUTFITS = 13,
+	RELOAD_QUESTS = 14,
+	RELOAD_RAIDS = 15,
+	RELOAD_SPELLS = 16,
+	RELOAD_STAGES = 17,
+	RELOAD_TALKACTIONS = 18,
+	RELOAD_VOCATIONS = 19,
+	RELOAD_WEAPONS = 20,
+	RELOAD_ALL = 21,
 	RELOAD_LAST = RELOAD_WEAPONS
 };
 
@@ -282,7 +279,7 @@ class Game
 		  * Returns a player based on a string name identifier, with support for the "~" wildcard.
 		  * \param s is the name identifier, with or without wildcard
 		  * \param player will point to the found player (if any)
-		  * \return "RET_PLAYERWITHTHISNAMEISNOTONLINE" or "RET_NAMEISTOOAMBIGUOUS"
+		  * \return "RETURNVALUE_PLAYERWITHTHISNAMEISNOTONLINE" or "RETURNVALUE_NAMEISTOOAMBIGUOUS"
 		  */
 		ReturnValue getPlayerByNameWildcard(std::string s, Player*& player);
 

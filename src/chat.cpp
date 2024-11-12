@@ -293,12 +293,12 @@ bool Chat::parseChannelNode(xmlNodePtr p)
 	Condition* condition = NULL;
 	if(readXMLInteger(p, "muted", intValue))
 	{
-		conditionId = 3;
+		conditionId = 2;
 		int32_t tmp = intValue * 1000;
 		if(readXMLInteger(p, "conditionId", intValue))
 		{
 			conditionId = intValue;
-			if(conditionId < 3)
+			if(conditionId < 2)
 				std::clog << "[Warning - Chat::parseChannelNode] Using reserved muted condition sub id (" << conditionId << ")" << std::endl;
 		}
 
@@ -585,7 +585,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 				trimString(param);
 
 				Player* paramPlayer = NULL;
-				if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RET_NOERROR)
+				if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RETURNVALUE_NOERROR)
 				{
 					if(paramPlayer->getGuildId() == 0)
 					{
@@ -662,7 +662,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 				trimString(param);
 
 				Player* paramPlayer = NULL;
-				if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RET_NOERROR)
+				if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RETURNVALUE_NOERROR)
 				{
 					if(paramPlayer->getGuildId() == 0)
 					{
@@ -736,7 +736,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 			trimString(param);
 
 			Player* paramPlayer = NULL;
-			if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RET_NOERROR)
+			if(g_game.getPlayerByNameWildcard(param, paramPlayer) == RETURNVALUE_NOERROR)
 			{
 				if(paramPlayer->getGuildId())
 				{
@@ -904,7 +904,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 			trimString(param2);
 
 			Player* paramPlayer = NULL;
-			if(g_game.getPlayerByNameWildcard(param1, paramPlayer) == RET_NOERROR)
+			if(g_game.getPlayerByNameWildcard(param1, paramPlayer) == RETURNVALUE_NOERROR)
 			{
 				if(paramPlayer->getGuildId())
 				{

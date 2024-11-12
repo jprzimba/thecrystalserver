@@ -274,36 +274,36 @@ ReturnValue Container::__queryAdd(int32_t index, const Thing* thing, uint32_t co
 	{
 		//a child container is querying, since we are the top container (not carried by a player)
 		//just return with no error.
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
 	const Item* item = thing->getItem();
 	if(!item)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(!item->isPickupable())
-		return RET_CANNOTPICKUP;
+		return RETURNVALUE_CANNOTPICKUP;
 
 	if(item == this)
-		return RET_THISISIMPOSSIBLE;
+		return RETURNVALUE_THISISIMPOSSIBLE;
 
 	if(const Container* container = item->getContainer())
 	{
 		for(const Cylinder* cylinder = getParent(); cylinder; cylinder = cylinder->getParent())
 		{
 			if(cylinder == container)
-				return RET_THISISIMPOSSIBLE;
+				return RETURNVALUE_THISISIMPOSSIBLE;
 		}
 	}
 
 	if(index == INDEX_WHEREEVER && !((flags & FLAG_NOLIMIT) == FLAG_NOLIMIT) && full())
-		return RET_CONTAINERNOTENOUGHROOM;
+		return RETURNVALUE_CONTAINERNOTENOUGHROOM;
 
 	const Cylinder* topParent = getTopParent();
 	if(topParent != this)
 		return topParent->__queryAdd(INDEX_WHEREEVER, item, count, flags | FLAG_CHILDISOWNER, actor);
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32_t count,
@@ -313,13 +313,13 @@ ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32
 	if(!item)
 	{
 		maxQueryCount = 0;
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 	}
 
 	if(((flags & FLAG_NOLIMIT) == FLAG_NOLIMIT))
 	{
 		maxQueryCount = std::max((uint32_t)1, count);
-		return RET_NOERROR;
+		return RETURNVALUE_NOERROR;
 	}
 
 	int32_t freeSlots = std::max((int32_t)(capacity() - size()), (int32_t)0);
@@ -335,7 +335,7 @@ ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32
 				if((*cit) != item && (*cit)->getID() == item->getID() && (*cit)->getItemCount() < 100)
 				{
 					uint32_t remainder = (100 - (*cit)->getItemCount());
-					if(__queryAdd(slotIndex, item, remainder, flags) == RET_NOERROR)
+					if(__queryAdd(slotIndex, item, remainder, flags) == RETURNVALUE_NOERROR)
 						n += remainder;
 				}
 			}
@@ -350,42 +350,42 @@ ReturnValue Container::__queryMaxCount(int32_t index, const Thing* thing, uint32
 			if(destItem && destItem->getID() == item->getID() && destItem->getItemCount() < 100)
 			{
 				uint32_t remainder = 100 - destItem->getItemCount();
-				if(__queryAdd(index, item, remainder, flags) == RET_NOERROR)
+				if(__queryAdd(index, item, remainder, flags) == RETURNVALUE_NOERROR)
 					n = remainder;
 			}
 		}
 
 		maxQueryCount = freeSlots * 100 + n;
 		if(maxQueryCount < count)
-			return RET_CONTAINERNOTENOUGHROOM;
+			return RETURNVALUE_CONTAINERNOTENOUGHROOM;
 	}
 	else
 	{
 		maxQueryCount = freeSlots;
 		if(maxQueryCount == 0)
-			return RET_CONTAINERNOTENOUGHROOM;
+			return RETURNVALUE_CONTAINERNOTENOUGHROOM;
 	}
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 ReturnValue Container::__queryRemove(const Thing* thing, uint32_t count, uint32_t flags, Creature*) const
 {
 	int32_t index = __getIndexOfThing(thing);
 	if(index == -1)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	const Item* item = thing->getItem();
 	if(item == NULL)
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(count == 0 || (item->isStackable() && count > item->getItemCount()))
-		return RET_NOTPOSSIBLE;
+		return RETURNVALUE_NOTPOSSIBLE;
 
 	if(!item->isMovable() && !hasBitSet(FLAG_IGNORENOTMOVABLE, flags))
-		return RET_NOTMOVABLE;
+		return RETURNVALUE_NOTMOVABLE;
 
-	return RET_NOERROR;
+	return RETURNVALUE_NOERROR;
 }
 
 Cylinder* Container::__queryDestination(int32_t& index, const Thing* thing, Item** destItem,
@@ -471,7 +471,7 @@ void Container::__addThing(Creature*, int32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__addThing], index:" << index << ", index >= capacity()" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	Item* item = thing->getItem();
@@ -480,14 +480,14 @@ void Container::__addThing(Creature*, int32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__addThing] item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 #ifdef __DEBUG_MOVESYS__
 	if(index != INDEX_WHEREEVER && size() >= capacity())
 	{
 		std::clog << "Failure: [Container::__addThing] size() >= capacity()" << std::endl;
-		return /*RET_CONTAINERNOTENOUGHROOM*/;
+		return /*RETURNVALUE_CONTAINERNOTENOUGHROOM*/;
 	}
 #endif
 
@@ -511,7 +511,7 @@ void Container::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__updateThing] index == -1" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	Item* item = thing->getItem();
@@ -520,7 +520,7 @@ void Container::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__updateThing] item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	const ItemType& oldType = Item::items[item->getID()];
@@ -548,7 +548,7 @@ void Container::__replaceThing(uint32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__replaceThing] item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	uint32_t count = 0;
@@ -566,7 +566,7 @@ void Container::__replaceThing(uint32_t index, Thing* thing)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__updateThing] item not found" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	totalWeight -= (*cit)->getWeight();
@@ -596,7 +596,7 @@ void Container::__removeThing(Thing* thing, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__removeThing] item == NULL" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	int32_t index = __getIndexOfThing(thing);
@@ -605,7 +605,7 @@ void Container::__removeThing(Thing* thing, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__removeThing] index == -1" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	ItemList::iterator cit = std::find(itemlist.begin(), itemlist.end(), thing);
@@ -614,7 +614,7 @@ void Container::__removeThing(Thing* thing, uint32_t count)
 #ifdef __DEBUG_MOVESYS__
 		std::clog << "Failure: [Container::__removeThing] item not found" << std::endl;
 #endif
-		return /*RET_NOTPOSSIBLE*/;
+		return /*RETURNVALUE_NOTPOSSIBLE*/;
 	}
 
 	if(item->isStackable() && count != item->getItemCount())

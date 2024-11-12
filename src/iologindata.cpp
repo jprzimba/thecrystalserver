@@ -1275,7 +1275,7 @@ bool IOLoginData::playerMail(Creature* actor, std::string name, uint32_t townId,
 
 	Depot* depot = player->getDepot(townId, true);
 	if(!depot || g_game.internalMoveItem(actor, item->getParent(), depot, INDEX_WHEREEVER,
-		item, item->getItemCount(), NULL, FLAG_NOLIMIT) != RET_NOERROR)
+		item, item->getItemCount(), NULL, FLAG_NOLIMIT) != RETURNVALUE_NOERROR)
 	{
 		if(player->isVirtual())
 			delete player;
