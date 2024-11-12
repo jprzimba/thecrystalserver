@@ -686,89 +686,89 @@ bool Item::hasProperty(enum ITEMPROPERTY prop) const
 	const ItemType& it = items[id];
 	switch(prop)
 	{
-		case BLOCKSOLID:
+		case CONST_PROP_BLOCKSOLID:
 			if(it.blockSolid)
 				return true;
 
 			break;
 
-		case MOVABLE:
+		case CONST_PROP_MOVABLE:
 			if(it.movable && (!loadedFromMap || (!getUniqueId()
 				&& (!getActionId() || !getContainer()))))
 				return true;
 
 			break;
 
-		case HASHEIGHT:
+		case CONST_PROP_HASHEIGHT:
 			if(it.hasHeight)
 				return true;
 
 			break;
 
-		case BLOCKPROJECTILE:
+		case CONST_PROP_BLOCKPROJECTILE:
 			if(it.blockProjectile)
 				return true;
 
 			break;
 
-		case BLOCKPATH:
+		case CONST_PROP_BLOCKPATH:
 			if(it.blockPathFind)
 				return true;
 
 			break;
 
-		case ISVERTICAL:
+		case CONST_PROP_ISVERTICAL:
 			if(it.isVertical)
 				return true;
 
 			break;
 
-		case ISHORIZONTAL:
+		case CONST_PROP_ISHORIZONTAL:
 			if(it.isHorizontal)
 				return true;
 
 			break;
 
-		case IMMOVABLEBLOCKSOLID:
+		case CONST_PROP_IMMOVABLEBLOCKSOLID:
 			if(it.blockSolid && (!it.movable || (loadedFromMap &&
 				(getUniqueId() || (getActionId() && getContainer())))))
 				return true;
 
 			break;
 
-		case IMMOVABLEBLOCKPATH:
+		case CONST_PROP_IMMOVABLEBLOCKPATH:
 			if(it.blockPathFind && (!it.movable || (loadedFromMap &&
 				(getUniqueId() || (getActionId() && getContainer())))))
 				return true;
 
 			break;
 
-		case SUPPORTHANGABLE:
+		case CONST_PROP_SUPPORTHANGABLE:
 			if(it.isHorizontal || it.isVertical)
 				return true;
 
 			break;
 
-		case IMMOVABLENOFIELDBLOCKPATH:
+		case CONST_PROP_IMMOVABLENOFIELDBLOCKPATH:
 			if(!it.isMagicField() && it.blockPathFind && (!it.movable || (loadedFromMap &&
 				(getUniqueId() || (getActionId() && getContainer())))))
 				return true;
 
 			break;
 
-		case NOFIELDBLOCKPATH:
+		case CONST_PROP_NOFIELDBLOCKPATH:
 			if(!it.isMagicField() && it.blockPathFind)
 				return true;
 
 			break;
 
-		case FLOORCHANGEDOWN:
+		case CONST_PROP_FLOORCHANGEDOWN:
 			if(it.floorChange[CHANGE_DOWN])
 				return true;
 
 			break;
 
-		case FLOORCHANGEUP:
+		case CONST_PROP_FLOORCHANGEUP:
 			for(uint16_t i = CHANGE_FIRST; i <= CHANGE_PRE_LAST; ++i)
 			{
 				if(it.floorChange[i])

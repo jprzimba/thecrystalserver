@@ -81,7 +81,7 @@ bool Tile::hasHeight(uint32_t n) const
 	uint32_t height = 0;
 	if(ground)
 	{
-		if(ground->hasProperty(HASHEIGHT))
+		if(ground->hasProperty(CONST_PROP_HASHEIGHT))
 			++height;
 
 		if(n == height)
@@ -92,7 +92,7 @@ bool Tile::hasHeight(uint32_t n) const
 	{
 		for(ItemVector::const_iterator it = items->begin(); it != items->end(); ++it)
 		{
-			if((*it)->hasProperty(HASHEIGHT))
+			if((*it)->hasProperty(CONST_PROP_HASHEIGHT))
 				++height;
 
 			if(n == height)
@@ -1713,19 +1713,19 @@ void Tile::updateTileFlags(Item* item, bool remove)
 		if(item->getContainer() && item->getContainer()->getDepot())
 			setFlag(TILESTATE_DEPOT);
 
-		if(item->hasProperty(BLOCKSOLID))
+		if(item->hasProperty(CONST_PROP_BLOCKSOLID))
 			setFlag(TILESTATE_BLOCKSOLID);
 
-		if(item->hasProperty(IMMOVABLEBLOCKSOLID))
+		if(item->hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID))
 			setFlag(TILESTATE_IMMOVABLEBLOCKSOLID);
 
-		if(item->hasProperty(BLOCKPATH))
+		if(item->hasProperty(CONST_PROP_BLOCKPATH))
 			setFlag(TILESTATE_BLOCKPATH);
 
-		if(item->hasProperty(NOFIELDBLOCKPATH))
+		if(item->hasProperty(CONST_PROP_NOFIELDBLOCKPATH))
 			setFlag(TILESTATE_NOFIELDBLOCKPATH);
 
-		if(item->hasProperty(IMMOVABLENOFIELDBLOCKPATH))
+		if(item->hasProperty(CONST_PROP_IMMOVABLENOFIELDBLOCKPATH))
 			setFlag(TILESTATE_IMMOVABLENOFIELDBLOCKPATH);
 	}
 	else
@@ -1802,22 +1802,22 @@ void Tile::updateTileFlags(Item* item, bool remove)
 		if(item->getContainer() && item->getContainer()->getDepot())
 			resetFlag(TILESTATE_DEPOT);
 
-		if(item->hasProperty(BLOCKSOLID) && !hasProperty(item, BLOCKSOLID))
+		if(item->hasProperty(CONST_PROP_BLOCKSOLID) && !hasProperty(item, CONST_PROP_BLOCKSOLID))
 			resetFlag(TILESTATE_BLOCKSOLID);
 
-		if(item->hasProperty(IMMOVABLEBLOCKSOLID) && !hasProperty(item, IMMOVABLEBLOCKSOLID))
+		if(item->hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID) && !hasProperty(item, CONST_PROP_IMMOVABLEBLOCKSOLID))
 			resetFlag(TILESTATE_IMMOVABLEBLOCKSOLID);
 
-		if(item->hasProperty(BLOCKPATH) && !hasProperty(item, BLOCKPATH))
+		if(item->hasProperty(CONST_PROP_BLOCKPATH) && !hasProperty(item, CONST_PROP_BLOCKPATH))
 			resetFlag(TILESTATE_BLOCKPATH);
 
-		if(item->hasProperty(NOFIELDBLOCKPATH) && !hasProperty(item, NOFIELDBLOCKPATH))
+		if(item->hasProperty(CONST_PROP_NOFIELDBLOCKPATH) && !hasProperty(item, CONST_PROP_NOFIELDBLOCKPATH))
 			resetFlag(TILESTATE_NOFIELDBLOCKPATH);
 
-		if(item->hasProperty(IMMOVABLEBLOCKPATH) && !hasProperty(item, IMMOVABLEBLOCKPATH))
+		if(item->hasProperty(CONST_PROP_IMMOVABLEBLOCKPATH) && !hasProperty(item, CONST_PROP_IMMOVABLEBLOCKPATH))
 			resetFlag(TILESTATE_IMMOVABLEBLOCKPATH);
 
-		if(item->hasProperty(IMMOVABLENOFIELDBLOCKPATH) && !hasProperty(item, IMMOVABLENOFIELDBLOCKPATH))
+		if(item->hasProperty(CONST_PROP_IMMOVABLENOFIELDBLOCKPATH) && !hasProperty(item, CONST_PROP_IMMOVABLENOFIELDBLOCKPATH))
 			resetFlag(TILESTATE_IMMOVABLENOFIELDBLOCKPATH);
 	}
 }

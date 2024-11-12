@@ -898,8 +898,8 @@ void Monster::pushItems(Tile* tile)
 	for(int32_t i = downItemsSize - 1; i >= 0; --i)
 	{
 		assert(i >= 0 && i < downItemsSize);
-		if((item = items->at(i)) && item->hasProperty(MOVABLE) &&
-			(item->hasProperty(BLOCKPATH) || item->hasProperty(BLOCKSOLID)))
+		if((item = items->at(i)) && item->hasProperty(CONST_PROP_MOVABLE) &&
+			(item->hasProperty(CONST_PROP_BLOCKPATH) || item->hasProperty(CONST_PROP_BLOCKSOLID)))
 		{
 			if(moveCount < 20 && pushItem(item, 1))
 				moveCount++;
@@ -927,7 +927,7 @@ bool Monster::pushCreature(Creature* creature)
 	for(DirVector::iterator it = dirVector.begin(); it != dirVector.end(); ++it)
 	{
 		if((tile = g_game.getTile(Spells::getCasterPosition(creature, (*it)))) && !tile->hasProperty(
-			BLOCKPATH) && g_game.internalMoveCreature(creature, (*it)) == RET_NOERROR)
+			CONST_PROP_BLOCKPATH) && g_game.internalMoveCreature(creature, (*it)) == RET_NOERROR)
 			return true;
 	}
 

@@ -734,7 +734,7 @@ bool Spell::checkInstantSpell(Player* player, Creature* creature)
 		return false;
 	}
 
-	if(blockingSolid && tile->hasProperty(BLOCKSOLID))
+	if(blockingSolid && tile->hasProperty(CONST_PROP_BLOCKSOLID))
 	{
 		player->sendCancelMessage(RET_NOTENOUGHROOM);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
@@ -825,7 +825,7 @@ bool Spell::checkInstantSpell(Player* player, const Position& toPos)
 		return false;
 	}
 
-	if(blockingSolid && tile->hasProperty(BLOCKSOLID))
+	if(blockingSolid && tile->hasProperty(CONST_PROP_BLOCKSOLID))
 	{
 		player->sendCancelMessage(RET_NOTENOUGHROOM);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
@@ -896,7 +896,7 @@ bool Spell::checkRuneSpell(Player* player, const Position& toPos)
 		return false;
 	}
 
-	if(blockingSolid && tile->hasProperty(BLOCKSOLID))
+	if(blockingSolid && tile->hasProperty(CONST_PROP_BLOCKSOLID))
 	{
 		player->sendCancelMessage(RET_NOTENOUGHROOM);
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
@@ -1392,11 +1392,11 @@ bool InstantSpell::Levitate(const InstantSpell*, Creature* creature, const std::
 				destination.z++;
 			}
 
-			if(!tmpTile || (!tmpTile->ground && !tmpTile->hasProperty(IMMOVABLEBLOCKSOLID)))
+			if(!tmpTile || (!tmpTile->ground && !tmpTile->hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID)))
 			{
 				Tile* tile = player->getTile();
 				tmpTile = g_game.getTile(destination);
-				if(tile && tmpTile && tmpTile->ground && !tmpTile->hasProperty(IMMOVABLEBLOCKSOLID) &&
+				if(tile && tmpTile && tmpTile->ground && !tmpTile->hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID) &&
 					!tmpTile->floorChange() && tile->hasFlag(TILESTATE_HOUSE) == tmpTile->hasFlag(TILESTATE_HOUSE)
 					&& tile->hasFlag(TILESTATE_PROTECTIONZONE) == tmpTile->hasFlag(TILESTATE_PROTECTIONZONE))
 					ret = g_game.internalMoveCreature(NULL, player, tile, tmpTile, FLAG_IGNOREBLOCKITEM | FLAG_IGNOREBLOCKCREATURE);

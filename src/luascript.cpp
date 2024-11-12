@@ -3091,6 +3091,32 @@ void LuaInterface::registerFunctions()
 	registerEnum(ITEM_GROUP_SPLASH)
 	registerEnum(ITEM_GROUP_FLUID)
 
+	//ammo
+	registerEnum(AMMO_NONE)
+	registerEnum(AMMO_BOLT)
+	registerEnum(AMMO_ARROW)
+	registerEnum(AMMO_SPEAR)
+	registerEnum(AMMO_THROWINGSTAR)
+	registerEnum(AMMO_THROWINGKNIFE)
+	registerEnum(AMMO_STONE)
+	registerEnum(AMMO_SNOWBALL)
+
+	//props
+	registerEnum(CONST_PROP_BLOCKSOLID)
+	registerEnum(CONST_PROP_HASHEIGHT)
+	registerEnum(CONST_PROP_BLOCKPROJECTILE)
+	registerEnum(CONST_PROP_BLOCKPATH)
+	registerEnum(CONST_PROP_ISVERTICAL)
+	registerEnum(CONST_PROP_ISHORIZONTAL)
+	registerEnum(CONST_PROP_MOVABLE)
+	registerEnum(CONST_PROP_IMMOVABLEBLOCKSOLID)
+	registerEnum(CONST_PROP_IMMOVABLEBLOCKPATH)
+	registerEnum(CONST_PROP_IMMOVABLENOFIELDBLOCKPATH)
+	registerEnum(CONST_PROP_NOFIELDBLOCKPATH)
+	registerEnum(CONST_PROP_SUPPORTHANGABLE)
+	registerEnum(CONST_PROP_FLOORCHANGEDOWN)
+	registerEnum(CONST_PROP_FLOORCHANGEUP)
+
 	//_G
 	registerGlobalVariable("INDEX_WHEREEVER", INDEX_WHEREEVER);
 	registerGlobalBoolean("VIRTUAL_PARENT", true);

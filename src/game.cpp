@@ -643,12 +643,12 @@ Thing* Game::internalGetThing(Player* player, const Position& pos, int32_t index
 
 		if(player && thing && thing->getItem())
 		{
-			if(tile->hasProperty(ISVERTICAL))
+			if(tile->hasProperty(CONST_PROP_ISVERTICAL))
 			{
 				if(player->getPosition().x + 1 == tile->getPosition().x)
 					thing = NULL;
 			}
-			else if(tile->hasProperty(ISHORIZONTAL) && player->getPosition().y + 1 == tile->getPosition().y)
+			else if(tile->hasProperty(CONST_PROP_ISHORIZONTAL) && player->getPosition().y + 1 == tile->getPosition().y)
 				thing = NULL;
 		}
 
@@ -1172,7 +1172,7 @@ bool Game::playerMoveCreature(uint32_t playerId, uint32_t movingCreatureId,
 			return false;
 		}
 
-		if(toTile->hasProperty(BLOCKPATH))
+		if(toTile->hasProperty(CONST_PROP_BLOCKPATH))
 		{
 			player->sendCancelMessage(RET_NOTENOUGHROOM);
 			return false;
@@ -1280,16 +1280,16 @@ ReturnValue Game::internalMoveCreature(Creature* creature, Direction direction, 
 		if(currentPos.z != 8 && creature->getTile()->hasHeight(3)) //try go up
 		{
 			if((!(tmpTile = map->getTile(Position(currentPos.x, currentPos.y, currentPos.z - 1)))
-				|| (!tmpTile->ground && !tmpTile->hasProperty(BLOCKSOLID))) &&
+				|| (!tmpTile->ground && !tmpTile->hasProperty(CONST_PROP_BLOCKSOLID))) &&
 				(tmpTile = map->getTile(Position(destPos.x, destPos.y, destPos.z - 1)))
-				&& tmpTile->ground && !tmpTile->hasProperty(BLOCKSOLID) && !tmpTile->hasProperty(FLOORCHANGEDOWN))
+				&& tmpTile->ground && !tmpTile->hasProperty(CONST_PROP_BLOCKSOLID) && !tmpTile->hasProperty(CONST_PROP_FLOORCHANGEDOWN))
 			{
 				flags = flags | FLAG_IGNOREBLOCKITEM | FLAG_IGNOREBLOCKCREATURE;
 				destPos.z--;
 			}
 		}
 		else if(currentPos.z != 7 && (!(tmpTile = map->getTile(destPos)) || (!tmpTile->ground &&
-			!tmpTile->hasProperty(BLOCKSOLID))) && (tmpTile = map->getTile(Position(
+			!tmpTile->hasProperty(CONST_PROP_BLOCKSOLID))) && (tmpTile = map->getTile(Position(
 			destPos.x, destPos.y, destPos.z + 1))) && tmpTile->hasHeight(3)) //try go down
 		{
 			flags = flags | FLAG_IGNOREBLOCKITEM | FLAG_IGNOREBLOCKCREATURE;
@@ -1439,10 +1439,10 @@ bool Game::playerMoveItem(uint32_t playerId, const Position& fromPos,
 	}
 
 	//hangable item specific code
-	if(item->isHangable() && toCylinder->getTile()->hasProperty(SUPPORTHANGABLE))
+	if(item->isHangable() && toCylinder->getTile()->hasProperty(CONST_PROP_SUPPORTHANGABLE))
 	{
 		//destination supports hangable objects so need to move there first
-		if(toCylinder->getTile()->hasProperty(ISVERTICAL))
+		if(toCylinder->getTile()->hasProperty(CONST_PROP_ISVERTICAL))
 		{
 			if(player->getPosition().x + 1 == mapToPos.x)
 			{
@@ -1450,7 +1450,7 @@ bool Game::playerMoveItem(uint32_t playerId, const Position& fromPos,
 				return false;
 			}
 		}
-		else if(toCylinder->getTile()->hasProperty(ISHORIZONTAL))
+		else if(toCylinder->getTile()->hasProperty(CONST_PROP_ISHORIZONTAL))
 		{
 			if(player->getPosition().y + 1 == mapToPos.y)
 			{
@@ -1462,10 +1462,10 @@ bool Game::playerMoveItem(uint32_t playerId, const Position& fromPos,
 		if(!Position::areInRange<1,1,0>(playerPos, mapToPos) && !player->hasCustomFlag(PlayerCustomFlag_CanMoveFromFar))
 		{
 			Position walkPos = mapToPos;
-			if(toCylinder->getTile()->hasProperty(ISVERTICAL))
+			if(toCylinder->getTile()->hasProperty(CONST_PROP_ISVERTICAL))
 				walkPos.x -= -1;
 
-			if(toCylinder->getTile()->hasProperty(ISHORIZONTAL))
+			if(toCylinder->getTile()->hasProperty(CONST_PROP_ISHORIZONTAL))
 				walkPos.y -= -1;
 
 			Position itemPos = fromPos;
