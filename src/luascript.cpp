@@ -3595,17 +3595,6 @@ const luaL_Reg LuaInterface::luaStdTable[] =
 	{NULL, NULL}
 };
 
-//Get
-std::string LuaInterface::getString(lua_State* L, int32_t arg)
-{
-	size_t len;
-	const char* c_str = lua_tolstring(L, arg, &len);
-	if (!c_str || len == 0) 
-		return std::string();
-
-	return std::string(c_str, len);
-}
-
 // _G
 int32_t LuaInterface::luaRawGetMetatable(lua_State* L)
 {

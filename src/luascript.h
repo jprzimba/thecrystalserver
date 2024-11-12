@@ -302,7 +302,6 @@ class LuaInterface
 		static std::string popString(lua_State* L);
 		static int32_t popCallback(lua_State* L);
 		static Outfit_t popOutfit(lua_State* L);
-		static std::string getString(lua_State* L, int32_t arg);
 
 		static int64_t getField(lua_State* L, const char* key);
 		static uint64_t getFieldUnsigned(lua_State* L, const char* key);
